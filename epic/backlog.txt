@@ -1,0 +1,10 @@
+create mySQL tables / database structure
+	entities / PHP classes
+
+front end design / wireframe
+	view for applicants
+	view for andrea / administrators
+
+make ERD diagram
+
+finish epic
