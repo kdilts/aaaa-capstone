@@ -35,10 +35,10 @@
 
 		<ul>
 			<li>
-				Name:
+				Name: Captain Dylan McDonald of the USS Fuzzy
 			</li>
 			<li>
-				Profession:
+				Profession: Professional admirer of all things Windows and Comcast. He spends most of his time embellishing the many features and advantages that Windows offers over the lesser, more primitive operating systems. A staunch believe that Windows Vista is the best piece of software ever written, he teaches his poor, naive students the "truth" of Windows superiority.
 			</li>
 			<li>
 				Technology:
