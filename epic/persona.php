@@ -15,7 +15,7 @@
 				Profession: Logistic ninja at STEMUlus Academy> Full time Inquiries, Registration and Payments Administrator
 			</li>
 			<li>
-				Techology: Surface Pro, Windows 10 with MS Windows Specifically MS Access as well as CNM Webmail/Outlook. Android Phone.
+				Technology: Surface Pro, Windows 10 with MS Windows Specifically MS Access as well as CNM Webmail/Outlook. Android Phone.
 			</li>
 
 			<li>
@@ -41,7 +41,7 @@
 				Profession:
 			</li>
 			<li>
-				Techology:
+				Technology:
 			</li>
 
 			<li>
