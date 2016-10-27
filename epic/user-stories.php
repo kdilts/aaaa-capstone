@@ -30,6 +30,23 @@
 			<li>
 				Dylan wants to track who has gone through the invite system / who is lagging.
 			</li>
+
+			<li>
+				Applicants are using our site so that they may easily submit applications to the program.
+			</li>
+
+			<li>
+				Andrea is using our site so that she may easily track inquiries, applications, and payment information on each potential student.
+			</li>
+
+			<li>
+				The bridge staff is using our site so that they may keep track of student's progress on their pre work, as well as textbook distribution.
+			</li>
+
+			<li>
+				Administrative staff is using our site so that they can create notes on any and all interactions with students as well as collect demographic data and statistics.
+			</li>
+
 		</ul>
 
 	</body>
