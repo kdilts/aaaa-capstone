@@ -6,6 +6,7 @@
 	</head>
 	<body>
 		<h3>
+			We didn't do this, so here's something to distract Dylan.
 			<img src="https://i.imgur.com/MQHYB.jpg">
 		</h3>
 	</body>
