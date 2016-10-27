@@ -8,3 +8,6 @@ front end design / wireframe
 make ERD diagram
 
 finish epic
+<!DOCTYPE HTML>
+<html>
+<title>
