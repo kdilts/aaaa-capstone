@@ -32,10 +32,6 @@
 			</li>
 
 			<li>
-				Applicants are using our site so that they may easily submit applications to the program.
-			</li>
-
-			<li>
 				Andrea is using our site so that she may easily track inquiries, applications, and payment information on each potential student.
 			</li>
 
