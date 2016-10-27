@@ -5,23 +5,23 @@
 		</title>
 	</head>
 	<body>
-		<h3>
+		<ul>
 			Use Cases:
 
-			I'd want to quickly look up, for example, all students who have applied for the July bootcamp and have paid and been emailed their pre-work.
+			<li>I'd want to quickly look up, for example, all students who have applied for the July bootcamp and have paid and been emailed their pre-work.</li>
 
-			Or I'd like to know who I sent an Access Funds application to.
+			<li>Or I'd like to know who I sent an Access Funds application to.\
 
 			or who have I sent a registration form to.
 
-			Karen B could want to see who returned their parking passes.
+			<li>Karen B could want to see who returned their parking passes.</li>
 
-			Karen G could report the average salary and percentage of students who found work.
+			<li>Karen G could report the average salary and percentage of students who found work.</li>
 
-			Karen G could identify which students have good PHP skills for a potential employer.
+			<li>Karen G could identify which students have good PHP skills for a potential employer.</li>
 
-			Bridge staff track students pre-work progress and text book distribution.
-		</h3>
+			<li>Bridge staff track students pre-work progress and text book distribution.</li>
+		</ul>
 	</body>
 </html>
 <?php
