@@ -11,3 +11,5 @@ Karen B could want to see who returned their parking passes.
 Karen G could report the average salary and percentage of students who found work.
 
 Karen G could identify which students have good PHP skills for a potential employer.
+
+Bridge staff track students pre-work progress and text book distribution.
