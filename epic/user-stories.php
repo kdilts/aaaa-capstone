@@ -8,7 +8,7 @@
 		<h1>User Stories:</h1>
 		<ul>
 			<li>
-				I'd want to quickly look up, for example, all students who have applied for the July bootcamp and have paid and been emailed their pre-work.
+				I'd want to quickly look up, for example, all students who have applied for the July Bootcamp and have paid and been emailed their pre-work.
 			</li>
 
 			<li>
@@ -24,7 +24,7 @@
 			</li>
 
 			<li>
-				Dylan wants to create notes on new applicants
+				Dylan wants to create notes on new applicants.
 			</li>
 
 			<li>
@@ -60,7 +60,7 @@
 			</li>
 
 			<li>
-				As a user i want to be able to log in and see all current applicants statuses, who has completed payment who hasn't, any flags comments etc
+				As a user i want to be able to log in and see all current applicants statuses, who has completed payment who hasn't, any flags comments etc.
 			</li>
 		</ul>
 
