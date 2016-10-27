@@ -19,7 +19,7 @@
 			Frustrations and Needs: She is very frustrated about the complete manual process across the board on the record keeping for applications, payments and personal records.
 			She needs a system where she may keep notes on each individual interactions with the inquirers and applicants as they happen.
 
-			Goals: Consistent and easy access of records, reduction of manual process and a process to upgrade from inquiries to applications.
+			Goals: Consistent and easy access of records, reduction of manual process and a process to upgrade from inquiries to applications!
 
 		</h3>
 	</body>
