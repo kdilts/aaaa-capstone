@@ -5,7 +5,7 @@
 		</title>
 	</head>
 	<body><ul>
-			Use Cases:
+			User Stories:
 
 			<li>I'd want to quickly look up, for example, all students who have applied for the July bootcamp and have paid and been emailed their pre-work.</li>
 
