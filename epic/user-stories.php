@@ -32,15 +32,31 @@
 			</li>
 
 			<li>
-				Andrea is using our site so that she may easily track inquiries, applications, and payment information on each potential student.
+				Andrea is using our site so that she may easily track inquiries from each potential student.
 			</li>
 
 			<li>
-				The bridge staff is using our site so that they may keep track of student's progress on their pre work, as well as textbook distribution.
+				Andrea is using our site so that she may easily track applications from each potential student.
 			</li>
 
 			<li>
-				Administrative staff is using our site so that they can create notes on any and all interactions with students as well as collect demographic data and statistics.
+				Andrea is using our site so that she may easily track payment from each potential student.
+			</li>
+
+			<li>
+				The bridge staff is using our site so that they may keep track of student's progress on their pre work.
+			</li>
+
+			<li>
+				The bridge staff is using our site so that they may keep track of textbook distribution.
+			</li>
+
+			<li>
+				Administrative staff is using our site so that they can create notes on any and all interactions with students.
+			</li>
+
+			<li>
+				Administrative staff is using our site so that they can collect demographic data and statistics.
 			</li>
 
 			<li>
