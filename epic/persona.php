@@ -6,7 +6,7 @@
 	</head>
 	<body>
 
-		<h1>Personas</h1>
+		<h1>Personas:</h1>
 		<ul>
 			<li>
 				Name: Andrea
