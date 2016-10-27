@@ -47,6 +47,9 @@
 				Administrative staff is using our site so that they can create notes on any and all interactions with students as well as collect demographic data and statistics.
 			</li>
 
+			<li>
+				As a user i want to be able to log in and see all current applicants statuses, who has completed payment who hasn't, any flags comments etc
+			</li>
 		</ul>
 
 	</body>
