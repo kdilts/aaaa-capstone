@@ -23,6 +23,10 @@
 			knowledge of the opportunities the center offers.
 			t</li>
 			</ul>
+		<ul>
+			Karen:
+			<li>One of Karen's responsibilities is keeping track of parking permits. Who has one, who needs one, who hasn't returned theirs, etc. She needs a function in the site and database that keeps track of this information. If possible the system should have Alerts set up to notify and remind. </li>
+		</ul>
 	</body>
 </html>
 <?php
