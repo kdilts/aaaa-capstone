@@ -7,7 +7,7 @@
 	<body>
 		<h1>Use Cases</h1>
 		<ul>
-			<li>Andrea</li>
+			Andrea
 		<li>Andrea works as the logistics admimistrator for SETMUlus Center. She is in charge of keeping track of all the
 			inquiries, applications, and record keeping of applicants to the multiples cohorts offered by the center. She
 			wants to have an automated system to keep records and where she may also have a one click access to the
