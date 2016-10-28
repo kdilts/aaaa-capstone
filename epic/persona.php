@@ -45,14 +45,14 @@
 			</li>
 
 			<li>
-				Attitudes and Behaviors:
+				Attitudes and Behaviors: Most well known for his attitude towards Mac peasants, whom he considers lesser mortals, he is generally respectful to everyone else except those who disagree that Star Wars is better than Star Trek.
 			</li>
 
 			<li>
-				Frustrations and Needs: Frustrated that his peers continue to use OSX or worse, Linux; he none the less recognizes that this project needs to be accessable accross all platforms.
+				Frustrations and Needs: Frustrated that his peers continue to use OSX or worse, Linux; he none the less recognizes that this project needs to be accessable accross all platforms. He needs a system compatible with is superior operating system that will allow him to access, organize, modify, and make notes on students from various cohorts. Occasionally frustrated when he finds his students haven't updated to the latest Windows 10 update.
 			</li>
 			<li>
-				Goals:
+				Goals: Dylan, when caught in a particularly good mood, is willing to admit that teaching students full-stack web development is a close second in priority to converting everyone into Windows and Comcast users.
 			</li>
 		</ul>
 	</body>
