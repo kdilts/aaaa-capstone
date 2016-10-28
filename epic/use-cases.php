@@ -6,7 +6,8 @@
 	</head>
 	<body>
 		<h1>Use Cases</h1>
-		<ul>Andrea</ul>
+		<ul>
+			<li>Andrea</li>
 		<p>Andrea works as the logistics admimistrator for SETMUlus Center. She is in charge of keeping track of all the
 			inquiries, applications, of applicants to the multiples cohorts offered by the center. She wants to have an
 			automated system to keep records and where she may also have a one click access to the information for updates
@@ -19,6 +20,7 @@
 		<li>She would really like to have more of her time dedicated to promote the program, and the ways more people have
 			knowledge of the opportunities the center offers.
 			t</li>
+			</ul>
 	</body>
 </html>
 <?php
