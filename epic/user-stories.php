@@ -7,13 +7,17 @@
 			li {
 				margin: 10px auto;
 			}
+
+			h2 {
+				font-size: 20px;
+			}
 		</style>
 	</head>
 	<body>
-		<h1>User Stories:</h1>
+		<h2>User Stories:</h2>
 		<ul>
 			<li>
-				Andrea
+				<h2>Andrea</h2>
 				<ul>
 					<li>
 						I'd want to quickly look up, for example, all students who have applied for the July Bootcamp and have paid and been emailed their pre-work.
@@ -33,7 +37,7 @@
 				</ul>
 			</li>
 			<li>
-				Dylan
+				<h2>Dylan</h2>
 				<ul>
 					<li>
 						Dylan wants to record whenever someone creates a mySQL instance.
@@ -47,7 +51,7 @@
 				</ul>
 			</li>
 			<li>
-				Bridge Staff
+				<h2>Bridge Staff</h2>
 				<ul>
 					<li>
 						Bridge staff track students pre-work progress and text book distribution.
@@ -61,7 +65,7 @@
 				</ul>
 			</li>
 			<li>
-				Administrative staff
+				<h2>Administrative staff</h2>
 				<ul>
 					<li>
 						Administrative staff is using our site so that they can create notes on any and all interactions with students.
@@ -72,11 +76,14 @@
 				</ul>
 			</li>
 			<li>
-				Karen B could want to see who returned their parking passes.
+				<h2>Karen B</h2>
+				<ul>
+					<li>
+						Karen B could want to see who returned their parking passes.
+					</li>
+				</ul>
 			</li>
-
 		</ul>
-
 	</body>
 </html>
 <?php
