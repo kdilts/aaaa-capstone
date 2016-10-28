@@ -41,7 +41,7 @@
 				Profession: Professional admirer of all things Windows and Comcast. He spends most of his time embellishing the many features and advantages that Windows offers over the lesser, more primitive operating systems. A staunch believe that Windows Vista is the best piece of software ever written, he teaches his poor, naive students the "truth" of Windows superiority.
 			</li>
 			<li>
-				Technology:
+				Technology: Sadly the Surface doesn't support Windows Vista, so he is forced to use the slightly worse Windows 8. However, he has it and his hard drive fully encrypted using ROT13, an algorithm he posits is the most secure ever created.
 			</li>
 
 			<li>
@@ -49,7 +49,7 @@
 			</li>
 
 			<li>
-				Frustrations and Needs:
+				Frustrations and Needs: Frustrated that his peers continue to use OSX or worse, Linux; he none the less recognizes that this project needs to be accessable accross all platforms.
 			</li>
 			<li>
 				Goals:
