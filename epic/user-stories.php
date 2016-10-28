@@ -51,31 +51,6 @@
 				</ul>
 			</li>
 			<li>
-				<h2>Bridge Staff</h2>
-				<ul>
-					<li>
-						Bridge staff track students pre-work progress and text book distribution.
-					</li>
-					<li>
-						The bridge staff is using our site so that they may keep track of student's progress on their pre work.
-					</li>
-					<li>
-						The bridge staff is using our site so that they may keep track of textbook distribution.
-					</li>
-				</ul>
-			</li>
-			<li>
-				<h2>Administrative staff</h2>
-				<ul>
-					<li>
-						Administrative staff is using our site so that they can create notes on any and all interactions with students.
-					</li>
-					<li>
-						Administrative staff is using our site so that they can collect demographic data and statistics.
-					</li>
-				</ul>
-			</li>
-			<li>
 				<h2>Karen B</h2>
 				<ul>
 					<li>
