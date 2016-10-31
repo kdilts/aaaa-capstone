@@ -1,8 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>
-			Backlog
-		</title>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Backlog</title>
 	</head>
 	<body>
 		<h1>Backlog</h1>
