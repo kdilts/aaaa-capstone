@@ -7,7 +7,16 @@
 	</head>
 	<body>
 		<h1>Interaction Flow</h1>
-
+		<ul>Karen wants to register a parking permit to a student.
+			<li>Logs in</li>
+			<li>Searches student by name or other criteria</li>
+			<li>Links the permits unique ID to that student.</li>
+		</ul>
+		<ul>Andrea wants to see who's registered under a specific cohort
+			<li>Logs in</li>
+			<li>Filters student by cohort ID.</li>
+			<li>Then does whatever action she wants to do. </li>
+		</ul>
 	</body>
 </html>
 <?php
