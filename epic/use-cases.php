@@ -7,7 +7,7 @@
 	<body>
 		<h1>Use Cases</h1>
 
-		<h2>Andrea</h2>
+		<h2>Admiral Andrea</h2>
 		<ul>
 			<li>Andrea works as the logistics administrator for SETMUlus Center.</li>
 			<li>Andres is the point of contact for all the inquiries on regards to the cohorts offered by the center.</li>
@@ -32,7 +32,7 @@
 			<li>She would really like to have more of her time dedicated to promote the program, and the ways more people have
 				knowledge of the opportunities the center offers.</li>
 		</ul>
-		<h2>Karen</h2>
+		<h2>Admiral Karen</h2>
 		<ul>
 			<li>One of Karen's responsibilities is keeping track of parking permits. Who has one, who needs one, who hasn't returned theirs, etc. She needs a function in the site and database that keeps track of this information. If possible the system should have Alerts set up to notify and remind. </li>
 		</ul>
