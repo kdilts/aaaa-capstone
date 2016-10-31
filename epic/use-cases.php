@@ -4,6 +4,15 @@
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>Use Cases</title>
+		<style>
+			li {
+				margin: 10px auto;
+			}
+
+			h1 {
+				text-align: center;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Use Cases</h1>
