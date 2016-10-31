@@ -9,13 +9,13 @@
 
 			<h2>Andrea</h2>
 			<ul>
-			<li>Andrea works as the logistics admimistrator for SETMUlus Center.</li>
+			<li>Andrea works as the logistics administrator for SETMUlus Center.</li>
 			<li>Andres is the point of contact for all the inquiries on regards to the cohorts offered by the center.</li>
 			<li>She keeps records of those individuals phone calls, texts and emails.</li>
 			<li>If they express a desire to start the process then she upgrades them to applicants.</li>
 			<li>Andrea also handles all the applicants</li>
 			<li>When Andrea receives a request for an application she emails the documents, once the application is
-				submetted she will send a message that lays out the process to submit it the payment process and the
+				submitted she will send a message that lays out the process to submit it the payment process and the
 				requirement on regards to the mandatory prework.</li>
 			<li>Andrea manually registers the applicants to the multiples cohorts offered by the center.</li>
 			<li>Andrea also keeps all the records of the applicants in different applications depending on what the record
@@ -40,7 +40,7 @@
 		<p> Dylan AKA the “Captain” never has much down time and that is by personal choice for the most part.  Dylan has just received my application for the Stimulus Program via from Andrea. With this new software he can easily make notes and adjustments to the applicants while keeping track of there progress in the pre work stage. </p>
 		<p> After submitting my application I go down to CNM to make a payment to begin the process of bettering my life. After making my payment in cash from selling a kidney.  I quickly receive  an email as a notification.</p>
 		<p> Dylan logs back into the AAAA program to see if I and or any other applicants  have started there pre-work.  He sees that I have made my payment and started to  1. created my CNM and Deep Dive student accounts 2. set up the toolset and need to get my book so I can self-study.</p>
-		<p> Since the installment of the new program, Dylan now has spare time to dress Captain Arlo up as a Klingon and reenact  scenes from the bridge of Star Trek V since there can be only one Captain on the bridgeß.</p>
+		<p> Since the installment of the new program, Dylan now has spare time to dress Captain Arlo up as a Klingon and reenact  scenes from the bridge of Star Trek V since there can be only one Captain on the bridge.</p>
 	</body>
 </html>
 <?php
