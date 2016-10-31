@@ -36,7 +36,7 @@
 		<ul>
 			<li>One of Karen's responsibilities is keeping track of parking permits. Who has one, who needs one, who hasn't returned theirs, etc. She needs a function in the site and database that keeps track of this information. If possible the system should have Alerts set up to notify and remind. </li>
 		</ul>
-		<h2>"Captain" Dylan</h2>
+		<h2>Captain Dylan</h2>
 		<ul>
 			<li> Dylan AKA the “Captain” never has much down time and that is by personal choice for the most part.  Dylan has just received my application for the Stimulus Program via from Andrea. With this new software he can easily make notes and adjustments to the applicants while keeping track of there progress in the pre work stage. </li>
 			<li> After submitting my application I go down to CNM to make a payment to begin the process of bettering my life. After making my payment in cash from selling a kidney.  I quickly receive  an email as a notification.</li>
