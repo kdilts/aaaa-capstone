@@ -52,13 +52,28 @@ CREATE TABLE application(
 	applicationHopeToAccomplish TEXT NOT NULL,
 	applicationExperience TEXT NOT NULL,
 	INDEX (applicationId),
-	PRIMARY KEY(applicationId)
+	PRIMARY KEY(applicationId),
 	FOREIGN KEY(applicationCohortId) REFERENCES cohort(cohortId)
 );
 
-CREATE TABLE note();
+CREATE TABLE note(
+	noteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	noteStudentId INT NOT NULL,
+	notePaymentStatus INT UNSIGNED NOT NULL,
+	notePreworkStatus INT UNSIGNED NOT NULL,
+	noteContent TEXT NOT NULL,
+	INDEX (noteId),
+	PRIMARY KEY(noteId),
+	FOREIGN KEY(noteStudentId) REFERENCES student(studentId)
+);
 
-CREATE TABLE cohort();
+CREATE TABLE cohort(
+	cohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	cohortApplicationId INT UNSIGNED NOT NULL,
+	INDEX (cohortId),
+	PRIMARY KEY(cohortId),
+	FOREIGN KEY(cohortApplicationId) REFERENCES application(applicationId)
+);
 
 CREATE TABLE noteTypeEnum();
 
