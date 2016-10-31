@@ -14,7 +14,17 @@ CREATE TABLE studentPermit(
 	FOREIGN KEY(spStudentId) REFERENCES student(studentId)
 );
 
-CREATE TABLE prospect();
+CREATE TABLE prospect(
+	prospectId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	prospectFirstName VARCHAR(40) NOT NULL,
+	prospectLastName VARCHAR(40) NOT NULL,
+	prospectEmail VARCHAR(100) NOT NULL,
+	prospectPhoneNumber VARCHAR(30) NOT NULL,
+	prospectCohortId INT UNSIGNED NOT NULL,
+	INDEX (prospectId),
+	PRIMARY KEY(prospectId),
+	FOREIGN KEY(prospectCohortId) REFERENCES cohort(cohortId)
+);
 
 CREATE TABLE student();
 
