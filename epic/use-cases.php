@@ -7,8 +7,8 @@
 	<body>
 		<h1>Use Cases</h1>
 
-			<h2>Andrea</h2>
-			<ul>
+		<h2>Andrea</h2>
+		<ul>
 			<li>Andrea works as the logistics administrator for SETMUlus Center.</li>
 			<li>Andres is the point of contact for all the inquiries on regards to the cohorts offered by the center.</li>
 			<li>She keeps records of those individuals phone calls, texts and emails.</li>
@@ -21,8 +21,8 @@
 			<li>Andrea also keeps all the records of the applicants in different applications depending on what the record
 				is about. Like emails phone calls and texts. Payment status. Set up to receive prework, books and schedules.</li>
 			<li>Andrea wants to have an automated system to keep records and where she may also have a one click access to the
-			information for updates add comments and reports to the Bridge about students that completed payments and how many
-			students there are for each cohort</li>
+				information for updates add comments and reports to the Bridge about students that completed payments and how many
+				students there are for each cohort</li>
 			<li>She is overwhelmed by the manual procedure to keep track of every phone call and record like and the different
 				places that she has to access to answer questions from the staff, CNM and students</li>
 			<li>All that takes a lot of her time and effort that she does not even have time left after work to visit the
@@ -37,10 +37,12 @@
 			<li>One of Karen's responsibilities is keeping track of parking permits. Who has one, who needs one, who hasn't returned theirs, etc. She needs a function in the site and database that keeps track of this information. If possible the system should have Alerts set up to notify and remind. </li>
 		</ul>
 		<h2>"Captain" Dylan</h2>
-		<p> Dylan AKA the “Captain” never has much down time and that is by personal choice for the most part.  Dylan has just received my application for the Stimulus Program via from Andrea. With this new software he can easily make notes and adjustments to the applicants while keeping track of there progress in the pre work stage. </p>
-		<p> After submitting my application I go down to CNM to make a payment to begin the process of bettering my life. After making my payment in cash from selling a kidney.  I quickly receive  an email as a notification.</p>
-		<p> Dylan logs back into the AAAA program to see if I and or any other applicants  have started there pre-work.  He sees that I have made my payment and started to  1. created my CNM and Deep Dive student accounts 2. set up the toolset and need to get my book so I can self-study.</p>
-		<p> Since the installment of the new program, Dylan now has spare time to dress Captain Arlo up as a Klingon and reenact  scenes from the bridge of Star Trek V since there can be only one Captain on the bridge.</p>
+		<ul>
+			<li> Dylan AKA the “Captain” never has much down time and that is by personal choice for the most part.  Dylan has just received my application for the Stimulus Program via from Andrea. With this new software he can easily make notes and adjustments to the applicants while keeping track of there progress in the pre work stage. </li>
+			<li> After submitting my application I go down to CNM to make a payment to begin the process of bettering my life. After making my payment in cash from selling a kidney.  I quickly receive  an email as a notification.</li>
+			<li> Dylan logs back into the AAAA program to see if I and or any other applicants  have started there pre-work.  He sees that I have made my payment and started to  1. created my CNM and Deep Dive student accounts 2. set up the toolset and need to get my book so I can self-study.</li>
+			<li> Since the installment of the new program, Dylan now has spare time to dress Senator Arlo up as a Klingon and reenact  scenes from the bridge of Star Trek V since there can be only one Captain on the bridge.</li>
+		</ul>
 	</body>
 </html>
 <?php
