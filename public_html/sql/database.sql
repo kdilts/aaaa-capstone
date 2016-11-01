@@ -84,7 +84,7 @@ CREATE TABLE application(
 	applicationUtmSource TEXT NOT NULL,
 	INDEX (applicationId),
 	PRIMARY KEY(applicationId),
-	FOREIGN KEY(applicationCohortId) REFERENCES cohort(cohortId)
+	FOREIGN KEY(applicationCohortId) REFERENCES cohortApplication(cohortApplicationCohortId)
 );
 
 CREATE TABLE note(
@@ -102,7 +102,7 @@ CREATE TABLE cohort(
 	cohortApplicationId INT UNSIGNED NOT NULL,
 	INDEX (cohortId),
 	PRIMARY KEY(cohortId),
-	FOREIGN KEY(cohortApplicationId) REFERENCES application(applicationId)
+	FOREIGN KEY(cohortApplicationId) REFERENCES cohortApplication(cohortApplicationApplicationId)
 );
 
 CREATE TABLE cohortApplication(
