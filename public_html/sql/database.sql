@@ -78,6 +78,10 @@ CREATE TABLE application(
 	applicationAboutYou TEXT NOT NULL,
 	applicationHopeToAccomplish TEXT NOT NULL,
 	applicationExperience TEXT NOT NULL,
+	applicationDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	applicationUtmCampaign TEXT NOT NULL,
+	applicationUtmMedium TEXT NOT NULL,
+	applicationUtmSource TEXT NOT NULL,
 	INDEX (applicationId),
 	PRIMARY KEY(applicationId),
 	FOREIGN KEY(applicationCohortId) REFERENCES cohort(cohortId)
