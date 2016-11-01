@@ -1,17 +1,44 @@
-CREATE TABLE permit(
-	permitId INT UNSIGNED NOT NULL,
-	permitStatus INT NOT NULL,
-	INDEX (permitId),
-	PRIMARY KEY(permitId)
+CREATE TABLE swipe(
+	swipeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	swipeNumber INT UNSIGNED NOT NULL,
+	swipeStatus INT UNSIGNED NOT NULL,
+	INDEX (swipeId),
+	PRIMARY KEY(swipeId)
+);
+
+CREATE TABLE placard(
+	placardId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	placardNumber INT UNSIGNED NOT NULL,
+	placardStatus INT UNSIGNED NOT NULL,
+	INDEX (placardId),
+	PRIMARY KEY(placardId)
+);
+
+CREATE TABLE noteType(
+	statusId INT UNSIGNED NOT NULL,
+	statusName VARCHAR(40) NOT NULL,
+	INDEX (statusId),
+	PRIMARY KEY(statusId)
+);
+
+CREATE TABLE bridge(
+	bridgeStaffId varchar(9),
+	bridgeName varchar(64),
+	bridgeUserName varchar(20),
+	INDEX (bridgeStaffId),
+	PRIMARY KEY(bridgeStaffId)
 );
 
 CREATE TABLE studentPermit(
-	spPermitId INT NOT NULL,
-	spStudentId INT NOT NULL,
-	INDEX (spPermitId),
-	INDEX (spStudentId),
-	FOREIGN KEY(spPermitId) REFERENCES permit(permitId),
-	FOREIGN KEY(spStudentId) REFERENCES student(studentId)
+	studentPermitStudentId INT NOT NULL,
+	studentPermitSwipeId INT NOT NULL,
+	studentPermitPlacardId INT NOT NULL,
+	INDEX (studentPermitStudentId),
+	INDEX (studentPermitPlacardId),
+	INDEX (studentPermitSwipeId),
+	PRIMARY KEY(studentPermitStudentId),
+	FOREIGN KEY(studentPermitSwipeId) REFERENCES swipe(swipeId),
+	FOREIGN KEY(studentPermitPlacardId) REFERENCES placard(placardId)
 );
 
 CREATE TABLE prospect(
@@ -59,8 +86,7 @@ CREATE TABLE application(
 CREATE TABLE note(
 	noteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	noteStudentId INT NOT NULL,
-	notePaymentStatus INT UNSIGNED NOT NULL,
-	notePreworkStatus INT UNSIGNED NOT NULL,
+	noteStatusId INT UNSIGNED NOT NULL,
 	noteContent TEXT NOT NULL,
 	INDEX (noteId),
 	PRIMARY KEY(noteId),
@@ -75,6 +101,9 @@ CREATE TABLE cohort(
 	FOREIGN KEY(cohortApplicationId) REFERENCES application(applicationId)
 );
 
-CREATE TABLE noteTypeEnum();
-
-CREATE TABLE bridge();
+CREATE TABLE cohortApplication(
+	cohortApplicationCohortId INT UNSIGNED NOT NULL,
+	cohortApplicationApplicationId INT UNSIGNED NOT NULL,
+	FOREIGN KEY(cohortApplicationCohortId) REFERENCES cohort(cohortId),
+	FOREIGN KEY(cohortApplicationApplicationId) REFERENCES application(applicationId)
+);
