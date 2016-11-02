@@ -4,10 +4,29 @@ namespace Edu\Cnm\aaaa\DataDesign;
 
 class Swipe {
 
+	/**
+	 * @var int $swipeId
+	 */
 	private $swipeId;
+
+	/**
+	 * @var int $swipeNumber
+	 */
 	private $swipeNumber;
+
+	/**
+	 * @var int $swipeStatus
+	 */
 	private $swipeStatus;
 
+	/**
+	 * Swipe constructor.
+	 * @param int $newSwipeId
+	 * @param int $newSwipeNumber
+	 * @param int $newSwipeStatus
+	 * @throws \Exception
+	 * @throws \TypeError
+	 */
 	public function __construct(int $newSwipeId, int $newSwipeNumber, int $newSwipeStatus){
 		try {
 			$this->setSwipeId($newSwipeId);
@@ -28,18 +47,30 @@ class Swipe {
 		}
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getSwipeId(){
 		return($this->swipeId);
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getSwipeNumber(){
 		return($this->swipeNumber);
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getSwipeStatus(){
 		return($this->swipeStatus);
 	}
 
+	/**
+	 * @param int $newSwipeId
+	 */
 	public function setSwipeId(int $newSwipeId){
 		// verify that newSwipeId is positive
 		if($newSwipeId <= 0){
@@ -48,6 +79,9 @@ class Swipe {
 		$this->swipeId = $newSwipeId;
 	}
 
+	/**
+	 * @param int $newSwipeNumber
+	 */
 	public function setSwipeNumber(int $newSwipeNumber){
 		// verify that newSwipeNumber is positive
 		if($newSwipeNumber <= 0){
@@ -56,6 +90,9 @@ class Swipe {
 		$this->swipeNumber = $newSwipeNumber;
 	}
 
+	/**
+	 * @param int $newSwipeStatus
+	 */
 	public function setSwipeStatus(int $newSwipeStatus){
 		// verify that newSwipeStatus is positive
 		if($newSwipeStatus <= 0){
