@@ -1,9 +1,8 @@
 <phpunit>
 	<testsuites>
-		<testsuite name="Twitter Data Design">
-			<file>ProfileTest.php</file>
-			<file>TweetTest.php</file>
-			<file>FavoriteTest.php</file>
+		<testsuite name="AAAA Data Design">
+			<file>PlacardTest.php</file>
+
 		</testsuite>
 	</testsuites>
 	<filter>
