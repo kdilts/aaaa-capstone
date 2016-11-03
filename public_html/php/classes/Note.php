@@ -94,6 +94,8 @@ class Note {
 	 * @param mixed $noteStudentId
 	 */
 	public function setNoteStudentId($noteStudentId) {
+		if ($noteStudentId < 0) {
+			throw(new \RangeException("Note Type Id can't be negative."));
 		$this->noteStudentId = $noteStudentId;
 	}
 

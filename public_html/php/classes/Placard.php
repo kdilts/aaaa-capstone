@@ -29,6 +29,14 @@ class Placard {
 			$this->setPlacardId($newPlacardId);
 			$this->setPlacardNumber($newPlacardNumber);
 			$this->setPlacardStatus($newPlacardStatus);
+			}catch(InvalidArgumentException $invalidArgument) {
+				throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+			}catch(\RangeException $range) {
+				throw(new \RangeException($range->getMessage(), 0, $range));
+			}catch(\TypeError $typeError) {
+				throw(new \TypeError($typeError->getMessage(), 0, $typeError));
+			}catch(\Exception $exception) {
+				throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
 
 	}
@@ -62,7 +70,7 @@ class Placard {
 		if (newPlacardId <= 0) {
 			throw(new \RangeException("Placard ID cannot be negative."));
 		}
-		$this->placardId = $placardId;
+		$this->placardId = $newPlacardId;
 	}
 
 	/**
@@ -70,16 +78,18 @@ class Placard {
 	 */
 	public function setPlacardNumber(int $newPlacardNumber) {
 		if (newPlacardNumber <= 0) {
-			throw(\RangeException("Placard Number cannot be negative."));
+			throw(new \RangeException("Placard Number cannot be negative."));
 		}
-		$this->placardNumber = $placardNumber;
+		$this->placardNumber = $newPlacardNumber;
 	}
 
 	/**
 	 * @param mixed $placardStatus
 	 */
 	public function setPlacardStatus(int $newPlacardStatus) {
-		if (newPlaca)
-		$this->placardStatus = $placardStatus;
+		if ($newPlacardStatus < 0) {
+			throw(new \RangeException("Placard status invalid."));
+		}
+		$this->placardStatus = $newPlacardStatus;
 	}
 }
