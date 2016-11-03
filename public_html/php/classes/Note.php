@@ -1,10 +1,38 @@
 <?php
 class Note {
-
+	/**
+	 * @var string $noteContent
+	 */
 	private $noteContent;
+
+	/**
+	 * @var int noteNoteTypeId
+	 */
 	private $noteNoteTypeId;
+	/**
+	 * @var int $noteStudentId
+	 */
 	private $noteStudentId;
+	/**
+	 * @var int $noteId
+	 */
 	private $noteId;
+
+	/**
+	 * Note constructor.
+	 * @param string $newNoteContent
+	 * @param int $newNoteNoteTypeId
+	 * @param int $newNoteStudentId
+	 * @param int $newNoteId
+	 */
+	public function __construct(string $newNoteContent, int $newNoteNoteTypeId, int $newNoteStudentId, int $newNoteId) {
+		try {
+			$this->setNoteContent($newNoteContent);
+			$this->setNoteId($newNoteId);
+			$this->setNoteNoteTypeId($newNoteNoteTypeId);
+			$this->setNoteStudentId($newNoteStudentId);
+		}
+	}
 
 	/**
 	 * @return mixed
@@ -45,7 +73,7 @@ class Note {
 	 * @param mixed $noteId
 	 */
 	public function setNoteId($noteId) {
-		if (noteId <= 0) {
+		if ($noteId <= 0) {
 			throw(new \RangeException("nodeId can't be 0 or negative."));
 		}
 
@@ -56,6 +84,9 @@ class Note {
 	 * @param mixed $noteNoteTypeId
 	 */
 	public function setNoteNoteTypeId($noteNoteTypeId) {
+		if ($noteNoteTypeId < 0) {
+			throw(new \RangeException("Note Type Id can't be negative."));
+		}
 		$this->noteNoteTypeId = $noteNoteTypeId;
 	}
 
