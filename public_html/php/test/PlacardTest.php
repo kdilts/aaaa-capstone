@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{Profile, Tweet};
+use Edu\Cnm\DdcAaaa\{Placard};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -15,30 +15,16 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  * This is a complete PHPUnit test of the Tweet class. It is complete because *ALL* mySQL/PDO enabled methods
  * are tested for both invalid and valid inputs.
  *
- * @see Tweet
- * @author Dylan McDonald <dmcdonald21@cnm.edu>
+ * @see Placard
+ * @author Kevin Dilts <kdilts@cnm.edu>
  **/
-class TweetTest extends DataDesignTest {
-	/**
-	 * content of the Tweet
-	 * @var string $VALID_TWEETCONTENT
-	 **/
-	protected $VALID_TWEETCONTENT = "PHPUnit test passing";
-	/**
-	 * content of the updated Tweet
-	 * @var string $VALID_TWEETCONTENT2
-	 **/
-	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
-	/**
-	 * timestamp of the Tweet; this starts as null and is assigned later
-	 * @var DateTime $VALID_TWEETDATE
-	 **/
-	protected $VALID_TWEETDATE = null;
-	/**
-	 * Profile that created the Tweet; this is for foreign key relations
-	 * @var Profile profile
-	 **/
-	protected $profile = null;
+class PlacardTest extends AaaaTest {
+
+	protected $VALID_PLACARDID = 0;
+
+	protected $VALID_PLACARDSTATUS = 1;
+
+	protected $VALID_PLACARDNUMBER = 2;
 
 	/**
 	 * create dependent objects before running each test
@@ -46,32 +32,25 @@ class TweetTest extends DataDesignTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-
-		// create and insert a Profile to own the test Tweet
-		$this->profile = new Profile(null, "@phpunit", "test@phpunit.de", "+12125551212");
-		$this->profile->insert($this->getPDO());
-
-		// calculate the date (just use the time the unit test was setup...)
-		$this->VALID_TWEETDATE = new \DateTime();
 	}
 
 	/**
-	 * test inserting a valid Tweet and verify that the actual mySQL data matches
+	 * test inserting a valid Placard and verify that the actual mySQL data matches
 	 **/
-	public function testInsertValidTweet() {
+	public function testInsertValidPlacard() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("placard");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Placard and insert to into mySQL
+		$placard = new Placard($this->VALID_PLACARDID, $this->VALID_PLACARDSTATUS, $this->VALID_PLACARDNUMBER);
+		$placard->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoPlacard = Placard::getPlacardByPlacardId($this->getPDO(), $placard->getPlacardId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
+		$this->assertEquals($pdoPlacard->getPlacardId(), $this->VALID_PLACARDID);
+		$this->assertEquals($pdoPlacard->getPlacardStatus(), $this->VALID_PLACARDSTATUS);
+		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
 
 	/**
