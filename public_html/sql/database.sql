@@ -15,10 +15,10 @@ CREATE TABLE placard(
 );
 
 CREATE TABLE noteType(
-	statusId INT UNSIGNED NOT NULL,
-	statusName VARCHAR(40) NOT NULL,
-	INDEX (statusId),
-	PRIMARY KEY(statusId)
+	noteTypeId INT UNSIGNED NOT NULL,
+	noteTypeName VARCHAR(40) NOT NULL,
+	INDEX (noteTypeName),
+	PRIMARY KEY(noteTypeId)
 );
 
 CREATE TABLE bridge(
@@ -33,6 +33,8 @@ CREATE TABLE studentPermit(
 	studentPermitStudentId INT NOT NULL,
 	studentPermitSwipeId INT NOT NULL,
 	studentPermitPlacardId INT NOT NULL,
+	studentPermitCheckOutDate DATE NOT NULL,
+	studentPermitCheckInDate DATE NOT NULL,
 	INDEX (studentPermitStudentId),
 	INDEX (studentPermitPlacardId),
 	INDEX (studentPermitSwipeId),
@@ -51,20 +53,6 @@ CREATE TABLE prospect(
 	INDEX (prospectId),
 	PRIMARY KEY(prospectId),
 	FOREIGN KEY(prospectCohortId) REFERENCES cohort(cohortId)
-);
-
-CREATE TABLE student(
-	studentId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	studentFirstName VARCHAR(40) NOT NULL,
-	studentLastName VARCHAR(40) NOT NULL,
-	studentEmail VARCHAR(100) NOT NULL,
-	studentPhoneNumber VARCHAR(30) NOT NULL,
-	studentCohortId INT UNSIGNED NOT NULL,
-	studentDateOfBirth DATE NOT NULL,
-	studentAddress VARCHAR(200) NOT NULL,
-	INDEX (studentId),
-	PRIMARY KEY(studentId),
-	FOREIGN KEY(studentCohortId) REFERENCES cohort(cohortId)
 );
 
 CREATE TABLE application(
@@ -88,12 +76,12 @@ CREATE TABLE application(
 );
 
 CREATE TABLE note(
-	noteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	noteNoteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	noteStudentId INT NOT NULL,
 	noteStatusId INT UNSIGNED NOT NULL,
 	noteContent TEXT NOT NULL,
-	INDEX (noteId),
-	PRIMARY KEY(noteId),
+	INDEX (noteNoteId),
+	PRIMARY KEY(noteNoteId),
 	FOREIGN KEY(noteStudentId) REFERENCES student(studentId)
 );
 
@@ -105,9 +93,8 @@ CREATE TABLE cohort(
 	FOREIGN KEY(cohortApplicationId) REFERENCES cohortApplication(cohortApplicationApplicationId)
 );
 
-CREATE TABLE cohortApplication(
-	cohortApplicationCohortId INT UNSIGNED NOT NULL,
-	cohortApplicationApplicationId INT UNSIGNED NOT NULL,
-	FOREIGN KEY(cohortApplicationCohortId) REFERENCES cohort(cohortId),
-	FOREIGN KEY(cohortApplicationApplicationId) REFERENCES application(applicationId)
+CREATE TABLE status(
+	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	statusTypeName
 );
+
