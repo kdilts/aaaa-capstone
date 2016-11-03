@@ -86,8 +86,8 @@ class Note {
 	public function setNoteId(int $newNoteId) {
 		if($newNoteId <= 0) {
 			throw(new \RangeException("nodeId can't be 0 or negative."));
-			$this->noteId = $newNoteId;
 		}
+		$this->noteId = $newNoteId;
 	}
 
 	/**
