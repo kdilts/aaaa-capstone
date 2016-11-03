@@ -5,7 +5,7 @@
  * Date: 11/2/2016
  * Time: 2:58 PM
  */
-namespace Edu\Cnm\Dmcdonald21\DataDesign\Test;
+namespace Edu\Cnm\DdcAaaa\Test;
 
 // grab the encrypted properties file
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
@@ -26,7 +26,7 @@ require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
  *
  * @author Dylan McDonald <dmcdonald21@cnm.edu>
  **/
-abstract class DataDesignTest extends \PHPUnit_Extensions_Database_TestCase {
+abstract class AaaaTest extends \PHPUnit_Extensions_Database_TestCase {
 	/**
 	 * invalid id to use for an INT UNSIGNED field (maximum allowed INT UNSIGNED in mySQL) + 1
 	 * @see https://dev.mysql.com/doc/refman/5.6/en/integer-types.html mySQL Integer Types
@@ -50,9 +50,16 @@ abstract class DataDesignTest extends \PHPUnit_Extensions_Database_TestCase {
 
 		// add all the tables for the project here
 		// THESE TABLES *MUST* BE LISTED IN THE SAME ORDER THEY WERE CREATED!!!!
-		$dataset->addTable("profile");
-		$dataset->addTable("tweet");
-		$dataset->addTable("favorite");
+		$dataset->addTable("cohort");
+		$dataset->addTable("note");
+		$dataset->addTable("noteType");
+		$dataset->addTable("placard");
+		$dataset->addTable("prospect");
+		$dataset->addTable("application");
+		$dataset->addTable("swipe");
+		$dataset->addTable("status");
+		$dataset->addTable("bridge");
+		$dataset->addTable("studentpermit");
 		return($dataset);
 	}
 
@@ -89,8 +96,8 @@ abstract class DataDesignTest extends \PHPUnit_Extensions_Database_TestCase {
 		// if the connection hasn't been established, create it
 		if($this->connection === null) {
 			// connect to mySQL and provide the interface to PHPUnit
-			$config = readConfig("/etc/apache2/data-design/dmcdonald21.ini");
-			$pdo = connectToEncryptedMySQL("/etc/apache2/data-design/dmcdonald21.ini");
+			$config = readConfig("/etc/apache2/data-design/ddcaaaa.ini");
+			$pdo = connectToEncryptedMySQL("/etc/apache2/data-design/ddcaaaa.ini");
 			$this->connection = $this->createDefaultDBConnection($pdo, $config["database"]);
 		}
 		return($this->connection);
