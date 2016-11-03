@@ -22,8 +22,9 @@ class Placard {
 	 * @param int $newPlacardId
 	 * @param int $newPlacardStatus
 	 * @param int $newPlacardNumber
+	 * @throws Exception
+	 * @throws TypeError
 	 */
-
 	public function __construct(int $newPlacardId, int $newPlacardStatus, int $newPlacardNumber) {
 		try {
 			$this->setPlacardId($newPlacardId);
@@ -63,28 +64,28 @@ class Placard {
 	}
 
 	/**
-	 * @param mixed $placardId
+	 * @param int $newPlacardId
 	 */
 	public function setPlacardId(int $newPlacardId) {
 		//checks if PlacardId is negative
-		if (newPlacardId <= 0) {
+		if ($newPlacardId <= 0) {
 			throw(new \RangeException("Placard ID cannot be negative."));
 		}
 		$this->placardId = $newPlacardId;
 	}
 
 	/**
-	 * @param mixed $placardNumber
+	 * @param int $newPlacardNumber
 	 */
 	public function setPlacardNumber(int $newPlacardNumber) {
-		if (newPlacardNumber <= 0) {
+		if ($newPlacardNumber <= 0) {
 			throw(new \RangeException("Placard Number cannot be negative."));
 		}
 		$this->placardNumber = $newPlacardNumber;
 	}
 
 	/**
-	 * @param mixed $placardStatus
+	 * @param int $newPlacardStatus
 	 */
 	public function setPlacardStatus(int $newPlacardStatus) {
 		if ($newPlacardStatus < 0) {
