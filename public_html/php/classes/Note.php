@@ -35,7 +35,7 @@ class Note {
 			$this->setNoteId($newNoteId);
 			$this->setNoteNoteTypeId($newNoteNoteTypeId);
 			$this->setNoteStudentId($newNoteStudentId);
-		} catch(InvalidArgumentException $invalidArgument) {
+		} catch(\InvalidArgumentException $invalidArgument) {
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
 		} catch(\RangeException $range) {
 			throw(new \RangeException($range->getMessage(), 0, $range));
