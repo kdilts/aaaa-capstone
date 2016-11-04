@@ -49,7 +49,7 @@ class Status {
 	$this->statusTypeId = $statusTypeId;
 	}
 	/**
- 	* @param int $statusTypeName
+ 	* @param string $statusTypeName
  	*/
 	public function setStatusTypeName(string $statusTypeName) {
 	$this->statusTypeName = $statusTypeName;
