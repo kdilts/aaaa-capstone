@@ -31,42 +31,48 @@ class application {
 	 */
 	private $applicationPhoneNumber;
 	/**
-	 * @var int $applicationSource
+	 * @var string $applicationSource
 	 */
 	private $applicationSource;
 	/**
-	 * @var int $applicationCohortId
+	 * @var string $applicationCohortId
 	 */
 	private $applicationCohortId;
 	/**
-	 * @var int $applicationAboutYou
+	 * @var string $applicationAboutYou
 	 */
 	private $applicationAboutYou;
 	/**
-	 * @var int $applicationHopeToAccomplish
+	 * @var string $applicationHopeToAccomplish
 	 */
 	private $applicationHopeToAccomplish;
 	/**
-	 * @var int $applicationExperienc
+	 * @var string $applicationExperienc
 	 */
-	private $applicationExperienc;
+	private $applicationExperience;
 	/**
-	 * @var int $applicationDateTime
+	 * @var string $applicationDateTime
 	 */
 	private $applicationDateTime;
 	/**
-	 * @var int $applicationUtmCampaign
+	 * @var string $applicationUtmCampaign
 	 */
 	private $applicationUtmCampaign;
 	/**
-	 * @var int $applicationUtmMedium
+	 * @var string $applicationUtmMedium
 	 */
 	private $applicationUtmMedium;
 	/**
-	 * @var int $applicationUtmSource
+	 * @var string $applicationUtmSource
 	 */
 	private $applicationUtmSource;
 
+	/**
+	 * @return int| null value of applicationId
+	 */
+	public function getApplicationId() {
+		return $this->applicationId;
+	}
 
 
 
