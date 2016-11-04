@@ -3,46 +3,113 @@ namespace Edu\Cnm\DdcAaaa;
 
 class Prospect {
 
+	/**
+	 * @var int $prospectId
+	 */
 	private $prospectId;
+
+	/**
+	 * @var int $prospectCohortId
+	 */
 	private $prospectCohortId;
+
+	/**
+	 * @var string $prospectPhoneNumber
+	 */
 	private $prospectPhoneNumber;
+
+	/**
+	 * @var string $prospectEmail
+	 */
 	private $prospectEmail;
+
+	/**
+	 * @var string $prospectFirstName
+	 */
 	private $prospectFirstName;
+
+	/**
+	 * @var string $prospectLastName
+	 */
 	private $prospectLastName;
 
+	/**
+	 * Prospect constructor.
+	 * @param int $newProspectId
+	 * @param int $newProspectCohortId
+	 * @param string $newProspectPhoneNumber
+	 * @param string $newProspectEmail
+	 * @param string $newProspectFirstName
+	 * @param string $newProspectLastName
+	 * @throws \InvalidArgumentException
+	 * @throws \RangeException
+	 * @throws \TypeError
+	 * @throws \Exception
+	 */
 	public function __construct(int $newProspectId, int $newProspectCohortId, string $newProspectPhoneNumber, string $newProspectEmail, string $newProspectFirstName, string $newProspectLastName){
-		$this->setProspectId($newProspectId);
-		$this->setProspectCohortId($newProspectCohortId);
-		$this->setProspectPhoneNumber($newProspectPhoneNumber);
-		$this->setProspectEmail($newProspectEmail);
-		$this->setProspectFirstName($newProspectFirstName);
-		$this->setProspectLastName($newProspectLastName);
+		try {
+			$this->setProspectId($newProspectId);
+			$this->setProspectCohortId($newProspectCohortId);
+			$this->setProspectPhoneNumber($newProspectPhoneNumber);
+			$this->setProspectEmail($newProspectEmail);
+			$this->setProspectFirstName($newProspectFirstName);
+			$this->setProspectLastName($newProspectLastName);
+		}catch(\InvalidArgumentException $invalidArgument) {
+			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		}catch(\RangeException $range) {
+			throw(new \RangeException($range->getMessage(), 0, $range));
+		}catch(\TypeError $typeError) {
+			throw(new \TypeError($typeError->getMessage(), 0, $typeError));
+		}catch(\Exception $exception) {
+			throw(new \Exception($exception->getMessage(), 0, $exception));
+		}
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getProspectId(){
 		return($this->getProspectId());
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getProspectCohortId(){
 		return($this->getProspectCohortId());
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getProspectPhoneNumber(){
 		return($this->getProspectPhoneNumber());
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getProspectEmail(){
 		return($this->getProspectEmail());
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getProspectFirstName(){
 		return($this->getProspectFirstName());
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getProspectLastName(){
 		return($this->getProspectLastName());
 	}
 
+	/**
+	 * @param $newProspectId
+	 */
 	public function setProspectId($newProspectId){
 		if ($newProspectId <= 0) {
 			throw(new \RangeException("Prospect ID cannot be negative."));
@@ -50,6 +117,9 @@ class Prospect {
 		$this->prospectId=$newProspectId;
 	}
 
+	/**
+	 * @param $newProspectCohortId
+	 */
 	public function setProspectCohortId($newProspectCohortId){
 		if ($newProspectCohortId <= 0) {
 			throw(new \RangeException("Prospect Cohort ID cannot be negative."));
@@ -57,6 +127,9 @@ class Prospect {
 		$this->prospectCohortId=$newProspectCohortId;
 	}
 
+	/**
+	 * @param $newProspectPhoneNumber
+	 */
 	public function setProspectPhoneNumber($newProspectPhoneNumber){
 		// verify the prospect phone number is secure
 		$newProspectPhoneNumber = trim($newProspectPhoneNumber);
@@ -74,6 +147,9 @@ class Prospect {
 		$this->prospectPhoneNumber=$newProspectPhoneNumber;
 	}
 
+	/**
+	 * @param $newProspectEmail
+	 */
 	public function setProspectEmail($newProspectEmail){
 		// verify the email is secure
 		$newProspectEmail = trim($newProspectEmail);
@@ -91,7 +167,9 @@ class Prospect {
 		$this->prospectEmail=$newProspectEmail;
 	}
 
-	
+	/**
+	 * @param $newProspectFirstName
+	 */
 	public function setProspectFirstName($newProspectFirstName){
 		// verify the first name is secure
 		$newProspectFirstName = trim($newProspectFirstName);
@@ -109,6 +187,9 @@ class Prospect {
 		$this->prospectFirstName=$newProspectFirstName;
 	}
 
+	/**
+	 * @param $newProspectLastName
+	 */
 	public function setProspectLastName($newProspectLastName){
 		// verify the first name is secure
 		$newProspectLastName = trim($newProspectLastName);
