@@ -18,12 +18,12 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  * @see Tweet
  * @author Dylan McDonald <dmcdonald21@cnm.edu>
  **/
-class TweetTest extends DataDesignTest {
+class NoteTest extends AaaaTest {
 	/**
 	 * content of the Tweet
-	 * @var string $VALID_TWEETCONTENT
+	 * @var string $VALID_NOTECONTENT
 	 **/
-	protected $VALID_TWEETCONTENT = "PHPUnit test passing";
+	protected $VALID_NOTECONTENT = "PHPUnit test passing";
 	/**
 	 * content of the updated Tweet
 	 * @var string $VALID_TWEETCONTENT2

@@ -20,14 +20,14 @@ class Note {
 	 */
 	private $noteId;
 
-	/**
+	/***
 	 * Note constructor.
 	 * @param string $newNoteContent
 	 * @param int $newNoteNoteTypeId
 	 * @param int $newNoteStudentId
 	 * @param int $newNoteId
-	 * @throws Exception
-	 * @throws TypeError
+	 * @throws \Exception
+	 * @throws \TypeError
 	 */
 	public function __construct(string $newNoteContent, int $newNoteNoteTypeId, int $newNoteStudentId, int $newNoteId) {
 		try {

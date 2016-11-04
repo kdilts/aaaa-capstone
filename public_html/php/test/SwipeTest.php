@@ -18,22 +18,22 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  * @see Tweet
  * @author Dylan McDonald <dmcdonald21@cnm.edu>
  **/
-class TweetTest extends DataDesignTest {
+class SwipeTest extends AaaaTest {
 	/**
 	 * content of the Tweet
 	 * @var string $VALID_TWEETCONTENT
 	 **/
-	protected $VALID_TWEETCONTENT = "PHPUnit test passing";
+	protected $VALID_SWIPEID = "PHPUnit test passing";
 	/**
 	 * content of the updated Tweet
 	 * @var string $VALID_TWEETCONTENT2
 	 **/
-	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
+	protected $VALID_SWIPESTATUS = "PHPUnit test still passing";
 	/**
 	 * timestamp of the Tweet; this starts as null and is assigned later
 	 * @var DateTime $VALID_TWEETDATE
 	 **/
-	protected $VALID_TWEETDATE = null;
+	protected $VALID_SWIPENUMBER = null;
 	/**
 	 * Profile that created the Tweet; this is for foreign key relations
 	 * @var Profile profile
@@ -43,7 +43,7 @@ class TweetTest extends DataDesignTest {
 	/**
 	 * create dependent objects before running each test
 	 **/
-	public final function setUp() {
+	/**public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
 
@@ -54,11 +54,11 @@ class TweetTest extends DataDesignTest {
 		// calculate the date (just use the time the unit test was setup...)
 		$this->VALID_TWEETDATE = new \DateTime();
 	}
-
+**/
 	/**
 	 * test inserting a valid Tweet and verify that the actual mySQL data matches
 	 **/
-	public function testInsertValidTweet() {
+	public function testInsertValidSwipe() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("tweet");
 
