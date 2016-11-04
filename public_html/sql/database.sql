@@ -72,17 +72,17 @@ CREATE TABLE application(
 	applicationUtmSource TEXT NOT NULL,
 	INDEX (applicationId),
 	PRIMARY KEY(applicationId),
-	FOREIGN KEY(applicationCohortId) REFERENCES cohortApplication(cohortApplicationCohortId)
+	FOREIGN KEY(applicationCohortId) REFERENCES cohort (cohortId)
 );
 
 CREATE TABLE note(
 	noteNoteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	noteStudentId INT NOT NULL,
 	noteStatusId INT UNSIGNED NOT NULL,
-	noteContent TEXT NOT NULL,
+	noteContent VARCHAR(2000) NOT NULL,
 	INDEX (noteNoteId),
 	PRIMARY KEY(noteNoteId),
-	FOREIGN KEY(noteStudentId) REFERENCES student(studentId)
+	FOREIGN KEY(noteStudentId) REFERENCES noteNoteId(noteNoteId)
 );
 
 CREATE TABLE cohort(
@@ -95,6 +95,18 @@ CREATE TABLE cohort(
 
 CREATE TABLE status(
 	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	statusTypeName
+	statusTypeName INT NOT NULL,
+	INDEX (statusTypeId),
+	PRIMARY KEY (statusTypeId)
 );
+
+CREATE TABLE noteType(
+	noteTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	noteTypeName INT NOT NULL,
+	INDEX (noteTypeId),
+	PRIMARY KEY (noteTypeId),
+	FOREIGN KEY (noteTypeName),
+
+
+)
 
