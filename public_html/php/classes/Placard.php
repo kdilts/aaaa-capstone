@@ -21,7 +21,7 @@ class Placard {
 
 	/**
 	 * Placard constructor.
-	 * @param int $newPlacardId
+	 * @param int|null $newPlacardId
 	 * @param int $newPlacardStatus
 	 * @param int $newPlacardNumber
 	 * @throws \InvalidArgumentException
@@ -29,7 +29,7 @@ class Placard {
 	 * @throws \TypeError
 	 * @throws \Exception
 	 */
-	public function __construct(int $newPlacardId, int $newPlacardStatus, int $newPlacardNumber) {
+	public function __construct(int $newPlacardId = null, int $newPlacardStatus, int $newPlacardNumber) {
 		try {
 			$this->setPlacardId($newPlacardId);
 			$this->setPlacardNumber($newPlacardNumber);
@@ -47,21 +47,21 @@ class Placard {
 	}
 
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getPlacardId() {
 		return $this->placardId;
 	}
 
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getPlacardNumber() {
 		return $this->placardNumber;
 	}
 
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getPlacardStatus() {
 		return $this->placardStatus;
