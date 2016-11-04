@@ -24,15 +24,17 @@ class Placard {
 	 * @param int $newPlacardId
 	 * @param int $newPlacardStatus
 	 * @param int $newPlacardNumber
-	 * @throws Exception
-	 * @throws TypeError
+	 * @throws \InvalidArgumentException
+	 * @throws \RangeException
+	 * @throws \TypeError
+	 * @throws \Exception
 	 */
 	public function __construct(int $newPlacardId, int $newPlacardStatus, int $newPlacardNumber) {
 		try {
 			$this->setPlacardId($newPlacardId);
 			$this->setPlacardNumber($newPlacardNumber);
 			$this->setPlacardStatus($newPlacardStatus);
-			}catch(InvalidArgumentException $invalidArgument) {
+			}catch(\InvalidArgumentException $invalidArgument) {
 				throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
 			}catch(\RangeException $range) {
 				throw(new \RangeException($range->getMessage(), 0, $range));
