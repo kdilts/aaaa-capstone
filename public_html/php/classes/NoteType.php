@@ -38,7 +38,7 @@ class NoteType{
 	 */
 	public function setNoteTypeId(int $newNoteTypeId) {
 		if($newNoteTypeId <= 0){
-			throw(new \RangeException("NotetypeId can't be less than or equal to 0"));
+			throw(new \RangeException("NoteTypeId can't be less than or equal to 0"));
 		}
 		$this->noteTypeId = $newNoteTypeId;
 	}

@@ -15,7 +15,7 @@ class Status {
 	public function __construct(string $newStatusTypeName, int $newStatusTypeId) {
 	try {
 		$this->setStatusTypeId($newStatusTypeId);
-		$this->statusTypeName($newStatusTypeName);
+		$this->setStatusTypeName($newStatusTypeName);
 	} catch(\InvalidArgumentException $invalidArgumentException){
 		throw(new \InvalidArgumentException($invalidArgumentException->getMessage(), 0, $invalidArgumentException));
 	} catch(\RangeException $rangeException){
@@ -49,9 +49,14 @@ class Status {
 	$this->statusTypeId = $statusTypeId;
 	}
 	/**
- 	* @param string $statusTypeName
+ 	* @param string $newStatusTypeName
  	*/
-	public function setStatusTypeName(string $statusTypeName) {
-	$this->statusTypeName = $statusTypeName;
+	public function setStatusTypeName(string $newStatusTypeName) {
+		$newStatusTypeName = trim($newStatusTypeName);
+		$newStatusTypeName = filter_var($newStatusTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newStatusTypeName) === true) {
+			throw (new \InvalidArgumentException("Status type name is either empty or insecure."));
+		}
+	$this->statusTypeName = $newStatusTypeName;
 }
 }
