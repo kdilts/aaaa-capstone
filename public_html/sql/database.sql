@@ -79,7 +79,7 @@ CREATE TABLE note(
 	noteNoteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	noteStudentId INT NOT NULL,
 	noteStatusId INT UNSIGNED NOT NULL,
-	noteContent VARCHAR(2000) NOT NULL,
+	noteContent TEXT NOT NULL,
 	INDEX (noteNoteId),
 	PRIMARY KEY(noteNoteId),
 	FOREIGN KEY(noteStudentId) REFERENCES note (noteNoteId)
