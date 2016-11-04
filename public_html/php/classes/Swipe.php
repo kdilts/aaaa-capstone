@@ -74,7 +74,7 @@ class Swipe {
 	public function setSwipeId(int $newSwipeId){
 		// verify that newSwipeId is positive
 		if($newSwipeId <= 0){
-			throw new \RangeException("swipe id is not positive");
+			throw(new \RangeException("swipe id is not positive"));
 		}
 		$this->swipeId = $newSwipeId;
 	}
@@ -85,7 +85,7 @@ class Swipe {
 	public function setSwipeNumber(int $newSwipeNumber){
 		// verify that newSwipeNumber is positive
 		if($newSwipeNumber <= 0){
-			throw new \RangeException("swipe number is not positive");
+			throw(new \RangeException("swipe number is not positive"));
 		}
 		$this->swipeNumber = $newSwipeNumber;
 	}
@@ -96,7 +96,7 @@ class Swipe {
 	public function setSwipeStatus(int $newSwipeStatus){
 		// verify that newSwipeStatus is positive
 		if($newSwipeStatus <= 0){
-			throw new \RangeException("swipe status is not positive");
+			throw(new \RangeException("swipe status is not positive"));
 		}
 		$this->swipeStatus = $newSwipeStatus;
 	}
