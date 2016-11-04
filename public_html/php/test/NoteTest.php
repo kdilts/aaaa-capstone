@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{Profile, Tweet};
+use Edu\Cnm\DdcAaaa\{Note};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
