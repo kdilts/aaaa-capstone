@@ -97,4 +97,63 @@ class Placard {
 		}
 		$this->placardStatus = $newPlacardStatus;
 	}
+
+	/**
+	 * @param \PDO $pdo
+	 */
+	public function insert(\PDO $pdo) {
+		// enforce the placardId is null (i.e., don't insert a placard that already exists)
+		if($this->placardId !== null) {
+			throw(new \PDOException("not a new placard"));
+		}
+
+		// create query template
+		$query = "INSERT INTO placard(placardId, placardStatus, placardNumber) VALUES(:placardId, :placardStatus, :placardNumber)";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = ["placardId" => $this->placardId, "placardStatus" => $this->placardStatus, "placardNumber" => $this->placardNumber];
+		$statement->execute($parameters);
+
+		// update the null tweetId with what mySQL just gave us
+		$this->placardId = intval($pdo->lastInsertId());
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 */
+	public function delete(\PDO $pdo) {
+		// enforce the placardId is not null (i.e., don't delete a placard that hasn't been inserted)
+		if($this->placardId === null) {
+			throw(new \PDOException("unable to delete a placard that does not exist"));
+		}
+
+		// create query template
+		$query = "DELETE FROM placard WHERE placardId = :placardId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holder in the template
+		$parameters = ["placardId" => $this->placardId];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 */
+	public function update(\PDO $pdo) {
+		// enforce the placardId is not null (i.e., don't update a placard that hasn't been inserted)
+		if($this->placardId === null) {
+			throw(new \PDOException("unable to update a placard that does not exist"));
+		}
+
+		// create query template
+		$query = "UPDATE placard SET placardId = :placardId, placardStatus = :placardStatus, placardNumber = :placardNumber WHERE placardId = :placardId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = ["placardId" => $this->placardId, "placardStatus" => $this->placardStatus, "placardNumber" => $this->placardNumber];
+		$statement->execute($parameters);
+	}
+
+
 }
