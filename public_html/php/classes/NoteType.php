@@ -2,5 +2,58 @@
 namespace Edu\Cnm\DdcAaaa;
 
 class NoteType{
+	private $noteTypeName;
+	private $noteTypeId;
+
+	public function __construct(string $newNoteTypeName, int $newNoteTypeId) {
+		try {
+			$this->setNoteTypeId($newNoteTypeId);
+			$this->setNoteTypeName($newNoteTypeName);
+		} catch (\InvalidArgumentException $invalidArgumentException) {
+			throw (new \InvalidArgumentException($invalidArgumentException->getMessage(), 0, $invalidArgumentException));
+		} catch (\RangeException $rangeException){
+			throw (new \RangeException($rangeException->getMessage(), 0, $rangeException));
+		} catch (\TypeError $typeError){
+			throw (new \TypeError($typeError->getMessage(), 0, $typeError));
+		} catch (\Exception $exception){
+			throw (new \Exception($exception->getMessage(), 0, $exception));
+		}
+	}
+	/**
+	 * @return mixed
+	 */
+	public function getNoteTypeId() {
+		return $this->noteTypeId;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getNoteTypeName() {
+		return $this->noteTypeName;
+	}
+
+	/**
+	 * @param int $newNoteTypeId
+	 */
+	public function setNoteTypeId(int $newNoteTypeId) {
+		if($newNoteTypeId <= 0){
+			throw(new \RangeException("NotetypeId can't be less than or equal to 0"));
+		}
+		$this->noteTypeId = $newNoteTypeId;
+	}
+
+	/**
+	 * @param string $newNoteTypeName
+	 */
+	public function setNoteTypeName(string $newNoteTypeName) {
+		$newNoteTypeName = trim($newNoteTypeName);
+		$newNoteTypeName = filter_var($newNoteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newNoteTypeName === true)){
+			throw(new \InvalidArgumentException("NoteTypeName is empty or insecure."));
+		}
+		$this->noteTypeName = $newNoteTypeName;
+	}
+
 
 }
