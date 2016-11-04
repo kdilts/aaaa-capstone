@@ -82,7 +82,7 @@ CREATE TABLE note(
 	noteContent VARCHAR(2000) NOT NULL,
 	INDEX (noteNoteId),
 	PRIMARY KEY(noteNoteId),
-	FOREIGN KEY(noteStudentId) REFERENCES noteNoteId(noteNoteId)
+	FOREIGN KEY(noteStudentId) REFERENCES note (noteNoteId)
 );
 
 CREATE TABLE cohort(
@@ -90,7 +90,7 @@ CREATE TABLE cohort(
 	cohortApplicationId INT UNSIGNED NOT NULL,
 	INDEX (cohortId),
 	PRIMARY KEY(cohortId),
-	FOREIGN KEY(cohortApplicationId) REFERENCES cohortApplication(cohortApplicationId)
+	FOREIGN KEY(cohortApplicationId) REFERENCES cohort (cohortApplicationId)
 );
 
 CREATE TABLE status(
@@ -105,6 +105,6 @@ CREATE TABLE noteType (
 	noteTypeName INT                         NOT NULL,
 	INDEX (noteTypeId),
 	PRIMARY KEY (noteTypeId),
-	FOREIGN KEY (noteTypeName) REFERENCES noteTypeId (noteTypeId)
+	FOREIGN KEY (noteTypeName) REFERENCES noteType (noteTypeId)
 );
 
