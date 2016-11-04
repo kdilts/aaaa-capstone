@@ -14,11 +14,6 @@ class Cohort {
 	 * @var int $cohortId
 	 **/
 	private $cohortId;
-
-	/**
-	 * @var int $cohortApplicationId
-	 **/
-	private $cohortApplicationId;
 	/**
 	 * cohort constructor
 	 *
@@ -29,7 +24,12 @@ class Cohort {
 	 * @throws \TypeError
 	 * @throws \Exception
 	 **/
-public function__construct(int $newCohortId = null, int $newCohortApplicationId) {
+	/**
+	 * @var int $cohortApplicationId
+	 **/
+	private $cohortApplicationId;
+
+public function __construct(int $newCohortId = null, int $newCohortApplicationId) {
 try {
 $this->setCohortId($newCohortId);
 $this->setCohortApplicationId($newCohortApplicationId);
@@ -57,12 +57,6 @@ $this->setCohortApplicationId($newCohortApplicationId);
 	public function getCohortId() {
 	return ($this->cohortId);
 }
-	/**
-	 * mutator method for cohort id
-	 *@param int|null
-	 *@throws \RangeException if cohort id is not positive
-	 *@throws \TypeError
-	 */
 	public function setCohortId(int $newCohortId = null) {
 	// base case: if the cohort id is null
 	if($newCohortId === null)	{
@@ -74,7 +68,7 @@ $this->setCohortApplicationId($newCohortApplicationId);
 		throw(new \RangeException("cohort id is not positive"));
 	}
 	// convert and store the cohort id
-	$this->cohortId = # newCohortId;
+	$this->cohortId = $newCohortId;
 
 }
 	/**
@@ -85,6 +79,7 @@ $this->setCohortApplicationId($newCohortApplicationId);
 	public function getcohortApplicationId () {
 	return($this->cohortApplicationId);
 }
+
 	/**
 	 * mutator method for cohort application id
 	 * @param int $newCohortApplicationId
@@ -92,7 +87,7 @@ $this->setCohortApplicationId($newCohortApplicationId);
 	 * @throws \TypeError if $newCohortApplicationId is not an integer
 	 **/
 	public function setCohortApplicationId(int $newCohortApplicationId) {
-	if($newCohortApplicationtId <= 0) {
+	if($newCohortApplicationId <= 0) {
 		throw(new \RangeException("cohort application id is not positive"));
 	}
 	// convert and store the cohort application id
