@@ -1,6 +1,6 @@
 <?php
 
-namespace Edu\Cnm\aaaa;
+namespace Edu\Cnm\DdcAaaa;
 
 /**
  * class Cohort for aaaa

@@ -1,5 +1,7 @@
 <?php
 
+namespace Edu\Cnm\DdcAaaa;
+
 class Placard {
 
 	/**

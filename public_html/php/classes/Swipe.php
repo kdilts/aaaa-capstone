@@ -1,6 +1,6 @@
 <?php
 
-namespace Edu\Cnm\aaaa\DataDesign;
+namespace Edu\Cnm\DdcAaaa;
 
 class Swipe {
 

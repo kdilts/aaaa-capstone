@@ -1,4 +1,6 @@
 <?php
+namespace Edu\Cnm\DdcAaaa;
+
 class Note {
 	/**
 	 * @var string $noteContent
