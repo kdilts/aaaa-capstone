@@ -9,7 +9,7 @@ CREATE TABLE swipe(
 CREATE TABLE placard(
 	placardId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	placardNumber INT UNSIGNED NOT NULL,
-	placardStatus INT UNSIGNED NOT NULL,
+	placardStatusId INT UNSIGNED NOT NULL,
 	INDEX (placardId),
 	PRIMARY KEY(placardId)
 );
@@ -90,7 +90,7 @@ CREATE TABLE cohort(
 	cohortApplicationId INT UNSIGNED NOT NULL,
 	INDEX (cohortId),
 	PRIMARY KEY(cohortId),
-	FOREIGN KEY(cohortApplicationId) REFERENCES cohortApplication(cohortApplicationApplicationId)
+	FOREIGN KEY(cohortApplicationId) REFERENCES cohortApplication(cohortApplicationId)
 );
 
 CREATE TABLE status(
@@ -100,13 +100,11 @@ CREATE TABLE status(
 	PRIMARY KEY (statusTypeId)
 );
 
-CREATE TABLE noteType(
-	noteTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	noteTypeName INT NOT NULL,
+CREATE TABLE noteType (
+	noteTypeId   INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	noteTypeName INT                         NOT NULL,
 	INDEX (noteTypeId),
 	PRIMARY KEY (noteTypeId),
-	FOREIGN KEY (noteTypeName),
-
-
-)
+	FOREIGN KEY (noteTypeName) REFERENCES noteTypeId (noteTypeId)
+);
 
