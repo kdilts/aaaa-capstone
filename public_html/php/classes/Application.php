@@ -47,7 +47,7 @@ class application {
 	 */
 	private $applicationHopeToAccomplish;
 	/**
-	 * @var string $applicationExperienc
+	 * @var string $applicationExperience
 	 */
 	private $applicationExperience;
 	/**
@@ -74,6 +74,74 @@ class application {
 		return $this->applicationId;
 	}
 
+	/**
+	 * @return int
+	 */
+	public function getApplicationFirstName() {
+		return $this->applicationFirstName;
+	}
 
+	/**
+	 * @return int
+	 */
+	public function getApplicationLastName() {
+		return $this->applicationLastName;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getApplicationEmail() {
+		return $this->applicationEmail;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getApplicationPhoneNumber() {
+		return $this->applicationPhoneNumber;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getApplicationSource() {
+		return $this->applicationSource;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getApplicationCohortId() {
+		return $this->applicationCohortId;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getApplicationAboutYou() {
+		return $this->applicationAboutYou;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getApplicationHopeToAccomplish() {
+		return $this->applicationHopeToAccomplish;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getApplicationExperience() {
+		return $this->applicationExperience;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getApplicationDateTime() {
+		return $this->applicationDateTime;
+	}
 
 }
