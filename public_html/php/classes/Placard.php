@@ -119,7 +119,7 @@ class Placard {
 		$parameters = ["placardId" => $this->placardId, "placardStatus" => $this->placardStatus, "placardNumber" => $this->placardNumber];
 		$statement->execute($parameters);
 
-		// update the null tweetId with what mySQL just gave us
+		// update the null placardId with what mySQL just gave us
 		$this->placardId = intval($pdo->lastInsertId());
 	}
 

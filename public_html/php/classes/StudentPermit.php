@@ -159,4 +159,78 @@ class StudentPermit {
 		}
 		$this->studentPermitCheckInDate = $newStudentPermitCheckInDate;
 	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @throws \PDOException
+	 */
+	public function insert(\PDO $pdo) {
+		// enforce the placardId is null (i.e., don't insert a studentPermit that already exists)
+		if($this->studentPermitStudentId !== null) {
+			throw(new \PDOException("not a new studentPermit"));
+		}
+
+		//$studentPermitStudentId $studentPermitPlacardId $studentPermitSwipeId $studentPermitCheckOutDate $studentPermitCheckInDate
+		
+		// create query template
+		$query = "INSERT INTO studentpermit(studentPermitStudentId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = [
+			"studentPermitStudentId" => $this->studentPermitStudentId,
+			"studentPermitPlacardId" => $this->studentPermitPlacardId,
+			"studentPermitSwipeId" => $this->studentPermitSwipeId,
+			"studentPermitCheckOutDate" => $this->studentPermitCheckOutDate,
+			"studentPermitCheckInDate" => $this->studentPermitCheckInDate
+		];
+		$statement->execute($parameters);
+
+		// update the null studentPermitStudentId with what mySQL just gave us
+		$this->studentPermitStudentId = intval($pdo->lastInsertId());
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @throws \PDOException
+	 */
+	public function delete(\PDO $pdo) {
+		// enforce the studentPermitStudentId is not null (i.e., don't delete a studentPermit that hasn't been inserted)
+		if($this->studentPermitStudentId === null) {
+			throw(new \PDOException("unable to delete a studentPermit that does not exist"));
+		}
+
+		// create query template
+		$query = "DELETE FROM studentpermit WHERE studentPermitStudentId = :studentPermitStudentId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holder in the template
+		$parameters = ["studentPermitStudentId" => $this->studentPermitStudentId];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @throws \PDOException
+	 */
+	public function update(\PDO $pdo) {
+		// enforce the studentPermitStudentId is not null (i.e., don't update a studentPermit that hasn't been inserted)
+		if($this->studentPermitStudentId === null) {
+			throw(new \PDOException("unable to update a studentPermit that does not exist"));
+		}
+
+		// create query template
+		$query = "UPDATE studentpermit SET studentPermitStudentId = :studentPermitStudentId, studentPermitPlacardId = :studentPermitPlacardId, studentPermitSwipeId = :studentPermitSwipeId, studentPermitCheckOutDate = :studentPermitCheckOutDate, studentPermitCheckInDate = :studentPermitCheckInDate WHERE studentPermitStudentId = :studentPermitStudentId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = [
+			"studentPermitStudentId" => $this->studentPermitStudentId,
+			"studentPermitPlacardId" => $this->studentPermitPlacardId,
+			"studentPermitSwipeId" => $this->studentPermitSwipeId,
+			"studentPermitCheckOutDate" => $this->studentPermitCheckOutDate,
+			"studentPermitCheckInDate" => $this->studentPermitCheckInDate
+		];
+		$statement->execute($parameters);
+	}
 }
