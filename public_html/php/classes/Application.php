@@ -143,5 +143,27 @@ class application {
 	public function getApplicationDateTime() {
 		return $this->applicationDateTime;
 	}
+	/**
+	 * @param int $newApplicationId
+	 * @throws \RangeException
+	 **/
+	public function setApplicationId(int $applicationId) {
+		$this->applicationId = $applicationId;
+		//check if applicationId is negitive
+		if($newApplicationId <= 0) {
+			throw(new \RangeException("Application Id cannot be negative."));
+			$this->applicationId = $newApplicationId;
+		}
+	}
+	/**
+	 * @param int $newApplicatonFirstName
+	 * @throws \RangeException
+	 **/
+	public function setApplicationFirstName($applicationFirstName){
+		$this->applicationFirstName = $applicationFirstName;
+		if ($newApplicationFirstName)
 
+		}
 }
+
+
