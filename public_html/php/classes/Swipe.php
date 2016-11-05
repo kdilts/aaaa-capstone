@@ -24,8 +24,10 @@ class Swipe {
 	 * @param int $newSwipeId
 	 * @param int $newSwipeNumber
 	 * @param int $newSwipeStatus
-	 * @throws \Exception
+	 * @throws \InvalidArgumentException
+	 * @throws \RangeException
 	 * @throws \TypeError
+	 * @throws \Exception
 	 */
 	public function __construct(int $newSwipeId, int $newSwipeNumber, int $newSwipeStatus){
 		try {
@@ -70,6 +72,7 @@ class Swipe {
 
 	/**
 	 * @param int $newSwipeId
+	 * @throws \RangeException
 	 */
 	public function setSwipeId(int $newSwipeId){
 		// verify that newSwipeId is positive
@@ -81,6 +84,7 @@ class Swipe {
 
 	/**
 	 * @param int $newSwipeNumber
+	 * @throws \RangeException
 	 */
 	public function setSwipeNumber(int $newSwipeNumber){
 		// verify that newSwipeNumber is positive
@@ -92,6 +96,7 @@ class Swipe {
 
 	/**
 	 * @param int $newSwipeStatus
+	 * @throws \RangeException
 	 */
 	public function setSwipeStatus(int $newSwipeStatus){
 		// verify that newSwipeStatus is positive
