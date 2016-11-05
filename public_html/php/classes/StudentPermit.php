@@ -31,7 +31,7 @@ class StudentPermit {
 
 	/**
 	 * StudentPermit constructor.
-	 * @param int $newStudentPermitStudentId
+	 * @param int|null $newStudentPermitStudentId
 	 * @param int $newStudentPermitPlacardId
 	 * @param int $newStudentPermitSwipeId
 	 * @param \DateTime $newStudentPermitCheckOutDate
@@ -41,7 +41,7 @@ class StudentPermit {
 	 * @throws \TypeError
 	 * @throws \Exception
 	 */
-	public function __construct(int $newStudentPermitStudentId, int $newStudentPermitPlacardId, int $newStudentPermitSwipeId, \DateTime $newStudentPermitCheckOutDate, \DateTime $newStudentPermitCheckInDate){
+	public function __construct(int $newStudentPermitStudentId = null, int $newStudentPermitPlacardId, int $newStudentPermitSwipeId, \DateTime $newStudentPermitCheckOutDate, \DateTime $newStudentPermitCheckInDate){
 		try{
 			$this->setStudentPermitStudentId($newStudentPermitStudentId);
 			$this->setStudentPermitPlacardId($newStudentPermitPlacardId);
