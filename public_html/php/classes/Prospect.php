@@ -27,7 +27,7 @@ class Prospect {
 	private $prospectLastName;
 	/**
 	 * Prospect constructor.
-	 * @param int $newProspectId
+	 * @param int|null $newProspectId
 	 * @param int $newProspectCohortId
 	 * @param string $newProspectPhoneNumber
 	 * @param string $newProspectEmail
@@ -38,7 +38,7 @@ class Prospect {
 	 * @throws \TypeError
 	 * @throws \Exception
 	 */
-	public function __construct(int $newProspectId, int $newProspectCohortId, string $newProspectPhoneNumber, string $newProspectEmail, string $newProspectFirstName, string $newProspectLastName){
+	public function __construct(int $newProspectId = null, int $newProspectCohortId, string $newProspectPhoneNumber, string $newProspectEmail, string $newProspectFirstName, string $newProspectLastName){
 		try {
 			$this->setProspectId($newProspectId);
 			$this->setProspectCohortId($newProspectCohortId);
