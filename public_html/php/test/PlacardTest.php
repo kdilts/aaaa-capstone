@@ -42,7 +42,7 @@ class PlacardTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("placard");
 
 		// create a new Placard and insert to into mySQL
-		$placard = new Placard($this->VALID_PLACARDID, $this->VALID_PLACARDSTATUS, $this->VALID_PLACARDNUMBER);
+		$placard = new Placard(null, $this->VALID_PLACARDSTATUS, $this->VALID_PLACARDNUMBER);
 		$placard->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
