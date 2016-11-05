@@ -96,6 +96,7 @@ class StudentPermit {
 
 	/**
 	 * @param int $newStudentPermitStudentId
+	 * @throws \RangeException
 	 */
 	public function setStudentPermitStudentId(int $newStudentPermitStudentId){
 		if ($newStudentPermitStudentId <= 0) {
@@ -106,6 +107,7 @@ class StudentPermit {
 
 	/**
 	 * @param int $newStudentPermitPlacardId
+	 * @throws \RangeException
 	 */
 	public function setStudentPermitPlacardId(int $newStudentPermitPlacardId){
 		if ($newStudentPermitPlacardId <= 0) {
@@ -116,6 +118,7 @@ class StudentPermit {
 
 	/**
 	 * @param int $newStudentPermitSwipeId
+	 * @throws \RangeException
 	 */
 	public function setStudentPermitSwipeId(int $newStudentPermitSwipeId){
 		if ($newStudentPermitSwipeId <= 0) {
@@ -126,6 +129,8 @@ class StudentPermit {
 
 	/**
 	 * @param \DateTime $newStudentPermitCheckOutDate
+	 * @throws \InvalidArgumentException
+	 * @throws \RangeException
 	 */
 	public function setStudentPermitCheckOutDate(\DateTime $newStudentPermitCheckOutDate){
 		try {
@@ -141,6 +146,8 @@ class StudentPermit {
 
 	/**
 	 * @param \DateTime $newStudentPermitCheckInDate
+	 * @throws \InvalidArgumentException
+	 * @throws \RangeException
 	 */
 	public function setStudentPermitCheckInDate(\DateTime $newStudentPermitCheckInDate){
 		try {
