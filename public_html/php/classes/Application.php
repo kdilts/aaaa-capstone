@@ -15,19 +15,19 @@ class application {
 	 */
 	private $applicationId;
 	/**
-	 * @var int $applicationFirstName
+	 * @var string $applicationFirstName
 	 */
 	private $applicationFirstName;
 	/**
-	 * @var int $applicationLastName
+	 * @var string $applicationLastName
 	 */
 	private $applicationLastName;
 	/**
-	 * @var int $applicationEmail
+	 * @var string $applicationEmail
 	 */
 	private $applicationEmail;
 	/**
-	 * @var int $applicationPhoneNumber
+	 * @var string $applicationPhoneNumber
 	 */
 	private $applicationPhoneNumber;
 	/**
@@ -35,7 +35,7 @@ class application {
 	 */
 	private $applicationSource;
 	/**
-	 * @var string $applicationCohortId
+	 * @var int $applicationCohortId
 	 */
 	private $applicationCohortId;
 	/**
@@ -51,7 +51,7 @@ class application {
 	 */
 	private $applicationExperience;
 	/**
-	 * @var string $applicationDateTime
+	 * @var \DateTime $applicationDateTime
 	 */
 	private $applicationDateTime;
 	/**
@@ -75,28 +75,28 @@ class application {
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
 	public function getApplicationFirstName() {
 		return $this->applicationFirstName;
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
 	public function getApplicationLastName() {
 		return $this->applicationLastName;
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
 	public function getApplicationEmail() {
 		return $this->applicationEmail;
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
 	public function getApplicationPhoneNumber() {
 		return $this->applicationPhoneNumber;
@@ -161,7 +161,9 @@ class application {
 	 **/
 	public function setApplicationFirstName($applicationFirstName){
 		$this->applicationFirstName = $applicationFirstName;
-		if ($newApplicationFirstName)
+		if ($newApplicationFirstName <=0){
+
+		}
 
 		}
 }
