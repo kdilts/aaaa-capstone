@@ -47,21 +47,21 @@ class Placard {
 	}
 
 	/**
-	 * @return int
+	 * @return int placardId
 	 */
 	public function getPlacardId() {
 		return $this->placardId;
 	}
 
 	/**
-	 * @return int
+	 * @return int placardNumber
 	 */
 	public function getPlacardNumber() {
 		return $this->placardNumber;
 	}
 
 	/**
-	 * @return int
+	 * @return int placardStatus
 	 */
 	public function getPlacardStatus() {
 		return $this->placardStatus;
@@ -69,6 +69,7 @@ class Placard {
 
 	/**
 	 * @param int $newPlacardId
+	 * @throws \RangeException
 	 */
 	public function setPlacardId(int $newPlacardId) {
 		//checks if PlacardId is negative
@@ -80,6 +81,7 @@ class Placard {
 
 	/**
 	 * @param int $newPlacardNumber
+	 * @throws \RangeException
 	 */
 	public function setPlacardNumber(int $newPlacardNumber) {
 		if ($newPlacardNumber <= 0) {
@@ -90,6 +92,7 @@ class Placard {
 
 	/**
 	 * @param int $newPlacardStatus
+	 * @throws \RangeException
 	 */
 	public function setPlacardStatus(int $newPlacardStatus) {
 		if ($newPlacardStatus < 0) {
@@ -100,6 +103,7 @@ class Placard {
 
 	/**
 	 * @param \PDO $pdo
+	 * @throws \PDOException
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the placardId is null (i.e., don't insert a placard that already exists)
@@ -121,6 +125,7 @@ class Placard {
 
 	/**
 	 * @param \PDO $pdo
+	 * @throws \PDOException
 	 */
 	public function delete(\PDO $pdo) {
 		// enforce the placardId is not null (i.e., don't delete a placard that hasn't been inserted)
@@ -139,6 +144,7 @@ class Placard {
 
 	/**
 	 * @param \PDO $pdo
+	 * @throws \PDOException
 	 */
 	public function update(\PDO $pdo) {
 		// enforce the placardId is not null (i.e., don't update a placard that hasn't been inserted)
