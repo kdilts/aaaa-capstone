@@ -201,6 +201,18 @@ class application {
 		//store email
 		this->applicationEmail=$newApplicationEmail;
 	}
+
+	/**
+	 * @param string $newApplicationPhoneNumber
+	 */
+	public function setApplicationPhoneNumber(string $newApplicationPhoneNumber) {
+		$this->applicationPhoneNumber = $newApplicationPhoneNumber;
+		$newApplicationPhoneNumber = trim($newApplicationPhoneNumber);
+		$newApplicationPhoneNumber = filter_var($newApplicationPhoneNumber, FILTER_FLAG_NO_ENCODE_QUOTES, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty ($newApplicationPhoneNumber) === true){
+			throw (new \InvalidArgumentException(""))
+		}
+	}
 	}
 
 
