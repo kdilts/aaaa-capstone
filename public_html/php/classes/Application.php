@@ -287,6 +287,33 @@ public function setApplicationHopeToAccomplish (string $newApplicationHopeToAcco
 if (strlen($newApplicationHopeToAccomplish) >2000);
 throw (new \RangeException("application Hope to Accomplish is to large"));
 //store the Application Hope To Accomplish
-	this->applicationHopeToAccomplish=$newApplicationHopeToAccomplish;
+	$this->applicationHopeToAccomplish=$newApplicationHopeToAccomplish;
 }
+/**
+ * @param string $ApplicationExperience
+ */
+public function setApplicationExperience (string $newApplicationExperience){
+	$this->applicationExperience = $newApplicationExperience;
+	$this->applicationExperience = trim($newApplicationExperience);
+	$this->applicationExperience = filter_var($newApplicationExperience, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if (empty ($newApplicationExperience) === true);
+	throw (new\InvalidArgumentException("application Experience is empty or secure"));
+	}
+	//verify applcation experience will fir in the database
+if (strlen($newApplicationExperience) >2000);
+throw (new \RangeException("application experience is to large"));
+// store the Application Experience
+	$this->applicationExperience = $newApplicationExperience;
+}
+/**
+ * @param string $applicationDateTime
+ */
+public function setApplicationDateTime (string $newApplicationDateTime){
+	$this->applicationDateTime = $newApplicationDateTime;
+	$this->applicationDateTime = trim ($newApplicationDateTime);
+	$this->applicationDateTime = filter_var($newApplicationDateTime, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if (empty ($newApplicationDateTime)=== true);
+
+}
+
 
