@@ -172,7 +172,6 @@ class application {
 
 	/**
 	 * @param string $newApplicationLastName
-	 * @throws \RangeException
 	 */
 	public function setApplicationLastName(string $newApplicationLastName) {
 		$this->applicationLastName = $newApplicationLastName;
@@ -184,10 +183,24 @@ class application {
 		}
 		$this->applicationLastName = $newApplicationLastName;
 }
-
-/**
- * @param string $
- */
+	/**
+	 * @param string $newApplicationEmail
+	 * @throws \RangeException
+	 */
+	public function setApplicationEmail(string $newApplicationEmail) {
+		$this->applicationEmail = $newApplicationEmail;
+		$newApplicationEmail = trim($newApplicationEmail);
+		$newApplicationEmail = filter_var($newApplicationEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty ($newApplicationEmail) === true){
+			throw (new \InvalidArgumentException("Application email is empty or secure"));
+		}
+		//verify email will fit in the database
+		if(strlen($newApplicationEmail) > 30) {
+			throw(new \RangeException("application Email is to large"));
+		}
+		//store email
+		this->applicationEmail=$newApplicationEmail;
+	}
 	}
 
 
