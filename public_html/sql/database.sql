@@ -30,6 +30,7 @@ CREATE TABLE bridge(
 );
 
 CREATE TABLE studentPermit(
+
 	studentPermitStudentId INT NOT NULL,
 	studentPermitSwipeId INT NOT NULL,
 	studentPermitPlacardId INT NOT NULL,
