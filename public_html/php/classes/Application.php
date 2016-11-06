@@ -175,14 +175,14 @@ class application {
 	 */
 	public function setApplicationLastName(string $newApplicationLastName) {
 		$this->applicationLastName = $newApplicationLastName;
-	//verify last name is secure
+		//verify last name is secure
 		$newApplicationLastName = trim($newApplicationLastName);
 		$newApplicationLastName = filter_var($newApplicationLastName, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty ($newApplicationLastName) === true){
 			throw(new \InvalidArgumentException("Application first name is empty or insecure");
 		}
 		$this->applicationLastName = $newApplicationLastName;
-}
+	}
 	/**
 	 * @param string $newApplicationEmail
 	 * @throws \RangeException
@@ -199,7 +199,7 @@ class application {
 			throw(new \RangeException("application Email is to large"));
 		}
 		//store email
-		this->applicationEmail=$newApplicationEmail;
+			this->applicationEmail=$newApplicationEmail;
 	}
 
 	/**
@@ -210,9 +210,21 @@ class application {
 		$newApplicationPhoneNumber = trim($newApplicationPhoneNumber);
 		$newApplicationPhoneNumber = filter_var($newApplicationPhoneNumber, FILTER_FLAG_NO_ENCODE_QUOTES, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty ($newApplicationPhoneNumber) === true){
-			throw (new \InvalidArgumentException(""))
+			throw (new \InvalidArgumentException("Application phone number is empty or secure"));
 		}
-	}
-	}
+		//verify phone number will fit in the database
+		if(strlen($newApplicationPhoneNumber) >100);
+		throw (new \RangeException("application phone number is to large"));
+			}
+		//store phone number
+		this->applicationPhoneNumber=$newApplicationPhoneNumber;
+}
+
+	/**
+	 * @param string $newApplicationSource
+ 	*/
+public function setApplicationSource (string $newApplicationSource){
+		$this->applicationSource
+}
 
 
