@@ -229,7 +229,7 @@ public function setApplicationSource (string $newApplicationSource){
 	$this->applicationSource = $newApplicationSource;
 	$newApplicationSource = trime($newApplicationSource);
 	$newApplicationSource = filter_var($newApplicationSource, FILTER_SANITIZE_STRING,
-FILTER_FLAG_NO_ENCODE_QUOTES);
+		FILTER_FLAG_NO_ENCODE_QUOTES);
 	if(empty ($newApplicationSource) === true){
 		throw (new \InvalidArgumentException("Application Source is empty or secure"));
 	}
@@ -239,9 +239,6 @@ FILTER_FLAG_NO_ENCODE_QUOTES);
 }
 //store the source
 $this->applicationSource=$newApplicationSource;
-}
-
-
 /**
  * @param string $newApplicationCohortId
  */
@@ -256,7 +253,7 @@ public function setApplicationCohortId (string $newApplicationCohortId){
 	if (strlen ($newApplicationCohortId) >20);
 	throw (new \RangeException("Application Cohort Id is to large"));
 //store the Application Cohort Id
-$this->applicationCohortId=$newApplicationCohortId;
+	$this->applicationCohortId=$newApplicationCohortId;
 }
 
 public function setApplicationAboutYou (string $newApplicationAboutYou){
@@ -287,7 +284,7 @@ public function setApplicationHopeToAccomplish (string $newApplicationHopeToAcco
 if (strlen($newApplicationHopeToAccomplish) >2000);
 throw (new \RangeException("application Hope to Accomplish is to large"));
 //store the Application Hope To Accomplish
-	$this->applicationHopeToAccomplish=$newApplicationHopeToAccomplish;
+$this->applicationHopeToAccomplish=$newApplicationHopeToAccomplish;
 }
 /**
  * @param string $ApplicationExperience
@@ -298,21 +295,28 @@ public function setApplicationExperience (string $newApplicationExperience){
 	$this->applicationExperience = filter_var($newApplicationExperience, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	if (empty ($newApplicationExperience) === true);
 	throw (new\InvalidArgumentException("application Experience is empty or secure"));
-	}
-	//verify applcation experience will fir in the database
+}
+//verify applcation experience will fir in the database
 if (strlen($newApplicationExperience) >2000);
 throw (new \RangeException("application experience is to large"));
 // store the Application Experience
-	$this->applicationExperience = $newApplicationExperience;
-}
+$this->applicationExperience = $newApplicationExperience;
+
 /**
- * @param string $applicationDateTime
+ * @param string $newApplicationDateTime
+ * @throws \InvalidArgumentException if $newApplicationDateTime is not a valid object or string
+ * @throws \RangeException if $newApplicationDateTime is a date that does not exist
  */
-public function setApplicationDateTime (string $newApplicationDateTime){
+public function setApplicationDateTime(\DateTime $newApplicationDateTime){
+	try {
+		$newApplicationDateTime = self::validateDateTime($newApplicationDateTime);
+	} catch(\InvalidArgumentException $invalidArgument) {
+		throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+	} catch(\RangeException $range) {
+		throw(new \RangeException($range->getMessage(), 0, $range));
+	}
+
 	$this->applicationDateTime = $newApplicationDateTime;
-	$this->applicationDateTime = trim ($newApplicationDateTime);
-	$this->applicationDateTime = filter_var($newApplicationDateTime, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	if (empty ($newApplicationDateTime)=== true);
 
 }
 

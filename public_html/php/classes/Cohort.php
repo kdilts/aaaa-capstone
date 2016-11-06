@@ -76,7 +76,7 @@ $this->setCohortApplicationId($newCohortApplicationId);
 	 *
 	 * @return int value of cohort application id
 	 */
-	public function getcohortApplicationId () {
+	public function getCohortApplicationId () {
 	return($this->cohortApplicationId);
 }
 
