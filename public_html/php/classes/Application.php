@@ -148,12 +148,14 @@ class application {
 	 * @throws \RangeException
 	 **/
 	public function setApplicationId(int $newApplicationId) {
-		//check if applicationId is negitive
+		$this->applicationId = $newApplicationId;
+		//check if applicationId is negative
+		$newApplicationId = trim ($newApplicationId);
+		$newApplicationId = filter_var($newApplicationId, FILTER_FLAG_NO_ENCODE_QUOTES, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if($newApplicationId <= 0) {
 			throw(new \RangeException("Application Id cannot be negative."));
 		}
 		$this->applicationId = $newApplicationId;
-
 	}
 	/**
 	 * @param string $newApplicationFirstName
@@ -199,7 +201,7 @@ class application {
 			throw(new \RangeException("application Email is to large"));
 		}
 		//store email
-			this->applicationEmail=$newApplicationEmail;
+		$this->applicationEmail=$newApplicationEmail;
 	}
 
 	/**
@@ -208,23 +210,65 @@ class application {
 	public function setApplicationPhoneNumber(string $newApplicationPhoneNumber) {
 		$this->applicationPhoneNumber = $newApplicationPhoneNumber;
 		$newApplicationPhoneNumber = trim($newApplicationPhoneNumber);
-		$newApplicationPhoneNumber = filter_var($newApplicationPhoneNumber, FILTER_FLAG_NO_ENCODE_QUOTES, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$newApplicationPhoneNumber = filter_var($newApplicationPhoneNumber, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty ($newApplicationPhoneNumber) === true){
 			throw (new \InvalidArgumentException("Application phone number is empty or secure"));
 		}
 		//verify phone number will fit in the database
 		if(strlen($newApplicationPhoneNumber) >100);
 		throw (new \RangeException("application phone number is to large"));
-			}
-		//store phone number
-		this->applicationPhoneNumber=$newApplicationPhoneNumber;
+	}
+	//store phone number
+$this->applicationPhoneNumber=$newApplicationPhoneNumber;
 }
 
-	/**
-	 * @param string $newApplicationSource
- 	*/
+/**
+ * @param string $newApplicationSource
+ */
 public function setApplicationSource (string $newApplicationSource){
-		$this->applicationSource
+	$this->applicationSource = $newApplicationSource;
+	$newApplicationSource = trime($newApplicationSource);
+	$newApplicationSource = filter_var($newApplicationSource, FILTER_SANITIZE_STRING,
+FILTER_FLAG_NO_ENCODE_QUOTES);
+	if(empty ($newApplicationSource) === true){
+		throw (new \InvalidArgumentException("Application Source is empty or secure"));
+	}
+	//verify source will fit in the database
+	if(strlen($newApplicationSource) >1000);
+	throw (new \RangeException("Application source is to large"));
+}
+//store the source
+$this->applicationSource=$newApplicationSource;
 }
 
 
+/**
+ * @param string $newApplicationCohortId
+ */
+public function setApplicationCohortId (string $newApplicationCohortId){
+	$this->applicationCohortId = $newApplicationCohortId;
+	$this->applicationCohortId = trim ($newApplicationCohortId);
+	$this->applicationCohortId = filter_var($newApplicationCohortId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if (empty ($newApplicationCohortId) === true){
+		throw (new \InvalidArgumentException("Application Cohort Id is empty or secure"));
+	}
+	//verify source will fit in the database
+	if (strlen ($newApplicationCohortId) >20);
+	throw (new \RangeException("Application Cohort Id is to large"));
+//store the Application Cohort Id
+$this->applicationCohortId=$newApplicationCohortId;
+}
+
+public function setApplicationAboutYou (string $newApplicationAboutYou){
+	$this->applicationAboutYou = $newApplicationAboutYou;
+	$this->applicationAboutYou = trim ($newApplicationAboutYou);
+	$this->applicationAboutYou = filter($newApplicationAboutYou, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if (empty ($newApplicationAboutYou)=== true){
+		throw (new \InvalidArgumentException("application About You is empty or secure"));
+	}
+	//verify source will fit in the database
+	if (strlen($newApplicationAboutYou) >1000);
+	throw (new \RangeException("application About You is to large"));
+//store the Application About You te
+	$this->applicationAboutYou=$newApplicationAboutYou;
+}
