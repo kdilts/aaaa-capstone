@@ -23,6 +23,16 @@ namespace Edu\Cnm\DdcAaaa;
 		 **/
 		private $bridgeUserName;
 
+		/**
+		 * Bridge constructor.
+		 * @param int|null $newBridgeStaffId
+		 * @param int $newBridgeName
+		 * @param int $newBridgeUserName
+		 * @throws \InvalidArgumentException
+		 * @throws \RangeException
+		 * @throws \TypeError
+		 * @throws \Exception
+		 */
 
 		public function __construct(int $newBridgeStaffId = null, int $newBridgeName, int $newBridgeUserName) {
 			try {
@@ -76,7 +86,8 @@ namespace Edu\Cnm\DdcAaaa;
 		public function getBridgeName() {
 				return ($this->bridgeName);
 		}
-		/** mutator method for bridgeName
+		/**
+		 * mutator method for bridgeName
 		 * @param string $newBridgeName
 		 * @throws \InvalidArgumentException if $newBridgeName is not a valid string
 		 * @throws \RangeException if $newBridgeName is not positive
@@ -98,7 +109,8 @@ namespace Edu\Cnm\DdcAaaa;
 		public function getBridgeUserName() {
 			return ($this->bridgeUserName);
 		}
-		/** mutator method for bridgeUserName
+		/**
+		 * mutator method for bridgeUserName
 		 * @param string $newBridgeUserName
 		 * @throws \InvalidArgumentException if $newBridgeUserName is not a valid string
 		 * @throws \RangeException if $newBridgeUserName is not positive
@@ -113,8 +125,58 @@ namespace Edu\Cnm\DdcAaaa;
 			}
 			$this ->bridgeUserName = $newBridgeUserName;
 		}
-
-
+		/**
+		 * @param \PDO $pdo
+		 * @throws \PDOException
+		 */
+		public function insert(\PDO $pdo) {
+			// enforce the bridgeStaffId is null (i.e., don't insert a bridge that already exists)
+			if($this->bridgeStaffId !== null) {
+				throw(new \PDOException("not a new bridge"));
+			}
+			// create query template
+			$query = "INSERT INTO bridge(bridgeStaffId, bridgeName, bridgeUserName) VALUES(:bridgeStaffId, :bridgeName, :bridgeUserName)";
+			$statement = $pdo->prepare($query);
+			// bind the member variables to the place holders in the template
+			$parameters = ["bridgeStaffId" => $this->bridgeStaffId, "bridgeName" => $this->bridgeName, "bridgeUserName" => $this->bridgeUserName];
+			$statement->execute($parameters);
+			// update the null bridgeStaffId with what mySQL just gave us
+			$this->bridgeStaffId = intval($pdo->lastInsertId());
 		}
+		/**
+		 * @param \PDO $pdo
+		 * @throws \PDOException
+		 */
+		public function delete(\PDO $pdo) {
+			// enforce the bridgeStaffId is not null (i.e., don't delete a bridgeStaffId that hasn't been inserted)
+			if($this->bridgeStaffId === null) {
+				throw(new \PDOException("unable to delete a bridgeStaffId that does not exist"));
+			}
+			// create query template
+			$query = "DELETE FROM bridge WHERE bridgeStaffId = :bridgeStaffId";
+			$statement = $pdo->prepare($query);
+			// bind the member variables to the place holder in the template
+			$parameters = ["bridgeStaffId" => $this->bridgeStaffId];
+			$statement->execute($parameters);
+		}
+		/**
+		 * @param \PDO $pdo
+		 * @throws \PDOException
+		 */
+		public function update(\PDO $pdo) {
+			// enforce the bridgeStaffId is not null (i.e., don't update a bridgeStaff that hasn't been inserted)
+			if($this->bridgeStaffId === null) {
+				throw(new \PDOException("unable to update a bridge that does not exist"));
+			}
+			// create query template
+			$query = "UPDATE bridge SET bridgeStaffId = :bridgeStaffId, bridgeName = :bridgeName, bridgeUserName = 
+			 :brigeUserNAme WHERE Id = :bridgeStaffId";
+			$statement = $pdo->prepare($query);
+			// bind the member variables to the place holders in the template
+			$parameters = ["bridgeStaffId" => $this->bridgeStaffId, "bridgeName" => $this->bridgeName, "bridgeUserName" =>
+				$this->bridgeUserName];
+			$statement->execute($parameters);
+		}
+	}
 
 
