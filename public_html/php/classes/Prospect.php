@@ -165,7 +165,7 @@ class Prospect {
 	 * @param $newProspectLastName
 	 */
 	public function setProspectLastName($newProspectLastName){
-		// verify the first name is secure
+		// verify the last name is secure
 		$newProspectLastName = trim($newProspectLastName);
 		$newProspectLastName = filter_var($newProspectLastName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newProspectLastName) === true) {

@@ -110,7 +110,7 @@ class application {
 	}
 
 	/**
-	 * @return string
+	 * @return int
 	 */
 	public function getApplicationCohortId() {
 		return $this->applicationCohortId;
@@ -147,25 +147,47 @@ class application {
 	 * @param int $newApplicationId
 	 * @throws \RangeException
 	 **/
-	public function setApplicationId(int $applicationId) {
-		$this->applicationId = $applicationId;
+	public function setApplicationId(int $newApplicationId) {
 		//check if applicationId is negitive
 		if($newApplicationId <= 0) {
 			throw(new \RangeException("Application Id cannot be negative."));
-			$this->applicationId = $newApplicationId;
 		}
+		$this->applicationId = $newApplicationId;
+
 	}
 	/**
-	 * @param int $newApplicatonFirstName
+	 * @param string $newApplicationFirstName
 	 * @throws \RangeException
 	 **/
-	public function setApplicationFirstName($applicationFirstName){
-		$this->applicationFirstName = $applicationFirstName;
-		if ($newApplicationFirstName <=0){
-
+	public function setApplicationFirstName($newApplicationFirstName) {
+		$this->applicationFirstName = $newApplicationFirstName;
+		// verify first name is secure
+		$newApplicationFirstName = trim($newApplicationFirstName);
+		$newApplicationFirstName = filter_var($newApplicationFirstName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newApplicationFirstName) === true) {
+			throw(new \InvalidArgumentException("Application first name is empty or insecure"));
 		}
+		$this->applicationFirstName = $newApplicationFirstName;
+	}
 
+	/**
+	 * @param string $newApplicationLastName
+	 * @throws \RangeException
+	 */
+	public function setApplicationLastName(string $newApplicationLastName) {
+		$this->applicationLastName = $newApplicationLastName;
+	//verify last name is secure
+		$newApplicationLastName = trim($newApplicationLastName);
+		$newApplicationLastName = filter_var($newApplicationLastName, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty ($newApplicationLastName) === true){
+			throw(new \InvalidArgumentException("Application first name is empty or insecure");
 		}
+		$this->applicationLastName = $newApplicationLastName;
 }
+
+/**
+ * @param string $
+ */
+	}
 
 
