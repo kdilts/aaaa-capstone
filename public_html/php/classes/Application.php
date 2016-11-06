@@ -269,6 +269,24 @@ public function setApplicationAboutYou (string $newApplicationAboutYou){
 	//verify source will fit in the database
 	if (strlen($newApplicationAboutYou) >1000);
 	throw (new \RangeException("application About You is to large"));
-//store the Application About You te
+//store the Application About You
 	$this->applicationAboutYou=$newApplicationAboutYou;
 }
+
+/**
+ * @param string $newApplicationHopeToAccomplish
+ */
+public function setApplicationHopeToAccomplish (string $newApplicationHopeToAccomplish) {
+	$this->applicationHopeToAccomplish = $newApplicationHopeToAccomplish;
+	$this->applicationHopeToAccomplish = trim($newApplicationHopeToAccomplish);
+	$this->applicationHopeToAccomplish = filter($newApplicationHopeToAccomplish, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if(empty ($newApplicationHopeToAccomplish) === true) ;
+	throw (new\InvalidArgumentException("application Hope to Accomplish is empty or secure"));
+}
+//verify source will fit in the datanase
+if (strlen($newApplicationHopeToAccomplish) >2000);
+throw (new \RangeException("application Hope to Accomplish is to large"));
+//store the Application Hope To Accomplish
+	this->applicationHopeToAccomplish=$newApplicationHopeToAccomplish;
+}
+
