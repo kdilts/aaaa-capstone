@@ -1,4 +1,5 @@
 <?php
+// TODO change your namespace to match the rest of the class namespaces - Edu\Cnm\DdcAaaa
 namespace Edu\Cnm\jwood47\aaaacapstone;
 
 require_once ("autoload.php");
@@ -148,8 +149,10 @@ class application {
 	 * @throws \RangeException
 	 **/
 	public function setApplicationId(int $newApplicationId) {
+		// TODO should not assign to $this->applicationId before input validation
 		$this->applicationId = $newApplicationId;
 		//check if applicationId is negative
+		// TODO should not be using string validation for an integer
 		$newApplicationId = trim ($newApplicationId);
 		$newApplicationId = filter_var($newApplicationId, FILTER_FLAG_NO_ENCODE_QUOTES, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if($newApplicationId <= 0) {
@@ -162,6 +165,7 @@ class application {
 	 * @throws \RangeException
 	 **/
 	public function setApplicationFirstName($newApplicationFirstName) {
+		// TODO should not assign to $this->application.. before input validation
 		$this->applicationFirstName = $newApplicationFirstName;
 		// verify first name is secure
 		$newApplicationFirstName = trim($newApplicationFirstName);
@@ -176,11 +180,13 @@ class application {
 	 * @param string $newApplicationLastName
 	 */
 	public function setApplicationLastName(string $newApplicationLastName) {
+		// TODO should not assign to $this->application.. before input validation
 		$this->applicationLastName = $newApplicationLastName;
 		//verify last name is secure
 		$newApplicationLastName = trim($newApplicationLastName);
 		$newApplicationLastName = filter_var($newApplicationLastName, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty ($newApplicationLastName) === true){
+			// TODO missing closing parenthesis - also copy pasted error message, should be last name not first name
 			throw(new \InvalidArgumentException("Application first name is empty or insecure");
 		}
 		$this->applicationLastName = $newApplicationLastName;
@@ -190,6 +196,7 @@ class application {
 	 * @throws \RangeException
 	 */
 	public function setApplicationEmail(string $newApplicationEmail) {
+		// TODO should not assign to $this->application.. before input validation
 		$this->applicationEmail = $newApplicationEmail;
 		$newApplicationEmail = trim($newApplicationEmail);
 		$newApplicationEmail = filter_var($newApplicationEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -208,6 +215,7 @@ class application {
 	 * @param string $newApplicationPhoneNumber
 	 */
 	public function setApplicationPhoneNumber(string $newApplicationPhoneNumber) {
+		// TODO should not assign to $this->application.. before input validation
 		$this->applicationPhoneNumber = $newApplicationPhoneNumber;
 		$newApplicationPhoneNumber = trim($newApplicationPhoneNumber);
 		$newApplicationPhoneNumber = filter_var($newApplicationPhoneNumber, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -217,6 +225,7 @@ class application {
 		//verify phone number will fit in the database
 		if(strlen($newApplicationPhoneNumber) >100);
 		throw (new \RangeException("application phone number is to large"));
+		// TODO store phone number outside of the function. bracket error
 	}
 	//store phone number
 $this->applicationPhoneNumber=$newApplicationPhoneNumber;
@@ -226,6 +235,7 @@ $this->applicationPhoneNumber=$newApplicationPhoneNumber;
  * @param string $newApplicationSource
  */
 public function setApplicationSource (string $newApplicationSource){
+	// TODO should not assign to $this->application.. before input validation
 	$this->applicationSource = $newApplicationSource;
 	$newApplicationSource = trime ($newApplicationSource);
 	$newApplicationSource = filter_var($newApplicationSource, FILTER_SANITIZE_STRING,
@@ -236,6 +246,7 @@ public function setApplicationSource (string $newApplicationSource){
 	//verify source will fit in the database
 	if(strlen($newApplicationSource) >1000);
 	throw (new \RangeException("Application source is to large"));
+	// TODO applicationSource outside of the function. bracket error
 }
 //store the source
 $this->applicationSource=$newApplicationSource;
@@ -243,6 +254,7 @@ $this->applicationSource=$newApplicationSource;
  * @param string $newApplicationCohortId
  */
 public function setApplicationCohortId (string $newApplicationCohortId){
+	// TODO should not assign to $this->application.. before input validation
 	$this->applicationCohortId = $newApplicationCohortId;
 	$this->applicationCohortId = trim ($newApplicationCohortId);
 	$this->applicationCohortId = filter_var($newApplicationCohortId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -257,6 +269,7 @@ public function setApplicationCohortId (string $newApplicationCohortId){
 }
 
 public function setApplicationAboutYou (string $newApplicationAboutYou){
+	// TODO should not assign to $this->application.. before input validation
 	$this->applicationAboutYou = $newApplicationAboutYou;
 	$this->applicationAboutYou = trim ($newApplicationAboutYou);
 	$this->applicationAboutYou = filter($newApplicationAboutYou, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -274,26 +287,29 @@ public function setApplicationAboutYou (string $newApplicationAboutYou){
  * @param string $newApplicationHopeToAccomplish
  */
 public function setApplicationHopeToAccomplish (string $newApplicationHopeToAccomplish) {
+	// TODO should not assign to $this->application.. before input validation
 	$this->applicationHopeToAccomplish = $newApplicationHopeToAccomplish;
 	$this->applicationHopeToAccomplish = trim($newApplicationHopeToAccomplish);
 	$this->applicationHopeToAccomplish = filter($newApplicationHopeToAccomplish, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	if(empty ($newApplicationHopeToAccomplish) === true) ;
+	if(empty ($newApplicationHopeToAccomplish) === true) ; // TODO should have an open bracket here, not a semicolon
 	throw (new\InvalidArgumentException("application Hope to Accomplish is empty or secure"));
 }
 //verify source will fit in the datanase
-if (strlen($newApplicationHopeToAccomplish) >2000);
+if (strlen($newApplicationHopeToAccomplish) >2000); // TODO should have an open bracket here, not a semicolon
 throw (new \RangeException("application Hope to Accomplish is to large"));
 //store the Application Hope To Accomplish
 $this->applicationHopeToAccomplish=$newApplicationHopeToAccomplish;
-}
+} // TODO after you fix your if statement brackets, make sure all brackets are matched. this bracket should finish this function
+
 /**
  * @param string $ApplicationExperience
  */
 public function setApplicationExperience (string $newApplicationExperience){
+	// TODO should not assign to $this->application.. before input validation
 	$this->applicationExperience = $newApplicationExperience;
 	$this->applicationExperience = trim($newApplicationExperience);
 	$this->applicationExperience = filter_var($newApplicationExperience, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	if (empty ($newApplicationExperience) === true);
+	if (empty ($newApplicationExperience) === true);  // TODO should have an open bracket here, not a semicolon
 	throw (new\InvalidArgumentException("application Experience is empty or secure"));
 }
 //verify applcation experience will fir in the database
@@ -301,6 +317,7 @@ if (strlen($newApplicationExperience) >2000);
 throw (new \RangeException("application experience is to large"));
 // store the Application Experience
 $this->applicationExperience = $newApplicationExperience;
+// TODO should have closing bracket here to finish function
 
 /**
  * @param string $newApplicationDateTime
@@ -309,6 +326,8 @@ $this->applicationExperience = $newApplicationExperience;
  */
 public function setApplicationDateTime(\DateTime $newApplicationDateTime){
 	try {
+		// TODO this looks good i think. you will need to add a 'use' statement at the top of this file to import ValidateDate.php
+		// TODO look at how i did it in StudentPermit.php - it is right under the 'class' line
 		$newApplicationDateTime = self::validateDateTime($newApplicationDateTime);
 	} catch(\InvalidArgumentException $invalidArgument) {
 		throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
