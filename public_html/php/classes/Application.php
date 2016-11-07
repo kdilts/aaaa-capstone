@@ -220,14 +220,14 @@ class application {
 	}
 	//store phone number
 $this->applicationPhoneNumber=$newApplicationPhoneNumber;
-}
+
 
 /**
  * @param string $newApplicationSource
  */
 public function setApplicationSource (string $newApplicationSource){
 	$this->applicationSource = $newApplicationSource;
-	$newApplicationSource = trime($newApplicationSource);
+	$newApplicationSource = trime ($newApplicationSource);
 	$newApplicationSource = filter_var($newApplicationSource, FILTER_SANITIZE_STRING,
 		FILTER_FLAG_NO_ENCODE_QUOTES);
 	if(empty ($newApplicationSource) === true){
