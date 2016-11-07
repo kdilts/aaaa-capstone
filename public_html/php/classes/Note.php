@@ -21,6 +21,7 @@ class Note {
 	private $noteId;
 
 	// TODO doc block for note constructor missing 2 @throws declarations
+	// TODO @param for $newNoteId should have int|null type hint
 	/***
 	 * Note constructor.
 	 * @param string $newNoteContent
@@ -30,6 +31,7 @@ class Note {
 	 * @throws \Exception
 	 * @throws \TypeError
 	 */
+	// TODO $newNoteId should be first parameter - $newNoteId should have null default value
 	public function __construct(string $newNoteContent, int $newNoteNoteTypeId, int $newNoteStudentId, int $newNoteId) {
 		try {
 			$this->setNoteContent($newNoteContent);
