@@ -93,4 +93,56 @@ $this->setCohortApplicationId($newCohortApplicationId);
 	// convert and store the cohort application id
 	$this->cohortApplicationId = $newCohortApplicationId;
 }
+
+	/**
+	 * @param \PDO $pdo
+	 * @throws \PDOException
+	 */
+	public function insert(\PDO $pdo) {
+		// enforce the cohortId is null (i.e., don't insert a cohort that already exists)
+		if($this->cohortId !== null) {
+			throw(new \PDOException("not a new cohort"));
+		}
+		// create query template
+		$query = "INSERT INTO cohort(cohortId, cohortApplicationId) VALUES(:cohortId, :cohortApplicationId)";
+		$statement = $pdo->prepare($query);
+		// bind the member variables to the place holders in the template
+		$parameters = ["cohortId" => $this->cohortId, "cohortApplicationId" => $this->cohortApplicationId];
+		$statement->execute($parameters);
+		// update the null cohortId with what mySQL just gave us
+		$this->cohortId = intval($pdo->lastInsertId());
+	}
+	/**
+	 * @param \PDO $pdo
+	 * @throws \PDOException
+	 */
+	public function delete(\PDO $pdo) {
+		// enforce the cohortId is not null (i.e., don't delete a cohort that hasn't been inserted)
+		if($this->cohortId === null) {
+			throw(new \PDOException("unable to delete a cohort that does not exist"));
+		}
+		// create query template
+		$query = "DELETE FROM cohort WHERE cohortId = :cohortId";
+		$statement = $pdo->prepare($query);
+		// bind the member variables to the place holder in the template
+		$parameters = ["cohortId" => $this->cohortId];
+		$statement->execute($parameters);
+	}
+	/**
+	 * @param \PDO $pdo
+	 * @throws \PDOException
+	 */
+	public function update(\PDO $pdo) {
+		// enforce the cohortId is not null (i.e., don't update a cohort that hasn't been inserted)
+		if($this->cohortId === null) {
+			throw(new \PDOException("unable to update a cohort that does not exist"));
+		}
+		// create query template
+		$query = "UPDATE cohort SET cohortId = :cohortId, cohortApplicationId = :cohortApplicationId, WHERE cohortId = :cohortdId";
+		$statement = $pdo->prepare($query);
+		// bind the member variables to the place holders in the template
+		$parameters = ["cohortId" => $this->cohortId, "cohortApplicationId" => $this->cohortApplicationId];
+		$statement->execute($parameters);
+	}
+
 }
