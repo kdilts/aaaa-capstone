@@ -9,61 +9,31 @@ require_once("AaaaTest.php");
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/classes/autoload.php");
 
-/**
- * Full PHPUnit test for the Tweet class
- *
- * This is a complete PHPUnit test of the Tweet class. It is complete because *ALL* mySQL/PDO enabled methods
- * are tested for both invalid and valid inputs.
- *
- * @see Tweet
- * @author Dylan McDonald <dmcdonald21@cnm.edu>
- **/
-class TweetTest extends DataDesignTest {
+
+class NoteTypeTest extends AaaaTest {
 	/**
 	 * content of the Tweet
-	 * @var string $VALID_TWEETCONTENT
+	 * @var string $VALID_NOTETYPENAME
 	 **/
-	protected $VALID_TWEETCONTENT = "PHPUnit test passing";
+	protected $VALID_NOTETYPENAME = "PHPUnit test passing";
 	/**
-	 * content of the updated Tweet
-	 * @var string $VALID_TWEETCONTENT2
-	 **/
-	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
-	/**
-	 * timestamp of the Tweet; this starts as null and is assigned later
-	 * @var DateTime $VALID_TWEETDATE
-	 **/
-	protected $VALID_TWEETDATE = null;
-	/**
-	 * Profile that created the Tweet; this is for foreign key relations
-	 * @var Profile profile
-	 **/
-	protected $profile = null;
+	 * @var string $VALID_NOTETYPEID
+	 */
+	protected $VALID_NOTETYPEID = "PHPUnit test still passing";
 
 	/**
 	 * create dependent objects before running each test
 	 **/
-	public final function setUp() {
-		// run the default setUp() method first
-		parent::setUp();
-
-		// create and insert a Profile to own the test Tweet
-		$this->profile = new Profile(null, "@phpunit", "test@phpunit.de", "+12125551212");
-		$this->profile->insert($this->getPDO());
-
-		// calculate the date (just use the time the unit test was setup...)
-		$this->VALID_TWEETDATE = new \DateTime();
-	}
 
 	/**
 	 * test inserting a valid Tweet and verify that the actual mySQL data matches
 	 **/
-	public function testInsertValidTweet() {
+	public function testInsertNoteTypeName() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("notetype"); //What does this do? -Trevor
 
 		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
+		$tweet = new Tweet(null, $this->profile->getNoteTypeId(), $this->VALID_NOTETYPEID, $this->VALID_TWEETDATE);
 		$tweet->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations

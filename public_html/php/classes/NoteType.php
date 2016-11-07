@@ -54,6 +54,19 @@ class NoteType{
 		}
 		$this->noteTypeName = $newNoteTypeName;
 	}
+//ATTN: Is this the type of error needed here?
+	public function insert(\PDO $pdo) {
+		if($this->noteTypeId === null) {
+			throw(new \PDOException("Need a note type."));
+		}
+		//create query template
+		$query = "INSERT INTO noteType(noteTypeId, noteTypeName) VALUES(:noteTypeId, :noteTypeName)";
+		$statement = $pdo->prepare($query);
+		
+		//bind member variables to the place holders in template
+		$parameters = ["noteTypeId" => $this->noteTypeId, "noteTypeName" => $this->noteTypeName];
+		$statement = execute($parameters);
 
-
+		$this->noteTypeId = intval($pdo->lastInsertId());
+	}
 }

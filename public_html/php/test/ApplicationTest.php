@@ -9,16 +9,8 @@ require_once("AaaaTest.php");
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/classes/autoload.php");
 
-/**
- * Full PHPUnit test for the Tweet class
- *
- * This is a complete PHPUnit test of the Tweet class. It is complete because *ALL* mySQL/PDO enabled methods
- * are tested for both invalid and valid inputs.
- *
- * @see Tweet
- * @author Dylan McDonald <dmcdonald21@cnm.edu>
- **/
-class TweetTest extends DataDesignTest {
+
+class ApplicationTest extends AaaaTest {
 	/**
 	 * content of the Tweet
 	 * @var string $VALID_TWEETCONTENT
