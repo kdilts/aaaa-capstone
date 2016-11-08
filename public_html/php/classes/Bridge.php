@@ -67,18 +67,10 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \Exception if some other exception occurs
 		 **/
 		public function setBridgeStaffId(string $newBridgeStaffId) {
-			// TODO should not assign to $this->bridgeStaffId before input validation is done
-			$this->bridgeStaffId = $newBridgeStaffId;
 			$this->bridgeStaffId = trim ($newBridgeStaffId);
-			// TODO missing filter_var sanatize string function
-			// TODO this will set $bridgeName to null - look at = vs ==
-			if($newBridgeStaffId = null) {
-				$this ->bridgeStaffId = null;
-				return;
-			}
-			//verify the bridge staff id !== 9
-			if(strlen($newBridgeStaffId)!== 9){
-					throw(new\RangeException("bridge staff id has to be 9"));
+			$newBridgeStaffId = filter_var($newBridgeStaffId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			if(empty($newBridgeStaffId) === true) {
+				throw (new \InvalidArgumentException("Bridge staff id is either empty or insecure."));
 			}
 			$this ->bridgeStaffId = $newBridgeStaffId;
 		}
@@ -97,14 +89,10 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \Exception if some other exception occurs
 		 **/
 		public function setBridgeName(string $newBridgeName) {
-			// TODO should not assign to $this->bridgeName before input validation is done
-			$this->bridgeName = $newBridgeName;
 			$this->bridgeName = trim ($newBridgeName);
-			// TODO missing filter_var sanatize string function
-			// TODO this will set $bridgeName to null - look at = vs ==
-			if($newBridgeName = null) {
-				$this ->bridgeName = null;
-				return;
+			$newBridgeName = filter_var($newBridgeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			if(empty($newBridgeName) === true) {
+				throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
 			}
 			$this ->bridgeName = $newBridgeName;
 		}
@@ -123,14 +111,10 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \Exception if some other exception occurs
 		 **/
 		public function setBridgeUserName(string $newBridgeUserName) {
-			// TODO should not assign to $this->bridgeName before input validation is done
-			$this->bridgeUserName = $newBridgeUserName;
-			$this->bridgeUserName = trim ($newBridgeUserName);
-			// TODO missing filter_var sanatize string function
-			// TODO this will set $bridgeName to null - look at = vs ==
-			if($newBridgeUserName = null) {
-				$this ->bridgeName = null;
-				return;
+			$newbridgeUserName = trim ($newBridgeUserName);
+			$newBridgeUserName = filter_var($newBridgeUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			if(empty($newBridgeNameName) === true) {
+				throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
 			}
 			$this ->bridgeUserName = $newBridgeUserName;
 		}
@@ -140,8 +124,8 @@ namespace Edu\Cnm\DdcAaaa;
 		 */
 		public function insert(\PDO $pdo) {
 			// enforce the bridgeStaffId is null (i.e., don't insert a bridge that already exists)
-			// TODO does this if statement match your comment above? !== vs ===
-			if($this->bridgeStaffId !== null) {
+
+			if(empty($bridgeStaffId) === true) {
 				throw(new \PDOException("not a new bridge"));
 			}
 			// create query template
@@ -159,8 +143,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 */
 		public function delete(\PDO $pdo) {
 			// enforce the bridgeStaffId is not null (i.e., don't delete a bridgeStaffId that hasn't been inserted)
-			// TODO does this if statement match your comment above? !== vs ===
-			if($this->bridgeStaffId === null) {
+			if(empty(bridgeStaffId) === null) {
 				throw(new \PDOException("unable to delete a bridgeStaffId that does not exist"));
 			}
 			// create query template
@@ -176,13 +159,12 @@ namespace Edu\Cnm\DdcAaaa;
 		 */
 		public function update(\PDO $pdo) {
 			// enforce the bridgeStaffId is not null (i.e., don't update a bridgeStaff that hasn't been inserted)
-			// TODO does this if statement match your comment above? !== vs ===
-			if($this->bridgeStaffId === null) {
+			if(empty(bridgeStaffId) === null) {
 				throw(new \PDOException("unable to update a bridge that does not exist"));
 			}
 			// create query template
 			$query = "UPDATE bridge SET bridgeStaffId = :bridgeStaffId, bridgeName = :bridgeName, bridgeUserName = 
-			 :brigeUserNAme WHERE Id = :bridgeStaffId";
+			 :brigeUserName WHERE Id = :bridgeStaffId";
 			$statement = $pdo->prepare($query);
 			// bind the member variables to the place holders in the template
 			$parameters = ["bridgeStaffId" => $this->bridgeStaffId, "bridgeName" => $this->bridgeName, "bridgeUserName" =>
