@@ -20,22 +20,21 @@ class Note {
 	 */
 	private $noteId;
 
-	// TODO doc block for note constructor missing 2 @throws declarations
-	// TODO @param for $newNoteId should have int|null type hint
 	/***
 	 * Note constructor.
+	 * @param int|null $newNoteId
 	 * @param string $newNoteContent
 	 * @param int $newNoteNoteTypeId
 	 * @param int $newNoteStudentId
-	 * @param int $newNoteId
-	 * @throws \Exception
+	 * @throws \InvalidArgumentException
+	 * @throws \RangeException
 	 * @throws \TypeError
+	 * @throws \Exception
 	 */
-	// TODO $newNoteId should be first parameter - $newNoteId should have null default value
-	public function __construct(string $newNoteContent, int $newNoteNoteTypeId, int $newNoteStudentId, int $newNoteId) {
+	public function __construct(int $newNoteId, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteStudentId) {
 		try {
-			$this->setNoteContent($newNoteContent);
 			$this->setNoteId($newNoteId);
+			$this->setNoteContent($newNoteContent);
 			$this->setNoteNoteTypeId($newNoteNoteTypeId);
 			$this->setNoteStudentId($newNoteStudentId);
 		} catch(\InvalidArgumentException $invalidArgument) {
@@ -49,20 +48,18 @@ class Note {
 		}
 	}
 
-
-	// TODO doc block returns types need to match data types
 	// ex: @return for getNoteContent() should be a string, not mixed
 	/**
 	 * @return mixed
 	 */
-	public function getNoteContent() {
+	public function getNoteId() {
 		return $this->noteContent;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getNoteId() {
+	public function getNoteContent() {
 		return $this->noteId;
 	}
 

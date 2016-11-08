@@ -110,7 +110,7 @@ namespace Edu\Cnm\DdcAaaa;
 		}
 		/**
 		 * accessor method for bridge user name
-		@return string value of bridge user name
+		 *@return string value of bridge user name
 		 **/
 		public function getBridgeUserName() {
 			return ($this->bridgeUserName);

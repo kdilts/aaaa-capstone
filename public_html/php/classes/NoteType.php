@@ -56,10 +56,10 @@ class NoteType{
 	}
 //ATTN: Is this the type of error needed here?
 	public function insert(\PDO $pdo) {
-		if($this->noteTypeId === null) {
+		if($this->noteTypeId !== null) {
 			throw(new \PDOException("Need a note type."));
 		}
-		//create query template
+		//create query
 		$query = "INSERT INTO noteType(noteTypeId, noteTypeName) VALUES(:noteTypeId, :noteTypeName)";
 		$statement = $pdo->prepare($query);
 		
