@@ -70,6 +70,27 @@ class application {
 	 */
 	private $applicationUtmSource;
 
+
+	/**
+	 *
+	 * application constructor.
+	 * @param int|null $newApplicationId
+	 * @param string $newApplicationFirstName
+	 * @param string $newApplicationLastName
+	 * @param string $newApplicationEmail
+	 * @param string $newApplicationPhoneNumber
+	 * @param string $newApplicationSource
+	 * @param int $newApplicationCohortId
+	 * @param string $newApplicationAboutYou
+	 * @param string $newApplicationHopeToAccomplish
+	 * @param string $newApplicationExperience
+	 * @param string $newApplicationDateTime
+	 * @param string $newApplicationUtmCampaign
+	 * @param string $newApplicationUtmMedium
+	 * @param string $newApplicationUtmSource
+	 * @throws \Exception
+	 * @throws \TypeError
+	 */
 	public function __construct(int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, int $newApplicationCohortId, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, string $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource){
 		try {
 			$this->setApplicationId($newApplicationId);
@@ -86,8 +107,16 @@ class application {
 			$this->setApplicationUtmCampaign($newApplicationUtmCampaign);
 			$this->setApplicationUtmMedium($newApplicationUtmMedium);
 			$this->setApplicationUtmSource($newApplicationUtmSource);
+		}catch(\InvalidArgumentException $invalidArgument) {
+			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		}catch(\RangeException $range) {
+			throw(new \RangeException($range->getMessage(), 0, $range));
+		}catch(\TypeError $typeError) {
+			throw(new \TypeError($typeError->getMessage(), 0, $typeError));
+		}catch(\Exception $exception) {
+			throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
-}
+	}
 	/**
 	 * @return int| null value of applicationId
 	 */
