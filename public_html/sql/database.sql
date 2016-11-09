@@ -91,6 +91,16 @@ CREATE TABLE studentPermit(
 	FOREIGN KEY(studentPermitPlacardId) REFERENCES placard(placardId)
 );
 
+CREATE TABLE note(
+	noteNoteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	noteProspectId INT NOT NULL,
+	noteStatusId INT UNSIGNED NOT NULL,
+	noteContent TEXT NOT NULL,
+	INDEX (noteNoteId),
+	PRIMARY KEY(noteNoteId),
+	FOREIGN KEY(noteProspectId) REFERENCES prospect (prospectId)
+);
+
 CREATE TABLE prospect(
 	prospectId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	prospectFirstName VARCHAR(40) NOT NULL,
@@ -103,15 +113,7 @@ CREATE TABLE prospect(
 	FOREIGN KEY(prospectCohortId) REFERENCES cohort(cohortId)
 );
 
-CREATE TABLE note(
-	noteNoteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	noteStudentId INT NOT NULL,
-	noteStatusId INT UNSIGNED NOT NULL,
-	noteContent TEXT NOT NULL,
-	INDEX (noteNoteId),
-	PRIMARY KEY(noteNoteId),
-	FOREIGN KEY(noteStudentId) REFERENCES note (noteNoteId)
-);
+
 
 
 
