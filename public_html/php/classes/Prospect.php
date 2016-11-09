@@ -1,6 +1,6 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
-class Prospect {
+class Prospect implements \JsonSerializable {
 	/**
 	 * @var int $prospectId
 	 */
@@ -179,8 +179,6 @@ class Prospect {
 		$this->prospectLastName=$newProspectLastName;
 	}
 
-	//int $newProspectId, int $newProspectCohortId, string $newProspectPhoneNumber, string $newProspectEmail, string $newProspectFirstName, string $newProspectLastName
-
 	/**
 	 * @param \PDO $pdo
 	 * @throws \PDOException
@@ -208,5 +206,47 @@ class Prospect {
 
 		// update the null prospectId with what mySQL just gave us
 		$this->prospectId = intval($pdo->lastInsertId());
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @return \SplFixedArray
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getAllProspects(\PDO $pdo){
+		// create query template
+		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName FROM prospect";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of prospects
+		$prospects = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$prospect = new prospect(
+					$row["prospectId"],
+					$row["prospectCohortId"],
+					$row["prospectPhoneNumber"],
+					$row["prospectEmail"],
+					$row["prospectFirstName"],
+					$row["prospectLastName"]
+				);
+				$prospects[$prospects->key()] = $prospect;
+				$prospects->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($prospects);
+	}
+
+	
+	
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		return($fields);
 	}
 }
