@@ -22,7 +22,7 @@ class PlacardTest extends AaaaTest {
 
 	protected $VALID_PLACARDID = 0;
 
-	protected $VALID_PLACARDSTATUS = 1;
+	protected $VALID_PLACARDSTATUSID = 1;
 
 	protected $VALID_PLACARDNUMBER = 2;
 
@@ -42,14 +42,14 @@ class PlacardTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("placard");
 
 		// create a new Placard and insert to into mySQL
-		$placard = new Placard(null, $this->VALID_PLACARDSTATUS, $this->VALID_PLACARDNUMBER);
+		$placard = new Placard(null, $this->VALID_PLACARDSTATUSID, $this->VALID_PLACARDNUMBER);
 		$placard->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoPlacard = Placard::getPlacardByPlacardId($this->getPDO(), $placard->getPlacardId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
 		$this->assertEquals($pdoPlacard->getPlacardId(), $this->VALID_PLACARDID);
-		$this->assertEquals($pdoPlacard->getPlacardStatus(), $this->VALID_PLACARDSTATUS);
+		$this->assertEquals($pdoPlacard->getPlacardStatusId(), $this->VALID_PLACARDSTATUSID);
 		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
 
@@ -60,7 +60,7 @@ class PlacardTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidPlacard() {
 		// create a Placard with a non null placard id and watch it fail
-		$placard = new Placard(AaaaTest::INVALID_KEY, $this->VALID_PLACARDSTATUS, $this->VALID_PLACARDNUMBER);
+		$placard = new Placard(AaaaTest::INVALID_KEY, $this->VALID_PLACARDSTATUSID, $this->VALID_PLACARDNUMBER);
 		$placard->insert($this->getPDO());
 	}
 
