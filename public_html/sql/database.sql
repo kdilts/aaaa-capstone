@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS note;
-DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS studentPermit;
 DROP TABLE IF EXISTS cohort;
+DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS swipe;
 DROP TABLE IF EXISTS statusType;
 DROP TABLE IF EXISTS placard;
@@ -47,6 +47,26 @@ CREATE TABLE swipe(
 	PRIMARY KEY(swipeId)
 );
 
+CREATE TABLE application(
+	applicationId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	applicationFirstName VARCHAR(40) NOT NULL,
+	applicationLastName VARCHAR(40) NOT NULL,
+	applicationEmail VARCHAR(100) NOT NULL,
+	applicationPhoneNumber VARCHAR(30) NOT NULL,
+	applicationSource TEXT NOT NULL,
+	applicationCohortId INT NOT NULL,
+	applicationAboutYou TEXT NOT NULL,
+	applicationHopeToAccomplish TEXT NOT NULL,
+	applicationExperience TEXT NOT NULL,
+	applicationDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	applicationUtmCampaign TEXT NOT NULL,
+	applicationUtmMedium TEXT NOT NULL,
+	applicationUtmSource TEXT NOT NULL,
+	INDEX (applicationId),
+	PRIMARY KEY(applicationId),
+	FOREIGN KEY(applicationCohortId) REFERENCES cohort (cohortId)
+);
+
 CREATE TABLE cohort(
 	cohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	cohortApplicationId INT UNSIGNED NOT NULL,
@@ -81,26 +101,6 @@ CREATE TABLE prospect(
 	INDEX (prospectId),
 	PRIMARY KEY(prospectId),
 	FOREIGN KEY(prospectCohortId) REFERENCES cohort(cohortId)
-);
-
-CREATE TABLE application(
-	applicationId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	applicationFirstName VARCHAR(40) NOT NULL,
-	applicationLastName VARCHAR(40) NOT NULL,
-	applicationEmail VARCHAR(100) NOT NULL,
-	applicationPhoneNumber VARCHAR(30) NOT NULL,
-	applicationSource TEXT NOT NULL,
-	applicationCohortId INT NOT NULL,
-	applicationAboutYou TEXT NOT NULL,
-	applicationHopeToAccomplish TEXT NOT NULL,
-	applicationExperience TEXT NOT NULL,
-	applicationDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	applicationUtmCampaign TEXT NOT NULL,
-	applicationUtmMedium TEXT NOT NULL,
-	applicationUtmSource TEXT NOT NULL,
-	INDEX (applicationId),
-	PRIMARY KEY(applicationId),
-	FOREIGN KEY(applicationCohortId) REFERENCES cohort (cohortId)
 );
 
 CREATE TABLE note(
