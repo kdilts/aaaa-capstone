@@ -68,10 +68,10 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param int $newPlacardId
+	 * @param int|null $newPlacardId
 	 * @throws \RangeException
 	 */
-	public function setPlacardId(int $newPlacardId) {
+	public function setPlacardId(int $newPlacardId = null) {
 		//checks if PlacardId is negative
 		if ($newPlacardId <= 0) {
 			throw(new \RangeException("Placard ID cannot be negative."));
