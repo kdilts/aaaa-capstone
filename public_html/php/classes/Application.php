@@ -389,7 +389,7 @@ class application {
 	}
 
 	/**
-	 * @param string $applicationUtmCampaign
+	 * @param string $newApplicationUtmCampaign
 	 */
 	public function setApplicationUtmCampaign(string $newApplicationUtmCampaign) {
 			$this->applicationUtmCampaign = trim($newApplicationUtmCampaign);
@@ -397,12 +397,45 @@ class application {
 			if (empty($newApplicationUtmCampaign)=== true) {
 				throw (new\InvalidArgumentException("application UTM Campaign is an empty or secure"));
 			}
-			//verify applcation experience will fir in the database
+			//verify application experience will fit in the database
 			if (strlen($newApplicationUtmCampaign)>200){
 				throw (new\RangeException("application UTM Campaign is to large"));
 			}
 			//store the application UTM Campaign
 		$this->applicationUtmCampaign = $newApplicationUtmCampaign;
+	}
+	/**
+	 * @param string $newApplicationUtmMedium
+	 */
+	public function setApplicationUtmMedium(string $applicationUtmMedium) {
+		$this->applicationUtmMedium = trim($newApplicationUtmMedium);
+		$this->applicationUtmMedium = filter_var($newApplicationUtmMedium, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if (empty($newApplicationUtmMedium)=== true){
+			throw (new\InvalidArgumentException("application UTM Medium is an empty or secure"));
+		}
+		//verify application UTM Medium will fit in the database
+		if (strlen($newApplicationUtmMedium)>200){
+			throw (new\RangeException("application UTM Medium is to large"));
+		}
+		//store the application UTM Medium
+		$this->applicationUtmMedium = $newaApplicationUtmMedium;
+	}
+
+	/**
+	 * @param string $applicationUtmSource
+	 */
+	public function setApplicationUtmSource(string $applicationUtmSource) {
+		$this->applicationUtmSource = trim($newApplicationSource);
+		$this->applicationUtmSource = $applicationUtmSource,FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+		if (empty($newApplicationSource)=== true){
+			throw (new\InvalidArgumentException("application UTM Source is an empty or secure"));
+		}
+		//verify application UTM Source
+		if (strlen($newApplicationSource)>200){
+			throw (new\RangeException("application UTM Source is to large"));
+		}
+		$this->applicationUtmSource = $newApplicationUtmSource;
+
 	}
 
 	/**
