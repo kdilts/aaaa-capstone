@@ -56,7 +56,7 @@ class PlacardTest extends AaaaTest {
 	/**
 	 * test inserting a Placard that already exists
 	 *
-	 * @expectedException PDOException
+	 * @expectedException \PDOException
 	 **/
 	public function testInsertInvalidPlacard() {
 		// create a Placard with a non null placard id and watch it fail
