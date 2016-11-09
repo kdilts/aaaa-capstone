@@ -41,7 +41,7 @@ CREATE TABLE cohort(
 	cohortApplicationId INT UNSIGNED NOT NULL,
 	INDEX (cohortId),
 	PRIMARY KEY(cohortId),
-	FOREIGN KEY(cohortApplicationId) REFERENCES cohort (cohortApplicationId)
+	FOREIGN KEY(cohortApplicationId) REFERENCES application (applicationId)
 );
 
 
