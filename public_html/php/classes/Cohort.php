@@ -154,6 +154,35 @@ class Cohort implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
+	public static function getPlacardByPlacardId(\PDO $pdo, int $cohortId){
+		// sanitize the cohortId before searching
+		if($cohortId <= 0){
+			throw(new \PDOException("cohortId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT cohortId, cohortApplicationId From cohort WHERE cohortId = :cohortId";
+		$statement = $pdo->prepare($query);
+
+		// bind the cohort id to the place holder in template
+		$parameters = ["cohortId" => $cohortId];
+		$statement->execute($parameters);
+
+		// grab cohort from SQL
+		try {
+			$cohort = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$cohort = new Placard($row["cohortId"], $row["cohortApplicationId"]);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($cohort);
+	}
+
 	/**
 	 * @param \PDO $pdo
 	 * @return \SplFixedArray
