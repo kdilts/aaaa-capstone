@@ -42,7 +42,7 @@ class CohortTest extends AaaaTest {
 		$cohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoCohort = Cohort::getCohortById($this->getPDO(), $cohort->getCohortId());
+		$pdoCohort = Cohort::getCohortByCohortId($this->getPDO(), $cohort->getCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
 		$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
 	}
