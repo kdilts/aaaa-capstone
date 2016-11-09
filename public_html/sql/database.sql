@@ -61,7 +61,7 @@ CREATE TABLE application(
 	applicationEmail VARCHAR(100) NOT NULL,
 	applicationPhoneNumber VARCHAR(30) NOT NULL,
 	applicationSource TEXT NOT NULL,
-	applicationCohortId INT NOT NULL,
+	applicationCohortId INT UNSIGNED NOT NULL,
 	applicationAboutYou TEXT NOT NULL,
 	applicationHopeToAccomplish TEXT NOT NULL,
 	applicationExperience TEXT NOT NULL,
@@ -76,15 +76,15 @@ CREATE TABLE application(
 
 CREATE TABLE studentPermit(
 
-	studentPermitStudentId INT NOT NULL,
-	studentPermitSwipeId INT NOT NULL,
-	studentPermitPlacardId INT NOT NULL,
+	studentPermitId INT UNSIGNED NOT NULL,
+	studentPermitSwipeId INT UNSIGNED NOT NULL,
+	studentPermitPlacardId INT UNSIGNED NOT NULL,
 	studentPermitCheckOutDate DATE NOT NULL,
 	studentPermitCheckInDate DATE NOT NULL,
-	INDEX (studentPermitStudentId),
+	INDEX (studentPermitId),
 	INDEX (studentPermitPlacardId),
 	INDEX (studentPermitSwipeId),
-	PRIMARY KEY(studentPermitStudentId),
+	PRIMARY KEY(studentPermitId),
 	FOREIGN KEY(studentPermitSwipeId) REFERENCES swipe(swipeId),
 	FOREIGN KEY(studentPermitPlacardId) REFERENCES placard(placardId)
 );
@@ -103,7 +103,7 @@ CREATE TABLE prospect(
 
 CREATE TABLE note(
 	noteNoteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	noteProspectId INT NOT NULL,
+	noteProspectId INT UNSIGNED NOT NULL,
 	noteStatusId INT UNSIGNED NOT NULL,
 	noteContent TEXT NOT NULL,
 	INDEX (noteNoteId),
