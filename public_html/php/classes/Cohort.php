@@ -58,29 +58,8 @@ class Cohort {
 	public function getCohortId() {
 		return ($this->cohortId);
 	}
-	/**
-	 * @param int|null
-	 * $newCohortId
-	 * @throws \RangeException
-	 */
 
-public function setCohortId(int $newCohortId){
-	if($newCohortId <= 0){
-			throw (new \RangeException("cohort id is not positive"));
-	}
-	$this->cohortId = $newCohortId;
-}
 
-	/**
-	 * @param int|null $newCohortApplicationId
-	 * @throws \RangeException
-	 */
-	public function setCohortApplicationId(){
-	if($newCohortApplicationId <= 0) {
-			throw(new \RangeException("cohort application id is not positive"));
-	}
-	$this->cohortApplicationId = $newCohortApplicationId;
-	}
 
 	/**
 	 * @param int|null $newCohortId
