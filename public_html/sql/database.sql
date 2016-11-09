@@ -1,9 +1,16 @@
-CREATE TABLE swipe(
-	swipeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	swipeNumber INT UNSIGNED NOT NULL,
-	swipeStatus INT UNSIGNED NOT NULL,
-	INDEX (swipeId),
-	PRIMARY KEY(swipeId)
+
+CREATE TABLE bridge(
+	bridgeStaffId VARCHAR(9),
+	bridgeName VARCHAR(64),
+	bridgeUserName VARCHAR(20),
+	INDEX (bridgeStaffId),
+	PRIMARY KEY(bridgeStaffId)
+);
+CREATE TABLE noteType(
+	noteTypeId INT UNSIGNED NOT NULL,
+	noteTypeName VARCHAR(40) NOT NULL,
+	INDEX (noteTypeName),
+	PRIMARY KEY(noteTypeId)
 );
 
 CREATE TABLE placard(
@@ -13,20 +20,18 @@ CREATE TABLE placard(
 	INDEX (placardId),
 	PRIMARY KEY(placardId)
 );
-
-CREATE TABLE noteType(
-	noteTypeId INT UNSIGNED NOT NULL,
-	noteTypeName VARCHAR(40) NOT NULL,
-	INDEX (noteTypeName),
-	PRIMARY KEY(noteTypeId)
+CREATE TABLE statusType(
+	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	statusTypeName VARCHAR(40) NOT NULL,
+	INDEX (statusTypeId),
+	PRIMARY KEY (statusTypeId)
 );
-
-CREATE TABLE bridge(
-	bridgeStaffId varchar(9),
-	bridgeName varchar(64),
-	bridgeUserName varchar(20),
-	INDEX (bridgeStaffId),
-	PRIMARY KEY(bridgeStaffId)
+CREATE TABLE swipe(
+	swipeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	swipeNumber INT UNSIGNED NOT NULL,
+	swipeStatus INT UNSIGNED NOT NULL,
+	INDEX (swipeId),
+	PRIMARY KEY(swipeId)
 );
 
 CREATE TABLE studentPermit(
@@ -94,18 +99,5 @@ CREATE TABLE cohort(
 	FOREIGN KEY(cohortApplicationId) REFERENCES cohort (cohortApplicationId)
 );
 
-CREATE TABLE status(
-	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	statusTypeName INT NOT NULL,
-	INDEX (statusTypeId),
-	PRIMARY KEY (statusTypeId)
-);
 
-CREATE TABLE noteType (
-	noteTypeId   INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	noteTypeName INT                         NOT NULL,
-	INDEX (noteTypeId),
-	PRIMARY KEY (noteTypeId),
-	FOREIGN KEY (noteTypeName) REFERENCES noteType (noteTypeId)
-);
 
