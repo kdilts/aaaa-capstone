@@ -382,8 +382,39 @@ class application {
 		if($this->applicationId === null) {
 			throw(new \PDOException("unable to update a applicationID that does not exist"));
 		}
-//$applicationId applicationFirstName applicationLastName applicationEmail applicationPhoneNumber applicationSource applicationCohortId applicationAboutYou applicationHopeToAccomplish applicationExperience applicationDateTime applicationUtmCompaign applicationUtmMedium applicationUtmSource
 
+		//create query template
+		$query= "UPDATE applicaiton SET applicationId = :applicatinId, applicationFirstName = :applicationFirstName, applicationLastName = :applicationLastName, applicationEmail = :applicationEmail, applicationPhoneNumber = :applicationPhoneNumber, applicationSource = :applicationSource, applicationCohortId = :applicationCohortId, applicationAboutYou = :applicationAboutYou, applicationHopeToAccomplish = :applicationHopeToAccomplish, applicationExperience = :applicationExperience, applicaitonDateTime = :applicationDateTime, applicationUtmCompaign = :applicationUtmCompaign, applicationUtmMedium = :applicationUtmMedium, applicationUtmSource = :applicationUtmSource WHERE applicationId =:applicationId";
+		$statement = $pdo->prepare($query);
+
+		//bind the members variable to the place holder in the template
+		$parameters = [
+			"applicationId" => $this->applicationId,
+			"applicationFirstName" => $this->applicationFirstName,
+			"applicationLastName" => $this->applicationLastName,
+			"applicationEmail" => $this->applicationEmail,
+			"applicationPhoneNumber" => $this->applicationPhoneNumber,
+			"applicationSource" => $this->applicationSource,
+			"applicationCohortId" => $this->applicationCohortId,
+			"applicationAboutYou" => $this->applicationAboutYou,
+			"applicationHopeToAccomplish" => $this->applicationHopeToAccomplish,
+			"applicationExperience" => $this->applicationExperience,
+			"applicationDateTime" => $this->applicationDateTime,
+			"applicationUtmCampaign" => $this->applicationUtmCampaign,
+			"applicationUtmMedium" => $this->applicationUtmMedium,
+			"applicaitonUtmSource" => $this->applicationUtmSource,
+		];
+		$statement->execute($parameters);
+	}
+	/**
+	 * @param \PDO $pdo
+	 * @throws \PDOException
+	 */
+	public function isert(\PDO $pdo) {
+		// enforce the application ID is not null (i.e., don't update a application ID that hasn't been inserted)
+		if($this->applicationId === null) {
+			throw(new \PDOException("unable to update a applicationID that does not exist"));
+		}
 		//create query template
 		$query="INSERT INTO applicaiton (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCompaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationCohortId, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCompaign, :applicationUtmMedium, :applicationUtmSource)";
 		$statement = $pdo->prepare($query);
@@ -410,5 +441,5 @@ class application {
 		// update the null applicationId with what mySQL just gave us
 		$this->applicationId = intval($pdo->lastInsertId());
 	}
-}
+	}
 
