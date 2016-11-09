@@ -392,22 +392,22 @@ class application {
 	 * @param string $newApplicationUtmCampaign
 	 */
 	public function setApplicationUtmCampaign(string $newApplicationUtmCampaign) {
-			$this->applicationUtmCampaign = trim($newApplicationUtmCampaign);
-			$this->applicationUtmCampaign = filter_var($newApplicationUtmCampaign, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			if (empty($newApplicationUtmCampaign)=== true) {
-				throw (new\InvalidArgumentException("application UTM Campaign is an empty or secure"));
-			}
-			//verify application experience will fit in the database
-			if (strlen($newApplicationUtmCampaign)>200){
-				throw (new\RangeException("application UTM Campaign is to large"));
-			}
-			//store the application UTM Campaign
+		$this->applicationUtmCampaign = trim($newApplicationUtmCampaign);
+		$this->applicationUtmCampaign = filter_var($newApplicationUtmCampaign, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if (empty($newApplicationUtmCampaign)=== true) {
+			throw (new\InvalidArgumentException("application UTM Campaign is an empty or secure"));
+		}
+		//verify application experience will fit in the database
+		if (strlen($newApplicationUtmCampaign)>200){
+			throw (new\RangeException("application UTM Campaign is to large"));
+		}
+		//store the application UTM Campaign
 		$this->applicationUtmCampaign = $newApplicationUtmCampaign;
 	}
 	/**
 	 * @param string $newApplicationUtmMedium
 	 */
-	public function setApplicationUtmMedium(string $applicationUtmMedium) {
+	public function setApplicationUtmMedium(string $newApplicationUtmMedium) {
 		$this->applicationUtmMedium = trim($newApplicationUtmMedium);
 		$this->applicationUtmMedium = filter_var($newApplicationUtmMedium, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if (empty($newApplicationUtmMedium)=== true){
@@ -424,14 +424,14 @@ class application {
 	/**
 	 * @param string $applicationUtmSource
 	 */
-	public function setApplicationUtmSource(string $applicationUtmSource) {
-		$this->applicationUtmSource = trim($newApplicationSource);
-		$this->applicationUtmSource = $applicationUtmSource,FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+	public function setApplicationUtmSource(string $newApplicationUtmSource) {
+		$this->applicationUtmSource = trim($newApplicationUtmSource);
+		$this->applicationUtmSource = filter_var($newApplicationUtmSource, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
 		if (empty($newApplicationSource)=== true){
 			throw (new\InvalidArgumentException("application UTM Source is an empty or secure"));
 		}
 		//verify application UTM Source
-		if (strlen($newApplicationSource)>200){
+		if (strlen($newApplicationUtmSource)>200){
 			throw (new\RangeException("application UTM Source is to large"));
 		}
 		$this->applicationUtmSource = $newApplicationUtmSource;
@@ -506,5 +506,5 @@ class application {
 		// update the null applicationId with what mySQL just gave us
 		$this->applicationId = intval($pdo->lastInsertId());
 	}
-	}
+}
 
