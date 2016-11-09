@@ -1,4 +1,3 @@
-
 CREATE TABLE bridge(
 	bridgeStaffId VARCHAR(9),
 	bridgeName VARCHAR(64),
@@ -6,6 +5,7 @@ CREATE TABLE bridge(
 	INDEX (bridgeStaffId),
 	PRIMARY KEY(bridgeStaffId)
 );
+
 CREATE TABLE noteType(
 	noteTypeId INT UNSIGNED NOT NULL,
 	noteTypeName VARCHAR(40) NOT NULL,
@@ -20,12 +20,14 @@ CREATE TABLE placard(
 	INDEX (placardId),
 	PRIMARY KEY(placardId)
 );
+
 CREATE TABLE statusType(
 	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	statusTypeName VARCHAR(40) NOT NULL,
 	INDEX (statusTypeId),
 	PRIMARY KEY (statusTypeId)
 );
+
 CREATE TABLE swipe(
 	swipeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	swipeNumber INT UNSIGNED NOT NULL,
@@ -33,6 +35,15 @@ CREATE TABLE swipe(
 	INDEX (swipeId),
 	PRIMARY KEY(swipeId)
 );
+
+CREATE TABLE cohort(
+	cohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	cohortApplicationId INT UNSIGNED NOT NULL,
+	INDEX (cohortId),
+	PRIMARY KEY(cohortId),
+	FOREIGN KEY(cohortApplicationId) REFERENCES cohort (cohortApplicationId)
+);
+
 
 CREATE TABLE studentPermit(
 
@@ -68,7 +79,7 @@ CREATE TABLE application(
 	applicationEmail VARCHAR(100) NOT NULL,
 	applicationPhoneNumber VARCHAR(30) NOT NULL,
 	applicationSource TEXT NOT NULL,
-	applicationCohortId TEXT NOT NULL,
+	applicationCohortId INT NOT NULL,
 	applicationAboutYou TEXT NOT NULL,
 	applicationHopeToAccomplish TEXT NOT NULL,
 	applicationExperience TEXT NOT NULL,
@@ -91,13 +102,6 @@ CREATE TABLE note(
 	FOREIGN KEY(noteStudentId) REFERENCES note (noteNoteId)
 );
 
-CREATE TABLE cohort(
-	cohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	cohortApplicationId INT UNSIGNED NOT NULL,
-	INDEX (cohortId),
-	PRIMARY KEY(cohortId),
-	FOREIGN KEY(cohortApplicationId) REFERENCES cohort (cohortApplicationId)
-);
 
 
 
