@@ -65,7 +65,7 @@ class NoteType{
 		
 		//bind member variables to the place holders in template
 		$parameters = ["noteTypeId" => $this->noteTypeId, "noteTypeName" => $this->noteTypeName];
-		$statement = execute($parameters);
+		$statement->execute($parameters);
 
 		$this->noteTypeId = intval($pdo->lastInsertId());
 	}

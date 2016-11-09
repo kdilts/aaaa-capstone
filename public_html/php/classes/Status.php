@@ -37,7 +37,7 @@ class Status {
 	 * @return string
 	 */
 	public function getStatusTypeName(){
-	return $this->statusTypeName;
+		return $this->statusTypeName;
 	}
 	/**
  	* @param int $statusTypeId
@@ -58,5 +58,21 @@ class Status {
 			throw (new \InvalidArgumentException("Status type name is either empty or insecure."));
 		}
 	$this->statusTypeName = $newStatusTypeName;
+}
+
+public function insert(\PDO $pdo) {
+	if($this->statusTypeId === null) {
+		throw(new \PDOException("Need a status type."));
+	}
+	$query = "INSERT INTO status(statusTypeId, statusTypeName) VALUES(:statusTypeId, :statusTypeName)";
+	$statement = $pdo->prepare($query);
+
+
+	$parameters = ["statusTypeId" => $this->statusTypeId, "statusTypeName" => $this->statusTypeName];
+	$statement->execute($parameters);
+
+
+	$this->statusTypeId = intval($pdo->lastInsertId());
+
 }
 }
