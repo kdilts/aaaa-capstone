@@ -206,6 +206,7 @@ class StudentPermit implements \JsonSerializable {
 
 		// bind the member variables to the place holders in the template
 		$parameters = [
+
 			"studentPermitStudentId" => $this->studentPermitStudentId,
 			"studentPermitPlacardId" => $this->studentPermitPlacardId,
 			"studentPermitSwipeId" => $this->studentPermitSwipeId,

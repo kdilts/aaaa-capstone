@@ -109,7 +109,7 @@ class Note {
 	}
 
 	/**
-	 * @param int|mull $newNoteNoteTypeId
+	 * @param int|null $newNoteNoteTypeId
 	 * @throws \RangeException
 	 * @throws \TypeError if $newNoteNoteId is not an integer
 	 */
@@ -172,7 +172,7 @@ class Note {
 	 * @param \PDO $pdo
 	 * @throws \PDOException
 	 */
-	public function updatei(\PDO $pdo) {
+	public function update(\PDO $pdo) {
 		// enforce the notedId is not null (i.e., don't update a note that hasn't been inserted)
 		if($this->noteId === null) {
 			throw(new \PDOException("unable to update a note that does not exist"));
