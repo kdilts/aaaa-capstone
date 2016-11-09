@@ -3,6 +3,7 @@
 		<testsuite name="AAAA Data Design">
 			<file>PlacardTest.php</file>
 			<file>SwipeTest.php</file>
+			<file>CohortTest.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>

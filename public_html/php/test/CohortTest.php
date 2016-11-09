@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{Cohort, Application};
+use Edu\Cnm\DdcAaaa\{Cohort};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -19,8 +19,6 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  * @author Kevin Dilts <kdilts@cnm.edu>
  **/
 class CohortTest extends AaaaTest {
-
-	protected $VALID_COHORTID = 0;
 
 	protected $VALID_COHORTAPPLICATIONID = 1;
 
@@ -46,7 +44,6 @@ class CohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoCohort = Cohort::getCohortById($this->getPDO(), $cohort->getCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
-		$this->assertEquals($pdoCohort->getCohortId(), $this->VALID_COHORTID);
 		$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
 	}
 
