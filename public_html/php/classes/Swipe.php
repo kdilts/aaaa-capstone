@@ -21,15 +21,13 @@ class Swipe {
 
 	/**
 	 * Swipe constructor.
-	 * @param int $newSwipeId
+	 * @param int|null $newSwipeId
 	 * @param int $newSwipeNumber
 	 * @param int $newSwipeStatus
-	 * @throws \InvalidArgumentException
-	 * @throws \RangeException
-	 * @throws \TypeError
 	 * @throws \Exception
+	 * @throws \TypeError
 	 */
-	public function __construct(int $newSwipeId, int $newSwipeNumber, int $newSwipeStatus) {
+	 	public function __construct(int $newSwipeId = null, int $newSwipeNumber, int $newSwipeStatus) {
 		try {
 			$this->setSwipeId($newSwipeId);
 			$this->setSwipeNumber($newSwipeNumber);
@@ -71,14 +69,19 @@ class Swipe {
 	}
 
 	/**
-	 * @param int $newSwipeId
-	 * @throws \RangeException
+	 * @param int|null $newSwipeId
 	 */
-	public function setSwipeId(int $newSwipeId) {
+	public function setSwipeId(int $newSwipeId = null) {
+		// base case: if the placard id is null, this a new placard without a mySQL assigned id (yet)
+		if($newSwipeId === null) {
+			$this->placardId = null;
+			return;
+		}
 		// verify that newSwipeId is positive
 		if($newSwipeId <= 0) {
 			throw(new \RangeException("swipe id is not positive"));
 		}
+
 		$this->swipeId = $newSwipeId;
 	}
 
@@ -192,7 +195,7 @@ class Swipe {
 	 */
 	public static function getSwipeBySwipeStatus(\PDO $pdo, int $swipeStatus) {
 		// sanitize the swipeId before searching
-		if($swipeStatus = 0) {
+		if($swipeStatus <= 0) {
 			throw(new \PDOException("swipeStatus not positive"));
 		}
 
@@ -229,7 +232,7 @@ class Swipe {
 	 */
 	public static function getSwipeBySwipeNumber(\PDO $pdo, int $swipeNumber) {
 		// sanitize the swipeId before searching
-		if($swipeNumber = 0) {
+		if($swipeNumber <= 0) {
 			throw(new \PDOException("swipeNumber not positive"));
 		}
 
