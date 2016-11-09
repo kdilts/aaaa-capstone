@@ -174,7 +174,7 @@ class Cohort implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$cohort = new Placard($row["cohortId"], $row["cohortApplicationId"]);
+				$cohort = new Cohort($row["cohortId"], $row["cohortApplicationId"]);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
@@ -200,7 +200,7 @@ class Cohort implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false){
 			try {
-				$cohort = new Placard($row["cohortId"], $row["cohortApplicationId"]);
+				$cohort = new Cohort($row["cohortId"], $row["cohortApplicationId"]);
 				$cohorts[$cohorts->key()] = $cohort;
 				$cohorts->next();
 			} catch(\Exception $exception){
