@@ -109,7 +109,6 @@ class Cohort {
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the cohortId is null (i.e., don't insert a cohort that already exists)
-		// TODO does this if statement match your comment above? !== vs ===
 		if($this->cohortId !== null) {
 			throw(new \PDOException("not a new cohort"));
 		}
@@ -128,7 +127,6 @@ class Cohort {
 	 */
 	public function delete(\PDO $pdo) {
 		// enforce the cohortId is not null (i.e., don't delete a cohort that hasn't been inserted)
-		// TODO does this if statement match your comment above? !== vs ===
 		if($this->cohortId === null) {
 			throw(new \PDOException("unable to delete a cohort that does not exist"));
 		}
@@ -145,12 +143,10 @@ class Cohort {
 	 */
 	public function update(\PDO $pdo) {
 		// enforce the cohortId is not null (i.e., don't update a cohort that hasn't been inserted)
-		// TODO does this if statement match your comment above? !== vs ===
 		if($this->cohortId === null) {
 			throw(new \PDOException("unable to update a cohort that does not exist"));
 		}
 		// create query template
-		// TODO syntax error in $query can you find it?
 		$query = "UPDATE cohort SET cohortId = :cohortId, cohortApplicationId = :cohortApplicationId WHERE cohortId = :cohortdId";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
