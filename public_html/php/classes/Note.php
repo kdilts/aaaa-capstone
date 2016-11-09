@@ -127,7 +127,7 @@ class Note {
 	 */
 	public function setNoteStudentId(int $newNoteStudentId) {
 		if($newNoteStudentId < 0) {
-			throw(new \RangeException("Note Type Id can't be negative.")); // TODO correct duplicate error message
+			throw(new \RangeException("Note Note Student Id can't be negative."));
 
 		}
 		$this->noteStudentId = $newNoteStudentId;
@@ -143,7 +143,8 @@ class Note {
 			throw(new \PDOException("not a new noteId"));
 		}
 		// create query template
-		$query = "INSERT INTO note(noteId, noteStudentId, noteNoteTypeId, noteContent) VALUES(:noteId, :noteStudentId, noteNoteTypeId, :noteContent)";
+		$query = "INSERT INTO note(noteId, noteStudentId, noteNoteTypeId, noteContent) VALUES(:noteId, :noteStudentId, 
+		noteNoteTypeId, :noteContent)";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
 		$parameters = ["noteId" => $this->noteId, "noteStudentId" => $this->noteStudentId, "noteContent" => $this->noteContent];
