@@ -72,6 +72,12 @@ class Placard implements \JsonSerializable {
 	 * @throws \RangeException
 	 */
 	public function setPlacardId(int $newPlacardId = null) {
+		// base case: if the placard id is null, this a new placard without a mySQL assigned id (yet)
+		if($newPlacardId === null) {
+			$this->placardId = null;
+			return;
+		}
+
 		//checks if PlacardId is negative
 		if ($newPlacardId <= 0) {
 			throw(new \RangeException("Placard ID cannot be negative."));
