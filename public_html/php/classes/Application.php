@@ -194,9 +194,25 @@ class application {
 		return $this->applicationDateTime;
 	}
 	/**
-	 * Application Constructor.
-	 * @param
+	 * @return string
 	 */
+	public function getApplicationUtmCampaign(): string {
+		return $this->applicationUtmCampaign;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getApplicationUtmMedium(): string {
+		return $this->applicationUtmMedium;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getApplicationUtmSource(): string {
+		return $this->applicationUtmSource;
+	}
 	/**
 	 * @param int $newApplicationId
 	 * @throws \RangeException
@@ -293,8 +309,6 @@ class application {
 	 * @param string $newApplicationCohortId
 	 */
 	public function setApplicationCohortId(string $newApplicationCohortId) {
-		// TODO should not assign to $this->application.. before input validation
-		$this->applicationCohortId = $newApplicationCohortId;
 		$this->applicationCohortId = trim($newApplicationCohortId);
 		$this->applicationCohortId = filter_var($newApplicationCohortId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty ($newApplicationCohortId) === true) {
@@ -373,6 +387,24 @@ class application {
 		$this->applicationDateTime = $newApplicationDateTime;
 
 	}
+
+	/**
+	 * @param string $applicationUtmCampaign
+	 */
+	public function setApplicationUtmCampaign(string $newApplicationUtmCampaign) {
+			$this->applicationUtmCampaign = trim($newApplicationUtmCampaign);
+			$this->applicationUtmCampaign = filter_var($newApplicationUtmCampaign, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			if (empty($newApplicationUtmCampaign)=== true) {
+				throw (new\InvalidArgumentException("application UTM Campaign is an empty or secure"));
+			}
+			//verify applcation experience will fir in the database
+			if (strlen($newApplicationUtmCampaign)>200){
+				throw (new\RangeException("application UTM Campaign is to large"));
+			}
+			//store the application UTM Campaign
+		$this->applicationUtmCampaign = $newApplicationUtmCampaign;
+	}
+
 	/**
 	 * @param \PDO $pdo
 	 * @throws \PDOException
@@ -410,13 +442,13 @@ class application {
 	 * @param \PDO $pdo
 	 * @throws \PDOException
 	 */
-	public function isert(\PDO $pdo) {
+	public function insert(\PDO $pdo) {
 		// enforce the application ID is not null (i.e., don't update a application ID that hasn't been inserted)
 		if($this->applicationId === null) {
 			throw(new \PDOException("unable to update a applicationID that does not exist"));
 		}
 		//create query template
-		$query="INSERT INTO applicaiton (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCompaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationCohortId, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCompaign, :applicationUtmMedium, :applicationUtmSource)";
+		$query="INSERT INTO application (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCompaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationCohortId, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCompaign, :applicationUtmMedium, :applicationUtmSource)";
 		$statement = $pdo->prepare($query);
 
 		//bind the members variable to the place holder in the template
