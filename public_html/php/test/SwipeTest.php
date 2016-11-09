@@ -46,7 +46,7 @@ class SwipeTest extends AaaaTest {
 		$swipe->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoSwipe = Swipe::getSwipeBySwipeId($this->getPDO(), $Swipe->getSwipeId());
+		$pdoSwipe = Swipe::getSwipeBySwipeId($this->getPDO(), $swipe->getSwipeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
 		//$this->assertEquals($pdoSwipe->getSwipeId(), $this->VALID_SWIPEID);
 		$this->assertEquals($pdoSwipe->getSwipeStatus(), $this->VALID_SWIPESTATUS);
