@@ -154,7 +154,7 @@ class Cohort implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
-	public static function getPlacardByPlacardId(\PDO $pdo, int $cohortId){
+	public static function getCohortByCohortId(\PDO $pdo, int $cohortId){
 		// sanitize the cohortId before searching
 		if($cohortId <= 0){
 			throw(new \PDOException("cohortId not positive"));
