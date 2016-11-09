@@ -9,7 +9,7 @@ namespace Edu\Cnm\DdcAaaa;
  *
  * @version 1.0.0
  **/
-class Cohort {
+class Cohort implements \JsonSerializable {
 
 	/**
 	 * id for the cohort is the primary key
@@ -154,4 +154,37 @@ class Cohort {
 		$statement->execute($parameters);
 	}
 
+	/**
+	 * @param \PDO $pdo
+	 * @return \SplFixedArray
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getAllCohorts(\PDO $pdo){
+		// create query template
+		$query = "SELECT cohortId, cohortApplicationId From cohort";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of cohorts
+		$cohorts = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false){
+			try {
+				$cohort = new Placard($row["cohortId"], $row["cohortApplicationId"]);
+				$cohorts[$cohorts->key()] = $cohort;
+				$cohorts->next();
+			} catch(\Exception $exception){
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $cohorts;
+	}
+
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		return($fields);
+	}
+	
 }
