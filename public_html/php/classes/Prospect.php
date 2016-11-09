@@ -1,6 +1,6 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
-class Prospect {
+class Prospect implements \JsonSerializable {
 	/**
 	 * @var int $prospectId
 	 */
@@ -179,8 +179,6 @@ class Prospect {
 		$this->prospectLastName=$newProspectLastName;
 	}
 
-	//int $newProspectId, int $newProspectCohortId, string $newProspectPhoneNumber, string $newProspectEmail, string $newProspectFirstName, string $newProspectLastName
-
 	/**
 	 * @param \PDO $pdo
 	 * @throws \PDOException
@@ -212,46 +210,43 @@ class Prospect {
 
 	/**
 	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * @return \SplFixedArray
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public function delete(\PDO $pdo) {
-		// enforce the prospectId is not null (i.e., don't delete a prospect that hasn't been inserted)
-		if($this->prospectId === null) {
-			throw(new \PDOException("unable to delete a prospect that does not exist"));
-		}
-
+	public static function getAllProspects(\PDO $pdo){
 		// create query template
-		$query = "DELETE FROM prospect WHERE prospectId = :prospectId";
+		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName FROM prospect";
 		$statement = $pdo->prepare($query);
+		$statement->execute();
 
-		// bind the member variables to the place holder in the template
-		$parameters = ["prospectId" => $this->prospectId];
-		$statement->execute($parameters);
+		// build an array of prospects
+		$prospects = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$prospect = new prospect(
+					$row["prospectId"],
+					$row["prospectCohortId"],
+					$row["prospectPhoneNumber"],
+					$row["prospectEmail"],
+					$row["prospectFirstName"],
+					$row["prospectLastName"]
+				);
+				$prospects[$prospects->key()] = $prospect;
+				$prospects->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($prospects);
 	}
 
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
-	public function update(\PDO $pdo) {
-		// enforce the prospectId is not null (i.e., don't update a prospect that hasn't been inserted)
-		if($this->prospectId === null) {
-			throw(new \PDOException("unable to update a prospect that does not exist"));
-		}
-
-		// create query template
-		$query = "UPDATE prospect SET prospectId = :prospectId, prospectCohortId = :prospectCohortId, prospectPhoneNumber = :prospectPhoneNumber, prospectEmail = :prospectEmail, prospectFirstName = :prospectFirstName, prospectLastName = :prospectLastName WHERE prospectId = :prospectId";
-		$statement = $pdo->prepare($query);
-
-		// bind the member variables to the place holders in the template
-		$parameters = [
-			"prospectId" => $this->prospectId,
-			"prospectCohortId" => $this->prospectCohortId,
-			"prospectPhoneNumber" => $this->prospectPhoneNumber,
-			"prospectEmail" => $this->prospectEmail,
-			"prospectFirstName" => $this->prospectFirstName,
-			"prospectLastName" => $this->prospectLastName
-		];
-		$statement->execute($parameters);
+	
+	
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		return($fields);
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Edu\Cnm\DdcAaaa;
 
-class Placard {
+class Placard implements \JsonSerializable {
 
 	/**
 	 * @var int $placardId
@@ -127,25 +127,6 @@ class Placard {
 	 * @param \PDO $pdo
 	 * @throws \PDOException
 	 */
-	public function delete(\PDO $pdo) {
-		// enforce the placardId is not null (i.e., don't delete a placard that hasn't been inserted)
-		if($this->placardId === null) {
-			throw(new \PDOException("unable to delete a placard that does not exist"));
-		}
-
-		// create query template
-		$query = "DELETE FROM placard WHERE placardId = :placardId";
-		$statement = $pdo->prepare($query);
-
-		// bind the member variables to the place holder in the template
-		$parameters = ["placardId" => $this->placardId];
-		$statement->execute($parameters);
-	}
-
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
 	public function update(\PDO $pdo) {
 		// enforce the placardId is not null (i.e., don't update a placard that hasn't been inserted)
 		if($this->placardId === null) {
@@ -161,5 +142,146 @@ class Placard {
 		$statement->execute($parameters);
 	}
 
+	/**
+	 * @param \PDO $pdo
+	 * @param int $placardId
+	 * @return Placard|null
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getPlacardByPlacardId(\PDO $pdo, int $placardId){
+		// sanitize the placardId before searching
+		if($placardId <= 0){
+			throw(new \PDOException("placardId not positive"));
+		}
 
+		// create query template
+		$query = "SELECT placardId, placardStatus, placardNumber From placard WHERE placardId = :placardId";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["placardId" => $placardId];
+		$statement->execute($parameters);
+
+		// grab placard from SQL
+		try {
+			$placard = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$placard = new Placard($row["placardId"], $row["placardStatus"], $row["placardNumber"]);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($placard);
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param int $placardStatus
+	 * @return \SplFixedArray
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getPlacardByPlacardStatus(\PDO $pdo, int $placardStatus){
+		// sanitize the placardId before searching
+		if($placardStatus = 0){
+			throw(new \PDOException("placardStatus not positive"));
+		}
+
+		// create query template
+		$query = "SELECT placardId, placardStatus, placardNumber From placard WHERE placardStatus = :placardStatus";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["placardStatus" => $placardStatus];
+		$statement->execute($parameters);
+
+		// build an array of placards
+		$placards = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false){
+			try {
+				$placard = new Placard($row["placardId"], $row["placardStatus"], $row["placardNumber"]);
+				$placards[$placards->key()] = $placard;
+				$placards->next();
+			} catch(\Exception $exception){
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $placards;
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param int $placardNumber
+	 * @return \SplFixedArray
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getPlacardByPlacardNumber(\PDO $pdo, int $placardNumber){
+		// sanitize the placardId before searching
+		if($placardNumber = 0){
+			throw(new \PDOException("placardNumber not positive"));
+		}
+
+		// create query template
+		$query = "SELECT placardId, placardStatus, placardNumber From placard WHERE placardStatus = :placardStatus";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["placardNumber" => $placardNumber];
+		$statement->execute($parameters);
+
+		// build an array of placards
+		$placards = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false){
+			try {
+				$placard = new Placard($row["placardId"], $row["placardStatus"], $row["placardNumber"]);
+				$placards[$placards->key()] = $placard;
+				$placards->next();
+			} catch(\Exception $exception){
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $placards;
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @return \SplFixedArray
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getAllPlacards(\PDO $pdo){
+		// create query template
+		$query = "SELECT placardId, placardStatus, placardNumber From placard";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of placards
+		$placards = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false){
+			try {
+				$placard = new Placard($row["placardId"], $row["placardStatus"], $row["placardNumber"]);
+				$placards[$placards->key()] = $placard;
+				$placards->next();
+			} catch(\Exception $exception){
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $placards;
+	}
+
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		return($fields);
+	}
 }

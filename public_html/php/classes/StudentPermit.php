@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
 
-class StudentPermit {
+class StudentPermit implements \JsonSerializable {
 	use ValidateDate;
 
 	/**
@@ -194,25 +194,6 @@ class StudentPermit {
 	 * @param \PDO $pdo
 	 * @throws \PDOException
 	 */
-	public function delete(\PDO $pdo) {
-		// enforce the studentPermitStudentId is not null (i.e., don't delete a studentPermit that hasn't been inserted)
-		if($this->studentPermitStudentId === null) {
-			throw(new \PDOException("unable to delete a studentPermit that does not exist"));
-		}
-
-		// create query template
-		$query = "DELETE FROM studentpermit WHERE studentPermitStudentId = :studentPermitStudentId";
-		$statement = $pdo->prepare($query);
-
-		// bind the member variables to the place holder in the template
-		$parameters = ["studentPermitStudentId" => $this->studentPermitStudentId];
-		$statement->execute($parameters);
-	}
-
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
 	public function update(\PDO $pdo) {
 		// enforce the studentPermitStudentId is not null (i.e., don't update a studentPermit that hasn't been inserted)
 		if($this->studentPermitStudentId === null) {
@@ -232,5 +213,44 @@ class StudentPermit {
 			"studentPermitCheckInDate" => $this->studentPermitCheckInDate
 		];
 		$statement->execute($parameters);
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @return \SplFixedArray
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getAllStudentPermits(\PDO $pdo){
+		// create query template
+		$query = "SELECT studentPermitStudentId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentpermit";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of studentPermits
+		$studentPermits = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$studentPermit = new studentPermit(
+					$row["studentPermitStudentId"],
+					$row["studentPermitPlacardId"],
+					$row["studentPermitSwipeId"],
+					$row["studentPermitCheckOutDate"],
+					$row["studentPermitCheckInDate"]
+				);
+				$studentPermits[$studentPermits->key()] = $studentPermit;
+				$studentPermits->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($studentPermits);
+	}
+
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		return($fields);
 	}
 }
