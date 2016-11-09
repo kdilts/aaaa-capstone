@@ -409,6 +409,6 @@ class application {
 
 		// update the null applicationId with what mySQL just gave us
 		$this->applicationId = intval($pdo->lastInsertId());
-	  }
+	}
 }
 
