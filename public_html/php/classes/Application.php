@@ -418,7 +418,7 @@ class application {
 			throw (new\RangeException("application UTM Medium is to large"));
 		}
 		//store the application UTM Medium
-		$this->applicationUtmMedium = $newaApplicationUtmMedium;
+		$this->applicationUtmMedium = $newApplicationUtmMedium;
 	}
 
 	/**
