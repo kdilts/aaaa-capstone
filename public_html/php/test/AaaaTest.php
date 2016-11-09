@@ -57,7 +57,7 @@ abstract class AaaaTest extends \PHPUnit_Extensions_Database_TestCase {
 		$dataset->addTable("prospect");
 		$dataset->addTable("application");
 		$dataset->addTable("swipe");
-		$dataset->addTable("status");
+		$dataset->addTable("statusType");
 		$dataset->addTable("bridge");
 		$dataset->addTable("studentPermit");
 		return($dataset);
