@@ -48,69 +48,82 @@ class Note {
 		}
 	}
 
-	// ex: @return for getNoteContent() should be a string, not mixed
 	/**
-	 * @return mixed
+	 * @return int|null value of note id
 	 */
 	public function getNoteId() {
-		return $this->noteContent;
+		return($this->noteId);
 	}
 
 	/**
-	 * @return mixed
+	 * @return string value of note content
 	 */
 	public function getNoteContent() {
-		return $this->noteId;
+		return($this->noteContent);
 	}
 
 	/**
-	 * @return mixed
+	 * @return int|null of note note type id
 	 */
 	public function getNoteNoteTypeId() {
-		return $this->noteNoteTypeId;
+		return($this->noteNoteTypeId);
 	}
 
 	/**
-	 * @return mixed
+	 * @return int|null of note student id
 	 */
 	public function getNoteStudentId() {
-		return $this->noteStudentId;
+		return($this->noteStudentId);
 	}
 
-	// TODO doc block will have at least 1 @throws declarations
-	/**
-	 * @param string $newNoteContent
-	 */
-	public function setNoteContent(string $newNoteContent) {
-		// TODO missing input validation
-		$this->noteContent = $newNoteContent;
-	}
-
-	// TODO doc block will have at least 1 @throws declarations
 	/**
 	 * @param int $newNoteId
+	 * @throws \RangeException
+	 * @throws \TypeError if new note id is not an integer
 	 */
-	public function setNoteId(int $newNoteId) {
+	public function setNoteId(int $newNoteId = null) {
+		if ($newNoteId === null) {
+			$this->noteId = null;
+			return;
+		}
+
 		if($newNoteId <= 0) {
-			throw(new \RangeException("nodeId can't be 0 or negative.")); // TODO correct typo in error message
+			throw(new \RangeException("Note Id is not positive."));
 		}
 		$this->noteId = $newNoteId;
 	}
 
-	// TODO doc block will have at least 1 @throws declarations
 	/**
-	 * @param int $newNoteNoteTypeId
+	 * @param string $newNoteContent
+	 * @throws \InvalidArgumentException if $newNoteContent is not a string or insecure
+	 * @throws \RangeException
+	 * @throws \TypeError if $newNoteContent is not a string
+	 **/
+	public function setNoteContent(string $newNoteContent) {
+		$newNoteContent = trim($newNoteContent);
+		$newNoteContent = filter_var($newNoteContent, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newNoteContent) === true) {
+			throw (new \InvalidArgumentException("Note content is either empty or insecure."));
+		}
+		$this->noteContent = $newNoteContent;
+	}
+
+	/**
+	 * @param int|mull $newNoteNoteTypeId
+	 * @throws \RangeException
+	 * @throws \TypeError if $newNoteNoteId is not an integer
 	 */
 	public function setNoteNoteTypeId(int $newNoteNoteTypeId) {
 		if($newNoteNoteTypeId < 0) {
-			throw(new \RangeException("Note Type Id can't be negative."));
+			throw(new \RangeException("Note Note Type Id can't be negative."));
 		}
+
 		$this->noteNoteTypeId = $newNoteNoteTypeId;
 	}
 
-	// TODO doc block will have at least 1 @throws declarations
 	/**
 	 * @param int $newNoteStudentId
+	 * @throws \RangeException
 	 */
 	public function setNoteStudentId(int $newNoteStudentId) {
 		if($newNoteStudentId < 0) {
@@ -126,14 +139,13 @@ class Note {
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the noteId is null (i.e., don't insert a noteId that already exists)
-		if($this->noteId !== null) { // TODO does this if statement match your comment above? !== vs ===
+		if($this->noteId !== null) { //
 			throw(new \PDOException("not a new noteId"));
 		}
 		// create query template
 		$query = "INSERT INTO note(noteId, noteStudentId, noteNoteTypeId, noteContent) VALUES(:noteId, :noteStudentId, noteNoteTypeId, :noteContent)";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
-		// TODO parameters missing noteNoteTypeId
 		$parameters = ["noteId" => $this->noteId, "noteStudentId" => $this->noteStudentId, "noteContent" => $this->noteContent];
 		$statement->execute($parameters);
 		// update the null noteId with what mySQL just gave us
@@ -145,7 +157,7 @@ class Note {
 	 */
 	public function delete(\PDO $pdo) {
 		// enforce the noteId is not null (i.e., don't delete a note that hasn't been inserted)
-		if($this->noteId === null) { // TODO does this if statement match your comment above? !== vs ===
+		if($this->noteId === null) {
 			throw(new \PDOException("unable to delete a note that does not exist"));
 		}
 		// create query template
@@ -159,16 +171,14 @@ class Note {
 	 * @param \PDO $pdo
 	 * @throws \PDOException
 	 */
-	public function update(\PDO $pdo) {
+	public function updatei(\PDO $pdo) {
 		// enforce the notedId is not null (i.e., don't update a note that hasn't been inserted)
-		if($this->noteId === null) { // TODO does this if statement match your comment above? !== vs ===
+		if($this->noteId === null) {
 			throw(new \PDOException("unable to update a note that does not exist"));
 		}
 		// create query template
-		// TODO noteContent should bet set
-		// TODO WHERE clause should be looking for a note id, not content
-		$query = "UPDATE note SET noteId = :noteId, noteStudentId = :noteStudentId, noteNoteTypeId = :noteNoteTypeId WHERE 
-		noteContent = :noteContent";
+		$query = "UPDATE note SET noteId = :noteId, noteStudentId = :noteStudentId, noteNoteTypeId = noteNoteTypeId, 
+		noteContent = :noteContent WHERE noteId = :noteId";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
 		$parameters = ["noteId" => $this->noteId, "noteStudentId" => $this->noteStudentId, "noteNoteTypeId" =>

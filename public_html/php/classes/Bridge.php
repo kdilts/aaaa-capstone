@@ -111,7 +111,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \Exception if some other exception occurs
 		 **/
 		public function setBridgeUserName(string $newBridgeUserName) {
-			$newbridgeUserName = trim ($newBridgeUserName);
+			$newBridgeUserName = trim ($newBridgeUserName);
 			$newBridgeUserName = filter_var($newBridgeUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 			if(empty($newBridgeNameName) === true) {
 				throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
