@@ -209,49 +209,4 @@ class Prospect {
 		// update the null prospectId with what mySQL just gave us
 		$this->prospectId = intval($pdo->lastInsertId());
 	}
-
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
-	public function delete(\PDO $pdo) {
-		// enforce the prospectId is not null (i.e., don't delete a prospect that hasn't been inserted)
-		if($this->prospectId === null) {
-			throw(new \PDOException("unable to delete a prospect that does not exist"));
-		}
-
-		// create query template
-		$query = "DELETE FROM prospect WHERE prospectId = :prospectId";
-		$statement = $pdo->prepare($query);
-
-		// bind the member variables to the place holder in the template
-		$parameters = ["prospectId" => $this->prospectId];
-		$statement->execute($parameters);
-	}
-
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
-	public function update(\PDO $pdo) {
-		// enforce the prospectId is not null (i.e., don't update a prospect that hasn't been inserted)
-		if($this->prospectId === null) {
-			throw(new \PDOException("unable to update a prospect that does not exist"));
-		}
-
-		// create query template
-		$query = "UPDATE prospect SET prospectId = :prospectId, prospectCohortId = :prospectCohortId, prospectPhoneNumber = :prospectPhoneNumber, prospectEmail = :prospectEmail, prospectFirstName = :prospectFirstName, prospectLastName = :prospectLastName WHERE prospectId = :prospectId";
-		$statement = $pdo->prepare($query);
-
-		// bind the member variables to the place holders in the template
-		$parameters = [
-			"prospectId" => $this->prospectId,
-			"prospectCohortId" => $this->prospectCohortId,
-			"prospectPhoneNumber" => $this->prospectPhoneNumber,
-			"prospectEmail" => $this->prospectEmail,
-			"prospectFirstName" => $this->prospectFirstName,
-			"prospectLastName" => $this->prospectLastName
-		];
-		$statement->execute($parameters);
-	}
 }

@@ -194,25 +194,6 @@ class StudentPermit {
 	 * @param \PDO $pdo
 	 * @throws \PDOException
 	 */
-	public function delete(\PDO $pdo) {
-		// enforce the studentPermitStudentId is not null (i.e., don't delete a studentPermit that hasn't been inserted)
-		if($this->studentPermitStudentId === null) {
-			throw(new \PDOException("unable to delete a studentPermit that does not exist"));
-		}
-
-		// create query template
-		$query = "DELETE FROM studentpermit WHERE studentPermitStudentId = :studentPermitStudentId";
-		$statement = $pdo->prepare($query);
-
-		// bind the member variables to the place holder in the template
-		$parameters = ["studentPermitStudentId" => $this->studentPermitStudentId];
-		$statement->execute($parameters);
-	}
-
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
 	public function update(\PDO $pdo) {
 		// enforce the studentPermitStudentId is not null (i.e., don't update a studentPermit that hasn't been inserted)
 		if($this->studentPermitStudentId === null) {

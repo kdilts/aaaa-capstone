@@ -127,25 +127,6 @@ class Placard {
 	 * @param \PDO $pdo
 	 * @throws \PDOException
 	 */
-	public function delete(\PDO $pdo) {
-		// enforce the placardId is not null (i.e., don't delete a placard that hasn't been inserted)
-		if($this->placardId === null) {
-			throw(new \PDOException("unable to delete a placard that does not exist"));
-		}
-
-		// create query template
-		$query = "DELETE FROM placard WHERE placardId = :placardId";
-		$statement = $pdo->prepare($query);
-
-		// bind the member variables to the place holder in the template
-		$parameters = ["placardId" => $this->placardId];
-		$statement->execute($parameters);
-	}
-
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
 	public function update(\PDO $pdo) {
 		// enforce the placardId is not null (i.e., don't update a placard that hasn't been inserted)
 		if($this->placardId === null) {
