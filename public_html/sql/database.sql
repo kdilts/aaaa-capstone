@@ -1,12 +1,12 @@
 DROP TABLE IF EXISTS note;
 DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS studentPermit;
-DROP TABLE IF EXISTS cohort;
 DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS swipe;
 DROP TABLE IF EXISTS statusType;
 DROP TABLE IF EXISTS placard;
 DROP TABLE IF EXISTS noteType;
+DROP TABLE IF EXISTS cohort;
 DROP TABLE IF EXISTS bridge;
 
 CREATE TABLE bridge(
@@ -15,6 +15,13 @@ CREATE TABLE bridge(
 	bridgeUserName VARCHAR(20),
 	INDEX (bridgeStaffId),
 	PRIMARY KEY(bridgeStaffId)
+);
+
+CREATE TABLE cohort(
+	cohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	cohortApplicationId INT UNSIGNED NOT NULL,
+	INDEX (cohortId),
+	PRIMARY KEY(cohortId)
 );
 
 CREATE TABLE noteType(
@@ -66,15 +73,6 @@ CREATE TABLE application(
 	PRIMARY KEY(applicationId),
 	FOREIGN KEY(applicationCohortId) REFERENCES cohort (cohortId)
 );
-
-CREATE TABLE cohort(
-	cohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	cohortApplicationId INT UNSIGNED NOT NULL,
-	INDEX (cohortId),
-	PRIMARY KEY(cohortId),
-	FOREIGN KEY(cohortApplicationId) REFERENCES application (applicationId)
-);
-
 
 CREATE TABLE studentPermit(
 
