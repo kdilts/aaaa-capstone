@@ -20,7 +20,7 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  **/
 class PlacardTest extends AaaaTest {
 
-	protected $VALID_PLACARDID = 0;
+	protected $VALID_PLACARDID = 1;
 
 	protected $VALID_PLACARDSTATUSID = 1;
 
