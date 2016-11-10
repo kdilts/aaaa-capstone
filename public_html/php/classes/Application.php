@@ -449,7 +449,7 @@ class application {
 		}
 
 		//create query template
-		$query= "UPDATE applicaiton SET applicationId = :applicatinId, applicationFirstName = :applicationFirstName, applicationLastName = :applicationLastName, applicationEmail = :applicationEmail, applicationPhoneNumber = :applicationPhoneNumber, applicationSource = :applicationSource, applicationCohortId = :applicationCohortId, applicationAboutYou = :applicationAboutYou, applicationHopeToAccomplish = :applicationHopeToAccomplish, applicationExperience = :applicationExperience, applicaitonDateTime = :applicationDateTime, applicationUtmCompaign = :applicationUtmCompaign, applicationUtmMedium = :applicationUtmMedium, applicationUtmSource = :applicationUtmSource WHERE applicationId =:applicationId";
+		$query= "UPDATE application SET applicationId = :applicationId, applicationFirstName = :applicationFirstName, applicationLastName = :applicationLastName, applicationEmail = :applicationEmail, applicationPhoneNumber = :applicationPhoneNumber, applicationSource = :applicationSource, applicationCohortId = :applicationCohortId, applicationAboutYou = :applicationAboutYou, applicationHopeToAccomplish = :applicationHopeToAccomplish, applicationExperience = :applicationExperience, applicaitonDateTime = :applicationDateTime, applicationUtmCompaign = :applicationUtmCompaign, applicationUtmMedium = :applicationUtmMedium, applicationUtmSource = :applicationUtmSource WHERE applicationId =:applicationId";
 		$statement = $pdo->prepare($query);
 
 		//bind the members variable to the place holder in the template
