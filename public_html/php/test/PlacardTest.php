@@ -67,7 +67,7 @@ class PlacardTest extends AaaaTest {
 	/**
 	 * test grabbing a Placard by placard content
 	 **/
-	public function testGetValidPlacardByPlacardContent() {
+	public function testGetValidPlacardByPlacardId() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("placard");
 
