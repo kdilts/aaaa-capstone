@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS note;
 DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS studentPermit;
+DROP TABLE IF EXISTS applicationCohort;
 DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS swipe;
 DROP TABLE IF EXISTS statusType;
