@@ -79,7 +79,7 @@ class PlacardTest extends AaaaTest {
 		$result = Placard::getPlacardByPlacardId($this->getPDO(), $placard->getPlacardId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
 		$this->assertNotNull($result);
-		$this->assertInstancesOf("Edu\\Cnm\\DdcAaaa\\Placard", $result);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Placard", $result);
 
 		// grab the result from the array and validate it
 		$this->assertEquals($result->getPlacardStatusId(), $this->VALID_PLACARDSTATUSID);
