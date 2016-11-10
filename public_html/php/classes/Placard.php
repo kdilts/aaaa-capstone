@@ -223,7 +223,7 @@ class Placard implements \JsonSerializable {
 
 	/**
 	 * @param \PDO $pdo
-	 * @param int $placardId
+	 * @param int $placardNumber
 	 * @return Placard|null
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type

@@ -86,6 +86,10 @@ class PlacardTest extends AaaaTest {
 		$this->assertEquals($result->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
 
+	// TODO test valid update placard
+
+	// TODO test invalid update placard
+
 	/**
 	 * test grabbing a Placard by id that does not exist
 	 **/
@@ -95,6 +99,7 @@ class PlacardTest extends AaaaTest {
 		$this->assertNull($placard);
 	}
 
+	// TODO test valid getPlacardByPlacardNumber
 
 	/**
 	 * test grabbing Placards by status that does not exist
@@ -104,6 +109,8 @@ class PlacardTest extends AaaaTest {
 		$placards = Placard::getPlacardsByPlacardStatusId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertCount(0, $placards);
 	}
+
+	// TODO test valid getPlacardByPlacardNumber
 
 	/**
 	 * test grabbing a Placard by a placard number that does not exist
