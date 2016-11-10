@@ -64,4 +64,27 @@ class PlacardTest extends AaaaTest {
 		$placard->insert($this->getPDO());
 	}
 
+	/**
+	 * test grabbing all Placards
+	 **/
+	public function testGetAllValidPlacards() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("placard");
+
+		// create a new Placard and insert to into mySQL
+		$placard = new Placard(null, $this->VALID_PLACARDSTATUSID, $this->VALID_PLACARDNUMBER);
+		$placard->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = Placard::getAllPlacards($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Placard", $results);
+
+		// grab the result from the array and validate it
+		$pdoPlacard = $results[0];
+		$this->assertEquals($pdoPlacard->getPlacardStatusId(), $this->VALID_PLACARDSTATUSID);
+		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
+	}
+
 }
