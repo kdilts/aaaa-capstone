@@ -31,15 +31,15 @@ class StudentPermit implements \JsonSerializable {
 
 	/**
 	 * StudentPermit constructor.
-	 * @param int|null $newStudentPermitStudentId
-	 * @param int $newStudentPermitPlacardId
-	 * @param int $newStudentPermitSwipeId
-	 * @param \DateTime $newStudentPermitCheckOutDate
-	 * @param \DateTime $newStudentPermitCheckInDate
-	 * @throws \InvalidArgumentException
-	 * @throws \RangeException
-	 * @throws \TypeError
-	 * @throws \Exception
+	 * @param int|null $newStudentPermitStudentId for new value for new student permit student id
+	 * @param int $newStudentPermitPlacardId for nre value for student permit placard id
+	 * @param int $newStudentPermitSwipeId for new value for student permit swipe id
+	 * @param \DateTime $newStudentPermitCheckOutDate as a DateTime object null to load the current time
+	 * @param \DateTime $newStudentPermitCheckInDate as a Datetime object null to load the current time
+	 * @throws \InvalidArgumentException if the new student permit is not valid
+	 * @throws \RangeException if new permit id is out of range
+	 * @throws \TypeError if student id is not valid
+	 * @throws \Exception if the student permit student id is out of range
 	 */
 	public function __construct(int $newStudentPermitStudentId = null, int $newStudentPermitPlacardId, int $newStudentPermitSwipeId, \DateTime $newStudentPermitCheckOutDate, \DateTime $newStudentPermitCheckInDate){
 		try{
@@ -95,8 +95,8 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param int $newStudentPermitStudentId
-	 * @throws \RangeException
+	 * @param int $newStudentPermitStudentId new value of student permit student id
+	 * @throws \RangeException if new value of student permit student id
 	 */
 	public function setStudentPermitStudentId(int $newStudentPermitStudentId){
 		if ($newStudentPermitStudentId <= 0) {
@@ -106,8 +106,8 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param int $newStudentPermitPlacardId
-	 * @throws \RangeException
+	 * @param int $newStudentPermitPlacardId new value for student permit placard id
+	 * @throws \RangeException new value of student permit placard id
 	 */
 	public function setStudentPermitPlacardId(int $newStudentPermitPlacardId){
 		if ($newStudentPermitPlacardId <= 0) {
@@ -117,8 +117,8 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param int $newStudentPermitSwipeId
-	 * @throws \RangeException
+	 * @param int $newStudentPermitSwipeId new value for student permit swipe id
+	 * @throws \RangeException new value of student permit swipe id is out of range
 	 */
 	public function setStudentPermitSwipeId(int $newStudentPermitSwipeId){
 		if ($newStudentPermitSwipeId <= 0) {
@@ -128,9 +128,9 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \DateTime $newStudentPermitCheckOutDate
-	 * @throws \InvalidArgumentException
-	 * @throws \RangeException
+	 * @param \DateTime $newStudentPermitCheckOutDate as a DateTime object null to load the current time
+	 * @throws \InvalidArgumentException is not a valid student permit or valid date
+	 * @throws \RangeException is a date that does not exist
 	 */
 	public function setStudentPermitCheckOutDate(\DateTime $newStudentPermitCheckOutDate){
 		try {
@@ -145,9 +145,9 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \DateTime $newStudentPermitCheckInDate
-	 * @throws \InvalidArgumentException
-	 * @throws \RangeException
+	 * @param \DateTime $newStudentPermitCheckInDate object null to load the current time
+	 * @throws \InvalidArgumentException if student permit is not valid
+	 * @throws \RangeException is a date that does not exist
 	 */
 	public function setStudentPermitCheckInDate(\DateTime $newStudentPermitCheckInDate){
 		try {
@@ -161,8 +161,8 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when mySQL related error occur
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the placardId is null (i.e., don't insert a studentPermit that already exists)
@@ -173,7 +173,7 @@ class StudentPermit implements \JsonSerializable {
 		//$studentPermitStudentId $studentPermitPlacardId $studentPermitSwipeId $studentPermitCheckOutDate $studentPermitCheckInDate
 		
 		// create query template
-		$query = "INSERT INTO studentpermit(studentPermitStudentId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
+		$query = "INSERT INTO studentPermit(studentPermitApplicationtId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -191,8 +191,8 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException if unable to update a student permit that does not exist
 	 */
 	public function update(\PDO $pdo) {
 		// enforce the studentPermitStudentId is not null (i.e., don't update a studentPermit that hasn't been inserted)
@@ -217,10 +217,10 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @return \SplFixedArray
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
+	 * @param \PDO $pdo connection object
+	 * @return \SplFixedArray SplFixedArray of student permit
+	 * @throws \PDOException if unable to update student permits
+	 * @throws \TypeError when student permit is not valid
 	 */
 	public static function getAllStudentPermits(\PDO $pdo){
 		// create query template
