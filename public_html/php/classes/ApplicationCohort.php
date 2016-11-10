@@ -118,6 +118,29 @@ class applicationCohort implements \JsonSerializable {
 	}
 
 	/**
+	 * @param \PDO $pdo
+	 * @throws \PDOException
+	 */
+	public function insert(\PDO $pdo) {
+		// enforce the applicationsCohortId is null (i.e., don't insert an applicationCohort that already exists)
+		if($this->applicationCohortId !== null) {
+			throw(new \PDOException("not a new applicationCohort"));
+		}
+		// create query template
+		$query = "INSERT INTO applicationCohort(applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId) VALUES(:applicationCohortId, :applicationCohortApplicationId, :applicationCohortCohortId)";
+		$statement = $pdo->prepare($query);
+		// bind the member variables to the place holders in the template
+		$parameters = [
+			"applicationCohortId" => $this->applicationCohortId,
+			"applicationCohortApplicationId" => $this->applicationCohortApplicationId,
+			"applicationCohortCohortId" => $this->applicationCohortCohortId
+		];
+		$statement->execute($parameters);
+		// update the null cohortId with what mySQL just gave us
+		$this->applicationCohortId = intval($pdo->lastInsertId());
+	}
+
+	/**
 	 * @return array
 	 */
 	public function jsonSerialize() {
