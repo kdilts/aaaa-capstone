@@ -5,29 +5,32 @@ namespace Edu\Cnm\DdcAaaa;
 class Placard implements \JsonSerializable {
 
 	/**
+	 *ID number for parking placard
 	 * @var int $placardId
 	 */
 	private $placardId;
 
 	/**
+	 * current status of placard
 	 * @var int $placardStatus
 	 */
 	private $placardStatusId;
 
 	/**
+	 * number on the placard
 	 * @var int $placardNumber
 	 */
 	private $placardNumber;
 
 	/**
 	 * Placard constructor.
-	 * @param int|null $newPlacardId
-	 * @param int $newPlacardStatusId
-	 * @param int $newPlacardNumber
-	 * @throws \InvalidArgumentException
-	 * @throws \RangeException
-	 * @throws \TypeError
-	 * @throws \Exception
+	 * @param int|null $newPlacardId ID of this placard or null if empty
+	 * @param int $newPlacardStatusId status of placard, int because it will be an enumerator
+	 * @param int $newPlacardNumber number on the physical placard
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data is not out of bounds
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs.
 	 */
 	public function __construct(int $newPlacardId = null, int $newPlacardStatusId, int $newPlacardNumber) {
 		try {
@@ -47,6 +50,8 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor for placardId
+	 *
 	 * @return int placardId
 	 */
 	public function getPlacardId() {
@@ -54,6 +59,7 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor for placard number
 	 * @return int placardNumber
 	 */
 	public function getPlacardNumber() {
@@ -61,6 +67,7 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor for placard status
 	 * @return int placardStatus
 	 */
 	public function getPlacardStatusId() {
@@ -68,8 +75,9 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param int|null $newPlacardId
-	 * @throws \RangeException
+	 * mutator for placard ID
+	 * @param int|null $newPlacardId new value for placard ID
+	 * @throws \RangeException throws this if number is negative, or 0.
 	 */
 	public function setPlacardId(int $newPlacardId = null) {
 		// base case: if the placard id is null, this a new placard without a mySQL assigned id (yet)
@@ -86,8 +94,9 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param int $newPlacardNumber
-	 * @throws \RangeException
+	 * mutator for placard number
+	 * @param int $newPlacardNumber new placard number
+	 * @throws \RangeException throws if number is negative or 0
 	 */
 	public function setPlacardNumber(int $newPlacardNumber) {
 		if ($newPlacardNumber <= 0) {
@@ -97,8 +106,9 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param int $newPlacardStatusId
-	 * @throws \RangeException
+	 * mutator for placard status
+	 * @param int $newPlacardStatusId new placard status
+	 * @throws \RangeException throws if status is less than 0
 	 */
 	public function setPlacardStatusId(int $newPlacardStatusId) {
 		if ($newPlacardStatusId < 0) {
@@ -108,8 +118,10 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * insert function into mySQL
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 * @throws \PDOException when mySQL errors occur.
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the placardId is null (i.e., don't insert a placard that already exists)
@@ -130,8 +142,10 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * updates in SQL
+	 * @param \PDO $pdo PDO connection object.
+	 * @throws \PDOException when mySQL errors occur.
+	 * @throws \TypeError if $pdo is not a PDO connection object
 	 */
 	public function update(\PDO $pdo) {
 		// enforce the placardId is not null (i.e., don't update a placard that hasn't been inserted)
@@ -149,8 +163,8 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $placardId
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $placardId Placard ID in database
 	 * @return Placard|null
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
@@ -185,9 +199,9 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $placardStatusId
-	 * @return \SplFixedArray
+	 * @param \PDO $pdo PDOconnection object
+	 * @param int $placardStatusId current placard status.
+	 * @return \SplFixedArray of placard IDs found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
@@ -222,9 +236,9 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $placardNumber
-	 * @return Placard|null
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $placardNumber search for placard by placard number
+	 * @return Placard|null if found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
@@ -258,8 +272,8 @@ class Placard implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @return \SplFixedArray
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of placards found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
