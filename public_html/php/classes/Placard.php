@@ -33,7 +33,7 @@ class Placard implements \JsonSerializable {
 		try {
 			$this->setPlacardId($newPlacardId);
 			$this->setPlacardNumber($newPlacardNumber);
-			$this->setPlacardStatus($newPlacardStatusId);
+			$this->setPlacardStatusId($newPlacardStatusId);
 			}catch(\InvalidArgumentException $invalidArgument) {
 				throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
 			}catch(\RangeException $range) {
