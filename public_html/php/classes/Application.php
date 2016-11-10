@@ -449,7 +449,7 @@ class application {
 		}
 
 		//create query template
-		$query= "UPDATE application SET applicationId = :applicationId, applicationFirstName = :applicationFirstName, applicationLastName = :applicationLastName, applicationEmail = :applicationEmail, applicationPhoneNumber = :applicationPhoneNumber, applicationSource = :applicationSource, applicationCohortId = :applicationCohortId, applicationAboutYou = :applicationAboutYou, applicationHopeToAccomplish = :applicationHopeToAccomplish, applicationExperience = :applicationExperience, applicaitonDateTime = :applicationDateTime, applicationUtmCompaign = :applicationUtmCompaign, applicationUtmMedium = :applicationUtmMedium, applicationUtmSource = :applicationUtmSource WHERE applicationId =:applicationId";
+		$query= "UPDATE application SET applicationId = :applicationId, applicationFirstName = :applicationFirstName, applicationLastName = :applicationLastName, applicationEmail = :applicationEmail, applicationPhoneNumber = :applicationPhoneNumber, applicationSource = :applicationSource, applicationCohortId = :applicationCohortId, applicationAboutYou = :applicationAboutYou, applicationHopeToAccomplish = :applicationHopeToAccomplish, applicationExperience = :applicationExperience, applicationDateTime = :applicationDateTime, applicationUtmCampaign = :applicationUtmCampaign, applicationUtmMedium = :applicationUtmMedium, applicationUtmSource = :applicationUtmSource WHERE applicationId =:applicationId";
 		$statement = $pdo->prepare($query);
 
 		//bind the members variable to the place holder in the template
@@ -481,7 +481,7 @@ class application {
 			throw(new \PDOException("unable to update a applicationID that does not exist"));
 		}
 		//create query template
-		$query="INSERT INTO application (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCompaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationCohortId, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCompaign, :applicationUtmMedium, :applicationUtmSource)";
+		$query="INSERT INTO application (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationCohortId, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCompaign, :applicationUtmMedium, :applicationUtmSource)";
 		$statement = $pdo->prepare($query);
 
 		//bind the members variable to the place holder in the template
