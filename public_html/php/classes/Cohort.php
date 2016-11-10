@@ -121,42 +121,6 @@ class Cohort implements \JsonSerializable {
 		// update the null cohortId with what mySQL just gave us
 		$this->cohortId = intval($pdo->lastInsertId());
 	}
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
-	public function delete(\PDO $pdo) {
-		// enforce the cohortId is not null (i.e., don't delete a cohort that hasn't been inserted)
-		if($this->cohortId === null) {
-			throw(new \PDOException("unable to delete a cohort that does not exist"));
-		}
-		// create query template
-		$query = "DELETE FROM cohort WHERE cohortId = :cohortId";
-		$statement = $pdo->prepare($query);
-		// bind the member variables to the place holder in the template
-		$parameters = ["cohortId" => $this->cohortId];
-		$statement->execute($parameters);
-	}
-
-
-	/**
-	 * gets the cohort by cohort id
-	 * @param \PDO $pdo
-	 * @return \SplFixedArray of cohortId
-	 * @throws \PDOException
-	 */
-	public function update(\PDO $pdo) {
-		// enforce the cohortId is not null (i.e., don't update a cohort that hasn't been inserted)
-		if($this->cohortId === null) {
-			throw(new \PDOException("unable to update a cohort that does not exist"));
-		}
-		// create query template
-		$query = "UPDATE cohort SET cohortId = :cohortId, cohortApplicationId = :cohortApplicationId WHERE cohortId = :cohortdId";
-		$statement = $pdo->prepare($query);
-		// bind the member variables to the place holders in the template
-		$parameters = ["cohortId" => $this->cohortId, "cohortApplicationId" => $this->cohortApplicationId];
-		$statement->execute($parameters);
-	}
 
 	public static function getCohortByCohortId(\PDO $pdo, int $cohortId){
 		// sanitize the cohortId before searching
