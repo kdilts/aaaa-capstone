@@ -398,7 +398,7 @@ class application {
 			throw (new\InvalidArgumentException("application UTM Campaign is an empty or secure"));
 		}
 		//verify application experience will fit in the database
-		if (strlen($newApplicationUtmCampaign)>200){
+		if (strlen($newApplicationUtmCampaign)>500){
 			throw (new\RangeException("application UTM Campaign is to large"));
 		}
 		//store the application UTM Campaign
@@ -414,7 +414,7 @@ class application {
 			throw (new\InvalidArgumentException("application UTM Medium is an empty or secure"));
 		}
 		//verify application UTM Medium will fit in the database
-		if (strlen($newApplicationUtmMedium)>200){
+		if (strlen($newApplicationUtmMedium)>500){
 			throw (new\RangeException("application UTM Medium is to large"));
 		}
 		//store the application UTM Medium
@@ -431,7 +431,7 @@ class application {
 			throw (new\InvalidArgumentException("application UTM Source is an empty or secure"));
 		}
 		//verify application UTM Source
-		if (strlen($newApplicationUtmSource)>200){
+		if (strlen($newApplicationUtmSource)>500){
 			throw (new\RangeException("application UTM Source is to large"));
 		}
 		$this->applicationUtmSource = $newApplicationUtmSource;
