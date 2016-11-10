@@ -4,7 +4,7 @@
 			<file>PlacardTest.php</file>
 			<file>SwipeTest.php</file>
 			<file>CohortTest.php</file>
-			<file>ApplicationCohort.php</file>
+			<file>ApplicationCohortTest.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>
