@@ -5,7 +5,7 @@ namespace Edu\Cnm\DdcAaaa;
 class Swipe {
 
 	/**
-	 * @var int $swipeId
+	 * @var int $swipeId Id for parking swipe card
 	 */
 	private $swipeId;
 
@@ -15,7 +15,7 @@ class Swipe {
 	private $swipeNumber;
 
 	/**
-	 * @var int $swipeStatus
+	 * @var int $swipeStatus current status of swipe card
 	 */
 	private $swipeStatus;
 
@@ -48,6 +48,7 @@ class Swipe {
 	}
 
 	/**
+	 * accessor method for swipeId
 	 * @return int
 	 */
 	public function getSwipeId() {
@@ -55,6 +56,7 @@ class Swipe {
 	}
 
 	/**
+	 * accessor method for swipe number
 	 * @return int
 	 */
 	public function getSwipeNumber() {
@@ -62,6 +64,7 @@ class Swipe {
 	}
 
 	/**
+	 * accessor method for swipe status.
 	 * @return int
 	 */
 	public function getSwipeStatus() {
@@ -69,6 +72,7 @@ class Swipe {
 	}
 
 	/**
+	 * mutator method for swipeId
 	 * @param int|null $newSwipeId id of this swipe is null or new
 	 * @throws \RangeException if $new value of swipe is out of bounds
 	 */
@@ -87,6 +91,7 @@ class Swipe {
 	}
 
 	/**
+	 * mutator method for swipeId
 	 * @param int $newSwipeNumber new value for swipe card number null or new
 	 * @throws \RangeException if $new swipe number is out of bounds
 	 */
@@ -99,6 +104,7 @@ class Swipe {
 	}
 
 	/**
+	 * mutator method for swipeStatus
 	 * @param int $newSwipeStatus for new status for swipe card
 	 * @throws \RangeException if swipe card status is not valid
 	 */
@@ -111,6 +117,7 @@ class Swipe {
 	}
 
 	/**
+	 * inserts swipe into SQL database
 	 * @param \PDO $pdo connection object
 	 * @throws \PDOException when swipe is not valid or out of bounds
 	 */
