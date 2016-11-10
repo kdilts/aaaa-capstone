@@ -57,21 +57,21 @@ class applicationCohort implements \JsonSerializable {
 	/**
 	 * @return int
 	 */
-	private function getApplicationCohortId() {
+	public function getApplicationCohortId() {
 		return($this->applicationCohortId);
 	}
 
 	/**
 	 * @return int
 	 */
-	private function getApplicationCohortApplicationId() {
+	public function getApplicationCohortApplicationId() {
 		return($this->applicationCohortApplicationId);
 	}
 
 	/**
 	 * @return int
 	 */
-	private function getApplicationCohortCohortId() {
+	public function getApplicationCohortCohortId() {
 		return($this->applicationCohortCohortId);
 	}
 	
@@ -79,7 +79,7 @@ class applicationCohort implements \JsonSerializable {
 	 * @param $newApplicationCohortId
 	 * @throws \RangeException
 	 */
-	private function setApplicationCohortId($newApplicationCohortId) {
+	public function setApplicationCohortId($newApplicationCohortId) {
 		// base case: if the applicatoinCohortId is null
 		if($newApplicationCohortId === null)	{
 			$this->applicationCohortId = null;
@@ -97,7 +97,7 @@ class applicationCohort implements \JsonSerializable {
 	 * @param $newApplicationCohortApplicationId
 	 * @throws \RangeException
 	 */
-	private function setApplicationCohortApplicationId($newApplicationCohortApplicationId) {
+	public function setApplicationCohortApplicationId($newApplicationCohortApplicationId) {
 		// input validation
 		if($newApplicationCohortApplicationId <= 0){
 			throw(new \RangeException("applicationCohortApplicationId is not positive"));
@@ -109,7 +109,7 @@ class applicationCohort implements \JsonSerializable {
 	 * @param $newApplicationCohortCohortId
 	 * @throws \RangeException
 	 */
-	private function setApplicationCohortCohortId($newApplicationCohortCohortId) {
+	public function setApplicationCohortCohortId($newApplicationCohortCohortId) {
 		// input validation
 		if($newApplicationCohortCohortId <= 0){
 			throw(new \RangeException("applicationCohortCohortId is not positive"));
@@ -138,6 +138,35 @@ class applicationCohort implements \JsonSerializable {
 		$statement->execute($parameters);
 		// update the null cohortId with what mySQL just gave us
 		$this->applicationCohortId = intval($pdo->lastInsertId());
+	}
+
+	public static function getApplicationCohortByApplicationCohortId(\PDO $pdo, int $applicationCohortId){
+		// sanitize the applicationCohortId before searching
+		if($applicationCohortId <= 0){
+			throw(new \PDOException("applicationCohortId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId From applicationCohort WHERE applicationCohortId = :applicationCohortId";
+		$statement = $pdo->prepare($query);
+
+		// bind the applicationCohortId to the place holder in template
+		$parameters = ["applicationCohortId" => $applicationCohortId];
+		$statement->execute($parameters);
+
+		// grab placard from SQL
+		try {
+			$applicationCohort = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$applicationCohort = new applicationCohort($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($applicationCohort);
 	}
 
 	/**
