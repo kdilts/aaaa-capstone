@@ -23,6 +23,7 @@ class PlacardTest extends AaaaTest {
 	protected $VALID_PLACARDID = 1;
 
 	protected $VALID_PLACARDSTATUSID = 1;
+	protected $VALID_PLACARDSTATUSID2 = 2;
 
 	protected $VALID_PLACARDNUMBER = 2;
 
@@ -86,7 +87,28 @@ class PlacardTest extends AaaaTest {
 		$this->assertEquals($result->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
 
-	// TODO test valid update placard
+	/**
+	 * test inserting a Placard, editing it, and then updating it
+	 **/
+	public function testUpdateValidPlacard() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("tweet");
+
+		// create a new Placard and insert to into mySQL
+		$placard = new Placard(null, $this->VALID_PLACARDSTATUSID, $this->VALID_PLACARDNUMBER);
+		$placard->insert($this->getPDO());
+
+		// edit the Tweet and update it in mySQL
+		$placard->setPlacardStatusId($this->VALID_PLACARDSTATUSID2);
+		$placard->update($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoPlacard = Placard::getPlacardByPlacardId($this->getPDO(), $placard->getPlacardId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
+		$this->assertEquals($pdoPlacard->getPlacardStatusId(), $this->VALID_PLACARDSTATUSID2);
+		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
+	}
+
 
 	/**
 	 * test updating a Placard that does not exist

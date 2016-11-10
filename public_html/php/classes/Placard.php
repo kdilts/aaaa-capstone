@@ -100,7 +100,7 @@ class Placard implements \JsonSerializable {
 	 * @param int $newPlacardStatusId
 	 * @throws \RangeException
 	 */
-	public function setPlacardStatus(int $newPlacardStatusId) {
+	public function setPlacardStatusId(int $newPlacardStatusId) {
 		if ($newPlacardStatusId < 0) {
 			throw(new \RangeException("Placard status invalid."));
 		}
