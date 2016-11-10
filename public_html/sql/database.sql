@@ -75,8 +75,11 @@ CREATE TABLE application(
 );
 
 CREATE TABLE applicationCohort(
+	applicationCohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	applicationCohortApplicationId INT UNSIGNED NOT NULL,
 	applicationCohortCohortId INT UNSIGNED NOT NULL,
+	INDEX (applicationCohortId),
+	PRIMARY KEY (applicationCohortId),
 	FOREIGN KEY(applicationCohortApplicationId) REFERENCES application(applicationId),
 	FOREIGN KEY(applicationCohortCohortId) REFERENCES cohort(cohortId)
 );
