@@ -196,21 +196,21 @@ class application {
 	/**
 	 * @return string
 	 */
-	public function getApplicationUtmCampaign(): string {
+	public function getApplicationUtmCampaign(){
 		return $this->applicationUtmCampaign;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getApplicationUtmMedium(): string {
+	public function getApplicationUtmMedium(){
 		return $this->applicationUtmMedium;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getApplicationUtmSource(): string {
+	public function getApplicationUtmSource() {
 		return $this->applicationUtmSource;
 	}
 	/**
