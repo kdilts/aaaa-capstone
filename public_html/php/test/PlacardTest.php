@@ -67,7 +67,7 @@ class PlacardTest extends AaaaTest {
 	/**
 	 * test grabbing a Placard by placard id
 	 **/
-	/*public function testGetValidPlacardByPlacardId() {
+	public function testGetValidPlacardByPlacardId() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("placard");
 
@@ -76,16 +76,15 @@ class PlacardTest extends AaaaTest {
 		$placard->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Placard::getPlacardByPlacardId($this->getPDO(), $placard->getPlacardId());
+		$result = Placard::getPlacardByPlacardId($this->getPDO(), $placard->getPlacardId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
-		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Placard", $results);
+		$this->assertNotNull($result);
+		$this->assertInstancesOf("Edu\\Cnm\\DdcAaaa\\Placard", $result);
 
 		// grab the result from the array and validate it
-		$pdoPlacard = $results[0];
-		$this->assertEquals($pdoPlacard->getPlacardStatusId(), $this->VALID_PLACARDSTATUSID);
-		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
-	}*/
+		$this->assertEquals($result->getPlacardStatusId(), $this->VALID_PLACARDSTATUSID);
+		$this->assertEquals($result->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
+	}
 
 	/**
 	 * test grabbing a Placard by id that does not exist
@@ -93,7 +92,7 @@ class PlacardTest extends AaaaTest {
 	public function testGetInvalidPlacardByPlacardId() {
 		// grab a placard by searching for id that does not exist
 		$placard = Placard::getPlacardByPlacardId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertCount(0, $placard);
+		$this->assertNull($placard);
 	}
 
 
