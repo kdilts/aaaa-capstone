@@ -191,14 +191,14 @@ class Placard implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getPlacardByPlacardStatus(\PDO $pdo, int $placardStatusId){
+	public static function getPlacardByPlacardStatusId(\PDO $pdo, int $placardStatusId){
 		// sanitize the placardId before searching
 		if($placardStatusId <= 0){
-			throw(new \PDOException("placardStatus not positive"));
+			throw(new \PDOException("placardStatusId not positive"));
 		}
 
 		// create query template
-		$query = "SELECT placardId, placardStatusId, placardNumber From placard WHERE placardStatusId = :placardStatus";
+		$query = "SELECT placardId, placardStatusId, placardNumber From placard WHERE placardStatusId = :placardStatusId";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
