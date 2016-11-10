@@ -137,8 +137,12 @@ class Cohort implements \JsonSerializable {
 		$parameters = ["cohortId" => $this->cohortId];
 		$statement->execute($parameters);
 	}
+
+
 	/**
+	 * gets the cohort by cohort id
 	 * @param \PDO $pdo
+	 * @return \SplFixedArray of cohortId
 	 * @throws \PDOException
 	 */
 	public function update(\PDO $pdo) {

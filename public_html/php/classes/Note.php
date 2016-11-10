@@ -135,6 +135,7 @@ class Note {
 
 	/**
 	 * @param \PDO $pdo
+	 * @return \SplFixedArray
 	 * @throws \PDOException
 	 */
 	public function insert(\PDO $pdo) {
@@ -151,39 +152,13 @@ class Note {
 		$statement->execute($parameters);
 		// update the null noteId with what mySQL just gave us
 		$this->noteId = intval($pdo->lastInsertId());
-	}
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
-	public function delete(\PDO $pdo) {
-		// enforce the noteId is not null (i.e., don't delete a note that hasn't been inserted)
-		if($this->noteId === null) {
-			throw(new \PDOException("unable to delete a note that does not exist"));
-		}
-		// create query template
-		$query = "DELETE FROM note WHERE noteId = :noteId";
-		$statement = $pdo->prepare($query);
-		// bind the member variables to the place holder in the template
-		$parameters = ["notedId" => $this->noteId];
-		$statement->execute($parameters);
-	}
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
-	public function update(\PDO $pdo) {
-		// enforce the notedId is not null (i.e., don't update a note that hasn't been inserted)
-		if($this->noteId === null) {
-			throw(new \PDOException("unable to update a note that does not exist"));
-		}
-		// create query template
-		$query = "UPDATE note SET noteId = :noteId, noteStudentId = :noteStudentId, noteNoteTypeId = noteNoteTypeId, 
-		noteContent = :noteContent WHERE noteId = :noteId";
-		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
-		$parameters = ["noteId" => $this->noteId, "noteStudentId" => $this->noteStudentId, "noteNoteTypeId" =>
-			$this->noteNoteTypeId, "noteContent" => $this->noteContent];
+		$parameters = [
+			"noteId" => $this ->noteId,
+			"noteStudentId" => $this ->noteStudentId,
+			"noteContent" => $this ->noteContent,
+			];
 		$statement->execute($parameters);
 	}
+
 }
