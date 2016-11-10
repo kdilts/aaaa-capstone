@@ -21,11 +21,11 @@ class Swipe {
 
 	/**
 	 * Swipe constructor.
-	 * @param int|null $newSwipeId
-	 * @param int $newSwipeNumber
-	 * @param int $newSwipeStatus
-	 * @throws \Exception
-	 * @throws \TypeError
+	 * @param int|null $newSwipeId if id for this swipe is null or new
+	 * @param int $newSwipeNumber swipe card to search for
+	 * @param int $newSwipeStatus if swipe card has new status or invalid
+	 * @throws \Exception if some other exception ocurrs
+	 * @throws \TypeError if data types violate type hints
 	 */
 	 	public function __construct(int $newSwipeId = null, int $newSwipeNumber, int $newSwipeStatus) {
 		try {
@@ -69,12 +69,13 @@ class Swipe {
 	}
 
 	/**
-	 * @param int|null $newSwipeId
+	 * @param int|null $newSwipeId id of this swipe is null or new
+	 * @throws \RangeException if $new value of swipe is out of bounds
 	 */
 	public function setSwipeId(int $newSwipeId = null) {
 		// base case: if the placard id is null, this a new placard without a mySQL assigned id (yet)
 		if($newSwipeId === null) {
-			$this->placardId = null;
+			$this->swipeId = null;
 			return;
 		}
 		// verify that newSwipeId is positive
@@ -86,8 +87,8 @@ class Swipe {
 	}
 
 	/**
-	 * @param int $newSwipeNumber
-	 * @throws \RangeException
+	 * @param int $newSwipeNumber new value for swipe card number null or new
+	 * @throws \RangeException if $new swipe number is out of bounds
 	 */
 	public function setSwipeNumber(int $newSwipeNumber) {
 		// verify that newSwipeNumber is positive
@@ -98,8 +99,8 @@ class Swipe {
 	}
 
 	/**
-	 * @param int $newSwipeStatus
-	 * @throws \RangeException
+	 * @param int $newSwipeStatus for new status for swipe card
+	 * @throws \RangeException if swipe card status is not valid
 	 */
 	public function setSwipeStatus(int $newSwipeStatus) {
 		// verify that newSwipeStatus is positive
@@ -110,8 +111,8 @@ class Swipe {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when swipe is not valid or out of bounds
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the swipeId is null (i.e., don't insert a swipe that already exists)
@@ -132,8 +133,8 @@ class Swipe {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when id is not valid
 	 */
 	public function update(\PDO $pdo) {
 		// enforce the swipeId is not null (i.e., don't update a swipe that hasn't been inserted)
@@ -153,9 +154,7 @@ class Swipe {
 	/**
 	 * @param \PDO $pdo
 	 * @param int $swipeId
-	 * @return swipe|null
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
+	 * @return Swipe|null
 	 */
 	public static function getSwipeBySwipeId(\PDO $pdo, int $swipeId) {
 		// sanitize the swipeId before searching
@@ -187,11 +186,11 @@ class Swipe {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $swipeStatus
-	 * @return \SplFixedArray
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $swipeStatus new value for swipe status
+	 * @return \SplFixedArray SplFixedArray of swipe
+	 * @throws \PDOException when swipe id is not valid
+	 * @throws \TypeError when swipe id is not an integer
 	 */
 	public static function getSwipeBySwipeStatus(\PDO $pdo, int $swipeStatus) {
 		// sanitize the swipeId before searching
@@ -224,10 +223,10 @@ class Swipe {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $swipeNumber
-	 * @return \SplFixedArray
-	 * @throws \PDOException when mySQL related errors occur
+	 * @param \PDO $pdo connection object
+	 * @param int $swipeNumber new value
+	 * @return \SplFixedArray SplFixedArray of swipe
+	 * @throws \PDOException when mySQL related error occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
 	public static function getSwipeBySwipeNumber(\PDO $pdo, int $swipeNumber) {
@@ -261,8 +260,8 @@ class Swipe {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @return \SplFixedArray
+	 * @param \PDO $pdo connection objects
+	 * @return \SplFixedArray SplFi
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
