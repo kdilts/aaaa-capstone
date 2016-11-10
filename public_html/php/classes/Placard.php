@@ -191,7 +191,7 @@ class Placard implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getPlacardByPlacardStatusId(\PDO $pdo, int $placardStatusId){
+	public static function getPlacardsByPlacardStatusId(\PDO $pdo, int $placardStatusId){
 		// sanitize the placardId before searching
 		if($placardStatusId <= 0){
 			throw(new \PDOException("placardStatusId not positive"));
@@ -223,8 +223,8 @@ class Placard implements \JsonSerializable {
 
 	/**
 	 * @param \PDO $pdo
-	 * @param int $placardNumber
-	 * @return \SplFixedArray
+	 * @param int $placardId
+	 * @return Placard|null
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
@@ -235,27 +235,26 @@ class Placard implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT placardId, placardStatusId, placardNumber From placard WHERE placardStatus = :placardStatus";
+		$query = "SELECT placardId, placardStatusId, placardNumber From placard WHERE placardNumber = :placardNumber";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
 		$parameters = ["placardNumber" => $placardNumber];
 		$statement->execute($parameters);
 
-		// build an array of placards
-		$placards = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false){
-			try {
+		// grab placard from SQL
+		try {
+			$placard = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
 				$placard = new Placard($row["placardId"], $row["placardStatusId"], $row["placardNumber"]);
-				$placards[$placards->key()] = $placard;
-				$placards->next();
-			} catch(\Exception $exception){
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return $placards;
+		return($placard);
 	}
 
 	/**
