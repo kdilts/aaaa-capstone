@@ -57,5 +57,27 @@ class CohortTest extends AaaaTest {
 		$cohort = new Cohort(AaaaTest::INVALID_KEY, $this->VALID_COHORTAPPLICATIONID);
 		$cohort->insert($this->getPDO());
 	}
+
+	/**
+	 * test grabbing all Cohorts
+	 **/
+	public function testGetAllValidCohorts() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("cohort");
+
+		// create a new Cohort and insert to into mySQL
+		$cohort = new Cohort(null, $this->VALID_COHORTAPPLICATIONID);
+		$cohort->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = Cohort::getAllCohorts($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Cohort", $results);
+
+		// grab the result from the array and validate it
+		$pdoCohort = $results[0];
+		$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
+	}
 	
 }
