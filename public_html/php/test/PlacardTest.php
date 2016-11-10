@@ -102,7 +102,7 @@ class PlacardTest extends AaaaTest {
 	public function testGetInvalidPlacardByPlacardStatusId() {
 		// grab a placard by searching for status that does not exist
 		$placard = Placard::getPlacardByPlacardStatusId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($placard);
+		$this->assertCount(0, $placard);
 	}
 
 	/**
