@@ -12,9 +12,9 @@ class Note {
 	 */
 	private $noteNoteTypeId;
 	/**
-	 * @var int $noteStudentId
+	 * @var int $noteApplicationId
 	 */
-	private $noteStudentId;
+	private $noteApplicationId;
 	/**
 	 * @var int $noteId
 	 */
@@ -25,18 +25,18 @@ class Note {
 	 * @param int|null $newNoteId
 	 * @param string $newNoteContent
 	 * @param int $newNoteNoteTypeId
-	 * @param int $newNoteStudentId
+	 * @param int $newNoteApplicationId
 	 * @throws \InvalidArgumentException
 	 * @throws \RangeException
 	 * @throws \TypeError
 	 * @throws \Exception
 	 */
-	public function __construct(int $newNoteId, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteStudentId) {
+	public function __construct(int $newNoteId, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId) {
 		try {
 			$this->setNoteId($newNoteId);
 			$this->setNoteContent($newNoteContent);
 			$this->setNoteNoteTypeId($newNoteNoteTypeId);
-			$this->setNoteStudentId($newNoteStudentId);
+			$this->setNoteApplicationId($newNoteApplicationId);
 		} catch(\InvalidArgumentException $invalidArgument) {
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
 		} catch(\RangeException $range) {
@@ -72,8 +72,8 @@ class Note {
 	/**
 	 * @return int|null of note student id
 	 */
-	public function getNoteStudentId() {
-		return($this->noteStudentId);
+	public function getNoteApplicationId() {
+		return($this->noteApplicationId);
 	}
 
 	/**
@@ -122,15 +122,15 @@ class Note {
 	}
 
 	/**
-	 * @param int $newNoteStudentId
+	 * @param int $newNoteApplicationId
 	 * @throws \RangeException
 	 */
-	public function setNoteStudentId(int $newNoteStudentId) {
-		if($newNoteStudentId < 0) {
+	public function setNoteApplicationId(int $newNoteApplicationId) {
+		if($newNoteApplicationId < 0) {
 			throw(new \RangeException("Note Note Student Id can't be negative."));
 
 		}
-		$this->noteStudentId = $newNoteStudentId;
+		$this->noteApplicationId = $newNoteApplicationId;
 	}
 
 	/**
@@ -144,20 +144,17 @@ class Note {
 			throw(new \PDOException("not a new noteId"));
 		}
 		// create query template
-		$query = "INSERT INTO note(noteId, noteStudentId, noteNoteTypeId, noteContent) VALUES(:noteId, :noteStudentId, 
+		$query = "INSERT INTO note(noteId, noteApplicationId, noteNoteTypeId, noteContent) VALUES(:noteId, :noteApplicationId, 
 		noteNoteTypeId, :noteContent)";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
-		$parameters = ["noteId" => $this->noteId, "noteStudentId" => $this->noteStudentId, "noteContent" => $this->noteContent];
+		$parameters = ["noteId" => $this->noteId, "noteApplicationId" => $this->noteApplicationId, "noteContent" => $this->noteContent];
 		$statement->execute($parameters);
 		// update the null noteId with what mySQL just gave us
 		$this->noteId = intval($pdo->lastInsertId());
 		// bind the member variables to the place holders in the template
-		$parameters = [
-			"noteId" => $this ->noteId,
-			"noteStudentId" => $this ->noteStudentId,
-			"noteContent" => $this ->noteContent,
-			];
+		$parameters = ["noteId" => $this->noteId, "noteApplicationId" => $this->noteApplicationId, "noteNoteTypeId" =>
+			$this->noteNoteTypeId, "noteContent" => $this->noteContent];
 		$statement->execute($parameters);
 	}
 
