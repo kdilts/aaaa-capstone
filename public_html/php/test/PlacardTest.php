@@ -92,7 +92,7 @@ class PlacardTest extends AaaaTest {
 	 **/
 	public function testUpdateValidPlacard() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("placard");
 
 		// create a new Placard and insert to into mySQL
 		$placard = new Placard(null, $this->VALID_PLACARDSTATUSID, $this->VALID_PLACARDNUMBER);
