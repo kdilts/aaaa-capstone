@@ -437,40 +437,6 @@ class application {
 		$this->applicationUtmSource = $newApplicationUtmSource;
 
 	}
-
-	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
-	 */
-	public function update(\PDO $pdo) {
-		// enforce the application ID is not null (i.e., don't update a application ID that hasn't been inserted)
-		if($this->applicationId === null) {
-			throw(new \PDOException("unable to update a applicationID that does not exist"));
-		}
-
-		//create query template
-		$query= "UPDATE application SET applicationId = :applicationId, applicationFirstName = :applicationFirstName, applicationLastName = :applicationLastName, applicationEmail = :applicationEmail, applicationPhoneNumber = :applicationPhoneNumber, applicationSource = :applicationSource, applicationCohortId = :applicationCohortId, applicationAboutYou = :applicationAboutYou, applicationHopeToAccomplish = :applicationHopeToAccomplish, applicationExperience = :applicationExperience, applicationDateTime = :applicationDateTime, applicationUtmCampaign = :applicationUtmCampaign, applicationUtmMedium = :applicationUtmMedium, applicationUtmSource = :applicationUtmSource WHERE applicationId =:applicationId";
-		$statement = $pdo->prepare($query);
-
-		//bind the members variable to the place holder in the template
-		$parameters = [
-			"applicationId" => $this->applicationId,
-			"applicationFirstName" => $this->applicationFirstName,
-			"applicationLastName" => $this->applicationLastName,
-			"applicationEmail" => $this->applicationEmail,
-			"applicationPhoneNumber" => $this->applicationPhoneNumber,
-			"applicationSource" => $this->applicationSource,
-			"applicationCohortId" => $this->applicationCohortId,
-			"applicationAboutYou" => $this->applicationAboutYou,
-			"applicationHopeToAccomplish" => $this->applicationHopeToAccomplish,
-			"applicationExperience" => $this->applicationExperience,
-			"applicationDateTime" => $this->applicationDateTime,
-			"applicationUtmCampaign" => $this->applicationUtmCampaign,
-			"applicationUtmMedium" => $this->applicationUtmMedium,
-			"applicaitonUtmSource" => $this->applicationUtmSource,
-		];
-		$statement->execute($parameters);
-	}
 	/**
 	 * @param \PDO $pdo
 	 * @throws \PDOException
