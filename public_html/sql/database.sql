@@ -88,14 +88,17 @@ CREATE TABLE applicationCohort(
 CREATE TABLE studentPermit(
 
 	studentPermitId INT UNSIGNED NOT NULL,
+	studentPermitApplictionId INT UNSIGNED NOT NULL,
 	studentPermitSwipeId INT UNSIGNED NOT NULL,
 	studentPermitPlacardId INT UNSIGNED NOT NULL,
 	studentPermitCheckOutDate DATE NOT NULL,
 	studentPermitCheckInDate DATE NOT NULL,
 	INDEX (studentPermitId),
+	INDEX (studentPermitApplictionId),
 	INDEX (studentPermitPlacardId),
 	INDEX (studentPermitSwipeId),
 	PRIMARY KEY(studentPermitId),
+	FOREIGN KEY (studentPermitApplictionId) REFERENCES application(applicationId),
 	FOREIGN KEY(studentPermitSwipeId) REFERENCES swipe(swipeId),
 	FOREIGN KEY(studentPermitPlacardId) REFERENCES placard(placardId)
 );
