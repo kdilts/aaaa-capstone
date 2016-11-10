@@ -77,23 +77,44 @@ class applicationCohort implements \JsonSerializable {
 	
 	/**
 	 * @param $newApplicationCohortId
+	 * @throws \RangeException
 	 */
 	private function setApplicationCohortId($newApplicationCohortId) {
-		
+		// base case: if the applicatoinCohortId is null
+		if($newApplicationCohortId === null)	{
+			$this->applicationCohortId = null;
+			return;
+		}
+
+		// input validation
+		if($newApplicationCohortId <= 0){
+			throw(new \RangeException("applicationCohortId is not positive"));
+		}
+		$this->applicationCohortId = $newApplicationCohortId;
 	}
 
 	/**
 	 * @param $newApplicationCohortApplicationId
+	 * @throws \RangeException
 	 */
 	private function setApplicationCohortApplicationId($newApplicationCohortApplicationId) {
-		
+		// input validation
+		if($newApplicationCohortApplicationId <= 0){
+			throw(new \RangeException("applicationCohortApplicationId is not positive"));
+		}
+		$this->applicationCohortApplicationId = $newApplicationCohortApplicationId;
 	}
 
 	/**
 	 * @param $newApplicationCohortCohortId
+	 * @throws \RangeException
 	 */
 	private function setApplicationCohortCohortId($newApplicationCohortCohortId) {
-		
+		// input validation
+		if($newApplicationCohortCohortId <= 0){
+			throw(new \RangeException("applicationCohortCohortId is not positive"));
+		}
+		$this->applicationCohortCohortId = $newApplicationCohortCohortId;
 	}
 
 	/**
