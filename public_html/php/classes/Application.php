@@ -6,7 +6,7 @@ use Edu\Cnm\DdcAaaa\ValidateDate;
 require_once ("autoload.php");
 
 /**
- * class Application for aaaa
+ * class   Application for aaaa
  *
  * @version 1.0.0
  **/
