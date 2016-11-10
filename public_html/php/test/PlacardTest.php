@@ -88,7 +88,16 @@ class PlacardTest extends AaaaTest {
 
 	// TODO test valid update placard
 
-	// TODO test invalid update placard
+	/**
+	 * test updating a Placard that does not exist
+	 *
+	 * @expectedException PDOException
+	 **/
+	public function testUpdateInvalidPlacard() {
+		// create a Placard, try to update it without actually updating it and watch it fail
+		$placard = new Placard(null, $this->VALID_PLACARDSTATUSID, $this->VALID_PLACARDNUMBER);
+		$placard->update($this->getPDO());
+	}
 
 	/**
 	 * test grabbing a Placard by id that does not exist
