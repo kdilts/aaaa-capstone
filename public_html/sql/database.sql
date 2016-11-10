@@ -74,6 +74,13 @@ CREATE TABLE application(
 	FOREIGN KEY(applicationCohortId) REFERENCES cohort (cohortId)
 );
 
+CREATE TABLE applicationCohort(
+	applicationCohortApplicationId INT UNSIGNED NOT NULL,
+	applicationCohortCohortId INT UNSIGNED NOT NULL,
+	FOREIGN KEY(applicationCohortApplicationId) REFERENCES application(applicationId),
+	FOREIGN KEY(applicationCohortCohortId) REFERENCES cohort(cohortId)
+);
+
 CREATE TABLE studentPermit(
 
 	studentPermitId INT UNSIGNED NOT NULL,
