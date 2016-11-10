@@ -65,9 +65,9 @@ class PlacardTest extends AaaaTest {
 	}
 
 	/**
-	 * test grabbing a Placard by placard content
+	 * test grabbing a Placard by placard id
 	 **/
-	public function testGetValidPlacardByPlacardId() {
+	/*public function testGetValidPlacardByPlacardId() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("placard");
 
@@ -85,8 +85,18 @@ class PlacardTest extends AaaaTest {
 		$pdoPlacard = $results[0];
 		$this->assertEquals($pdoPlacard->getPlacardStatusId(), $this->VALID_PLACARDSTATUSID);
 		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
+	}*/
+
+	/**
+	 * test grabbing a Placard by id that does not exist
+	 **/
+	public function testGetInvalidPlacardByPlacardId() {
+		// grab a placard by searching for content that does not exist
+		$placard = Placard::getPlacardByPlacardId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertCount(0, $placard);
 	}
-	
+
+
 	/**
 	 * test grabbing all Placards
 	 **/
