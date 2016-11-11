@@ -56,18 +56,22 @@ class Status extends AaaaTest {
 			}
 
 	/**
-	 * test inserting a valid Status and verify that the actual mySQL data matches
+	 * test inserting a Status and verify that it already exists
 	 * @expectedException \PDOException
 	 **/
-	public function testInsertValidTweet() {
+	public function testInsertValidStatus() {
+		// create a Status with a non null status id and watch it fail
+		$status = new Status(AaaaTest::
+		:
+		INVALID_KEY, $this->VALID_STATUSTYPEID, $this->VALID_STATUTYPENAME);
+		$status->insert($this->getPDO());
+		}
+		/**
+		 * test inserting a Status, editin it, and then updating it
+		 **/
+	public function testUpdateValidStatus() {
+
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("status");
-
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
 		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
