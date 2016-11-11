@@ -10,35 +10,24 @@ require_once("AaaaTest.php");
 require_once(dirname(__DIR__) . "/classes/autoload.php");
 
 /**
- * Full PHPUnit test for the Tweet class
+ * Full PHPUnit test for the Status class
  *
- * This is a complete PHPUnit test of the Tweet class. It is complete because *ALL* mySQL/PDO enabled methods
+ * This is a complete PHPUnit test of the StatusTest class. It is complete because *ALL* mySQL/PDO enabled methods
  * are tested for both invalid and valid inputs.
  *
- * @see Tweet
- * @author Dylan McDonald <dmcdonald21@cnm.edu>
+ * @see status
  **/
-class TweetTest extends DataDesignTest {
+class Status extends AaaaTest {
 	/**
-	 * content of the Tweet
-	 * @var string $VALID_TWEETCONTENT
+	 * content of the Status
+	 * @var string $VALID_STATUS
 	 **/
-	protected $VALID_TWEETCONTENT = "PHPUnit test passing";
+	protected $VALID_STATUSTYPEID = "PHPUnit test passing";
 	/**
-	 * content of the updated Tweet
-	 * @var string $VALID_TWEETCONTENT2
+	 * content of the updated
+	 * @var string $VALID_STATUSTYPENAME
 	 **/
-	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
-	/**
-	 * timestamp of the Tweet; this starts as null and is assigned later
-	 * @var DateTime $VALID_TWEETDATE
-	 **/
-	protected $VALID_TWEETDATE = null;
-	/**
-	 * Profile that created the Tweet; this is for foreign key relations
-	 * @var Profile profile
-	 **/
-	protected $profile = null;
+	protected $VALID_STATUSTYPENAME = "PHPUnit test still passing";
 
 	/**
 	 * create dependent objects before running each test
@@ -46,21 +35,33 @@ class TweetTest extends DataDesignTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-
-		// create and insert a Profile to own the test Tweet
-		$this->profile = new Profile(null, "@phpunit", "test@phpunit.de", "+12125551212");
-		$this->profile->insert($this->getPDO());
-
-		// calculate the date (just use the time the unit test was setup...)
-		$this->VALID_TWEETDATE = new \DateTime();
 	}
+		/**
+		 * test inserting a valid Status and verify that the actual mySQL data matches
+		 */
+		public function testInsertValidStatus() {
+
+			// count the number of rows and save it for later
+			$numRows = $this->getConnection()->getRowCount("status");
+
+			// create a new Status and inser to into mySQL
+			$status = new Status(null, $this->VALID_STATUSTYPEID, $this->VALID_STATUSTYPENAME);
+			$status->insert($this->getPDO());
+
+			// grab the data from mySQL and enforce the fields match our expectations
+			$pdoStatus = Status::getStatusByStatusTypeId($this->getPDO(), $syatus->getStatusTypeId());
+			$this->assetEqual($numRows + 1, $this->getConnection()->getRowCount("status"));
+			//$this->assertEqual(%pdoStatus->getStatusTypeId(), $this->VALID_STATUSTYPEID
+			$this->assertEqual(%pdoStatus->getStatusTypeName(), $this->VALID_STATUSTYPENAME);
+			}
 
 	/**
-	 * test inserting a valid Tweet and verify that the actual mySQL data matches
+	 * test inserting a valid Status and verify that the actual mySQL data matches
+	 * @expectedException \PDOException
 	 **/
 	public function testInsertValidTweet() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("status");
 
 		// create a new Tweet and insert to into mySQL
 		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
