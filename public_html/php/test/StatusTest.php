@@ -22,9 +22,9 @@ class Status extends AaaaTest {
 	 * content of the Status
 	 * @var string $VALID_STATUS
 	 **/
-	protected $VALID_STATUSTYPEID = "PHPUnit test passing";
+	protected $VALID_STATUSTYPEID = 0;
 
-	protected $VALID_STATUSTYPENAME = "PHPUnit test still passing";
+	protected $VALID_STATUSTYPENAME = 1;
 
 	/**
 	 * create dependent objects before running each test
@@ -33,24 +33,24 @@ class Status extends AaaaTest {
 		// run the default setUp() method first
 		parent::setUp();
 	}
-		/**
-		 * test inserting a valid Status and verify that the actual mySQL data matches
-		 */
-		public function testInsertValidStatus() {
+	/**
+	 * test inserting a valid Status and verify that the actual mySQL data matches
+	 */
+	public function testInsertValidStatus() {
 
-			// count the number of rows and save it for later
-			$numRows = $this->getConnection()->getRowCount("status");
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("status");
 
-			// create a new Status and insert to into mySQL
-			$status = new Status(null, $this->VALID_STATUSTYPEID, $this->VALID_STATUSTYPENAME);
-			$status->insert($this->getPDO());
+		// create a new Status and insert to into mySQL
+		$status = new Status(null, $this->VALID_STATUSTYPEID, $this->VALID_STATUSTYPENAME);
+		$status->insert($this->getPDO());
 
-			// grab the data from mySQL and enforce the fields match our expectations
-			$pdoStatus = Status::getStatusByStatusTypeId($this->getPDO(), $status->getStatusTypeId());
-			$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("status"));
-			//$this->assertEquals(%pdoStatus->getStatusTypeId(), $this->VALID_STATUSTYPEID);
-			$this->assertEquals($pdoStatus->getStatusTypeName(), $this->VALID_STATUSTYPENAME);
-			}
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoStatus = Status::getStatusByStatusTypeId($this->getPDO(), $status->getStatusTypeId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("status"));
+		//$this->assertEquals(%pdoStatus->getStatusTypeId(), $this->VALID_STATUSTYPEID);
+		$this->assertEquals($pdoStatus->getStatusTypeName(), $this->VALID_STATUSTYPENAME);
+	}
 
 	/**
 	 * test inserting a Status that already exists
