@@ -169,6 +169,18 @@ class applicationCohort implements \JsonSerializable {
 		return($applicationCohort);
 	}
 
+	public function getApplicationCohortByApplicationId (\PDO $pdo, int $applicationCohortId){
+		//sanitize the applicationCohortId before searching
+		if ($applicationCohortId <=0) {
+			throw(new \PDOException("applicationCohortId not positive"));
+		}
+
+		//create query template
+		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId From applicationCoort WHERE applicationCohortId = : applicationCohortId";
+		$statement = $pdo->prepare($query);
+
+		//grab placard from SQL
+	}
 	/**
 	 * @return array
 	 */
