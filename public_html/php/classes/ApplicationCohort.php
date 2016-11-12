@@ -176,16 +176,39 @@ class applicationCohort implements \JsonSerializable {
 		}
 
 		//create query template
-		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId From applicationCoort WHERE applicationCohortId = : applicationCohortId";
+		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId From applicationCohort WHERE applicationCohortId = : applicationCohortId";
 		$statement = $pdo->prepare($query);
 
 		//grab placard from SQL
 		try {
-			applicationCohort=null;
+			applicationCohort = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$applicationCohort = new applicaitonCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+				$applicationCohort = new applicationCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+			}
+		} catch(\Exception $exception){
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($applicationCohort);
+	}
+	public function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortId){
+		//sanitize the applicationCohortId before searching
+		if ($applicationCohortId <=0){
+			throw(new \PDOException("applicationCohortId not positive"));
+		}
+		//create query template
+		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId FROM applicationCohort WHERE applicationCohortId = : applicaitonCohortId";
+		$statement = $pdo->prepare($query);
+
+		//grab placard from SQL
+		try {
+			applicationCohort = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if (row !==false){
+				$applicationCohort = new applicationCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicatinCohortCohortId"]);
 			}
 		} catch(\Exception $exception){
 			//if the row couldn't be converted, rethrow it
