@@ -12,7 +12,7 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
 
 class NoteTypeTest extends AaaaTest {
 	/**
-	 * content of the Tweet
+	 * content of the NoteType
 	 * @var string $VALID_NOTETYPENAME
 	 **/
 	protected $VALID_NOTETYPENAME = "PHPUnit test passing";

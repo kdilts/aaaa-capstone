@@ -1,5 +1,5 @@
 <?php
-namespace Edu\Cnm\Aaaa\Test;
+namespace Edu\Cnm\DdcAaa\Test;
 
 use Edu\Cnm\DdcAaaa\{Status};
 
@@ -17,10 +17,10 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  *
  * @see status
  **/
-class Status extends AaaaTest {
+class StatusTest extends AaaaTest {
 	/**
 	 * content of the Status
-	 * @var string $VALID_STATUS
+	 * @var string $VALID_ST
 	 **/
 	protected $VALID_STATUSTYPEID = 0;
 
