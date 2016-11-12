@@ -180,6 +180,16 @@ class applicationCohort implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		//grab placard from SQL
+		try {
+			applicationCohort =null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$applicationCohort = new applicaitonCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+			}
+		} catch(\Exception $exception){
+			//if the row couldn't be converted, rethrow it
+		}
 	}
 	/**
 	 * @return array
