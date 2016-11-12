@@ -10,23 +10,26 @@ require_once("AaaaTest.php");
 require_once(dirname(__DIR__) . "/classes/autoload.php");
 
 /**
- * Full PHPUnit test for the Tweet class
+ * Full PHPUnit test for the Bridge class
  *
- * This is a complete PHPUnit test of the Tweet class. It is complete because *ALL* mySQL/PDO enabled methods
+ * This is a complete PHPUnit test of the Bridge class. It is complete because *ALL* mySQL/PDO enabled methods
  * are tested for both invalid and valid inputs.
  *
- * @see Tweet
- * @author Dylan McDonald <dmcdonald21@cnm.edu>
+ * @see Bridge
+ *
  **/
-class TweetTest extends DataDesignTest {
+class BridgeTest extends AaaaTest {
 	/**
-	 * content of the Tweet
-	 * @var string $VALID_TWEETCONTENT
+	 * content of the Bridge
+	 * @var string $VALID_BRIDGESTAFFID
 	 **/
-	protected $VALID_TWEETCONTENT = "PHPUnit test passing";
+	protected $VALID_BRIDGESTAFFID = 0;
+
+	protected $VALID_BRIDGENAME = 1;
+
+	protected $VALID_BRIDGEUSERNAME = 2;
 	/**
-	 * content of the updated Tweet
-	 * @var string $VALID_TWEETCONTENT2
+	 * create dependent objects before running each test
 	 **/
 	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
 	/**
