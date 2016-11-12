@@ -28,20 +28,6 @@ class BridgeTest extends AaaaTest {
 	protected $VALID_BRIDGENAME = 1;
 
 	protected $VALID_BRIDGEUSERNAME = 2;
-	/**
-	 * create dependent objects before running each test
-	 **/
-	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
-	/**
-	 * timestamp of the Tweet; this starts as null and is assigned later
-	 * @var DateTime $VALID_TWEETDATE
-	 **/
-	protected $VALID_TWEETDATE = null;
-	/**
-	 * Profile that created the Tweet; this is for foreign key relations
-	 * @var Profile profile
-	 **/
-	protected $profile = null;
 
 	/**
 	 * create dependent objects before running each test
@@ -49,34 +35,25 @@ class BridgeTest extends AaaaTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-
-		// create and insert a Profile to own the test Tweet
-		$this->profile = new Profile(null, "@phpunit", "test@phpunit.de", "+12125551212");
-		$this->profile->insert($this->getPDO());
-
-		// calculate the date (just use the time the unit test was setup...)
-		$this->VALID_TWEETDATE = new \DateTime();
 	}
-
 	/**
-	 * test inserting a valid Tweet and verify that the actual mySQL data matches
+	 * test inserting a valid Bridge and verify that the actual mySQL data matches
 	 **/
-	public function testInsertValidTweet() {
+	public function testInsertValidBridge() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("bridge");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Bridge and insert to into mySQL
+		$bridge = new Bridge(null, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoBridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
+		//$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID
+		$this->assertEquals($pdobridge->getBridgeName(), $this->VALID_BRIDGENAME());
+		$this->assertEquals($pdobridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
-
 	/**
 	 * test inserting a Tweet that already exists
 	 *
