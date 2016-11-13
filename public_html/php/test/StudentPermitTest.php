@@ -29,12 +29,15 @@ class StudentPermitTest extends AaaaTest {
 	/**
 	 * @var int StudentPermitSwipeId
 	 **/
-	protected $VALID_STUDENTPERMITSWIPEID= 1;
+	protected $VALID_STUDENTPERMITSWIPEID= 2;
 	/**
-	 * Profile that created the Tweet; this is for foreign key relations
-	 * @var Profile profile
+	 * @var DateTime $studentPermitCheckOutDate
 	 **/
-	protected $profile = null;
+	protected $STUDENTPERMITCHECKOUTDATE = null;
+	/**
+	 * @var DateTime $studentPermitCheckInDate
+	 */
+	protected $STUDENTPERMITCHECINTDATE = null;
 
 	/**
 	 * create dependent objects before running each test
@@ -42,27 +45,20 @@ class StudentPermitTest extends AaaaTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-
-		// create and insert a Profile to own the test Tweet
-		$this->profile = new Profile(null, "@phpunit", "test@phpunit.de", "+12125551212");
-		$this->profile->insert($this->getPDO());
-
-		// calculate the date (just use the time the unit test was setup...)
-		$this->VALID_TWEETDATE = new \DateTime();
 	}
 
 	/**
-	 * test inserting a valid Tweet and verify that the actual mySQL data matches
+	 * test inserting a valid Student and verify that the actual mySQL data matches
 	 **/
 	public function testInsertValidTweet() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("tweet");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+	// create a Student and insert a Permit to own the test
+	student = new Student(null, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID);
+	$student->insert($this->getPDO());
 
-		// grab the data from mySQL and enforce the fields match our expectations
+	// grab the data from mySQL and enforce the fields match our expectations
 		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
 		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
