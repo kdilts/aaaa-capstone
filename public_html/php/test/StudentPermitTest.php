@@ -10,30 +10,26 @@ require_once("AaaaTest.php");
 require_once(dirname(__DIR__) . "/classes/autoload.php");
 
 /**
- * Full PHPUnit test for the Tweet class
+ * Full PHPUnit test for the StudentPermit class
  *
- * This is a complete PHPUnit test of the Tweet class. It is complete because *ALL* mySQL/PDO enabled methods
+ * This is a complete PHPUnit test of the Student Permit class. It is complete because *ALL* mySQL/PDO enabled methods
  * are tested for both invalid and valid inputs.
  *
- * @see Tweet
- * @author Dylan McDonald <dmcdonald21@cnm.edu>
+ * @see StudentPermit
  **/
-class TweetTest extends DataDesignTest {
+class StudentPermitTest extends AaaaTest {
 	/**
-	 * content of the Tweet
-	 * @var string $VALID_TWEETCONTENT
+	 * @var string $VALID_StudentPermitApplicationId
 	 **/
-	protected $VALID_TWEETCONTENT = "PHPUnit test passing";
+	protected $VALID_STUDENTPERMITAPPLICATIONID = 0;
 	/**
-	 * content of the updated Tweet
-	 * @var string $VALID_TWEETCONTENT2
+	 * @var int_StudentPermitPlacardId
 	 **/
-	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
+	protected $VALID_STUDENTPERMITPLACARDID = 1;
 	/**
-	 * timestamp of the Tweet; this starts as null and is assigned later
-	 * @var DateTime $VALID_TWEETDATE
+	 * @var int StudentPermitSwipeId
 	 **/
-	protected $VALID_TWEETDATE = null;
+	protected $VALID_STUDENTPERMITSWIPEID= 1;
 	/**
 	 * Profile that created the Tweet; this is for foreign key relations
 	 * @var Profile profile
