@@ -164,7 +164,7 @@ namespace Edu\Cnm\DdcAaaa;
 			}
 			// create query template
 			$query = "UPDATE bridge SET bridgeStaffId = :bridgeStaffId, bridgeName = :bridgeName, bridgeUserName = 
-			 :brigeUserName WHERE Id = :bridgeStaffId";
+			 :brigeUserName WHERE bridgeStaffId = :bridgeStaffId";
 			$statement = $pdo->prepare($query);
 			// bind the member variables to the place holders in the template
 			$parameters = ["bridgeStaffId" => $this->bridgeStaffId, "bridgeName" => $this->bridgeName, "bridgeUserName" =>

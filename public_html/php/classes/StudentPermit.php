@@ -63,7 +63,7 @@ class StudentPermit implements \JsonSerializable {
 	 * @return int
 	 */
 	public function getStudentPermitApplicationId(){
-		return($this->studentPermitApplicaitonId);
+		return($this->studentPermitApplicationId);
 	}
 
 	/**
@@ -173,7 +173,7 @@ class StudentPermit implements \JsonSerializable {
 		//$studentPermitStudentId $studentPermitPlacardId $studentPermitSwipeId $studentPermitCheckOutDate $studentPermitCheckInDate
 		
 		// create query template
-		$query = "INSERT INTO studentPermit(studentPermitApplicationtId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
+		$query = "INSERT INTO studentPermit(studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
