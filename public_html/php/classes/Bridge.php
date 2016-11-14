@@ -137,41 +137,13 @@ namespace Edu\Cnm\DdcAaaa;
 			// update the null bridgeStaffId with what mySQL just gave us
 			$this->bridgeStaffId = intval($pdo->lastInsertId());
 		}
+
 		/**
 		 * @param \PDO $pdo
-		 * @throws \PDOException
+		 * @param string $bridgeStaffId
+		 * @return Bridge|null
 		 */
-		public function delete(\PDO $pdo) {
-			// enforce the bridgeStaffId is not null (i.e., don't delete a bridgeStaffId that hasn't been inserted)
-			if(empty($bridgeStaffId) === null) {
-				throw(new \PDOException("unable to delete a bridgeStaffId that does not exist"));
-			}
-			// create query template
-			$query = "DELETE FROM bridge WHERE bridgeStaffId = :bridgeStaffId";
-			$statement = $pdo->prepare($query);
-			// bind the member variables to the place holder in the template
-			$parameters = ["bridgeStaffId" => $this->bridgeStaffId];
-			$statement->execute($parameters);
-		}
-		/**
-		 * @param \PDO $pdo
-		 * @throws \PDOException
-		 */
-		public function update(\PDO $pdo) {
-			// enforce the bridgeStaffId is not null (i.e., don't update a bridgeStaff that hasn't been inserted)
-			if(empty($bridgeStaffId) === null) {
-				throw(new \PDOException("unable to update a bridge that does not exist"));
-			}
-			// create query template
-			$query = "UPDATE bridge SET bridgeStaffId = :bridgeStaffId, bridgeName = :bridgeName, bridgeUserName = 
-			 :brigeUserName WHERE bridgeStaffId = :bridgeStaffId";
-			$statement = $pdo->prepare($query);
-			// bind the member variables to the place holders in the template
-			$parameters = ["bridgeStaffId" => $this->bridgeStaffId, "bridgeName" => $this->bridgeName, "bridgeUserName" =>
-				$this->bridgeUserName];
-			$statement->execute($parameters);
-		}
-		public static function getBridgeByBridgeStaffId(\PDO $pdo, int $bridgeStaffId) {
+		public static function getBridgeByBridgeStaffId(\PDO $pdo, string $bridgeStaffId) {
 			// sanitize the bridgeId before searching
 			if($bridgeStaffId <= 0) {
 				throw(new \PDOException("bridgeStaffId not positive"));
@@ -200,6 +172,11 @@ namespace Edu\Cnm\DdcAaaa;
 			return ($bridge);
 		}
 
+		/**
+		 * @param \PDO $pdo
+		 * @param int $bridgeName
+		 * @return \SplFixedArray
+		 */
 
 		public static function getBridgeByBridgeName(\PDO $pdo, int $bridgeName) {
 			// sanitize the bridgeName before searching
@@ -231,6 +208,11 @@ namespace Edu\Cnm\DdcAaaa;
 			return $bridges;
 		}
 
+		/**
+		 * @param \PDO $pdo
+		 * @param string $bridgeUserName
+		 * @return \SplFixedArray
+		 */
 
 		public static function getBridgeByBridgeUserName(\PDO $pdo, string $bridgeUserName) {
 			// sanitize the bridgeUserName before searching

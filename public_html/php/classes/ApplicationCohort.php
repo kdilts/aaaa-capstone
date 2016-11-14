@@ -181,7 +181,7 @@ class applicationCohort implements \JsonSerializable {
 
 		//grab placard from SQL
 		try {
-			applicationCohort = null;
+			$applicationCohort = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
@@ -204,11 +204,11 @@ class applicationCohort implements \JsonSerializable {
 
 		//grab placard from SQL
 		try {
-			applicationCohort = null;
+			$applicationCohort = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if (row !==false){
-				$applicationCohort = new applicationCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicatinCohortCohortId"]);
+				$applicationCohort = new applicationCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
 			}
 		} catch(\Exception $exception){
 			//if the row couldn't be converted, rethrow it
