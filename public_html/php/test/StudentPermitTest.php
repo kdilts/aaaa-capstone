@@ -95,7 +95,7 @@ class StudentPermitTest extends AaaaTest {
 
 		// edit the StudentPermit and update it in mySQL
 		$studentPermitt->setStudentPermitApplicationId($this->VALID_STUDENTPERMITPLACARDID);
-		$tweet->update($this->getPDO());
+		$studentPermitt->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoSstudentPermit = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(),
