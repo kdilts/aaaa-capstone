@@ -216,6 +216,13 @@ class applicationCohort implements \JsonSerializable {
 		}
 		return($applicationCohort);
 	}
+
+	/**
+	 * @param \PDO $pdo connection objects
+	 * @return \SplFixedArray SplFi
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
 	public static function getAllApplicationCohorts(\PDO $pdo) {
 		// create query template
 		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId FROM applicationCohort";
@@ -227,7 +234,7 @@ class applicationCohort implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$applicationCohort = new Swipe($row["swipeId"], $row["swipeStatus"], $row["swipeNumber"]);
+				$applicationCohort = new ApplicationCohort($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
 				$applicationCohorts[$applicationCohorts->key()] = $applicationCohort;
 				$applicationCohorts->next();
 			} catch(\Exception $exception) {
