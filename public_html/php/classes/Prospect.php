@@ -294,6 +294,50 @@ class Prospect implements \JsonSerializable {
 
 	/**
 	 * @param \PDO $pdo
+	 * @param int $prospectEmail
+	 * @return Prospect|null
+	 * @throws \PDOException
+	 */
+	public static function getProspectByProspectEmail(\PDO $pdo, int $prospectEmail){
+		// sanitize the prospectEmail before searching
+		$prospectEmail = trim($prospectEmail);
+		$prospectEmail = filter_var($prospectEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($prospectEmail) === true) {
+			throw(new \PDOException("Prospect Email is empty or insecure"));
+		}
+
+		// create query template
+		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectEmail = :prospectEmail";
+		$statement = $pdo->prepare($query);
+
+		// bind the prospect id to the place holder in template
+		$parameters = ["prospectEmail" => $prospectEmail];
+		$statement->execute($parameters);
+
+		// grab prospect from SQL
+		try {
+			$prospect = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$prospect = new Prospect(
+					$row["prospectId"],
+					$row["prospectCohortId"],
+					$row["prospectPhoneNumber"],
+					$row["prospectEmail"],
+					$row["prospectFirstName"],
+					$row["prospectLastName"]
+				);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($prospect);
+	}
+
+	/**
+	 * @param \PDO $pdo
 	 * @return \SplFixedArray
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
