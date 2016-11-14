@@ -1,7 +1,9 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{Swipe};
+use Edu\Cnm\DdcAaaa\{
+	Swipe
+};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -62,6 +64,18 @@ class SwipeTest extends AaaaTest {
 		// create a Swipe with a non null Swipe id and watch it fail
 		$swipe = new Swipe(AaaaTest::INVALID_KEY, $this->VALID_SWIPESTATUS, $this->VALID_SWIPENUMBER);
 		$swipe->insert($this->getPDO());
+	}
+
+	/** test inserting a swipe, editing it, and then updating it
+	 **/
+	public function testUpdateValidApplication() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("swipe");
+
+		// create a new Swipe status and insert into mySQL
+		//$swipe = new Swipe
+
+		// edit the
 	}
 
 }
