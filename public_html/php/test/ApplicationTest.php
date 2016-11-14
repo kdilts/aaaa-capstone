@@ -65,14 +65,14 @@ class ApplicationTest extends AaaaTest {
 	}
 
 	/**
-	 * test inserting a Tweet that already exists
+	 * test inserting a Application that already exists
 	 *
 	 * @expectedException PDOException
 	 **/
-	public function testInsertInvalidTweet() {
-		// create a Tweet with a non null tweet id and watch it fail
-		$tweet = new Tweet(DataDesignTest::INVALID_KEY, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+	public function testInsertInvalidApplication() {
+		// create a Application with a non null application id and watch it fail
+		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONID, $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
+		$application->insert($this->getPDO());
 	}
 
 	/**
