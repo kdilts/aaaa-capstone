@@ -11,7 +11,7 @@ require_once ("autoload.php");
  * @version 1.0.0
  **/
 
-class application {
+class Application {
 	use ValidateDate;
 	/**
 	 * @var int $applicationId
