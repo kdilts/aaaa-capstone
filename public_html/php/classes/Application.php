@@ -472,5 +472,13 @@ class application {
 		// update the null applicationId with what mySQL just gave us
 		$this->applicationId = intval($pdo->lastInsertId());
 	}
+
+	/**
+	 * @return array
+	 */
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		return($fields);
+	}
 }
 

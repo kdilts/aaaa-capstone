@@ -179,6 +179,9 @@ class Cohort implements \JsonSerializable {
 		return $cohorts;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		return($fields);
