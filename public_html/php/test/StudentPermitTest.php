@@ -50,153 +50,85 @@ class StudentPermitTest extends AaaaTest {
 	/**
 	 * test inserting a valid Student and verify that the actual mySQL data matches
 	 **/
-	public function testInsertValidTweet() {
+	public function testInsertValidStudentPermit() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
-	// create a Student and insert a Permit to own the test
-	student = new Student(null, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID);
-	$student->insert($this->getPDO());
+	// create a Student Permit and insert into mySQL
+	$studentPermit = new StudentPermit(null, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID,
+		$this->VALID_STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
+	$studentPermit->insert($this->getPDO());
 
 	// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoStudentPermit = StudentPermit::getBystudentPermit($this->getPDO(), $studentPermit->getStudentPermit());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		//$this->assertEquals($pdo->getStudentPermit(), $this->VALID_STUDENTPERMIT);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->VALID_STUDENTPERMITAPPLICATIONID);
+		$this->assertEquals($pdoStudentPermit->getStudentPermit(), $this->VALID_STUDENTPERMITPLACARDID);
+		$this->assertEquals($pdoStudentPermit->getStudentPermit(), $this->VALID_STUDENTPERMITSWIPEID);
 	}
 
 	/**
-	 * test inserting a Tweet that already exists
+	 * test inserting a StudentPermit that already exists
 	 *
 	 * @expectedException PDOException
 	 **/
-	public function testInsertInvalidTweet() {
-		// create a Tweet with a non null tweet id and watch it fail
-		$tweet = new Tweet(DataDesignTest::INVALID_KEY, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+	public function testInsertInvalidStudentPermit() {
+		// create a StudentPermit with a non null studentPermit Application Id and watch it fail
+		$student = new StudentPermit(AaaaTest::INVALID_KEY, $this->studentPermit->getStudentPemitApplicationId(),
+			$this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID; $this->VALID_STUDENTPERMITCHECKOUTDATE,
+		$this->STUDENTPERMITCHECKINDATE);
+		$student->insert($this->getPDO());
 	}
 
 	/**
-	 * test inserting a Tweet, editing it, and then updating it
+	 * test inserting a StudentPermit, editing it, and then updating it
 	 **/
-	public function testUpdateValidTweet() {
+	public function testUpdateValidStudentPermi() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new StudentPermit and insert to into mySQL
+		$studentPermitt = new StudentPermit(null, $this->VALID_STUDENTPERMITAPPLICATIONID->get(),
+			$this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID);
+		$studentPermitt->insert($this->getPDO());
 
-		// edit the Tweet and update it in mySQL
-		$tweet->setTweetContent($this->VALID_TWEETCONTENT2);
+		// edit the StudentPermit and update it in mySQL
+		$studentPermitt->setStudentPermitApplicationId($this->VALID_STUDENTPERMITPLACARDID);
 		$tweet->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT2);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoSstudentPermit = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(),
+			$studentPermitt->getStudentPermitApplicationId()Id());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($pdoSstudentPermit->getStudentPermitApplicationId(),
+			$this->studentPermit->getStudentPermitApplicationId());
+		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->VALID_STUDENTPERMITPLACARDID);
+		$this->assertEquals($pdoSstudentPermit->getStudentPermit(), $this->VALID_STUDENTPERMITSWIPEID);
 	}
 
 	/**
-	 * test updating a Tweet that does not exist
-	 *
-	 * @expectedException PDOException
+	 * test grabbing all StudentPermits
 	 **/
-	public function testUpdateInvalidTweet() {
-		// create a Tweet, try to update it without actually updating it and watch it fail
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->update($this->getPDO());
-	}
-
-	/**
-	 * test creating a Tweet and then deleting it
-	 **/
-	public function testDeleteValidTweet() {
+	public function testGetAllValidStudentPermits() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
-
-		// delete the Tweet from mySQL
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$tweet->delete($this->getPDO());
-
-		// grab the data from mySQL and enforce the Tweet does not exist
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertNull($pdoTweet);
-		$this->assertEquals($numRows, $this->getConnection()->getRowCount("tweet"));
-	}
-
-	/**
-	 * test deleting a Tweet that does not exist
-	 *
-	 * @expectedException PDOException
-	 **/
-	public function testDeleteInvalidTweet() {
-		// create a Tweet and try to delete it without actually inserting it
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->delete($this->getPDO());
-	}
-
-	/**
-	 * test grabbing a Tweet by tweet content
-	 **/
-	public function testGetValidTweetByTweetContent() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
-
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Student Permit and insert to into mySQL
+		$studentPermit = new StudentPermit(null, $this->studentPermit->getStudentPermitApplicationId(),
+			$this->VALID_STUDENTPERMITAPPLICATIONID, $this->VALID_STUDENTPERMITSWIPEID);
+		$studentPermit->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Tweet::getTweetByTweetContent($this->getPDO(), $tweet->getTweetContent());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
+		$results = StudentPermit::t::getAllStudentPermits($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Tweet", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\Cnm\DdcAaaa\Test\StudentPermit", $results);
 
 		// grab the result from the array and validate it
-		$pdoTweet = $results[0];
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
-	}
-
-	/**
-	 * test grabbing a Tweet by content that does not exist
-	 **/
-	public function testGetInvalidTweetByTweetContent() {
-		// grab a tweet by searching for content that does not exist
-		$tweet = Tweet::getTweetByTweetContent($this->getPDO(), "you will find nothing");
-		$this->assertCount(0, $tweet);
-	}
-
-	/**
-	 * test grabbing all Tweets
-	 **/
-	public function testGetAllValidTweets() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
-
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Tweet::getAllTweets($this->getPDO());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Tweet", $results);
-
-		// grab the result from the array and validate it
-		$pdoTweet = $results[0];
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoStudentPermit = $results[0];
+		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->studentPermit->getStudentPlacardId());
+		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate(), $this->VALID_STUDENTPERMITCHECOUTTDATE);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITSWIPEID);
 	}
 }
