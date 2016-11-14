@@ -5,6 +5,11 @@ class StudentPermit implements \JsonSerializable {
 	use ValidateDate;
 
 	/**
+	 * @var
+	 */
+	private $studentPermitId;
+
+	/**
 	 * @var int $studentPermitApplicationId
 	 */
 	private $studentPermitApplicationId;
@@ -31,8 +36,9 @@ class StudentPermit implements \JsonSerializable {
 
 	/**
 	 * StudentPermit constructor.
-	 * @param int|null $newStudentPermitApplicationId for new value for new student permit student id
-	 * @param int $newStudentPermitPlacardId for nre value for student permit placard id
+	 * @param int $newStudentPermitId for new value for new student permit id
+	 * @param int $newStudentPermitApplicationId for new value for new student permit application id
+	 * @param int $newStudentPermitPlacardId for new value for student permit placard id
 	 * @param int $newStudentPermitSwipeId for new value for student permit swipe id
 	 * @param \DateTime $newStudentPermitCheckOutDate as a DateTime object null to load the current time
 	 * @param \DateTime $newStudentPermitCheckInDate as a Datetime object null to load the current time
@@ -41,8 +47,9 @@ class StudentPermit implements \JsonSerializable {
 	 * @throws \TypeError if student id is not valid
 	 * @throws \Exception if the student permit student id is out of range
 	 */
-	public function __construct(int $newStudentPermitApplicationId = null, int $newStudentPermitPlacardId, int $newStudentPermitSwipeId, \DateTime $newStudentPermitCheckOutDate, \DateTime $newStudentPermitCheckInDate){
+	public function __construct(int $newStudentPermitId = null, int $newStudentPermitApplicationId, int $newStudentPermitPlacardId, int $newStudentPermitSwipeId, \DateTime $newStudentPermitCheckOutDate, \DateTime $newStudentPermitCheckInDate){
 		try{
+			$this->setStudentPermitId($newStudentPermitId);
 			$this->setStudentPermitApplicationId($newStudentPermitApplicationId);
 			$this->setStudentPermitPlacardId($newStudentPermitPlacardId);
 			$this->setStudentPermitSwipeId($newStudentPermitSwipeId);
@@ -57,6 +64,13 @@ class StudentPermit implements \JsonSerializable {
 		}catch(\Exception $exception) {
 			throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getStudentPermitId(){
+		return($this->studentPermitId);
 	}
 
 	/**
@@ -95,12 +109,23 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * @param int $newStudentPermitId
+	 * @throws \RangeException
+	 */
+	public function setStudentPermitId(int $newStudentPermitId){
+		if ($newStudentPermitId <= 0) {
+			throw(new \RangeException("StudentPermit Id cannot be negative."));
+		}
+		$this->studentPermitId = $newStudentPermitId;
+	}
+
+	/**
 	 * @param int $newStudentPermitApplicationId
 	 * @throws \RangeException
 	 */
 	public function setStudentPermitApplicationId(int $newStudentPermitApplicationId){
 		if ($newStudentPermitApplicationId <= 0) {
-			throw(new \RangeException("Student Id cannot be negative."));
+			throw(new \RangeException("StudentPermit application Id cannot be negative."));
 		}
 		$this->studentPermitApplicationId = $newStudentPermitApplicationId;
 	}
@@ -166,18 +191,19 @@ class StudentPermit implements \JsonSerializable {
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the placardId is null (i.e., don't insert a studentPermit that already exists)
-		if($this->studentPermitApplicationId !== null) {
+		if($this->studentPermitId !== null) {
 			throw(new \PDOException("not a new studentPermit"));
 		}
 
 		//$studentPermitStudentId $studentPermitPlacardId $studentPermitSwipeId $studentPermitCheckOutDate $studentPermitCheckInDate
 		
 		// create query template
-		$query = "INSERT INTO studentPermit(studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
+		$query = "INSERT INTO studentPermit(studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitId, :studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
 		$parameters = [
+			"studentPermitId" => $this->studentPermitId,
 			"studentPermitApplicationId" => $this->studentPermitApplicationId,
 			"studentPermitPlacardId" => $this->studentPermitPlacardId,
 			"studentPermitSwipeId" => $this->studentPermitSwipeId,
@@ -187,7 +213,7 @@ class StudentPermit implements \JsonSerializable {
 		$statement->execute($parameters);
 
 		// update the null studentPermitStudentId with what mySQL just gave us
-		$this->studentPermitApplicationId = intval($pdo->lastInsertId());
+		$this->studentPermitId = intval($pdo->lastInsertId());
 	}
 
 	/**
@@ -195,19 +221,19 @@ class StudentPermit implements \JsonSerializable {
 	 * @throws \PDOException if unable to update a student permit that does not exist
 	 */
 	public function update(\PDO $pdo) {
-		// enforce the studentPermitStudentId is not null (i.e., don't update a studentPermit that hasn't been inserted)
-		if($this->studentPermitApplicationId === null) {
+		// enforce the studentPermitId is not null (i.e., don't update a studentPermit that hasn't been inserted)
+		if($this->studentPermitId === null) {
 			throw(new \PDOException("unable to update a studentPermit that does not exist"));
 		}
 
 		// create query template
-		$query = "UPDATE studentpermit SET studentPermitApplicationId = :studentPermitApplicationId, studentPermitPlacardId = :studentPermitPlacardId, studentPermitSwipeId = :studentPermitSwipeId, studentPermitCheckOutDate = :studentPermitCheckOutDate, studentPermitCheckInDate = :studentPermitCheckInDate WHERE studentPermitApplicationId = :studentPermitApplicationId";
+		$query = "UPDATE studentpermit SET studentPermitId = :studentPermitId, studentPermitApplicationId = :studentPermitApplicationId, studentPermitPlacardId = :studentPermitPlacardId, studentPermitSwipeId = :studentPermitSwipeId, studentPermitCheckOutDate = :studentPermitCheckOutDate, studentPermitCheckInDate = :studentPermitCheckInDate WHERE studentPermitApplicationId = :studentPermitApplicationId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
 		$parameters = [
-
-			"studentPermitApplicationtId" => $this->studentPermitApplicationId,
+			"studentPermitId" => $this->studentPermitId,
+			"studentPermitApplicationId" => $this->studentPermitApplicationId,
 			"studentPermitPlacardId" => $this->studentPermitPlacardId,
 			"studentPermitSwipeId" => $this->studentPermitSwipeId,
 			"studentPermitCheckOutDate" => $this->studentPermitCheckOutDate,
@@ -229,7 +255,7 @@ class StudentPermit implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT studentPermitId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitId = :studentPermitId";
+		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitId = :studentPermitId";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
@@ -244,7 +270,8 @@ class StudentPermit implements \JsonSerializable {
 			if($row !== false){
 
 				$studentPermit = new StudentPermit(
-					$row["studentPermitStudentId"],
+					$row["studentPermitId"],
+					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
 					$row["studentPermitCheckOutDate"],
@@ -271,7 +298,7 @@ class StudentPermit implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT studentPermitId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitApplicationId = :studentPermitApplicationId";
+		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitApplicationId = :studentPermitApplicationId";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
@@ -286,7 +313,8 @@ class StudentPermit implements \JsonSerializable {
 			if($row !== false){
 
 				$studentPermit = new StudentPermit(
-					$row["studentPermitStudentId"],
+					$row["studentPermitId"],
+					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
 					$row["studentPermitCheckOutDate"],
@@ -300,6 +328,12 @@ class StudentPermit implements \JsonSerializable {
 		return($studentPermit);
 	}
 
+	/**
+	 * @param \PDO $pdo
+	 * @param $studentPermitSwipeId
+	 * @return StudentPermit|null
+	 * @throws \PDOException
+	 */
 	public static function getStudentPermitByStudentPermitSwipeId(\PDO $pdo, $studentPermitSwipeId){
 		// sanitize the studentPermitId before searching
 		if($studentPermitSwipeId <= 0){
@@ -307,7 +341,7 @@ class StudentPermit implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT studentPermitId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitSwipeId = :studentPermitSwipeId";
+		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitSwipeId = :studentPermitSwipeId";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
@@ -322,7 +356,51 @@ class StudentPermit implements \JsonSerializable {
 			if($row !== false){
 
 				$studentPermit = new StudentPermit(
-					$row["studentPermitStudentId"],
+					$row["studentPermitId"],
+					$row["studentPermitApplicationId"],
+					$row["studentPermitPlacardId"],
+					$row["studentPermitSwipeId"],
+					$row["studentPermitCheckOutDate"],
+					$row["studentPermitCheckInDate"]
+				);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($studentPermit);
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param $studentPermitPlacardId
+	 * @return StudentPermit|null
+	 * @throws \PDOException
+	 */
+	public static function getStudentPermitByStudentPermitPlacardId(\PDO $pdo, $studentPermitPlacardId){
+		// sanitize the studentPermitId before searching
+		if($studentPermitPlacardId <= 0){
+			throw(new \PDOException("studentPermitPlacardId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitPlacardId = :studentPermitPlacardId";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["$studentPermitPlacardId" => $studentPermitPlacardId];
+		$statement->execute($parameters);
+
+		// grab placard from SQL
+		try {
+			$studentPermit = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+
+				$studentPermit = new StudentPermit(
+					$row["studentPermitId"],
+					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
 					$row["studentPermitCheckOutDate"],
@@ -344,7 +422,7 @@ class StudentPermit implements \JsonSerializable {
 	 */
 	public static function getAllStudentPermits(\PDO $pdo){
 		// create query template
-		$query = "SELECT studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit";
+		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -354,6 +432,7 @@ class StudentPermit implements \JsonSerializable {
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$studentPermit = new studentPermit(
+					$row["studentPermitId"],
 					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],

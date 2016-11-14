@@ -87,7 +87,7 @@ CREATE TABLE applicationCohort(
 
 CREATE TABLE studentPermit(
 
-	studentPermitId INT UNSIGNED NOT NULL,
+	studentPermitId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	studentPermitApplicationId INT UNSIGNED NOT NULL,
 	studentPermitSwipeId INT UNSIGNED NOT NULL,
 	studentPermitPlacardId INT UNSIGNED NOT NULL,
