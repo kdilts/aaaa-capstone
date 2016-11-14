@@ -108,7 +108,7 @@ class NoteType{
 public static function getAllNotes(\PDO $pdo){
 	//creat query template
 	$query = "SELECT noteTypeName, noteTypeId FROM note";
-	$statement = pdo->prepare($query);
+	$statement = $pdo->prepare($query);
 	$statement->execute();
 
 	//build an array of placards
