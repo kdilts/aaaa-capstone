@@ -202,13 +202,16 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
+		$formatedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d H:i:s");
+		$formatedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
+
 		$parameters = [
 			"studentPermitId" => $this->studentPermitId,
 			"studentPermitApplicationId" => $this->studentPermitApplicationId,
 			"studentPermitPlacardId" => $this->studentPermitPlacardId,
 			"studentPermitSwipeId" => $this->studentPermitSwipeId,
-			"studentPermitCheckOutDate" => $this->studentPermitCheckOutDate,
-			"studentPermitCheckInDate" => $this->studentPermitCheckInDate
+			"studentPermitCheckOutDate" => $formatedCheckOutDate,
+			"studentPermitCheckInDate" => $formatedCheckInDate
 		];
 		$statement->execute($parameters);
 
@@ -231,13 +234,16 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
+		$formatedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d H:i:s");
+		$formatedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
+
 		$parameters = [
 			"studentPermitId" => $this->studentPermitId,
 			"studentPermitApplicationId" => $this->studentPermitApplicationId,
 			"studentPermitPlacardId" => $this->studentPermitPlacardId,
 			"studentPermitSwipeId" => $this->studentPermitSwipeId,
-			"studentPermitCheckOutDate" => $this->studentPermitCheckOutDate,
-			"studentPermitCheckInDate" => $this->studentPermitCheckInDate
+			"studentPermitCheckOutDate" => $formatedCheckOutDate,
+			"studentPermitCheckInDate" => $formatedCheckInDate
 		];
 		$statement->execute($parameters);
 	}
@@ -414,7 +420,7 @@ class StudentPermit implements \JsonSerializable {
 		return($studentPermit);
 	}
 
-	public static function getStudentPermitsByStudentPermitDateRange(\PDO $pdo, $startDate, $endDate){
+	public static function getStudentPermitsByStudentPermitCheckOutDateRange(\PDO $pdo, $startDate, $endDate){
 		// validate dates
 		try {
 			$startDate = self::validateDateTime($startDate);
@@ -424,6 +430,10 @@ class StudentPermit implements \JsonSerializable {
 		} catch(\RangeException $range) {
 			throw(new \RangeException($range->getMessage(), 0, $range));
 		}
+
+		// format dates
+		$startDate = $startDate->format("Y-m-d H:i:s");
+		$endDate = $endDate->format("Y-m-d H:i:s");
 
 		// create query template
 		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit WHERE studentPermitCheckOutDate >= :startDate AND  studentPermitCheckOutDate <= :endDate";
