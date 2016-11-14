@@ -338,19 +338,20 @@ class Prospect implements \JsonSerializable {
 
 	/**
 	 * @param \PDO $pdo
-	 * @param int $prospectName
+	 * @param string $prospectName
 	 * @return Prospect|null
 	 */
-	public static function getProspectsByProspectName(\PDO $pdo, int $prospectName){
+	public static function getProspectsByProspectName(\PDO $pdo, string $prospectName){
 		// sanitize the prospectEmail before searching
 		$prospectName = trim($prospectName);
 		$prospectName = filter_var($prospectName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($prospectName) === true) {
 			throw(new \PDOException("Prospect Name is empty or insecure"));
 		}
+		$prospectName = "%$prospectName%";
 
 		// create query template
-		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectFirstName = :prospectName || prospectLastName = :proscpectName";
+		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectFirstName LIKE :prospectName OR prospectLastName LIKE :proscpectName";
 		$statement = $pdo->prepare($query);
 
 		// bind the prospect id to the place holder in template
