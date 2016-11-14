@@ -1,5 +1,5 @@
 <?php
-namespace Edu\Cnm\DdcAaaa;
+namespace Edu\Cnm\aaaacapstone;
 
 use Edu\Cnm\DdcAaaa\ValidateDate;
 
@@ -11,7 +11,7 @@ require_once ("autoload.php");
  * @version 1.0.0
  **/
 
-class Application {
+class application {
 	use ValidateDate;
 	/**
 	 * @var int $applicationId
@@ -452,6 +452,7 @@ class Application {
 		$statement = $pdo->prepare($query);
 
 		//bind the members variable to the place holder in the template
+		$this->applicationDateTime = $this->applicationDateTime->format("Y-m-d H:i:s");
 		$parameters = [
 			"applicationId" => $this->applicationId,
 			"applicationFirstName" => $this->applicationFirstName,
@@ -486,7 +487,7 @@ class Application {
 		$startDate = $startDate->format("Y-m-d H:i:s");
 
 		// create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationDateTime = :startDate";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE application.applicationDateTime = :startDate";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
