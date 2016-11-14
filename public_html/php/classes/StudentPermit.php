@@ -259,6 +259,48 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * @param \PDO $pdo
+	 * @param $studentPermitApplicationId
+	 * @return StudentPermit|null
+	 * @throws \PDOException
+	 */
+	public static function getStudentPermitByStudentPermitApplicationId(\PDO $pdo, $studentPermitApplicationId){
+		// sanitize the studentPermitId before searching
+		if($studentPermitApplicationId <= 0){
+			throw(new \PDOException("studentPermitApplicationId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT studentPermitId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitApplicationId = :studentPermitApplicationId";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["$studentPermitApplicationId" => $studentPermitApplicationId];
+		$statement->execute($parameters);
+
+		// grab placard from SQL
+		try {
+			$studentPermit = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+
+				$studentPermit = new StudentPermit(
+					$row["studentPermitStudentId"],
+					$row["studentPermitPlacardId"],
+					$row["studentPermitSwipeId"],
+					$row["studentPermitCheckOutDate"],
+					$row["studentPermitCheckInDate"]
+				);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($studentPermit);
+	}
+
+	/**
 	 * @param \PDO $pdo connection object
 	 * @return \SplFixedArray SplFixedArray of student permit
 	 * @throws \PDOException if unable to update student permits
