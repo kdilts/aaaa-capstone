@@ -53,11 +53,11 @@ class ApplicationTest extends AaaaTest {
 
 		// create a new Application and insert to into mySQL
 		$application = new Application(null, $this->VALID_APPLICATIONID, $this->VALID_APPLICATIONCOHORTID,
-			$this->VALID_APPLICATIONDATETIME);
+			$this->VALID_APPLICATIONPHONENUMBER);
 		$application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
+		$pdoApplication = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		//$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONID);
 		$this->assertEquals($pdoApplication->getApplicationCohortId(), $this->VALID_APPLICATIONCOHORTID);
@@ -84,8 +84,8 @@ class ApplicationTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("application");
 
 		// create a new Application and insert to into mySQL
-		$application = new Application(null, $this->), $this->VALID_APPLICATIONID, $this->VALID_APPLICATIONCOHORTID,
-		$this->VALID_APPLICATIONDATETIME);
+		$application = new Application(null, $this->APPLICATIONID->getApplicationCohortId(), $this->VALID_APPLICATIONEMAIL,
+			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONDATETIME);
 		$application->insert($this->getPDO());
 
 		// edit the Application and update it in mySQL
@@ -93,7 +93,7 @@ class ApplicationTest extends AaaaTest {
 		$application->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
+		$pdoApplication = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		//$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONID);
 		$this->assertEquals($pdoApplication->getApplicationCohortId(), $this->VALID_APPLICATIONCOHORTID);
@@ -101,46 +101,48 @@ class ApplicationTest extends AaaaTest {
 	}
 
 	/**
-	 * test updating a Tweet that does not exist
+	 * test updating Application that does not exist
 	 *
 	 * @expectedException PDOException
 	 **/
-	public function testUpdateInvalidTweet() {
-		// create a Tweet, try to update it without actually updating it and watch it fail
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->update($this->getPDO());
+	public function testUpdateInvalidApplication() {
+		// create a Application, try to update it without actually updating it and watch it fail
+		$application = new Application(null, $this->applicationId->getApplicationCohortId(),
+			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONEMAIL);
+		$application->update($this->getPDO());
 	}
 
 
 
 	/**
-	 * test grabbing a Tweet by tweet content
+	 * test grabbing a Application by Application content
 	 **/
-	public function testGetValidTweetByTweetContent() {
+	public function testGetValidApplicationByApplicationApplicationCohortId() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("application");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Application and insert to into mySQL
+		$application = new Application(null, $this->applicationId->getApplicationCohortId(), $this->VALID_APPLICATIONPHONENUMBER,
+			$application->VALID_APPLICATIONLASTNAME);
+		$application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Tweet::getTweetByTweetContent($this->getPDO(), $tweet->getTweetContent());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
+		$results = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationtCohortId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Tweet", $results);
+		$this->assertContainsOnlyInstancesOf(results, "Edu\\Cnm\\DdcAaaa\\Test\\StudentPermit");
 
 		// grab the result from the array and validate it
-		$pdoTweet = $results[0];
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoApplication = $results[0];
+		$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONCOHORTID);
+		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONLASTNAME);
+		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONLASTNAME);
 	}
 
 	/**
 	 * test grabbing a Application by content that does not exist
 	 **/
-	public function testGetInvalidTweetByTweetContent() {
+	public function testGetInvalidApplicationtByApplicationId() {
 		// grab a Application by searching for content that does not exist
 		$Application = Application::getApplicationId($this->getPDO(), "you will find nothing");
 		$this->assertCount(0, $Application);
@@ -164,9 +166,9 @@ class ApplicationTest extends AaaaTest {
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Test\\Application", $results);
 
 		// grab the result from the array and validate it
-		$pdoTweet = $results[0];
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoApplication = $results[0];
+		$this->assertEquals($pdoApplication->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONIDLASTNAME);
+		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONLASTNAME);
 	}
 }
