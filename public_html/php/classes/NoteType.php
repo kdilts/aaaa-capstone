@@ -67,6 +67,8 @@ class NoteType{
 		$parameters = ["noteTypeId" => $this->noteTypeId, "noteTypeName" => $this->noteTypeName];
 		$statement->execute($parameters);
 
+		// update the null noteTypeId with what mySQL just gave us
+
 		$this->noteTypeId = intval($pdo->lastInsertId());
 	}
 
