@@ -80,7 +80,7 @@ class applicationCohort implements \JsonSerializable {
 	 * @throws \RangeException
 	 */
 	public function setApplicationCohortId($newApplicationCohortId) {
-		// base case: if the applicatoinCohortId is null
+		// base case: if the applicationCohortId is null
 		if($newApplicationCohortId === null)	{
 			$this->applicationCohortId = null;
 			return;
