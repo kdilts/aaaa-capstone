@@ -87,7 +87,7 @@ class StatusType {
 		}
 
 		// create query template
-		$query = "SELECT statusTypeName, statusTypeId FROM status WHERE statusTypeName = :statusTypeName";
+		$query = "SELECT statusTypeName, statusTypeId FROM statusType WHERE statusTypeName = :statusTypeName";
 		$statement = $pdo->prepare($query);
 
 		// bind the swipe id to the place holder in template
@@ -116,7 +116,7 @@ class StatusType {
 		}
 
 		// create query template
-		$query = "SELECT swipeId, swipeStatus, statusTypeId FROM swipe WHERE swipeStatus = :swipeStatus";
+		$query = "SELECT statusTypeName, statusTypeId FROM statusType WHERE statusTypeId = :statusTypeId";
 		$statement = $pdo->prepare($query);
 
 		// bind the swipe id to the place holder in template
@@ -124,19 +124,19 @@ class StatusType {
 		$statement->execute($parameters);
 
 		// build an array of swipes
-		$swipes = new \SplFixedArray($statement->rowCount());
+		$statuses = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$swipe = new Swipe($row["swipeId"], $row["swipeStatus"], $row["statusTypeId"]);
-				$swipes[$swipes->key()] = $swipe;
-				$swipes->next();
+				$status = new StatusType($row["statusTypeName"], $row["statusTypeId"]);
+				$statuses[$statuses->key()] = $status;
+				$statuses->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return $swipes;
+		return $statuses;
 	}
 	/**
 	 * @return array
