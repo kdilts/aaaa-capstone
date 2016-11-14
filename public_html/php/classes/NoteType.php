@@ -69,4 +69,12 @@ class NoteType{
 
 		$this->noteTypeId = intval($pdo->lastInsertId());
 	}
+
+	/**
+	 * @return array
+	 */
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		return($fields);
+	}
 }
