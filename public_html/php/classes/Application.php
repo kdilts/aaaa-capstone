@@ -1,5 +1,5 @@
 <?php
-namespace Edu\Cnm\aaaacapstone;
+namespace Edu\Cnm\DdcAaaa;
 
 use Edu\Cnm\DdcAaaa\ValidateDate;
 
