@@ -299,6 +299,9 @@ class Placard implements \JsonSerializable {
 		return $placards;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		return($fields);
