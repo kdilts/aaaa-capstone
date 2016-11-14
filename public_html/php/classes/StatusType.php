@@ -114,7 +114,6 @@ class StatusType {
 		if($statusTypeId <= 0) {
 			throw(new \PDOException("statusTypeId not positive"));
 		}
-
 		// create query template
 		$query = "SELECT statusTypeName, statusTypeId FROM statusType WHERE statusTypeId = :statusTypeId";
 		$statement = $pdo->prepare($query);
