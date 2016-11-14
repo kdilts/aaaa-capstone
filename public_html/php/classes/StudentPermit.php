@@ -414,6 +414,48 @@ class StudentPermit implements \JsonSerializable {
 		return($studentPermit);
 	}
 
+	public static function getStudentPermitsByStudentPermitDateRange(\PDO $pdo, $startDate, $endDate){
+		// validate dates
+		try {
+			$startDate = self::validateDateTime($startDate);
+			$endDate = self::validateDateTime($endDate);
+		} catch(\InvalidArgumentException $invalidArgument) {
+			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		} catch(\RangeException $range) {
+			throw(new \RangeException($range->getMessage(), 0, $range));
+		}
+
+		// create query template
+		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit WHERE studentPermitCheckOutDate >= :startDate && studentPermitCheckOutDate <= :endDate";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["$startDate" => $startDate, "$endDate" => $endDate];
+		$statement->execute($parameters);
+
+		// build an array of studentPermits
+		$studentPermits = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$studentPermit = new studentPermit(
+					$row["studentPermitId"],
+					$row["studentPermitApplicationId"],
+					$row["studentPermitPlacardId"],
+					$row["studentPermitSwipeId"],
+					$row["studentPermitCheckOutDate"],
+					$row["studentPermitCheckInDate"]
+				);
+				$studentPermits[$studentPermits->key()] = $studentPermit;
+				$studentPermits->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($studentPermits);
+	}
+
 	/**
 	 * @param \PDO $pdo connection object
 	 * @return \SplFixedArray SplFixedArray of student permit
