@@ -99,7 +99,7 @@ class StudentPermitTest extends AaaaTest {
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoSstudentPermit = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(),
-			$studentPermitt->getStudentPermitApplicationId()Id());
+			$studentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		$this->assertEquals($pdoSstudentPermit->getStudentPermitApplicationId(),
 			$this->studentPermit->getStudentPermitApplicationId());
