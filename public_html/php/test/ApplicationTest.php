@@ -1,7 +1,9 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{Application};
+use Edu\Cnm\DdcAaaa\{
+	Application
+};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -11,26 +13,21 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
 
 
 class ApplicationTest extends AaaaTest {
-	/**
-	 * content of the Tweet
-	 * @var string $VALID_TWEETCONTENT
-	 **/
-	protected $VALID_TWEETCONTENT = "PHPUnit test passing";
-	/**
-	 * content of the updated Tweet
-	 * @var string $VALID_TWEETCONTENT2
-	 **/
-	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
-	/**
-	 * timestamp of the Tweet; this starts as null and is assigned later
-	 * @var DateTime $VALID_TWEETDATE
-	 **/
-	protected $VALID_TWEETDATE = null;
-	/**
-	 * Profile that created the Tweet; this is for foreign key relations
-	 * @var Profile profile
-	 **/
-	protected $profile = null;
+
+	protected $VALID_APPLICATIONID = 0;
+
+	protected $VALID_APPLICATIONFIRSTNAME = 1;
+
+	protected $VALID_APPLICATIONLASTNAME = 1;
+
+	protected $VALID_APPLICATIONEMAIL = "foo@bar.com";
+
+	protected $VALID_APPLICATIONPHONENUMBER = "+12125551212";
+
+	protected $VALID_APPLICATIONCOHORTID = null;
+
+	protected $VALID_APPLICATIONDATETIME = null;
+
 
 	/**
 	 * create dependent objects before running each test
@@ -39,8 +36,8 @@ class ApplicationTest extends AaaaTest {
 		// run the default setUp() method first
 		parent::setUp();
 
-		// create and insert a Profile to own the test Tweet
-		$this->profile = new Profile(null, "@phpunit", "test@phpunit.de", "+12125551212");
+		// create and insert a Profile to own the test Application
+		$this->VALID_APPLICATIONID = mrosado2("+12125551212");
 		$this->profile->insert($this->getPDO());
 
 		// calculate the date (just use the time the unit test was setup...)
@@ -111,37 +108,7 @@ class ApplicationTest extends AaaaTest {
 		$tweet->update($this->getPDO());
 	}
 
-	/**
-	 * test creating a Tweet and then deleting it
-	 **/
-	public function testDeleteValidTweet() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
-
-		// delete the Tweet from mySQL
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$tweet->delete($this->getPDO());
-
-		// grab the data from mySQL and enforce the Tweet does not exist
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertNull($pdoTweet);
-		$this->assertEquals($numRows, $this->getConnection()->getRowCount("tweet"));
-	}
-
-	/**
-	 * test deleting a Tweet that does not exist
-	 *
-	 * @expectedException PDOException
-	 **/
-	public function testDeleteInvalidTweet() {
-		// create a Tweet and try to delete it without actually inserting it
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->delete($this->getPDO());
-	}
 
 	/**
 	 * test grabbing a Tweet by tweet content
@@ -168,30 +135,30 @@ class ApplicationTest extends AaaaTest {
 	}
 
 	/**
-	 * test grabbing a Tweet by content that does not exist
+	 * test grabbing a Application by content that does not exist
 	 **/
 	public function testGetInvalidTweetByTweetContent() {
-		// grab a tweet by searching for content that does not exist
-		$tweet = Tweet::getTweetByTweetContent($this->getPDO(), "you will find nothing");
-		$this->assertCount(0, $tweet);
+		// grab a Application by searching for content that does not exist
+		$Application = Application::getApplicationId($this->getPDO(), "you will find nothing");
+		$this->assertCount(0, $Application);
 	}
 
 	/**
-	 * test grabbing all Tweets
+	 * test grabbing all ApplicationId
 	 **/
-	public function testGetAllValidTweets() {
+	public function testGetAllValidApplications() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("application");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new ApplicationId and insert to into mySQL
+		$Application = new ApplicationId(null, $this->VALID_APPLICATIONID);
+		$Application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Tweet::getAllTweets($this->getPDO());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
+		$results = Application::getAllApplications($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("Application"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Tweet", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Test\\Application", $results);
 
 		// grab the result from the array and validate it
 		$pdoTweet = $results[0];
