@@ -70,3 +70,4 @@ class NoteType{
 		$this->noteTypeId = intval($pdo->lastInsertId());
 	}
 }
+
