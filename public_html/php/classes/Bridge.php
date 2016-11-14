@@ -25,7 +25,7 @@ namespace Edu\Cnm\DdcAaaa;
 
 		/**
 		 * Bridge constructor.
-		 * @param int|null $newBridgeStaffId
+		 * @param string|null $newBridgeStaffId
 		 * @param string $newBridgeName
 		 * @param string $newBridgeUserName
 		 * @throws \InvalidArgumentException
@@ -34,7 +34,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \Exception
 		 */
 
-		public function __construct(int $newBridgeStaffId = null, string $newBridgeName, string $newBridgeUserName) {
+		public function __construct(string $newBridgeStaffId = null, string $newBridgeName, string $newBridgeUserName) {
 			try {
 				$this->setBridgeStaffId($newBridgeStaffId);
 				$this->setBridgeName($newBridgeName);
@@ -143,7 +143,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 */
 		public function delete(\PDO $pdo) {
 			// enforce the bridgeStaffId is not null (i.e., don't delete a bridgeStaffId that hasn't been inserted)
-			if(empty(bridgeStaffId) === null) {
+			if(empty($bridgeStaffId) === null) {
 				throw(new \PDOException("unable to delete a bridgeStaffId that does not exist"));
 			}
 			// create query template
@@ -159,7 +159,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 */
 		public function update(\PDO $pdo) {
 			// enforce the bridgeStaffId is not null (i.e., don't update a bridgeStaff that hasn't been inserted)
-			if(empty(bridgeStaffId) === null) {
+			if(empty($bridgeStaffId) === null) {
 				throw(new \PDOException("unable to update a bridge that does not exist"));
 			}
 			// create query template
