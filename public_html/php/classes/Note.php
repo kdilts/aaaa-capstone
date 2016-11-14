@@ -253,6 +253,12 @@ class Note {
 		}
 		return $notes;
 	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param int $noteProspectId
+	 * @return \SplFixedArray
+	 */
 	public static function getNoteByNoteProspectId(\PDO $pdo, int $noteProspectId) {
 		// sanitize the noteProspectId before searching
 		if($noteProspectId <= 0) {
@@ -282,6 +288,12 @@ class Note {
 		}
 		return $notes;
 	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param int $noteNoteTypeId
+	 * @return \SplFixedArray
+	 */
 	public static function getNoteByNoteNoteTypeId(\PDO $pdo, int $noteNoteTypeId) {
 		// sanitize the noteNoteTypeId before searching
 		if($noteNoteTypeId <= 0) {
