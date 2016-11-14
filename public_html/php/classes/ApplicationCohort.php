@@ -207,7 +207,7 @@ class applicationCohort implements \JsonSerializable {
 			$applicationCohort = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
-			if (row !==false){
+			if ($row !==false){
 				$applicationCohort = new applicationCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
 			}
 		} catch(\Exception $exception){
