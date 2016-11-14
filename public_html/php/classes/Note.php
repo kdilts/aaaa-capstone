@@ -158,4 +158,11 @@ class Note {
 		$statement->execute($parameters);
 	}
 
+	/**
+	 * @return array
+	 */
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		return($fields);
+	}
 }
