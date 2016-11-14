@@ -200,7 +200,7 @@ namespace Edu\Cnm\DdcAaaa;
 			return ($bridge);
 		}
 
-		/
+
 		public static function getBridgeByBridgeName(\PDO $pdo, int $bridgeName) {
 			// sanitize the bridgeName before searching
 			if($bridgeName === null) {

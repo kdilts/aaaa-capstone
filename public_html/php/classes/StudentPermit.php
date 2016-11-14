@@ -201,7 +201,7 @@ class StudentPermit implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "UPDATE studentpermit SET studentPermitApplicationId = :studentPermitStudentId, studentPermitPlacardId = :studentPermitPlacardId, studentPermitSwipeId = :studentPermitSwipeId, studentPermitCheckOutDate = :studentPermitCheckOutDate, studentPermitCheckInDate = :studentPermitCheckInDate WHERE studentPermitApplicationId = :studentPermitStudentId";
+		$query = "UPDATE studentpermit SET studentPermitApplicationId = :studentPermitApplicationId, studentPermitPlacardId = :studentPermitPlacardId, studentPermitSwipeId = :studentPermitSwipeId, studentPermitCheckOutDate = :studentPermitCheckOutDate, studentPermitCheckInDate = :studentPermitCheckInDate WHERE studentPermitApplicationId = :studentPermitApplicationId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -224,7 +224,7 @@ class StudentPermit implements \JsonSerializable {
 	 */
 	public static function getAllStudentPermits(\PDO $pdo){
 		// create query template
-		$query = "SELECT studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentpermit";
+		$query = "SELECT studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
