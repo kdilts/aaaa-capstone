@@ -78,7 +78,37 @@ class StatusType {
 		$this->statusTypeId = intval($pdo->lastInsertId());
 
 	}
+	public static function getStatusByStatusTypeName(\PDO $pdo, string $statusTypeName) {
+		// sanitize the swipeId before searching
+		$statusTypeName = trim($statusTypeName);
+		$statusTypeName = filter_var($statusTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($statusTypeName) === null) {
+			throw(new \PDOException("swipeNumber not positive"));
+		}
 
+		// create query template
+		$query = "SELECT swipeId, swipeStatus, swipeNumber FROM swipe WHERE swipeStatus = :swipeStatus";
+		$statement = $pdo->prepare($query);
+
+		// bind the swipe id to the place holder in template
+		$parameters = ["statusTypeName" => $statusTypeName];
+		$statement->execute($parameters);
+
+		// build an array of swipes
+		$statuses = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$status = new Swipe($row["swipeId"], $row["swipeStatus"], $row["swipeNumber"]);
+				$statuses[$statuses->key()] = $status;
+				$statuses->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $statuses;
+	}
 	/**
 	 * @return array
 	 */

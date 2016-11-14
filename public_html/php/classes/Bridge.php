@@ -145,8 +145,10 @@ namespace Edu\Cnm\DdcAaaa;
 		 */
 		public static function getBridgeByBridgeStaffId(\PDO $pdo, string $bridgeStaffId) {
 			// sanitize the bridgeId before searching
-			if($bridgeStaffId <= 0) {
-				throw(new \PDOException("bridgeStaffId not positive"));
+			$bridgeStaffId = trim($bridgeStaffId);
+			$bridgeStaffId = filter_var($bridgeStaffId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			if(empty($bridgeStaffId) === null) {
+				throw(new \PDOException("bridgeStaffId is empty or insecure."));
 			}
 
 			// create query template
@@ -180,8 +182,10 @@ namespace Edu\Cnm\DdcAaaa;
 
 		public static function getBridgeByBridgeName(\PDO $pdo, int $bridgeName) {
 			// sanitize the bridgeName before searching
-			if($bridgeName === null) {
-				throw(new \PDOException("bridgeName is empty/")); //is this right?
+			$bridgeName = trim($bridgeName);
+			$bridgeName = filter_var($bridgeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			if(empty($bridgeName) === null) {
+				throw(new \PDOException("bridgeName is empty or insecure")); //is this right?
 			}
 
 			// create query template
@@ -216,7 +220,9 @@ namespace Edu\Cnm\DdcAaaa;
 
 		public static function getBridgeByBridgeUserName(\PDO $pdo, string $bridgeUserName) {
 			// sanitize the bridgeUserName before searching
-			if($bridgeUserName === null) {
+			$bridgeUserName = trim($bridgeUserName);
+			$bridgeUserName = filter_var($bridgeUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			if(empty($bridgeUserName) === null) {
 				throw(new \PDOException("bridgeUserName can't be empty"));
 			}
 
