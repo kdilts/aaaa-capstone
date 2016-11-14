@@ -95,8 +95,8 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param int $newStudentPermitApplicationtId new value of student permit student id
-	 * @throws \RangeException if new value of student permit student id
+	 * @param int $newStudentPermitApplicationId
+	 * @throws \RangeException
 	 */
 	public function setStudentPermitApplicationId(int $newStudentPermitApplicationId){
 		if ($newStudentPermitApplicationId <= 0) {
@@ -214,6 +214,48 @@ class StudentPermit implements \JsonSerializable {
 			"studentPermitCheckInDate" => $this->studentPermitCheckInDate
 		];
 		$statement->execute($parameters);
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param $studentPermitId
+	 * @return StudentPermit|null
+	 * @throws \PDOException
+	 */
+	public static function getStudentPermitByStudentPermitId(\PDO $pdo, $studentPermitId){
+		// sanitize the studentPermitId before searching
+		if($studentPermitId <= 0){
+			throw(new \PDOException("studentPermitId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT studentPermitId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitId = :studentPermitId";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["studentPermitId" => $studentPermitId];
+		$statement->execute($parameters);
+
+		// grab placard from SQL
+		try {
+			$studentPermit = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+
+				$studentPermit = new StudentPermit(
+					$row["studentPermitStudentId"],
+					$row["studentPermitPlacardId"],
+					$row["studentPermitSwipeId"],
+					$row["studentPermitCheckOutDate"],
+					$row["studentPermitCheckInDate"]
+				);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($studentPermit);
 	}
 
 	/**
