@@ -323,6 +323,29 @@ class Note {
 		}
 		return $notes;
 	}
+	public static function getAllNotes(\PDO $pdo){
+		//create query template
+	$query = "SELECT noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent FROM note";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		//build an array of placards
+		$notes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false){
+			try{
+				$notes = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$notes[$notes->key()] = $notes;
+				$notes->next();
+			} catch (\Exception $exception){
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $notes;
+
+}
+
 	/**
 	 * @return array
 	 */
