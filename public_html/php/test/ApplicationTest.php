@@ -71,19 +71,19 @@ class ApplicationTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidApplication() {
 		// create a Application with a non null application id and watch it fail
-		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONID, $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
+		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONID, $this->VALID_APPLICATIONCOHORTID, $this->VALID_APPLICATIONDATETIME);
 		$application->insert($this->getPDO());
 	}
 
 	/**
-	 * test inserting a Tweet, editing it, and then updating it
+	 * test inserting an Application , editing it, and then updating it
 	 **/
-	public function testUpdateValidTweet() {
+	public function testUpdateValidApplication() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("application");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
+		// create a new Application and insert to into mySQL
+		$tweet = new Application(null, $this->), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
 		$tweet->insert($this->getPDO());
 
 		// edit the Tweet and update it in mySQL
