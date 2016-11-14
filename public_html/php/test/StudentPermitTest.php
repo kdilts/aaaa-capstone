@@ -75,10 +75,9 @@ class StudentPermitTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidStudentPermit() {
 		// create a StudentPermit with a non null studentPermit Application Id and watch it fail
-		$student = new StudentPermit(AaaaTest::INVALID_KEY, $this->studentPermit->getStudentPemitApplicationId(),
-			$this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID; $this->VALID_STUDENTPERMITCHECKOUTDATE,
-		$this->STUDENTPERMITCHECKINDATE);
-		$student->insert($this->getPDO());
+		$studentPermit = new StudentPermit(AaaaTest::INVALID_KEY, $this->studentPermit->getStudentPemitApplicationId(),
+			$this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID;
+		$studentPermit->insert($this->getPDO());
 	}
 
 	/**
@@ -89,8 +88,7 @@ class StudentPermitTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
 		// create a new StudentPermit and insert to into mySQL
-		$studentPermitt = new StudentPermit(null, $this->VALID_STUDENTPERMITAPPLICATIONID->get(),
-			$this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID);
+		$studentPermitt = new StudentPermit(null, $this->STUDENTPERMITAPPLICATIONID->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITSWIPEID, $this->VALID_STUDENTPERMITCHECJOUTDATE);
 		$studentPermitt->insert($this->getPDO());
 
 		// edit the StudentPermit and update it in mySQL
