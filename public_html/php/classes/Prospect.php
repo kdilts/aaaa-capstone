@@ -208,6 +208,12 @@ class Prospect implements \JsonSerializable {
 		$this->prospectId = intval($pdo->lastInsertId());
 	}
 
+	/**
+	 * @param \PDO $pdo
+	 * @param int $prospectId
+	 * @return Prospect|null
+	 * @throws \PDOException
+	 */
 	public static function getProspectByProspectId(\PDO $pdo, int $prospectId){
 		// sanitize the prospectId before searching
 		if($prospectId <= 0){
@@ -243,7 +249,49 @@ class Prospect implements \JsonSerializable {
 		}
 		return($prospect);
 	}
-	
+
+	/**
+	 * @param \PDO $pdo
+	 * @param int $prospectCohortId
+	 * @return Prospect|null
+	 * @throws \PDOException
+	 */
+	public static function getProspectByProspectCohortId(\PDO $pdo, int $prospectCohortId){
+		// sanitize the prospectId before searching
+		if($prospectCohortId <= 0){
+			throw(new \PDOException("prospectCohortId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectCohortId = :prospectCohortId";
+		$statement = $pdo->prepare($query);
+
+		// bind the prospect id to the place holder in template
+		$parameters = ["prospectCohortId" => $prospectCohortId];
+		$statement->execute($parameters);
+
+		// grab prospect from SQL
+		try {
+			$prospect = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$prospect = new Prospect(
+					$row["prospectId"],
+					$row["prospectCohortId"],
+					$row["prospectPhoneNumber"],
+					$row["prospectEmail"],
+					$row["prospectFirstName"],
+					$row["prospectLastName"]
+				);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($prospect);
+	}
+
 	/**
 	 * @param \PDO $pdo
 	 * @return \SplFixedArray
