@@ -2,7 +2,7 @@
 
 namespace Edu\Cnm\DdcAaaa;
 
-class Status {
+class StatusType {
 	/**
 	 * @var string $statusTypeName
 	 */
@@ -60,11 +60,14 @@ class Status {
 	$this->statusTypeName = $newStatusTypeName;
 }
 
+	/**
+	 * @param \PDO $pdo
+	 */
 public function insert(\PDO $pdo) {
 	if($this->statusTypeId === null) {
 		throw(new \PDOException("Need a status type."));
 	}
-	$query = "INSERT INTO status(statusTypeId, statusTypeName) VALUES(:statusTypeId, :statusTypeName)";
+	$query = "INSERT INTO statusType(statusTypeId, statusTypeName) VALUES(:statusTypeId, :statusTypeName)";
 	$statement = $pdo->prepare($query);
 
 
