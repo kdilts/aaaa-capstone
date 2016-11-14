@@ -62,7 +62,7 @@ class NoteType{
 		//create query
 		$query = "INSERT INTO noteType(noteTypeId, noteTypeName) VALUES(:noteTypeId, :noteTypeName)";
 		$statement = $pdo->prepare($query);
-		
+
 		//bind member variables to the place holders in template
 		$parameters = ["noteTypeId" => $this->noteTypeId, "noteTypeName" => $this->noteTypeName];
 		$statement->execute($parameters);
@@ -71,6 +71,40 @@ class NoteType{
 
 		$this->noteTypeId = intval($pdo->lastInsertId());
 	}
+	/**
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $noteId Note ID in database
+	 * @return Note|null
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getNoteTypeByeNoteTypeId(\PDO $pdo, int $noteTypeId){
+		// sanitize the placardId before searching
+		if($noteTypeId <= 0){
+			throw(new\PDOException("notetype not positive"));
+		}
+
+// create query template
+		$query = "SELECT noteTypeName, noteTypeId FROM note WHERE noteId = noteId";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+
+// grab note from SQL
+		try {
+			$note = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$placard = new note ($row["noteTypeName"], $row["noteTypeIdId"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($note);
+	}
+
 
 	/**
 	 * @return array
