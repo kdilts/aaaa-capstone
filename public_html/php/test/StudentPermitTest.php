@@ -95,18 +95,18 @@ class StudentPermitTest extends AaaaTest {
 
 		// create a new Student Permit and insert to into mySQL
 		$studentPermit = new StudentPermit(null, $this->studentPermit->getStudentPermitApplicationId(),
-			$this->VALID_STUDENTPERMITAPPLICATIONID, $this->VALID_STUDENTPERMITSWIPEID);
+			$this->VALID_STUDENTPERMITAPPLICATIONID, $this->VALID_STUDENTPERMITAPPLICATIONID);
 		$studentPermit->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = StudentPermit::getAllStudentPermits($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf($results, "Edu\\Cnm\\DdcAaaa\\Test\StudentPermit");
+		$this->assertContainsOnlyInstancesOf($results, "Edu\\Cnm\\DdcAaaa\\Test\\StudentPermit");
 
 		// grab the result from the array and validate it
 		$pdoStudentPermit = $results[0];
-		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->studentPermit->getStudentPlacardId);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->VALID_STUDENTPERMITSWIPEID);
 		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate);
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITSWIPEID);
 	}
