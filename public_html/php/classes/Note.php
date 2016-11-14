@@ -147,15 +147,13 @@ class Note {
 		$query = "INSERT INTO note(noteId, noteApplicationId, noteNoteTypeId, noteContent) VALUES(:noteId, :noteApplicationId, 
 		noteNoteTypeId, :noteContent)";
 		$statement = $pdo->prepare($query);
+
 		// bind the member variables to the place holders in the template
 		$parameters = ["noteId" => $this->noteId, "noteApplicationId" => $this->noteApplicationId, "noteContent" => $this->noteContent];
 		$statement->execute($parameters);
+
 		// update the null noteId with what mySQL just gave us
 		$this->noteId = intval($pdo->lastInsertId());
-		// bind the member variables to the place holders in the template
-		$parameters = ["noteId" => $this->noteId, "noteApplicationId" => $this->noteApplicationId, "noteNoteTypeId" =>
-			$this->noteNoteTypeId, "noteContent" => $this->noteContent];
-		$statement->execute($parameters);
 	}
 
 	/**
