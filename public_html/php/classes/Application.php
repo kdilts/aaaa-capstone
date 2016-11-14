@@ -421,6 +421,7 @@ class Application {
 		$this->applicationUtmMedium = $newApplicationUtmMedium;
 	}
 
+
 	/**
 	 * @param string $applicationUtmSource
 	 */
@@ -471,6 +472,56 @@ class Application {
 
 		// update the null applicationId with what mySQL just gave us
 		$this->applicationId = intval($pdo->lastInsertId());
+	}
+	public static function getApplicationByApplicationDateTime(\PDO $pdo, $startDate){
+		// validate dates
+		try {
+			$startDate = self::validateDateTime($startDate);
+			} catch(\InvalidArgumentException $invalidArgument) {
+			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		} catch(\RangeException $range) {
+			throw(new \RangeException($range->getMessage(), 0, $range));
+		}
+		// format dates
+		$startDate = $startDate->format("Y-m-d H:i:s");
+
+		// create query template
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE application.applicationDateTime = :startDate";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["$startDate" => $startDate];
+		$statement->execute($parameters);
+
+		// build an array of studentPermits
+		$applications = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$application = new application(
+					$row["applicationId"],
+					$row["applicationFirstName"],
+					$row["applicationLastName"],
+					$row["applicationEmail"],
+					$row["applicationPhoneNumber"],
+					$row["applicationSource"],
+					$row["applicationCohortId"],
+					$row["applicationAboutYou"],
+					$row["applicationHopeToAccomplish"],
+					$row["applicationExperience"],
+					$row["applicationDateTime"],
+					$row["applicationUtmCampaign"],
+					$row["applicationUtmMedium"],
+					$row["applicationUtmSource"]
+				);
+				$applications[$applications->key()] = $application;
+				$applications->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($applications);
 	}
 
 	/**

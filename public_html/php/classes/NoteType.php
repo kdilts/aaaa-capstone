@@ -85,7 +85,7 @@ class NoteType{
 		}
 
 // create query template
-		$query = "SELECT noteTypeName, noteTypeId FROM note WHERE noteId = noteId";
+		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeId = :noteTypeId";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
