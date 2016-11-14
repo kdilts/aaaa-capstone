@@ -250,6 +250,9 @@ class StudentPermit implements \JsonSerializable {
 		return ($studentPermits);
 	}
 
+	/**
+	 * @return array
+	 */
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		return($fields);
