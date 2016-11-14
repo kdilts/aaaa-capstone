@@ -73,7 +73,7 @@ class NoteType{
 	}
 	/**
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $noteId Note ID in database
+	 * @param int $noteTypeId Note ID in database
 	 * @return Note|null
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
