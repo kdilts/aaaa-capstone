@@ -105,7 +105,27 @@ class NoteType{
 		return($note);
 	}
 
+public static function getAllNotes(\PDO $pdo){
+	//creat query template
+	$query = "SELECT noteTypeName, noteTypeId FROM note";
+	$statement = pdo->prepare($query);
+	$statement->execute();
 
+	//build an array of placards
+	$note = new \SplFixedArray($statement->rowCount());
+	$statement->setFetchMode(\PDO::FETCH_ASSOC);
+	while(($row = $statement->fetch()) !== false){
+		try {
+			$note = new Note($row["noteTypeName"], $row["noteTypeId"]);
+			$note [$note->key()] = $note;
+			$note->next();
+		} catch(\Exception $exception){
+			//if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+	}
+return $note;
+}
 	/**
 	 * @return array
 	 */
