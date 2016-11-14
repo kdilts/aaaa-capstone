@@ -300,6 +300,42 @@ class StudentPermit implements \JsonSerializable {
 		return($studentPermit);
 	}
 
+	public static function getStudentPermitByStudentPermitSwipeId(\PDO $pdo, $studentPermitSwipeId){
+		// sanitize the studentPermitId before searching
+		if($studentPermitSwipeId <= 0){
+			throw(new \PDOException("studentPermitSwipeId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT studentPermitId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitSwipeId = :studentPermitSwipeId";
+		$statement = $pdo->prepare($query);
+
+		// bind the placard id to the place holder in template
+		$parameters = ["$studentPermitSwipeId" => $studentPermitSwipeId];
+		$statement->execute($parameters);
+
+		// grab placard from SQL
+		try {
+			$studentPermit = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+
+				$studentPermit = new StudentPermit(
+					$row["studentPermitStudentId"],
+					$row["studentPermitPlacardId"],
+					$row["studentPermitSwipeId"],
+					$row["studentPermitCheckOutDate"],
+					$row["studentPermitCheckInDate"]
+				);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($studentPermit);
+	}
+
 	/**
 	 * @param \PDO $pdo connection object
 	 * @return \SplFixedArray SplFixedArray of student permit
