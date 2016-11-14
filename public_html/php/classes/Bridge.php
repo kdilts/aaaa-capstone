@@ -268,7 +268,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \PDOException when mySQL related errors occur
 		 * @throws \TypeError when variables are not the correct data type
 		 */
-		public static function getAllbridges(\PDO $pdo) {
+		public static function getAllBridges(\PDO $pdo) {
 			// create query template
 			$query = "SELECT bridgeStaffId, bridgeName, bridgeUserName FROM bridge";
 			$statement = $pdo->prepare($query);
