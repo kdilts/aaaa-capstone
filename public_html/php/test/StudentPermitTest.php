@@ -120,7 +120,7 @@ class StudentPermitTest extends AaaaTest {
 		$studentPermit->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = StudentPermit::t::getAllStudentPermits($this->getPDO());
+		$results = StudentPermit::getAllStudentPermits($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("Edu\Cnm\DdcAaaa\Test\StudentPermit", $results);
