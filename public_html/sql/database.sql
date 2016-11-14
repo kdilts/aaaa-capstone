@@ -116,12 +116,13 @@ CREATE TABLE prospect(
 );
 
 CREATE TABLE note(
-	noteNoteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	noteProspectId INT UNSIGNED NOT NULL,
-	noteStatusId INT UNSIGNED NOT NULL,
+	noteId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	noteApplicationId INT UNSIGNED,
+	noteProspectId INT UNSIGNED,
+	noteNoteTypeId INT UNSIGNED NOT NULL,
 	noteContent VARCHAR(2000) NOT NULL,
-	INDEX (noteNoteId),
-	PRIMARY KEY(noteNoteId),
+	INDEX (noteId),
+	PRIMARY KEY(noteId),
 	FOREIGN KEY(noteProspectId) REFERENCES prospect (prospectId)
 );
 
