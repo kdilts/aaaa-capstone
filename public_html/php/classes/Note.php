@@ -235,7 +235,36 @@ class Note {
 		$statement = $pdo->prepare($query);
 
 		// bind the noteApplication id to the place holder in template
-		$parameters = ["noteId" => $noteApplicationId];
+		$parameters = ["noteApplicationId" => $noteApplicationId];
+		$statement->execute($parameters);
+
+		// build an array of notes
+		$notes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$note = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$notes[$notes->key()] = $note;
+				$notes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $notes;
+	}
+	public static function getNoteByNoteProspectId(\PDO $pdo, int $noteProspectId) {
+		// sanitize the noteApplicationId before searching
+		if($noteProspectId <= 0) {
+			throw(new \PDOException("noteProspectId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent FROM note WHERE noteId = :noteApplicationId";
+		$statement = $pdo->prepare($query);
+
+		// bind the noteProspect id to the place holder in template
+		$parameters = ["noteProspectId" => $noteProspectId];
 		$statement->execute($parameters);
 
 		// build an array of notes
