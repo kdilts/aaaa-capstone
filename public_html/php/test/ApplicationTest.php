@@ -71,7 +71,8 @@ class ApplicationTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidApplication() {
 		// create a Application with a non null application id and watch it fail
-		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONID, $this->VALID_APPLICATIONCOHORTID, $this->VALID_APPLICATIONDATETIME);
+		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONID, $this->VALID_APPLICATIONCOHORTID,
+			$this->VALID_APPLICATIONDATETIME);
 		$application->insert($this->getPDO());
 	}
 
@@ -83,19 +84,20 @@ class ApplicationTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("application");
 
 		// create a new Application and insert to into mySQL
-		$tweet = new Application(null, $this->), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		$application = new Application(null, $this->), $this->VALID_APPLICATIONID, $this->VALID_APPLICATIONCOHORTID,
+		$this->VALID_APPLICATIONDATETIME);
+		$application->insert($this->getPDO());
 
-		// edit the Tweet and update it in mySQL
-		$tweet->setTweetContent($this->VALID_TWEETCONTENT2);
-		$tweet->update($this->getPDO());
+		// edit the Application and update it in mySQL
+		$application->setApplicationId($this->VALID_APPLICATIONEMAIL);
+		$application->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT2);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoTweet = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
+		//$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONID);
+		$this->assertEquals($pdoApplication->getApplicationCohortId(), $this->VALID_APPLICATIONCOHORTID);
+		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONDATETIME);
 	}
 
 	/**
