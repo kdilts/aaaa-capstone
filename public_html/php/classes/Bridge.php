@@ -26,15 +26,15 @@ namespace Edu\Cnm\DdcAaaa;
 		/**
 		 * Bridge constructor.
 		 * @param int|null $newBridgeStaffId
-		 * @param int $newBridgeName
-		 * @param int $newBridgeUserName
+		 * @param string $newBridgeName
+		 * @param string $newBridgeUserName
 		 * @throws \InvalidArgumentException
 		 * @throws \RangeException
 		 * @throws \TypeError
 		 * @throws \Exception
 		 */
 
-		public function __construct(int $newBridgeStaffId = null, int $newBridgeName, int $newBridgeUserName) {
+		public function __construct(int $newBridgeStaffId = null, string $newBridgeName, string $newBridgeUserName) {
 			try {
 				$this->setBridgeStaffId($newBridgeStaffId);
 				$this->setBridgeName($newBridgeName);
