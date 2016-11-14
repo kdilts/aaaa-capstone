@@ -9,35 +9,18 @@ require_once("AaaaTest.php");
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/classes/autoload.php");
 
-/**
- * Full PHPUnit test for the StudentPermit class
- *
- * This is a complete PHPUnit test of the Student Permit class. It is complete because *ALL* mySQL/PDO enabled methods
- * are tested for both invalid and valid inputs.
- *
- * @see StudentPermit
- **/
+
 class StudentPermitTest extends AaaaTest {
-	/**
-	 * @var string $VALID_StudentPermitApplicationId
-	 **/
+
 	protected $VALID_STUDENTPERMITAPPLICATIONID = 0;
-	/**
-	 * @var int_StudentPermitPlacardId
-	 **/
+
 	protected $VALID_STUDENTPERMITPLACARDID = 1;
-	/**
-	 * @var int StudentPermitSwipeId
-	 **/
+
 	protected $VALID_STUDENTPERMITSWIPEID= 2;
-	/**
-	 * @var DateTime $studentPermitCheckOutDate
-	 **/
+
 	protected $STUDENTPERMITCHECKOUTDATE = null;
-	/**
-	 * @var DateTime $studentPermitCheckInDate
-	 */
-	protected $STUDENTPERMITCHECINTDATE = null;
+
+	protected $STUDENTPERMITCHECKINTDATE = null;
 
 	/**
 	 * create dependent objects before running each test
@@ -54,12 +37,11 @@ class StudentPermitTest extends AaaaTest {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
-	// create a Student Permit and insert into mySQL
-	$studentPermit = new StudentPermit(null, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID,
-		$this->VALID_STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-	$studentPermit->insert($this->getPDO());
+		// create a Student Permit and insert into mySQL
+		$studentPermit = new StudentPermit(null, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID);
+		$studentPermit->insert($this->getPDO());
 
-	// grab the data from mySQL and enforce the fields match our expectations
+		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoStudentPermit = StudentPermit::getBystudentPermit($this->getPDO(), $studentPermit->getStudentPermit());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		//$this->assertEquals($pdo->getStudentPermit(), $this->VALID_STUDENTPERMIT);
@@ -76,7 +58,7 @@ class StudentPermitTest extends AaaaTest {
 	public function testInsertInvalidStudentPermit() {
 		// create a StudentPermit with a non null studentPermit Application Id and watch it fail
 		$studentPermit = new StudentPermit(AaaaTest::INVALID_KEY, $this->studentPermit->getStudentPemitApplicationId(),
-			$this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID;
+			$this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID);
 		$studentPermit->insert($this->getPDO());
 	}
 
@@ -88,20 +70,19 @@ class StudentPermitTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
 		// create a new StudentPermit and insert to into mySQL
-		$studentPermitt = new StudentPermit(null, $this->STUDENTPERMITAPPLICATIONID->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITSWIPEID, $this->VALID_STUDENTPERMITCHECJOUTDATE);
-		$studentPermitt->insert($this->getPDO());
+		$studentPermit = new StudentPermit(null, $this->STUDENTPERMITAPPLICATIONID->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITSWIPEID);
+		$studentPermit->insert($this->getPDO());
 
 		// edit the StudentPermit and update it in mySQL
-		$studentPermitt->setStudentPermitApplicationId($this->VALID_STUDENTPERMITPLACARDID);
-		$studentPermitt->update($this->getPDO());
+		$studentPermit->setStudentPermitApplicationId($this->VALID_STUDENTPERMITPLACARDID);
+		$studentPermit->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoSstudentPermit = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(),
 			$studentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
-		$this->assertEquals($pdoSstudentPermit->getStudentPermitApplicationId(),
-			$this->studentPermit->getStudentPermitApplicationId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->VALID_STUDENTPERMITPLACARDID);
+		$this->assertEquals($pdoSstudentPermit->getStudentPermitApplicationId(), $this->studentPermit->getStudentPermitApplicationId());
+		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckOutDate(), $this->VALID_STUDENTPERMITPLACARDID);
 		$this->assertEquals($pdoSstudentPermit->getStudentPermit(), $this->VALID_STUDENTPERMITSWIPEID);
 	}
 
@@ -121,12 +102,12 @@ class StudentPermitTest extends AaaaTest {
 		$results = StudentPermit::getAllStudentPermits($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\Cnm\DdcAaaa\Test\StudentPermit", $results);
+		$this->assertContainsOnlyInstancesOf($results, "Edu\\Cnm\\DdcAaaa\\Test\StudentPermit");
 
 		// grab the result from the array and validate it
 		$pdoStudentPermit = $results[0];
-		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->studentPermit->getStudentPlacardId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate(), $this->VALID_STUDENTPERMITCHECOUTTDATE);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->studentPermit->getStudentPlacardId);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate);
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITSWIPEID);
 	}
 }
