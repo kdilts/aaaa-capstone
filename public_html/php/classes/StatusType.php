@@ -83,11 +83,11 @@ class StatusType {
 		$statusTypeName = trim($statusTypeName);
 		$statusTypeName = filter_var($statusTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($statusTypeName) === null) {
-			throw(new \PDOException("swipeNumber not positive"));
+			throw(new \PDOException("statusTypeName is empty or insecure"));
 		}
 
 		// create query template
-		$query = "SELECT swipeId, swipeStatus, swipeNumber FROM swipe WHERE swipeStatus = :swipeStatus";
+		$query = "SELECT statusTypeName, statusTypeId FROM status WHERE statusTypeName = :statusTypeName";
 		$statement = $pdo->prepare($query);
 
 		// bind the swipe id to the place holder in template
@@ -99,7 +99,7 @@ class StatusType {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$status = new Swipe($row["swipeId"], $row["swipeStatus"], $row["swipeNumber"]);
+				$status = new StatusType($row["statusTypeName"], $row["statusTypeId"]);
 				$statuses[$statuses->key()] = $status;
 				$statuses->next();
 			} catch(\Exception $exception) {
@@ -108,6 +108,35 @@ class StatusType {
 			}
 		}
 		return $statuses;
+	}
+	public static function getStatusByStatusTypeId(\PDO $pdo, int $statusTypeId) {
+		// sanitize the swipeId before searching
+		if($statusTypeId <= 0) {
+			throw(new \PDOException("statusTypeId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT swipeId, swipeStatus, statusTypeId FROM swipe WHERE swipeStatus = :swipeStatus";
+		$statement = $pdo->prepare($query);
+
+		// bind the swipe id to the place holder in template
+		$parameters = ["statusTypeId" => $statusTypeId];
+		$statement->execute($parameters);
+
+		// build an array of swipes
+		$swipes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$swipe = new Swipe($row["swipeId"], $row["swipeStatus"], $row["statusTypeId"]);
+				$swipes[$swipes->key()] = $swipe;
+				$swipes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $swipes;
 	}
 	/**
 	 * @return array
