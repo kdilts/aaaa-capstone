@@ -185,6 +185,75 @@ class Note {
 	}
 
 	/**
+	 * @param \PDO $pdo
+	 * @param int $noteId
+	 * @return \SplFixedArray
+	 */
+	public static function getNoteByNoteId(\PDO $pdo, int $noteId) {
+		// sanitize the noteId before searching
+		if($noteId <= 0) {
+			throw(new \PDOException("noteId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent FROM note WHERE noteId = :noteId";
+		$statement = $pdo->prepare($query);
+
+		// bind the note id to the place holder in template
+		$parameters = ["noteId" => $noteId];
+		$statement->execute($parameters);
+
+		// build an array of notes
+		$notes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$note = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$notes[$notes->key()] = $note;
+				$notes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $notes;
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param int $noteApplicationId
+	 * @return \SplFixedArray
+	 */
+	public static function getNoteByNoteApplicationId(\PDO $pdo, int $noteApplicationId) {
+		// sanitize the noteApplicationId before searching
+		if($noteApplicationId <= 0) {
+			throw(new \PDOException("noteApplicationId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent FROM note WHERE noteId = :noteApplicationId";
+		$statement = $pdo->prepare($query);
+
+		// bind the noteApplication id to the place holder in template
+		$parameters = ["noteId" => $noteApplicationId];
+		$statement->execute($parameters);
+
+		// build an array of notes
+		$notes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$note = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$notes[$notes->key()] = $note;
+				$notes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $notes;
+	}
+	/**
 	 * @return array
 	 */
 	public function jsonSerialize() {

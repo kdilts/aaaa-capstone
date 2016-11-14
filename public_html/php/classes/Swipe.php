@@ -243,7 +243,7 @@ class Swipe {
 		}
 
 		// create query template
-		$query = "SELECT swipeId, swipeStatus, swipeNumber FROM swipe WHERE swipeStatus = :swipeStatus";
+		$query = "SELECT swipeId, swipeStatus, swipeNumber FROM swipe WHERE swipeNumber = :swipeNumber";
 		$statement = $pdo->prepare($query);
 
 		// bind the swipe id to the place holder in template
