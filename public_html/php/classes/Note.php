@@ -3,29 +3,34 @@ namespace Edu\Cnm\DdcAaaa;
 
 class Note {
 	/**
+	 * actual content of the note
 	 * @var string $noteContent
 	 */
 	private $noteContent;
 
 	/**
+	 * Id of the note that was sent by the user.
 	 * @var int noteNoteTypeId
 	 */
 	private $noteNoteTypeId;
 	/**
+	 * Id of the applicant that sent the note
 	 * @var int $noteApplicationId
 	 */
 	private $noteApplicationId;
 	/**
-	 * @var
+	 * Id of the potential prospective student
+	 * @var int $noteProspectId
 	 */
 	private $noteProspectId;
 	/**
+	 * Id of the note
 	 * @var int $noteId
 	 */
 	private $noteId;
 
 	/***
-	 * Note constructor.
+	 * Note constructor for this function.
 	 * @param int|null $newNoteId
 	 * @param string $newNoteContent
 	 * @param int $newNoteNoteTypeId
@@ -44,12 +49,16 @@ class Note {
 			$this->setNoteApplicationId($newNoteApplicationId);
 			$this->setNoteProspectId($newNoteProspectId);
 		} catch(\InvalidArgumentException $invalidArgument) {
+			//rethrow the exception to the caller
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
 		} catch(\RangeException $range) {
+			//rethrow the exception to the caller
 			throw(new \RangeException($range->getMessage(), 0, $range));
 		} catch(\TypeError $typeError) {
+			//rethrow the exception to the caller
 			throw(new \TypeError($typeError->getMessage(), 0, $typeError));
 		} catch(\Exception $exception) {
+			//rethrow the exception to the caller
 			throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
 	}
