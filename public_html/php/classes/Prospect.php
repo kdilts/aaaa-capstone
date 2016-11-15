@@ -268,7 +268,7 @@ class Prospect implements \JsonSerializable {
 	 * gets prospects by prospect id
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param string $prospectId to search by
+	 * @param int $prospectId to search by
 	 * @return Prospect|null prospect if found, null if not
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
@@ -313,7 +313,7 @@ class Prospect implements \JsonSerializable {
 	 * gets prospects by prospect cohort id
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param string $prospectCohortId to search by
+	 * @param int $prospectCohortId to search by
 	 * @return \SplFixedArray SplFixedArray of prospects found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
@@ -332,14 +332,12 @@ class Prospect implements \JsonSerializable {
 		$parameters = ["prospectCohortId" => $prospectCohortId];
 		$statement->execute($parameters);
 
-		// grab prospect from SQL
-		// TODO change to plural -- use while loop and \SPL array
-		try {
-			$prospect = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false){
-				$prospect = new Prospect(
+		// build an array of prospects
+		$prospects = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$prospect = new prospect(
 					$row["prospectId"],
 					$row["prospectCohortId"],
 					$row["prospectPhoneNumber"],
@@ -347,19 +345,21 @@ class Prospect implements \JsonSerializable {
 					$row["prospectFirstName"],
 					$row["prospectLastName"]
 				);
+				$prospects[$prospects->key()] = $prospect;
+				$prospects->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception){
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($prospect);
+		return ($prospects);
 	}
 
 	/**
 	 * gets the prospect by prospect email
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param string $prospectEmail to search by
+	 * @param int $prospectEmail to search by
 	 * @return Prospect|null prospect found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
@@ -428,14 +428,12 @@ class Prospect implements \JsonSerializable {
 		$parameters = ["prospectName" => $prospectName];
 		$statement->execute($parameters);
 
-		// grab prospect from SQL
-		// TODO change to plural -- use SPL array
-		try {
-			$prospect = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false){
-				$prospect = new Prospect(
+		// build an array of prospects
+		$prospects = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$prospect = new prospect(
 					$row["prospectId"],
 					$row["prospectCohortId"],
 					$row["prospectPhoneNumber"],
@@ -443,12 +441,14 @@ class Prospect implements \JsonSerializable {
 					$row["prospectFirstName"],
 					$row["prospectLastName"]
 				);
+				$prospects[$prospects->key()] = $prospect;
+				$prospects->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception){
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($prospect);
+		return ($prospects);
 	}
 
 	/**
