@@ -624,41 +624,47 @@ class Application {
 	 * @param \PDO $pdo
 	 * @param int $applicationID
 	 * @return Application
-	 *  @throws \PDOException when mySQL related errors occur
+	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getApplicationbyApplicationId (\PDO $pdo, int $applicationId) {
-		//sanitise applicationID before searching
-		if($applicationId <= 0) {
+	public function getApplicationByApplicationId (\PDO $pdo, int $applicationId){
+		//sanitize the applicationId before searching
+		if ($applicationId <=0){
 			throw(new \PDOException("applicationId not positive"));
 		}
 		//create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource  FROM application WHERE applicationId = :applicationId";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationId = :applicationId";
 		$statement = $pdo->prepare($query);
 
-		// bind the application id to the place holder in template
-		$parameters = ["applicationId" => $applicationId];
-		$statement->execute($parameters);
-
-		// build an array of application
-		$applicationId = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		//grab placard from SQL
 		try {
-			$application=null;
+			$application = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
+				$application = new Application(
+					$row["applicationId"],
+					$row["applicationFirstName"],
+					$row["applicationLastName"],
+					$row["applicationEmail"],
+					$row["applicationPhoneNumber"],
+					$row["applicationSource"],
+					$row["applicationCohortId"],
+					$row["applicationAboutYou"],
+					$row["applicationHopeToAccomplish"],
+					$row["applicationExperience"],
+					$row["applicationDateTime"],
+					$row["applicationUtmCampaign"],
+					$row["applicationUtmMedium"],
+					$row["applicationUtmSource"]);
 			}
-			$application = new Application($row["applicationId"], $row["applicationFirstName"], $row["applicationLastName"], $row["applicationEmail"], $row["applicationPhoneNumber"], $row["applicationSource"], $row["applicationCohortId"], $row["applicationAboutYou"], $row["applicationHopeToAccomplish"], $row["applicationExperience"], $row["applicationDateTime"], $row["applicationUtmCampaign"], $row["applicationUtmMedium"], $row["applicationUtmSource"]);
-			$application[$application->key()] = $application;
-			$application->next();
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
+
+		} catch(\Exception $exception){
+			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($application);
-	}
-	/**
+		return($application);
+	}	/**
 	 * @return array
 	 */
 	public function jsonSerialize() {
