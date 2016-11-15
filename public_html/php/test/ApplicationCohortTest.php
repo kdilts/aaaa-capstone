@@ -20,7 +20,7 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  **/
 class ApplicationCohortTest extends AaaaTest {
 
-	private $VALID_APPLICATIONCOHORTAPPLICATIONID = 1;
+	private $application = null;
 	private $VALID_APPLICATIONCOHORTCOHORTID = 2;
 
 	/**
@@ -29,6 +29,11 @@ class ApplicationCohortTest extends AaaaTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
+
+		// create an application
+		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source",
+			1, "about you", "hope", "exp", "utmC", "utmM", "utmS");
+		$this->application->insert($this->getPDO());
 	}
 
 	/**
@@ -38,14 +43,14 @@ class ApplicationCohortTest extends AaaaTest {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("applicationCohort");
 
-		// create a new Placard and insert to into mySQL
-		$applicationCohort = new ApplicationCohort(null, $this->VALID_APPLICATIONCOHORTAPPLICATIONID, $this->VALID_APPLICATIONCOHORTCOHORTID);
+		// create a new ApplicationCohort and insert to into mySQL
+		$applicationCohort = new ApplicationCohort(null, $this->application->getApplicationId(), $this->VALID_APPLICATIONCOHORTCOHORTID);
 		$applicationCohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoApplicationCohort = applicationCohort::getApplicationCohortByApplicationCohortId($this->getPDO(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
-		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->VALID_APPLICATIONCOHORTAPPLICATIONID);
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->VALID_APPLICATIONCOHORTCOHORTID);
 	}
 
