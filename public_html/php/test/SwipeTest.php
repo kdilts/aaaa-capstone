@@ -66,16 +66,115 @@ class SwipeTest extends AaaaTest {
 		$swipe->insert($this->getPDO());
 	}
 
-	/** test inserting a swipe, editing it, and then updating it
+	/**
+	 * test inserting a swipe, editing it, and then updating it
 	 **/
 	public function testUpdateValidApplication() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("swipe");
 
 		// create a new Swipe status and insert into mySQL
-		//$swipe = new Swipe
+		$swipe = new Swipe(null, $this->VALID_SWIPESTATUS, $this->VALID_SWIPENUMBER);
+		$swipe->insert($this->getPDO());
 
-		// edit the
+		// grab the data from mySQL and enforce the fields match our expectations
+		$result = Swipe::getSwipeBySwipeId($this->getPDO(), $swipe->getSwipeId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
+		$this->assertNotNull($result);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Swipe", $result);
+		// grab the result from the array and validate it
+		$this->assertEquals($result->getSwipeStatus(), $this->VALID_SWIPESTATUS);
+		$this->assertEquals($result->getSwipeNumber(), $this->VALID_SWIPENUMBER);
+	}
+
+	/**
+	 * test grabbing a Swipe by id that does not exist
+	 **/
+	public function testGetInvalidSwipeBySwipeId() {
+		// grab a swipe by searching for id that does not exist
+		$swipe = Swipe::getSwipeByPSwipeId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertNull($swipe);
+	}
+	/**
+	 * test grabbing Swipe by Swipe status id
+	 **/
+	public function testGetValidSwipeBySwipeStatus() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("swipe");
+		// create a new Swipe and insert to into mySQL
+		$swipe = new Swipe(null, $this->VALID_SWIPESTATUS, $this->VALID_SWIPENUMBER);
+		$swipe->insert($this->getPDO());
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = Swipe::getSwipeBySwipeStatus($this->getPDO(), $swipe->getSwipeStatus());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Swipe", $results);
+		// grab the result from the array and validate it
+		$pdoSwipe = $results[0];
+		$this->assertEquals($pdoSwipe->getSwipeStatus(), $this->VALID_SWIPESTATUS);
+		$this->assertEquals($pdoSwipe->getSwipeNumber(), $this->VALID_SWIPENUMBER);
+	}
+	/**
+	 * test grabbing Swipes by status that does not exist
+	 **/
+	public function testGetInvalidSwipesBySwipeStatus() {
+		// grab swipes by searching for status that does not exist
+		$swipes = Swipe::getSwipesBySwipeStatus($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertCount(0, $swipes);
+	}
+	/**
+	 * test grabbing a Swipe by swipe number
+	 **/
+	public function testGetValidSwipeBySwipeNumber() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("swipe");
+		// create a new Swipe and insert to into mySQL
+		$swipe = new Swipe(null, $this->VALID_SWIPESTATUS, $this->VALID_PSWIPENUMBER);
+		$swipe->insert($this->getPDO());
+		// grab the data from mySQL and enforce the fields match our expectations
+		$result = Swipe::getSwipeBySwipeNumber($this->getPDO(), $swipe->getSwipeNumber());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
+		$this->assertNotNull($result);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Swipe", $result);
+		// grab the result from the array and validate it
+		$this->assertEquals($result->getSwipeStatus(), $this->VALID_SWIPESTATUS);
+		$this->assertEquals($result->getSwipeNumber(), $this->VALID_SWIPEDNUMBER);
+	}
+	/**
+	 * test grabbing a Swipe by a swipe number that does not exist
+	 **/
+	public function testGetInvalidSwipeBySwipeNumber() {
+		// grab a Swipe by searching for swipe number that does not exist
+		$swipe = Swipe::getSwipeBySwipeNumber($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertNull($swipe);
+	}
+	/**
+	 * test grabbing all Swipes
+	 **/
+	public function testGetAllValidSwipes() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("swipe");
+		// create a new Swipe and insert to into mySQL
+		$swipe = new Swipe(null, $this->VALID_SWIPESTATUS, $this->VALID_SWIPENUMBER);
+		$swipe->insert($this->getPDO());
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = Swipe::getAllSwipes($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Swipe", $results);
+		// grab the result from the array and validate it
+		$pdoSwipe = $results[0];
+		$this->assertEquals($pdoSwipe->getSwipeStatus(), $this->VALID_SWIPESTATUS);
+		$this->assertEquals($pdoSwipe->getSwipeNumber(), $this->VALID_SWIPENUMBER);
 	}
 
 }
+
+
+
+
+
+
+
+
+
