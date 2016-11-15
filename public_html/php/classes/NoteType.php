@@ -93,7 +93,7 @@ class NoteType{
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$note = new NoteType($row["noteTypeName"], $row["noteTypeId"]);
+				$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeIdId"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
@@ -103,7 +103,7 @@ class NoteType{
 	}
 
 public static function getAllNotes(\PDO $pdo){
-	//creat query template
+	//create query template
 	$query = "SELECT noteTypeName, noteTypeId FROM noteType";
 	$statement = $pdo->prepare($query);
 	$statement->execute();
