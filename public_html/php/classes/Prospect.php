@@ -318,7 +318,7 @@ class Prospect implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getProspectByProspectsCohortId(\PDO $pdo, int $prospectCohortId){
+	public static function getProspectsByProspectsCohortId(\PDO $pdo, int $prospectCohortId){
 		// sanitize the prospectId before searching
 		if($prospectCohortId <= 0){
 			throw(new \PDOException("prospectCohortId not positive"));
