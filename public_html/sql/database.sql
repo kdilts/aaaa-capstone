@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS studentPermit;
 DROP TABLE IF EXISTS applicationCohort;
 DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS swipe;
-DROP TABLE IF EXISTS statusType;
 DROP TABLE IF EXISTS placard;
+DROP TABLE IF EXISTS statusType;
 DROP TABLE IF EXISTS noteType;
 DROP TABLE IF EXISTS cohort;
 DROP TABLE IF EXISTS bridge;
@@ -32,27 +32,32 @@ CREATE TABLE noteType(
 	PRIMARY KEY(noteTypeId)
 );
 
+CREATE TABLE statusType(
+statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+statusTypeName VARCHAR(40) NOT NULL,
+INDEX (statusTypeId),
+PRIMARY KEY (statusTypeId)
+);
+
 CREATE TABLE placard(
 	placardId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	placardNumber INT UNSIGNED NOT NULL,
 	placardStatusId INT UNSIGNED NOT NULL,
 	INDEX (placardId),
-	PRIMARY KEY(placardId)
-);
+	INDEX (placardStatusId),
+	PRIMARY KEY(placardId),
+	FOREIGN KEY(placardStatusId) REFERENCES statusType(statusTypeId)
 
-CREATE TABLE statusType(
-	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	statusTypeName VARCHAR(40) NOT NULL,
-	INDEX (statusTypeId),
-	PRIMARY KEY (statusTypeId)
 );
 
 CREATE TABLE swipe(
 	swipeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	swipeNumber INT UNSIGNED NOT NULL,
-	swipeStatus INT UNSIGNED NOT NULL,
+	swipeStatusId INT UNSIGNED NOT NULL,
 	INDEX (swipeId),
-	PRIMARY KEY(swipeId)
+	INDEX (swipeStatusId),
+	PRIMARY KEY(swipeId),
+	FOREIGN KEY(swipeStatusId) REFERENCES statusType(statusTypeId)
 );
 
 CREATE TABLE application(
