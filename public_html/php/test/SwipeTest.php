@@ -34,8 +34,8 @@ class SwipeTest extends AaaaTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-		//$this->swipe = new Swipe(null, "5123412", "2134234", "2");
-		//$this->swipe->insert($this->getPDO());
+		$this->swipeStatus = new StatusType(null, "2");
+		$this->swipeStatus->insert($this->getPDO());
 	}
 	/**
 	 * test inserting a valid Swipe and verify that the actual mySQL data matches

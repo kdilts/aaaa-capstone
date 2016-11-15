@@ -479,6 +479,12 @@ class Application {
 		// update the null applicationId with what mySQL just gave us
 		$this->applicationId = intval($pdo->lastInsertId());
 	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param $startDate
+	 * @return \SplFixedArray
+	 */
 	public static function getApplicationsByApplicationDateTime(\PDO $pdo, $startDate){
 		// validate dates
 		try {
@@ -529,6 +535,12 @@ class Application {
 		}
 		return ($applications);
 	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param string $applicationEmail
+	 * @return Application|null
+	 */
 	public function getApplicationByApplicationEmail (\PDO $pdo, string $applicationEmail){
 		//sanitize the applicationCohortId before searching
 		$applicationEmail = trim($applicationEmail);
