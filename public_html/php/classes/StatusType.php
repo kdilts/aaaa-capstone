@@ -152,7 +152,7 @@ class StatusType {
 	 * @return \SplFixedArray
 	 */
 	public static function getStatusTypeByStatusTypeName(\PDO $pdo, string $statusTypeName) {
-		// sanitize the swipeId before searching
+		// sanitize the statusTypeId before searching
 		if($statusTypeName <= 0) {
 			throw(new \PDOException("statusTypeName not positive"));
 		}
@@ -165,7 +165,7 @@ class StatusType {
 		$parameters = ["statusTypeName" => $statusTypeName];
 		$statement->execute($parameters);
 
-		// build an array of swipes
+		// build an array of statusType
 		$statusTypes = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
