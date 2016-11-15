@@ -45,11 +45,11 @@ class StatusTypeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("statusType");
 
 		// create a new Status and insert to into mySQL
-		$status = new StatusType(null, $this->VALID_STATUSTYPEID, $this->VALID_STATUSTYPENAME);
+		$status = new StatusType(null, $this->VALID_STATUSTYPENAME);
 		$status->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoStatus = StatusType::getStatusByStatusTypeId($this->getPDO(), $status->getStatusTypeId());
+		$pdoStatus = StatusType::getStatusTypeByStatusTypeId($this->getPDO(), $status->getStatusTypeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("statusType"));
 		$this->assertEquals($pdoStatus->getStatusTypeName(), $this->VALID_STATUSTYPENAME);
 	}
@@ -80,7 +80,7 @@ class StatusTypeTest extends AaaaTest {
 		$status->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our
-		$pdoStatus = StatusType::getStatusByStatusTypeId($this->getPDO(), $status->getStatusTypeId());
+		$pdoStatus = StatusType::getStatusTypeByStatusTypeId($this->getPDO(), $status->getStatusTypeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("statusType"));
 		$this->assertEquals($pdoStatus->getStatusTypeId(), $this->VALID_STATUSTYPEID2);
 		$this->assertEquals($pdoStatus->getStatusTypeName(), $this->VALID_STATUSTYPENAME);

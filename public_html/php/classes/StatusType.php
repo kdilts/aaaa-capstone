@@ -3,16 +3,25 @@
 namespace Edu\Cnm\DdcAaaa;
 
 class StatusType {
+
 	/**
-	 * @var string $statusTypeName
-	 */
-	private $statusTypeName;
-	/**
-	 * @var int $statusTypeId
+	 * @var int|null $statusTypeId
 	 */
 	private $statusTypeId;
 
-	public function __construct(string $newStatusTypeName, int $newStatusTypeId) {
+	/**
+	 * @var int $statusTypeName
+	 */
+	private $statusTypeName;
+
+	/**
+	 * StatusType constructor.
+	 * @param int|null $newStatusTypeId
+	 * @param int $newStatusTypeName
+	 * @throws \Exception
+	 * @throws \TypeError
+	 */
+	public function __construct(int $newStatusTypeId = null, int $newStatusTypeName) {
 		try {
 			$this->setStatusTypeId($newStatusTypeId);
 			$this->setStatusTypeName($newStatusTypeName);
@@ -42,20 +51,24 @@ class StatusType {
 	/**
 	 * @param int $statusTypeId
 	 */
-	public function setStatusTypeId(int $statusTypeId) {
-		if($statusTypeId <= 0) {
+	public function setStatusTypeId(int $newStatusTypeId = null) {
+		if($newStatusTypeId === null){
+			$this->statusTypeId = null;
+			return;
+		}
+
+		if($newStatusTypeId <= 0) {
 			throw(new \RangeException("typeId can't be 0 or less."));
 		}
-		$this->statusTypeId = $statusTypeId;
+		$this->statusTypeId = $newStatusTypeId;
 	}
 	/**
 	 * @param string $newStatusTypeName
+	 * @throws \RangeException
 	 */
 	public function setStatusTypeName(string $newStatusTypeName) {
-		$newStatusTypeName = trim($newStatusTypeName);
-		$newStatusTypeName = filter_var($newStatusTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newStatusTypeName) === true) {
-			throw (new \InvalidArgumentException("Status type name is either empty or insecure."));
+		if($newStatusTypeName <= 0){
+			throw (new \RangeException("Status type name must be positive"));
 		}
 		$this->statusTypeName = $newStatusTypeName;
 	}
@@ -64,8 +77,8 @@ class StatusType {
 	 * @param \PDO $pdo
 	 */
 	public function insert(\PDO $pdo) {
-		if($this->statusTypeId === null) {
-			throw(new \PDOException("Need a status type."));
+		if($this->statusTypeId !== null) {
+			throw(new \PDOException("cannont insert a statusType that already exists."));
 		}
 		$query = "INSERT INTO statusType(statusTypeId, statusTypeName) VALUES(:statusTypeId, :statusTypeName)";
 		$statement = $pdo->prepare($query);
@@ -79,8 +92,58 @@ class StatusType {
 
 	}
 
+	/**
+	 * @param \PDO $pdo
+	 */
 	public function update(\PDO $pdo){
+		// enforce the statusTypeId is not null (i.e., don't update a statusType that hasn't been inserted)
+		if($this->statusTypeId === null) {
+			throw(new \PDOException("unable to update a statusType that does not exist"));
+		}
 
+		// create query template
+		$query = "UPDATE statusType SET statusTypeId = :statusTypeId, statusTypeName = :statusTypeName;";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = [
+			"statusTypeId" => $this->statusTypeId,
+			"statusTypeName" => $this->statusTypeName
+		];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param int $statusTypeId
+	 * @return StatusType|null
+	 */
+	public static function getStatusTypeByStatusTypeId(\PDO $pdo, int $statusTypeId) {
+		// sanitize the swipeId before searching
+		if($statusTypeId <= 0) {
+			throw(new \PDOException("statusTypeId not positive"));
+		}
+		// create query template
+		$query = "SELECT statusTypeName, statusTypeId FROM statusType WHERE statusTypeId = :statusTypeId";
+		$statement = $pdo->prepare($query);
+
+		// bind the status type id to the place holder in template
+		$parameters = ["statusTypeId" => $statusTypeId];
+		$statement->execute($parameters);
+
+		// grab statusType from SQL
+		try {
+			$statusType = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$statusType = new StatusType($row["statusTypeId"], $row["statusTypeName"]);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($statusType);
 	}
 
 	/**
@@ -88,12 +151,10 @@ class StatusType {
 	 * @param string $statusTypeName
 	 * @return \SplFixedArray
 	 */
-	public static function getStatusByStatusTypeName(\PDO $pdo, string $statusTypeName) {
+	public static function getStatusTypeByStatusTypeName(\PDO $pdo, string $statusTypeName) {
 		// sanitize the swipeId before searching
-		$statusTypeName = trim($statusTypeName);
-		$statusTypeName = filter_var($statusTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($statusTypeName) === null) {
-			throw(new \PDOException("statusTypeName is empty or insecure"));
+		if($statusTypeName <= 0) {
+			throw(new \PDOException("statusTypeName not positive"));
 		}
 
 		// create query template
@@ -119,34 +180,11 @@ class StatusType {
 		}
 		return $statusTypes;
 	}
-	public static function getStatusByStatusTypeId(\PDO $pdo, int $statusTypeId) {
-		// sanitize the swipeId before searching
-		if($statusTypeId <= 0) {
-			throw(new \PDOException("statusTypeId not positive"));
-		}
-		// create query template
-		$query = "SELECT statusTypeName, statusTypeId FROM statusType WHERE statusTypeId = :statusTypeId";
-		$statement = $pdo->prepare($query);
 
-		// bind the swipe id to the place holder in template
-		$parameters = ["statusTypeId" => $statusTypeId];
-		$statement->execute($parameters);
-
-		// build an array of swipes
-		$statusTypes = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
-				$statusType = new StatusType($row["statusTypeName"], $row["statusTypeId"]);
-				$statusTypes[$statusTypes->key()] = $statusType;
-				$statusTypes->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-		return $statusTypes;
-	}
+	/**
+	 * @param \PDO $pdo
+	 * @return \SplFixedArray
+	 */
 	public static function getAllStatusTypes(\PDO $pdo) {
 		// create query template
 		$query = "SELECT statusTypeName, statusTypeID FROM statusType";
