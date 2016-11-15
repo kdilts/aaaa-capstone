@@ -1,11 +1,35 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
 
-class NoteType{
-	private $noteTypeName;
+/**
+ * Class NoteType
+ * enumerator class that describes each note's type
+ * @package Edu\Cnm\DdcAaaa
+ */
+class NoteType implements \JsonSerializable {
+
+	/**
+	 * Id number for noteType
+	 * @var int $noteTypeId
+	 */
 	private $noteTypeId;
 
-	public function __construct(string $newNoteTypeName, int $newNoteTypeId) {
+	/**
+	 * Name for NoteType
+	 * @var string $noteTypeName
+	 */
+	private $noteTypeName;
+
+	/**
+	 * NoteType constructor.
+	 * @param int|null $newNoteTypeId id of this noteType, or null if new noteType
+	 * @param string $newNoteTypeName name of this noteType
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data is not out of bounds
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs.
+	 */
+	public function __construct(int $newNoteTypeId = null, string $newNoteTypeName) {
 		try {
 			$this->setNoteTypeId($newNoteTypeId);
 			$this->setNoteTypeName($newNoteTypeName);
@@ -19,32 +43,37 @@ class NoteType{
 			throw (new \Exception($exception->getMessage(), 0, $exception));
 		}
 	}
+
 	/**
-	 * @return mixed
+	 * accessor method for NoteTypeId
+	 * @return int NoteTypeId
 	 */
 	public function getNoteTypeId() {
 		return $this->noteTypeId;
 	}
 
 	/**
-	 * @return mixed
+	 * accessor method for NoteTypeName
+	 * @return string value of NoteTypeName
 	 */
 	public function getNoteTypeName() {
 		return $this->noteTypeName;
 	}
 
 	/**
-	 * @param int $newNoteTypeId
+	 * mutator method for NoteTypeId
+	 * @param int $newNoteTypeId new value for NoteTypeId
 	 */
 	public function setNoteTypeId(int $newNoteTypeId) {
 		if($newNoteTypeId <= 0){
-			throw(new \RangeException("NoteTypeId can't be less than or equal to 0"));
+			throw(new \RangeException("NoteTypeId must be positive"));
 		}
 		$this->noteTypeId = $newNoteTypeId;
 	}
 
 	/**
-	 * @param string $newNoteTypeName
+	 * mutator method for NoteTypeName
+	 * @param string $newNoteTypeName new value for NoteTypeName
 	 */
 	public function setNoteTypeName(string $newNoteTypeName) {
 		$newNoteTypeName = trim($newNoteTypeName);
@@ -54,10 +83,16 @@ class NoteType{
 		}
 		$this->noteTypeName = $newNoteTypeName;
 	}
-//ATTN: Is this the type of error needed here?
+
+	/**
+	 * insert this noteType into mySQL
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL errors occur.
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
 	public function insert(\PDO $pdo) {
 		if($this->noteTypeId !== null) {
-			throw(new \PDOException("Need a note type."));
+			throw(new \PDOException("not a new noteType"));
 		}
 		//create query
 		$query = "INSERT INTO noteType(noteTypeId, noteTypeName) VALUES(:noteTypeId, :noteTypeName)";
@@ -72,16 +107,17 @@ class NoteType{
 		$this->noteTypeId = intval($pdo->lastInsertId());
 	}
 	/**
+	 * gets noteType by noteType id
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $noteTypeId Note ID in database
-	 * @return Note|null
+	 * @param int $noteTypeId Note Id in database
+	 * @return NoteType|null noteType if found, or null if not
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
 	public static function getNoteTypeByNoteTypeId(\PDO $pdo, int $noteTypeId){
 		// sanitize the placardId before searching
 		if($noteTypeId <= 0){
-			throw(new\PDOException("notetype not positive"));
+			throw(new\PDOException("noteType id not positive"));
 		}
 // create query template
 		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeId = :noteTypeId";
@@ -89,7 +125,7 @@ class NoteType{
 		$statement->execute();
 // grab note from SQL
 		try {
-			$note = null;
+			$noteType = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
@@ -99,33 +135,44 @@ class NoteType{
 			// if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($note);
+		return($noteType);
 	}
 
-public static function getAllNotes(\PDO $pdo){
-	//create query template
-	$query = "SELECT noteTypeName, noteTypeId FROM noteType";
-	$statement = $pdo->prepare($query);
-	$statement->execute();
-
-	//build an array of placards
-	$note = new \SplFixedArray($statement->rowCount());
-	$statement->setFetchMode(\PDO::FETCH_ASSOC);
-	while(($row = $statement->fetch()) !== false){
-		try {
-			$note = new Note($row["noteTypeName"], $row["noteTypeId"]);
-			$note [$note->key()] = $note;
-			$note->next();
-		} catch(\Exception $exception){
-			//if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
-		}
-	}
-return $note;
-}
 	/**
-	 * @return array
+	 * get all noteTypes
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of noteTypes found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
 	 */
+	public static function getAllNoteTypes(\PDO $pdo){
+		//create query template
+		$query = "SELECT noteTypeName, noteTypeId FROM noteType";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		//build an array of placards
+		$noteTypes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false){
+			try {
+				$noteType = new NoteType($row["noteTypeId"], $row["noteTypeName"]);
+				$noteTypes[$noteTypes->key()] = $noteType;
+				$noteTypes->next();
+			} catch(\Exception $exception){
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $noteTypes;
+	}
+
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		return($fields);
