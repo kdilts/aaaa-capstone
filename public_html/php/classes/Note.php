@@ -64,6 +64,8 @@ class Note {
 	}
 
 	/**
+	 * accessor method for note Id
+	 *
 	 * @return int|null value of note id
 	 */
 	public function getNoteId() {
