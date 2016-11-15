@@ -91,6 +91,8 @@ class Note {
 	}
 
 	/**
+	 * accessor method for Id of the application
+	 *
 	 * @return int|null of note student id
 	 */
 	public function getNoteApplicationId() {
