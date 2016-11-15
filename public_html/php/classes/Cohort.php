@@ -104,8 +104,11 @@ class Cohort implements \JsonSerializable {
 	}
 
 	/**
+	 * inserts this Cohort into database
+	 *
 	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * @throws \PDOException when SQL errors occur
+	 * @throws \TypeError if $pdo is not a pdo connection object
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the cohortId is null (i.e., don't insert a cohort that already exists)
@@ -122,7 +125,15 @@ class Cohort implements \JsonSerializable {
 		$this->cohortId = intval($pdo->lastInsertId());
 	}
 
-	public static function getCohortByCohortId(\PDO $pdo, int $cohortId){
+	/**
+	 * gets cohorts by cohortId
+	 * @param \PDO $pdo
+	 * @param int $cohortId to search for
+	 * @return Cohort|null
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	 public static function getCohortByCohortId(\PDO $pdo, int $cohortId){
 		// sanitize the cohortId before searching
 		if($cohortId <= 0){
 			throw(new \PDOException("cohortId not positive"));
@@ -152,10 +163,14 @@ class Cohort implements \JsonSerializable {
 	}
 
 	/**
+	 * searches cohorts by ApplicationId
 	 * @param \PDO $pdo
-	 * @param int $cohortApplicationId
+	 * @param int $cohortApplicationId searching cohort by ApplicationId
 	 * @return Cohort|null
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
 	 */
+
 	public static function getCohortByCohortApplicationId(\PDO $pdo, int $cohortApplicationId){
 		// sanitize the cohortId before searching
 		if($cohortApplicationId <= 0){
@@ -185,8 +200,9 @@ class Cohort implements \JsonSerializable {
 		return($cohort);
 	}
 	/**
+	 * gets all cohorts
 	 * @param \PDO $pdo
-	 * @return \SplFixedArray
+	 * @return \SplFixedArray of chorts found, or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
