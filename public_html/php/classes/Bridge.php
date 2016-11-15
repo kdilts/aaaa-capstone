@@ -137,10 +137,13 @@ namespace Edu\Cnm\DdcAaaa;
 			// update the null bridgeStaffId with what mySQL just gave us
 			$this->bridgeStaffId = intval($pdo->lastInsertId());
 		}
+
 		/**
-		 * @param \PDO $pdo
-		 * @param string $bridgeStaffId
-		 * @return Bridge|null
+		 * @param \PDO $pdo PDO connection object
+		 * @param \string bridgeStaffId search for bridge by StaffId
+		 * @return bridge|null if found or null if not found
+		 * @throws \PDOException when mySQL related errors occur
+		 * @throws \TypeError when variables are not the correct data type
 		 */
 		public static function getBridgeByBridgeStaffId(\PDO $pdo, string $bridgeStaffId) {
 			// sanitize the bridgeId before searching
@@ -173,11 +176,13 @@ namespace Edu\Cnm\DdcAaaa;
 			return ($bridge);
 		}
 		/**
-		 * @param \PDO $pdo
-		 * @param int $bridgeName
-		 * @return \SplFixedArray
+		 * @param \PDO $pdo PDO connection object
+		 * @param string $bridgeName search for bridge by bridge name
+		 * @return bridge|null if found or null if not found
+		 * @throws \PDOException when mySQL related errors occur
+		 * @throws \TypeError when variables are not the correct data type
 		 */
-		public static function getBridgeByBridgeName(\PDO $pdo, int $bridgeName) {
+		public static function getBridgeByBridgeName(\PDO $pdo, string $bridgeName) {
 			// sanitize the bridgeName before searching
 			$bridgeName = trim($bridgeName);
 			$bridgeName = filter_var($bridgeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -210,8 +215,11 @@ namespace Edu\Cnm\DdcAaaa;
 		}
 		/**
 		 * @param \PDO $pdo
-		 * @param string $bridgeUserName
+		 * @param \string $bridgeUserName searches bridge by UserName
 		 * @return \SplFixedArray
+		 * @throws \PDOException when mySQL related errors occur
+		 * @throws \TypeError when variables are not the correct data type
+
 		 */
 		public static function getBridgeByBridgeUserName(\PDO $pdo, string $bridgeUserName) {
 			// sanitize the bridgeUserName before searching

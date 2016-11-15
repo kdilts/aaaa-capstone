@@ -78,25 +78,22 @@ class NoteType{
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getNoteTypeByeNoteTypeId(\PDO $pdo, int $noteTypeId){
+	public static function getNoteTypeByNoteTypeId(\PDO $pdo, int $noteTypeId){
 		// sanitize the placardId before searching
 		if($noteTypeId <= 0){
 			throw(new\PDOException("notetype not positive"));
 		}
-
 // create query template
 		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeId = :noteTypeId";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
-
-
 // grab note from SQL
 		try {
 			$note = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$placard = new note ($row["noteTypeName"], $row["noteTypeIdId"]);
+				$note = new NoteType($row["noteTypeName"], $row["noteTypeId"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
@@ -107,7 +104,7 @@ class NoteType{
 
 public static function getAllNotes(\PDO $pdo){
 	//creat query template
-	$query = "SELECT noteTypeName, noteTypeId FROM note";
+	$query = "SELECT noteTypeName, noteTypeId FROM noteType";
 	$statement = $pdo->prepare($query);
 	$statement->execute();
 
