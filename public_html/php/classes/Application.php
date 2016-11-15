@@ -606,7 +606,11 @@ class Application {
 		$applicationId = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		try {
-
+			$application=null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+			}
 			$application = new Application($row["applicationId"], $row["applicationFirstName"], $row["applicationLastName"], $row["applicationEmail"], $row["applicationPhoneNumber"], $row["applicationSource"], $row["applicationCohortId"], $row["applictionAboutYou"], $row["applicationHopeToAccomplish"], $row["applicationExperience"], $row["applicationDateTime"], $row["applicationUtmCampaign"], $row["applicationUtmMedium"], $row["applicationUtmSource"]);
 			$application[$application->key()] = $application;
 			$application->next();
