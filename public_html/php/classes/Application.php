@@ -118,6 +118,7 @@ class Application {
 		}
 	}
 	/**
+	 * accessor method for Id
 	 * @return int| null value of applicationId
 	 */
 	public function getApplicationId() {
@@ -125,6 +126,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for FirstName
 	 * @return string
 	 */
 	public function getApplicationFirstName() {
@@ -132,6 +134,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for LastName
 	 * @return string
 	 */
 	public function getApplicationLastName() {
@@ -139,6 +142,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for Email
 	 * @return string
 	 */
 	public function getApplicationEmail() {
@@ -146,6 +150,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for PhoneNumber
 	 * @return string
 	 */
 	public function getApplicationPhoneNumber() {
@@ -153,6 +158,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for Source
 	 * @return string
 	 */
 	public function getApplicationSource() {
@@ -160,6 +166,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for CohortId
 	 * @return int
 	 */
 	public function getApplicationCohortId() {
@@ -167,6 +174,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for AboutYou
 	 * @return string
 	 */
 	public function getApplicationAboutYou() {
@@ -174,6 +182,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for HopeToAccomplish
 	 * @return string
 	 */
 	public function getApplicationHopeToAccomplish() {
@@ -181,6 +190,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for Experience
 	 * @return string
 	 */
 	public function getApplicationExperience() {
@@ -188,12 +198,14 @@ class Application {
 	}
 
 	/**
+	 * accessor method for DateTime
 	 * @return string
 	 */
 	public function getApplicationDateTime() {
 		return $this->applicationDateTime;
 	}
 	/**
+	 * accessor method for UtmCampaign
 	 * @return string
 	 */
 	public function getApplicationUtmCampaign(){
@@ -201,6 +213,7 @@ class Application {
 	}
 
 	/**
+	 * accessor method for UtmMedium
 	 * @return string
 	 */
 	public function getApplicationUtmMedium(){
@@ -208,12 +221,14 @@ class Application {
 	}
 
 	/**
+	 * accessor method for UtmSource
 	 * @return string
 	 */
 	public function getApplicationUtmSource() {
 		return $this->applicationUtmSource;
 	}
 	/**
+	 * mutator method for applicationId
 	 * @param int $newApplicationId
 	 * @throws \RangeException
 	 **/
@@ -231,6 +246,7 @@ class Application {
 	}
 
 	/**
+	 * mutator method for applicationFirstName
 	 * @param string $newApplicationFirstName
 	 * @throws \RangeException
 	 **/
@@ -245,6 +261,7 @@ class Application {
 	}
 
 	/**
+	 * mutator method for applicationLastName
 	 * @param string $newApplicationLastName
 	 */
 	public function setApplicationLastName(string $newApplicationLastName) {
@@ -258,6 +275,7 @@ class Application {
 	}
 
 	/**
+	 * mutator method for applicationEmail
 	 * @param string $newApplicationEmail
 	 * @throws \RangeException
 	 */
@@ -276,6 +294,7 @@ class Application {
 	}
 
 	/**
+	 * mutator method for applicationPhoneNumber
 	 * @param string $newApplicationPhoneNumber
 	 */
 	public function setApplicationPhoneNumber(string $newApplicationPhoneNumber) {
@@ -293,6 +312,7 @@ class Application {
 	}
 
 	/**
+	 * mutator method for applicationSource
 	 * @param string $newApplicationSource
 	 */
 	public function setApplicationSource(string $newApplicationSource) {
@@ -311,6 +331,7 @@ class Application {
 	}
 
 	/**
+	 * mutator method for applicationCohortId
 	 * @param string $newApplicationCohortId
 	 */
 	public function setApplicationCohortId(string $newApplicationCohortId) {
@@ -327,6 +348,10 @@ class Application {
 		$this->applicationCohortId = $newApplicationCohortId;
 	}
 
+	/**
+	 * mutator method for applicationAboutYou
+	 * @param string $newApplicationAboutYou
+	 */
 	public function setApplicationAboutYou(string $newApplicationAboutYou) {
 		//$this->applicationAboutYou = trim ($newApplicationAboutYou);
 		$this->applicationAboutYou = filter_var($newApplicationAboutYou, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -342,6 +367,7 @@ class Application {
 	}
 
 	/**
+	 * mutator method for applicationHopeToAccomplish
 	 * @param string $newApplicationHopeToAccomplish
 	 */
 	public function setApplicationHopeToAccomplish(string $newApplicationHopeToAccomplish) {
@@ -359,6 +385,8 @@ class Application {
 	}
 
 	/**
+	 * mutator method for applicationExperience
+	 *
 	 * @param string $ApplicationExperience
 	 */
 	public function setApplicationExperience(string $newApplicationExperience) {
@@ -376,7 +404,8 @@ class Application {
 	}
 
 	/**
-	 * @param string $newApplicationDateTime
+	 * mutator method for applicationDateTime
+	 * @param \DateTime $newApplicationDateTime
 	 * @throws \InvalidArgumentException if $newApplicationDateTime is not a valid object or string
 	 * @throws \RangeException if $newApplicationDateTime is a date that does not exist
 	 */
@@ -394,6 +423,7 @@ class Application {
 	}
 
 	/**
+	 * mutator method for ApplicationUtmCampaign
 	 * @param string $newApplicationUtmCampaign
 	 */
 	public function setApplicationUtmCampaign(string $newApplicationUtmCampaign) {
@@ -410,6 +440,8 @@ class Application {
 		$this->applicationUtmCampaign = $newApplicationUtmCampaign;
 	}
 	/**
+	 * mutator method for ApplicationUtmMedium
+	 *
 	 * @param string $newApplicationUtmMedium
 	 */
 	public function setApplicationUtmMedium(string $newApplicationUtmMedium) {
@@ -428,6 +460,8 @@ class Application {
 
 
 	/**
+	 * mutator method for applicationUtmSource
+	 *
 	 * @param string $applicationUtmSource
 	 */
 	public function setApplicationUtmSource(string $newApplicationUtmSource) {
@@ -444,6 +478,7 @@ class Application {
 
 	}
 	/**
+	 * inserts application into SQL database
 	 * @param \PDO $pdo
 	 * @throws \PDOException
 	 */
@@ -481,6 +516,7 @@ class Application {
 	}
 
 	/**
+	 * searches applications by applicationDateTime
 	 * @param \PDO $pdo
 	 * @param $startDate
 	 * @return \SplFixedArray
@@ -537,6 +573,7 @@ class Application {
 	}
 
 	/**
+	 * searches applications by applicationEmail
 	 * @param \PDO $pdo
 	 * @param string $applicationEmail
 	 * @return Application|null
@@ -583,6 +620,7 @@ class Application {
 	}
 
 	/**
+	 * searches applications by applicationId
 	 * @param \PDO $pdo
 	 * @param int $applicationID
 	 * @return Application
