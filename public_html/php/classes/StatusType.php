@@ -2,24 +2,33 @@
 
 namespace Edu\Cnm\DdcAaaa;
 
-class StatusType {
+/**
+ * Class StatusType
+ * Enumerator class for placard and swipe statuses.
+ * @package Edu\Cnm\DdcAaaa
+ */
+class StatusType implements \JsonSerializable {
 
 	/**
+	 * id for this status type
 	 * @var int|null $statusTypeId
 	 */
 	private $statusTypeId;
 
 	/**
+	 * name that describes what the status is checked in, checked out, lost, etc
 	 * @var int $statusTypeName
 	 */
 	private $statusTypeName;
 
 	/**
 	 * StatusType constructor.
-	 * @param int|null $newStatusTypeId
-	 * @param int $newStatusTypeName
-	 * @throws \Exception
-	 * @throws \TypeError
+	 * @param int|null $newStatusTypeId id of this statusType, or null if a new statusType
+	 * @param int $newStatusTypeName name of this statusType
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bound
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
 	 */
 	public function __construct(int $newStatusTypeId = null, int $newStatusTypeName) {
 		try {
@@ -37,19 +46,25 @@ class StatusType {
 
 	}
 	/**
-	 * @return int
+	 * accessor method for statusType id
+	 * @return int value of statusType id
 	 */
 	public function getStatusTypeId(){
 		return $this->statusTypeId;
 	}
+
 	/**
-	 * @return string
+	 * accessor method for statusType name
+	 * @return int value of statusType name
 	 */
 	public function getStatusTypeName(){
 		return $this->statusTypeName;
 	}
 	/**
-	 * @param int $statusTypeId
+	 * mutator method for statusType id
+	 * @param int|null $statusTypeId  new value of statusType id
+	 * @throws \RangeException throws if $newStatusTypeId is not positive
+	 * @throws \TypeError throws if $newStatusTypedId is not an integer
 	 */
 	public function setStatusTypeId(int $newStatusTypeId = null) {
 		if($newStatusTypeId === null){
@@ -63,8 +78,11 @@ class StatusType {
 		$this->statusTypeId = $newStatusTypeId;
 	}
 	/**
-	 * @param string $newStatusTypeName
-	 * @throws \RangeException
+	 * mutator method for statusType name
+	 * @param int $statusTypeName  new value of statusType name
+	 * @throws \RangeException throws if $newStatusTypeName is not positive
+	 * @throws \TypeError throws if $newStatusTypedName is not an integer
+	 *
 	 */
 	public function setStatusTypeName(string $newStatusTypeName) {
 		if($newStatusTypeName <= 0){
@@ -74,11 +92,14 @@ class StatusType {
 	}
 
 	/**
-	 * @param \PDO $pdo
+	 * inserts this statusType into mySQL
+	 * @param \PDO $pdo pdo connection object
+	 * @throws \PDOException throws when mySQL errors occur
+	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
 	public function insert(\PDO $pdo) {
 		if($this->statusTypeId !== null) {
-			throw(new \PDOException("cannont insert a statusType that already exists."));
+			throw(new \PDOException("cannot insert a statusType that already exists."));
 		}
 		$query = "INSERT INTO statusType(statusTypeId, statusTypeName) VALUES(:statusTypeId, :statusTypeName)";
 		$statement = $pdo->prepare($query);
@@ -93,7 +114,10 @@ class StatusType {
 	}
 
 	/**
-	 * @param \PDO $pdo
+	 * updates this statusType in mySQL
+	 * @param \PDO $pdo pdo connection object
+	 * @throws \PDOException throws when mySQL errors occur
+	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
 	public function update(\PDO $pdo){
 		// enforce the statusTypeId is not null (i.e., don't update a statusType that hasn't been inserted)
@@ -114,9 +138,11 @@ class StatusType {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $statusTypeId
-	 * @return StatusType|null
+	 * gets statusType by statusType id
+	 * @param \PDO $pdo pdo connection object
+	 * @param $statusTypeId statusType id to search for
+	 * @throws \PDOException throws when mySQL errors occur
+	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
 	public static function getStatusTypeByStatusTypeId(\PDO $pdo, int $statusTypeId) {
 		// sanitize the swipeId before searching
@@ -147,9 +173,11 @@ class StatusType {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param string $statusTypeName
-	 * @return \SplFixedArray
+	 * gets statusType by statusType name
+	 * @param \PDO $pdo pdo connection object
+	 * @param $statusTypeName statusType name to search for
+	 * @throws \PDOException throws when mySQL errors occur
+	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
 	public static function getStatusTypeByStatusTypeName(\PDO $pdo, string $statusTypeName) {
 		// sanitize the statusTypeId before searching
@@ -182,8 +210,11 @@ class StatusType {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @return \SplFixedArray
+	 * gets all statusTypes
+	 * @param \PDO $pdo pdo connection object
+	 * @return \SplFixedArray array of statusTypes found
+	 * @throws \PDOException throws when mySQL errors occur
+	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
 	public static function getAllStatusTypes(\PDO $pdo) {
 		// create query template
@@ -206,9 +237,12 @@ class StatusType {
 		}
 		return $statusTypes;
 	}
+
 	/**
-	 * @return array
-	 */
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		return($fields);
