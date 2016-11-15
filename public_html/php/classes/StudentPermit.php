@@ -1,35 +1,46 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
 
+/**
+ * Class StudentPermit
+ * keeps track of placard / swipe pairs for each student permit
+ * @package Edu\Cnm\DdcAaaa
+ */
 class StudentPermit implements \JsonSerializable {
 	use ValidateDate;
 
 	/**
-	 * @var
+	 * id for this student permit - this is the primary key
+	 * @var $studentPermitId
 	 */
 	private $studentPermitId;
 
 	/**
+	 * application id for this student permit
 	 * @var int $studentPermitApplicationId
 	 */
 	private $studentPermitApplicationId;
 
 	/**
+	 * placard id for this student permit
 	 * @var int $studentPermitPlacardId
 	 */
 	private $studentPermitPlacardId;
 
 	/**
+	 * swipe id for this student permit
 	 * @var int $studentPermitSwipeId
 	 */
 	private $studentPermitSwipeId;
 
 	/**
+	 * date that this student permit was give to a student
 	 * @var \DateTime $studentPermitCheckOutDate
 	 */
 	private $studentPermitCheckOutDate;
 
 	/**
+	 * dat that this student permit was returned
 	 * @var \DateTime $studentPermitCheckInDate
 	 */
 	private $studentPermitCheckInDate;
@@ -67,6 +78,7 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor method for studentPermit id
 	 * @return int
 	 */
 	public function getStudentPermitId(){
@@ -74,6 +86,7 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor method for studentPermit application id
 	 * @return int
 	 */
 	public function getStudentPermitApplicationId(){
@@ -81,6 +94,7 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor method for studentPermit placard id
 	 * @return int
 	 */
 	public function getStudentPermitPlacardId(){
@@ -88,6 +102,7 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor method for studentPermit swipe id
 	 * @return int
 	 */
 	public function getStudentPermitSwipeId(){
@@ -95,6 +110,7 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor method for studentPermit check out date
 	 * @return \DateTime
 	 */
 	public function getStudentPermitCheckOutDate(){
@@ -102,6 +118,7 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * accessor method for studentPermit check in date
 	 * @return \DateTime
 	 */
 	public function getStudentPermitCheckInDate(){
@@ -109,53 +126,63 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * mutator method for this studentPermit id
 	 * @param int $newStudentPermitId
-	 * @throws \RangeException
+	 * @throws \RangeException if new value of student permit id is out of range
+	 * @throws \TypeError if $newStudentPermitId is not an integer
 	 */
 	public function setStudentPermitId(int $newStudentPermitId){
 		if ($newStudentPermitId <= 0) {
-			throw(new \RangeException("StudentPermit Id cannot be negative."));
+			throw(new \RangeException("StudentPermit Id must be positive."));
 		}
 		$this->studentPermitId = $newStudentPermitId;
 	}
 
 	/**
+	 * mutator method for this studentPermit application id
 	 * @param int $newStudentPermitApplicationId
-	 * @throws \RangeException
+	 * @throws \RangeException if new value of student permit placard id is out of range
+	 * @throws \TypeError if $newStudentPermitApplicationId is not an integer
 	 */
 	public function setStudentPermitApplicationId(int $newStudentPermitApplicationId){
 		if ($newStudentPermitApplicationId <= 0) {
-			throw(new \RangeException("StudentPermit application Id cannot be negative."));
+			throw(new \RangeException("StudentPermit application Id must be positive."));
 		}
 		$this->studentPermitApplicationId = $newStudentPermitApplicationId;
 	}
 
 	/**
+	 * mutator method for this studentPermit placard id
 	 * @param int $newStudentPermitPlacardId new value for student permit placard id
-	 * @throws \RangeException new value of student permit placard id
+	 * @throws \RangeException if new value of student permit placard id is out of range
+	 * @throws \TypeError if $newStudentPermitPlacardId is not an integer
 	 */
 	public function setStudentPermitPlacardId(int $newStudentPermitPlacardId){
 		if ($newStudentPermitPlacardId <= 0) {
-			throw(new \RangeException("Placard Id cannot be negative."));
+			throw(new \RangeException("studentPermit placard id must be positive."));
 		}
 		$this->studentPermitPlacardId = $newStudentPermitPlacardId;
 	}
 
 	/**
+	 * mutator method for this studentPermit swipe id
 	 * @param int $newStudentPermitSwipeId new value for student permit swipe id
 	 * @throws \RangeException new value of student permit swipe id is out of range
+	 * @throws \TypeError if $newStudentPermitSwipeId is not an integer
 	 */
 	public function setStudentPermitSwipeId(int $newStudentPermitSwipeId){
 		if ($newStudentPermitSwipeId <= 0) {
-			throw(new \RangeException("Swipe Id cannot be negative."));
+			throw(new \RangeException("Swipe Id must be positive."));
 		}
 		$this->studentPermitSwipeId = $newStudentPermitSwipeId;
 	}
 
 	/**
+	 * mutator method for this studentPermit check out date
 	 * @param \DateTime $newStudentPermitCheckOutDate as a DateTime object null to load the current time
 	 * @throws \InvalidArgumentException is not a valid student permit or valid date
 	 * @throws \RangeException is a date that does not exist
+	 * @throws \TypeError if $newStudentPermitCheckOutDate is not a DateTime
 	 */
 	public function setStudentPermitCheckOutDate(\DateTime $newStudentPermitCheckOutDate){
 		try {
@@ -170,9 +197,11 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
+	 * mutator method for this studentPermit check in date
 	 * @param \DateTime $newStudentPermitCheckInDate object null to load the current time
 	 * @throws \InvalidArgumentException if student permit is not valid
 	 * @throws \RangeException is a date that does not exist
+	 * @throws \TypeError if $newStudentPermitCheckInDate is not a DateTime
 	 */
 	public function setStudentPermitCheckInDate(\DateTime $newStudentPermitCheckInDate){
 		try {
@@ -186,32 +215,32 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo connection object
-	 * @throws \PDOException when mySQL related error occur
+	 * insert this studentPermit into mySQL
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL errors occur.
+	 * @throws \TypeError if $pdo is not a PDO connection object
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the placardId is null (i.e., don't insert a studentPermit that already exists)
 		if($this->studentPermitId !== null) {
 			throw(new \PDOException("not a new studentPermit"));
 		}
-
-		//$studentPermitStudentId $studentPermitPlacardId $studentPermitSwipeId $studentPermitCheckOutDate $studentPermitCheckInDate
 		
 		// create query template
 		$query = "INSERT INTO studentPermit(studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitId, :studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$formatedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d H:i:s");
-		$formatedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
+		$formattedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d H:i:s");
+		$formattedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
 
 		$parameters = [
 			"studentPermitId" => $this->studentPermitId,
 			"studentPermitApplicationId" => $this->studentPermitApplicationId,
 			"studentPermitPlacardId" => $this->studentPermitPlacardId,
 			"studentPermitSwipeId" => $this->studentPermitSwipeId,
-			"studentPermitCheckOutDate" => $formatedCheckOutDate,
-			"studentPermitCheckInDate" => $formatedCheckInDate
+			"studentPermitCheckOutDate" => $formattedCheckOutDate,
+			"studentPermitCheckInDate" => $formattedCheckInDate
 		];
 		$statement->execute($parameters);
 
@@ -234,16 +263,16 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$formatedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d H:i:s");
-		$formatedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
+		$formattedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d H:i:s");
+		$formattedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
 
 		$parameters = [
 			"studentPermitId" => $this->studentPermitId,
 			"studentPermitApplicationId" => $this->studentPermitApplicationId,
 			"studentPermitPlacardId" => $this->studentPermitPlacardId,
 			"studentPermitSwipeId" => $this->studentPermitSwipeId,
-			"studentPermitCheckOutDate" => $formatedCheckOutDate,
-			"studentPermitCheckInDate" => $formatedCheckInDate
+			"studentPermitCheckOutDate" => $formattedCheckOutDate,
+			"studentPermitCheckInDate" => $formattedCheckInDate
 		];
 		$statement->execute($parameters);
 	}
@@ -420,7 +449,19 @@ class StudentPermit implements \JsonSerializable {
 		return($studentPermit);
 	}
 
-	public static function getStudentPermitsByStudentPermitCheckOutDateRange(\PDO $pdo, $startDate, $endDate){
+	// TODO add getStudentPermitByCheckInDateRange
+
+	/**
+	 * gets studentPermit by studentPermit check out date range
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param \DateTime $startDate start date of search
+	 * @param \DateTime $endDate end date of search
+	 * @return \SplFixedArray studentPermits found, or null if none are found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getStudentPermitsByStudentPermitCheckOutDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate){
 		// validate dates
 		try {
 			$startDate = self::validateDateTime($startDate);
@@ -439,7 +480,7 @@ class StudentPermit implements \JsonSerializable {
 		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit WHERE studentPermitCheckOutDate >= :startDate AND  studentPermitCheckOutDate <= :endDate";
 		$statement = $pdo->prepare($query);
 
-		// bind the placard id to the place holder in template
+		// bind the parameters
 		$parameters = ["$startDate" => $startDate, "$endDate" => $endDate];
 		$statement->execute($parameters);
 
@@ -467,10 +508,12 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo connection object
-	 * @return \SplFixedArray SplFixedArray of student permit
-	 * @throws \PDOException if unable to update student permits
-	 * @throws \TypeError when student permit is not valid
+	 * get all student permits
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of studentPermits found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
 	 */
 	public static function getAllStudentPermits(\PDO $pdo){
 		// create query template
@@ -502,8 +545,10 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @return array
-	 */
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		return($fields);
