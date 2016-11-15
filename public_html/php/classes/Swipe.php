@@ -23,7 +23,7 @@ class Swipe {
 	 * Swipe constructor.
 	 * @param int|null $newSwipeId if id for this swipe is null or new
 	 * @param int $newSwipeNumber swipe card to search for
-	 * @param int $newSwipeStatus if swipe card has new status or invalid
+	 * @param int $newSwipeStatusTypeId if swipe card has new status or invalid
 	 * @throws \Exception if some other exception occurs
 	 * @throws \TypeError if data types violate type hints
 	 */
@@ -105,7 +105,7 @@ class Swipe {
 
 	/**
 	 * mutator method for swipeStatus
-	 * @param int $newSwipeStatus for new status for swipe card
+	 * @param int $newSwipeStatusTypeId for new status for swipe card
 	 * @throws \RangeException if swipe card status is not valid
 	 */
 	public function setSwipeStatus(int $newSwipeStatusTypeId) {
@@ -113,7 +113,7 @@ class Swipe {
 		if($newSwipeStatusTypeId <= 0) {
 			throw(new \RangeException("swipe status is not positive"));
 		}
-		$this->swipeStatus = $newSwipeStatusTypeId;
+		$this->swipeStatusTypeId = $newSwipeStatusTypeId;
 	}
 
 	/**
