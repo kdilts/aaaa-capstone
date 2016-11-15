@@ -119,6 +119,7 @@ namespace Edu\Cnm\DdcAaaa;
 			$this ->bridgeUserName = $newBridgeUserName;
 		}
 		/**
+		 * inserts this bridge member into database.
 		 * @param \PDO $pdo
 		 * @throws \PDOException
 		 */
@@ -139,6 +140,7 @@ namespace Edu\Cnm\DdcAaaa;
 		}
 
 		/**
+		 * searches bridge by staffId
 		 * @param \PDO $pdo PDO connection object
 		 * @param \string bridgeStaffId search for bridge by StaffId
 		 * @return bridge|null if found or null if not found
@@ -176,9 +178,10 @@ namespace Edu\Cnm\DdcAaaa;
 			return ($bridge);
 		}
 		/**
+		 * searches bridge by bridgeName
 		 * @param \PDO $pdo PDO connection object
 		 * @param string $bridgeName search for bridge by bridge name
-		 * @return bridge|null if found or null if not found
+		 * @return \SplFixedArray if found or null if not found
 		 * @throws \PDOException when mySQL related errors occur
 		 * @throws \TypeError when variables are not the correct data type
 		 */
@@ -214,6 +217,7 @@ namespace Edu\Cnm\DdcAaaa;
 			return $bridges;
 		}
 		/**
+		 * searches bridge by userName
 		 * @param \PDO $pdo
 		 * @param \string $bridgeUserName searches bridge by UserName
 		 * @return \SplFixedArray
@@ -254,6 +258,7 @@ namespace Edu\Cnm\DdcAaaa;
 		}
 
 		/**
+		 * gets all bridge members
 		 * @param \PDO $pdo connection objects
 		 * @return \SplFixedArray SplFi
 		 * @throws \PDOException when mySQL related errors occur
