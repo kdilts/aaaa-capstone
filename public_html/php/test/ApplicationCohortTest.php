@@ -30,9 +30,15 @@ class ApplicationCohortTest extends AaaaTest {
 		// run the default setUp() method first
 		parent::setUp();
 
+//		int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, int $newApplicationCohortId, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, string $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource
+
+		// create date
+		$date = new \DateTime();
+		//$date = $date->format("Y-m-d H:i:s");
+
 		// create an application
 		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source",
-			1, "about you", "hope", "exp", "utmC", "utmM", "utmS");
+			1, "about you", "hope", "exp", "utmC", $date,"utmM", "utmS");
 		$this->application->insert($this->getPDO());
 	}
 

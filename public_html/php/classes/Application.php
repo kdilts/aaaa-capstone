@@ -84,14 +84,14 @@ class Application {
 	 * @param string $newApplicationAboutYou
 	 * @param string $newApplicationHopeToAccomplish
 	 * @param string $newApplicationExperience
-	 * @param string $newApplicationDateTime
+	 * @param \DateTime $newApplicationDateTime
 	 * @param string $newApplicationUtmCampaign
 	 * @param string $newApplicationUtmMedium
 	 * @param string $newApplicationUtmSource
 	 * @throws \Exception
 	 * @throws \TypeError
 	 */
-	public function __construct(int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, int $newApplicationCohortId, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, string $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource){
+	public function __construct(int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, int $newApplicationCohortId, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, \DateTime $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource){
 		try {
 			$this->setApplicationId($newApplicationId);
 			$this->setApplicationFirstName($newApplicationFirstName);
@@ -217,7 +217,12 @@ class Application {
 	 * @param int $newApplicationId
 	 * @throws \RangeException
 	 **/
-	public function setApplicationId(int $newApplicationId) {
+	public function setApplicationId(int $newApplicationId = null) {
+		if($newApplicationId === null){
+			$this->applicationId = null;
+			return;
+		}
+
 		//check if applicationId is negative
 		if($newApplicationId <= 0) {
 			throw(new \RangeException("Application Id cannot be negative."));
