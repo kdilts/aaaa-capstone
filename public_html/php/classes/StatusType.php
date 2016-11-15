@@ -78,6 +78,16 @@ class StatusType {
 		$this->statusTypeId = intval($pdo->lastInsertId());
 
 	}
+
+	public function update(\PDO $pdo){
+
+	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param string $statusTypeName
+	 * @return \SplFixedArray
+	 */
 	public static function getStatusByStatusTypeName(\PDO $pdo, string $statusTypeName) {
 		// sanitize the swipeId before searching
 		$statusTypeName = trim($statusTypeName);
