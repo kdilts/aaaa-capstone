@@ -73,6 +73,8 @@ class Note {
 	}
 
 	/**
+	 * accessor method for note content
+	 *
 	 * @return string value of note content
 	 */
 	public function getNoteContent() {
@@ -80,6 +82,8 @@ class Note {
 	}
 
 	/**
+	 * accessor method for Id of the note
+	 *
 	 * @return int|null of note note type id
 	 */
 	public function getNoteNoteTypeId() {
