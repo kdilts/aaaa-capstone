@@ -17,21 +17,21 @@ class Swipe {
 	/**
 	 * @var int $swipeStatus current status of swipe card
 	 */
-	private $swipeStatus;
+	private $swipeStatusTypeId;
 
 	/**
 	 * Swipe constructor.
 	 * @param int|null $newSwipeId if id for this swipe is null or new
 	 * @param int $newSwipeNumber swipe card to search for
 	 * @param int $newSwipeStatus if swipe card has new status or invalid
-	 * @throws \Exception if some other exception ocurrs
+	 * @throws \Exception if some other exception occurs
 	 * @throws \TypeError if data types violate type hints
 	 */
-	 	public function __construct(int $newSwipeId = null, int $newSwipeNumber, int $newSwipeStatus) {
+	 	public function __construct(int $newSwipeId = null, int $newSwipeNumber, int $newSwipeStatusTypeId) {
 		try {
 			$this->setSwipeId($newSwipeId);
 			$this->setSwipeNumber($newSwipeNumber);
-			$this->setSwipeStatus($newSwipeStatus);
+			$this->setSwipeStatus($newSwipeStatusTypeId);
 		} catch(\InvalidArgumentException $invalidArgumentException) {
 			// rethrow exception to the caller
 			throw(new \InvalidArgumentException($invalidArgumentException->getMessage(), 0, $invalidArgumentException));
@@ -68,7 +68,7 @@ class Swipe {
 	 * @return int
 	 */
 	public function getSwipeStatus() {
-		return ($this->swipeStatus);
+		return ($this->swipeStatusTypeId);
 	}
 
 	/**
@@ -108,12 +108,12 @@ class Swipe {
 	 * @param int $newSwipeStatus for new status for swipe card
 	 * @throws \RangeException if swipe card status is not valid
 	 */
-	public function setSwipeStatus(int $newSwipeStatus) {
+	public function setSwipeStatus(int $newSwipeStatusTypeId) {
 		// verify that newSwipeStatus is positive
-		if($newSwipeStatus <= 0) {
+		if($newSwipeStatusTypeId <= 0) {
 			throw(new \RangeException("swipe status is not positive"));
 		}
-		$this->swipeStatus = $newSwipeStatus;
+		$this->swipeStatus = $newSwipeStatusTypeId;
 	}
 
 	/**
@@ -128,11 +128,11 @@ class Swipe {
 		}
 
 		// create query template
-		$query = "INSERT INTO swipe(swipeId, swipeStatus, swipeNumber) VALUES(:swipeId, :swipeStatus, :swipeNumber)";
+		$query = "INSERT INTO swipe(swipeId, swipeStatusTypeId, swipeNumber) VALUES(:swipeId, :swipeStatus, :swipeNumber)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["swipeId" => $this->swipeId, "swipeStatus" => $this->swipeStatus, "swipeNumber" => $this->swipeNumber];
+		$parameters = ["swipeId" => $this->swipeId, "swipeStatusTypeId" => $this->swipeStatusTypeId, "swipeNumber" => $this->swipeNumber];
 		$statement->execute($parameters);
 
 		// update the null swipeId with what mySQL just gave us
@@ -150,11 +150,11 @@ class Swipe {
 		}
 
 		// create query template
-		$query = "UPDATE swipe SET swipeId = :swipeId, swipeStatus = :swipeStatus, swipeNumber = :swipeNumber WHERE swipeId = :swipeId";
+		$query = "UPDATE swipe SET swipeId = :swipeId, swipeStatusTypeId = :swipeStatusTypeId, swipeNumber = :swipeNumber WHERE swipeId = :swipeId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["swipeId" => $this->swipeId, "swipeStatus" => $this->swipeStatus, "swipeNumber" => $this->swipeNumber];
+		$parameters = ["swipeId" => $this->swipeId, "swipeStatusTypeId" => $this->swipeStatusTypeId, "swipeNumber" => $this->swipeNumber];
 		$statement->execute($parameters);
 	}
 
@@ -170,7 +170,7 @@ class Swipe {
 		}
 
 		// create query template
-		$query = "SELECT swipeId, swipeStatus, swipeNumber FROM swipe WHERE swipeId = :swipeId";
+		$query = "SELECT swipeId, swipeStatusTypeId, swipeNumber FROM swipe WHERE swipeId = :swipeId";
 		$statement = $pdo->prepare($query);
 
 		// bind the swipe id to the place holder in template
@@ -183,7 +183,7 @@ class Swipe {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$swipe = new swipe($row["swipeId"], $row["swipeStatus"], $row["swipeNumber"]);
+				$swipe = new swipe($row["swipeId"], $row["swipeStatusTypeId"], $row["swipeNumber"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
@@ -194,23 +194,23 @@ class Swipe {
 
 	/**
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $swipeStatus new value for swipe status
+	 * @param int $swipeStatusTypeId new value for swipe status
 	 * @return \SplFixedArray SplFixedArray of swipe
 	 * @throws \PDOException when swipe id is not valid
 	 * @throws \TypeError when swipe id is not an integer
 	 */
-	public static function getSwipeBySwipeStatus(\PDO $pdo, int $swipeStatus) {
+	public static function getSwipeBySwipeStatus(\PDO $pdo, int $swipeStatusTypeId) {
 		// sanitize the swipeId before searching
-		if($swipeStatus <= 0) {
-			throw(new \PDOException("swipeStatus not positive"));
+		if($swipeStatusTypeId <= 0) {
+			throw(new \PDOException("swipeStatusTypeId not positive"));
 		}
 
 		// create query template
-		$query = "SELECT swipeId, swipeStatus, swipeNumber FROM swipe WHERE swipeStatus = :swipeStatus";
+		$query = "SELECT swipeId, swipeStatusTypeId, swipeNumber FROM swipe WHERE swipeStatusTypeId = :swipeStatusTypeId";
 		$statement = $pdo->prepare($query);
 
 		// bind the swipe id to the place holder in template
-		$parameters = ["swipeStatus" => $swipeStatus];
+		$parameters = ["swipeStatusTypeId" => $swipeStatusTypeId];
 		$statement->execute($parameters);
 
 		// build an array of swipes
@@ -218,7 +218,7 @@ class Swipe {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$swipe = new Swipe($row["swipeId"], $row["swipeStatus"], $row["swipeNumber"]);
+				$swipe = new Swipe($row["swipeId"], $row["swipeStatusTypeId"], $row["swipeNumber"]);
 				$swipes[$swipes->key()] = $swipe;
 				$swipes->next();
 			} catch(\Exception $exception) {
@@ -243,7 +243,7 @@ class Swipe {
 		}
 
 		// create query template
-		$query = "SELECT swipeId, swipeStatus, swipeNumber FROM swipe WHERE swipeNumber = :swipeNumber";
+		$query = "SELECT swipeId, swipeStatusTypeId, swipeNumber FROM swipe WHERE swipeNumber = :swipeNumber";
 		$statement = $pdo->prepare($query);
 
 		// bind the swipe id to the place holder in template
@@ -255,7 +255,7 @@ class Swipe {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$swipe = new Swipe($row["swipeId"], $row["swipeStatus"], $row["swipeNumber"]);
+				$swipe = new Swipe($row["swipeId"], $row["swipeStatusTypeId"], $row["swipeNumber"]);
 				$swipes[$swipes->key()] = $swipe;
 				$swipes->next();
 			} catch(\Exception $exception) {
@@ -274,7 +274,7 @@ class Swipe {
 	 */
 	public static function getAllSwipes(\PDO $pdo) {
 		// create query template
-		$query = "SELECT swipeId, swipeStatus, swipeNumber FROM swipe";
+		$query = "SELECT swipeId, swipeStatusTypeId, swipeNumber FROM swipe";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -283,7 +283,7 @@ class Swipe {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$swipe = new Swipe($row["swipeId"], $row["swipeStatus"], $row["swipeNumber"]);
+				$swipe = new Swipe($row["swipeId"], $row["swipeStatusTypeId"], $row["swipeNumber"]);
 				$swipes[$swipes->key()] = $swipe;
 				$swipes->next();
 			} catch(\Exception $exception) {
@@ -294,6 +294,11 @@ class Swipe {
 		return $swipes;
 	}
 
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		return ($fields);

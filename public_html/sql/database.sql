@@ -53,11 +53,11 @@ CREATE TABLE placard(
 CREATE TABLE swipe(
 	swipeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	swipeNumber INT UNSIGNED NOT NULL,
-	swipeStatusId INT UNSIGNED NOT NULL,
+	swipeStatusTypeId INT UNSIGNED NOT NULL,
 	INDEX (swipeId),
-	INDEX (swipeStatusId),
+	INDEX (swipeStatusTypeId),
 	PRIMARY KEY(swipeId),
-	FOREIGN KEY(swipeStatusId) REFERENCES statusType(statusTypeId)
+	FOREIGN KEY(swipeStatusTypeId) REFERENCES statusType(statusTypeId)
 );
 
 CREATE TABLE application(
