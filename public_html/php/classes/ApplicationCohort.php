@@ -3,6 +3,11 @@
 namespace Edu\Cnm\DdcAaaa;
 
 /**
+ * cross section of the Application Cohort assignments
+ *
+ * This example of the assignations and uses within the app that cnm will use to automatize the application
+ * process
+ *
  * class applicationCohort for aaaa
  *
  * @version 1.0.0
@@ -10,29 +15,32 @@ namespace Edu\Cnm\DdcAaaa;
 class ApplicationCohort implements \JsonSerializable {
 
 	/**
+	 * id for this applicationCohort; this is the primary key
 	 * @var $applicationCohortId
 	 */
 	private $applicationCohortId;
 
 	/**
-	 * @var $applicationCohortApplicationIdId
+	 * id for the application cohort; this is a foreign key
+	 * @var $applicationCohortApplicationId
 	 */
 	private $applicationCohortApplicationId;
 
 	/**
+	 * id for the application assigned according to applicable cohort
 	 * @var $applicationCohortCohortId
 	 */
 	private $applicationCohortCohortId;
 
 	/**
 	 * applicationCohort constructor.
-	 * @param int|null $newApplicationCohortId
-	 * @param int $newApplicationCohortApplicationId
-	 * @param int $newApplicationCohortCohortId
-	 * @throws \InvalidArgumentException
-	 * @throws \RangeException
-	 * @throws \TypeError
-	 * @throws \Exception
+	 * @param int|null $newApplicationCohortId id of this application or null if a new application
+	 * @param int $newApplicationCohortApplicationId id of the application assigned to a cohort
+	 * @param int $newApplicationCohortCohortId id of the cohort
+	 * @throws \InvalidArgumentException if data is not valid
+	 * @throws \RangeException if data values are out of bounds
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
 	 */
 	public function __construct(int $newApplicationCohortId = null, int $newApplicationCohortApplicationId, int $newApplicationCohortCohortId) {
 		try {
@@ -55,71 +63,86 @@ class ApplicationCohort implements \JsonSerializable {
 	}
 
 	/**
-	 * @return int
+	 * accessor method for the cohort id
+	 * @return int|null value for the cohort id
 	 */
 	public function getApplicationCohortId() {
 		return($this->applicationCohortId);
 	}
 
 	/**
-	 * @return int
+	 * accessor method for the cohort application id
+	 * @return int value for the cohort application id
 	 */
 	public function getApplicationCohortApplicationId() {
 		return($this->applicationCohortApplicationId);
 	}
 
 	/**
-	 * @return int
+	 * accessor method for the application cohort cohort id
+	 * @return int value of the application cohort cohort id
 	 */
 	public function getApplicationCohortCohortId() {
 		return($this->applicationCohortCohortId);
 	}
-	
+
 	/**
-	 * @param $newApplicationCohortId
-	 * @throws \RangeException
+	 * mutator method for the application cohort id
+	 * @param int $newApplicationCohortId new value of tweet id
+	 * @throws \RangeException if $newApplicationCohortId is not positive
 	 */
 	public function setApplicationCohortId($newApplicationCohortId) {
-		// base case: if the applicationCohortId is null
+		// base case: if the applicationCohortId is null, this is a new applicationCohortId without a mySQL assigned id (yet)
 		if($newApplicationCohortId === null)	{
 			$this->applicationCohortId = null;
 			return;
 		}
 
-		// input validation
+		// verify the application cohort id is positive
 		if($newApplicationCohortId <= 0){
 			throw(new \RangeException("applicationCohortId is not positive"));
 		}
+
+		// convert and store the application cohort id
 		$this->applicationCohortId = $newApplicationCohortId;
 	}
 
 	/**
-	 * @param $newApplicationCohortApplicationId
-	 * @throws \RangeException
+	 * mutator method for tweet profile id
+	 *
+	 * @param int $newApplicationCohortApplicationId new value of application cohort application id
+	 * @throws \RangeException if new application cohort application id is not positive
 	 */
 	public function setApplicationCohortApplicationId($newApplicationCohortApplicationId) {
-		// input validation
+		// verify the application cohort application id is positive
 		if($newApplicationCohortApplicationId <= 0){
 			throw(new \RangeException("applicationCohortApplicationId is not positive"));
 		}
+
+		// convert and store the profile id
 		$this->applicationCohortApplicationId = $newApplicationCohortApplicationId;
 	}
 
 	/**
-	 * @param $newApplicationCohortCohortId
-	 * @throws \RangeException
+	 * mutator method for application cohort cohort id
+	 *
+	 * @param int $newApplicationCohortCohortId new value of application cohort cohort id
+	 * @throws \RangeException if $newApplicationCohortCohortId is not positive
 	 */
 	public function setApplicationCohortCohortId($newApplicationCohortCohortId) {
-		// input validation
+		// verify the application cohort cohort id is positive
 		if($newApplicationCohortCohortId <= 0){
 			throw(new \RangeException("applicationCohortCohortId is not positive"));
 		}
+
+		// store the application cohort cohort id
 		$this->applicationCohortCohortId = $newApplicationCohortCohortId;
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * insert this Application Cohort into mySQL
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException if application cohort is not positive
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the applicationsCohortId is null (i.e., don't insert an applicationCohort that already exists)
@@ -129,22 +152,27 @@ class ApplicationCohort implements \JsonSerializable {
 		// create query template
 		$query = "INSERT INTO applicationCohort(applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId) VALUES(:applicationCohortId, :applicationCohortApplicationId, :applicationCohortCohortId)";
 		$statement = $pdo->prepare($query);
-		// bind the member variables to the place holders in the template
+		// bind the application variables to the place holders in the template
 		$parameters = [
 			"applicationCohortId" => $this->applicationCohortId,
 			"applicationCohortApplicationId" => $this->applicationCohortApplicationId,
 			"applicationCohortCohortId" => $this->applicationCohortCohortId
 		];
 		$statement->execute($parameters);
-		// update the null cohortId with what mySQL just gave us
+		// update the null applicationCohortId with what mySQL just gave us
 		$this->applicationCohortId = intval($pdo->lastInsertId());
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $applicationCohortId
-	 * @return ApplicationCohort|null
-	 */
+	 * gets the application Cohort by application cohort id
+	 *
+	 * @param \PDO $pdo connection to the object
+	 * @param int $applicationCohortId new value of application cohort id
+	 * @return \SplFixedArray SplFixedArray of Applications Cohort found
+	 * @return applicationCohort|null Application Cohort found or null if not found
+	 * @throws \PDOException if application cohort id is not positive
+
+*/
 	public static function getApplicationCohortByApplicationCohortId(\PDO $pdo, int $applicationCohortId){
 		// sanitize the applicationCohortId before searching
 		if($applicationCohortId <= 0){
@@ -175,10 +203,14 @@ class ApplicationCohort implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $applicationCohortId
-	 * @return ApplicationCohort|null
+	 * gets the Application Cohort by application id
+	 * @param \PDO $pdo connection object
+	 * @param int $applicationCohortId application cohort id to search for
+	 * @return \SplFixedArray SplFixedArray of applications cohorts found
+	 * @return applicationCohort|null when application cohort found or null if not found
+	 * @throws \PDOException if application cohort application id is not positive
 	 */
+
 	public function getApplicationCohortByApplicationId (\PDO $pdo, int $applicationCohortId){
 		//sanitize the applicationCohortId before searching
 		if ($applicationCohortId <=0) {
@@ -205,9 +237,11 @@ class ApplicationCohort implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $applicationCohortId
-	 * @return ApplicationCohort|null
+	 * gets the Application Cohort Id
+	 * @param \PDO $pdo connection object
+	 * @param int $applicationCohortId application cohort id to search for
+	 * @return ApplicationCohort|null found or not found
+	 * @throws \PDOException if application cohort cohort id is not positive
 	 */
 	public function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortId){
 		//sanitize the applicationCohortId before searching
