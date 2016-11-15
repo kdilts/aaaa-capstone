@@ -312,6 +312,7 @@ class Placard implements \JsonSerializable {
 		}
 		return $placards;
 	}
+
 	/**
 	 * formats the state variables for JSON serialization
 	 *

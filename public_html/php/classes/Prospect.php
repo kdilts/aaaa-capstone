@@ -1,42 +1,61 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
+
+/**
+ * Class Prospect
+ * contains information about prospective students
+ * @package Edu\Cnm\DdcAaaa
+ */
 class Prospect implements \JsonSerializable {
+
 	/**
+	 * id for this prospect - primary key
 	 * @var int $prospectId
 	 */
 	private $prospectId;
+
 	/**
+	 * cohort id for this prospect
 	 * @var int $prospectCohortId
 	 */
 	private $prospectCohortId;
+
 	/**
+	 * phone number for this prospect
 	 * @var string $prospectPhoneNumber
 	 */
 	private $prospectPhoneNumber;
+
 	/**
+	 * email for this prospect
 	 * @var string $prospectEmail
 	 */
 	private $prospectEmail;
+
 	/**
+	 * first name for this prospect
 	 * @var string $prospectFirstName
 	 */
 	private $prospectFirstName;
+
 	/**
+	 * last name for this prospect
 	 * @var string $prospectLastName
 	 */
 	private $prospectLastName;
+
 	/**
 	 * Prospect constructor.
-	 * @param int|null $newProspectId
-	 * @param int $newProspectCohortId
-	 * @param string $newProspectPhoneNumber
-	 * @param string $newProspectEmail
-	 * @param string $newProspectFirstName
-	 * @param string $newProspectLastName
-	 * @throws \InvalidArgumentException
-	 * @throws \RangeException
-	 * @throws \TypeError
-	 * @throws \Exception
+	 * @param int|null $newProspectId new id for this prospect, null if new prospect
+	 * @param int $newProspectCohortId cohort id for this prospect
+	 * @param string $newProspectPhoneNumber phone number for this prospect
+	 * @param string $newProspectEmail email for this prospect
+	 * @param string $newProspectFirstName first name for this prospect
+	 * @param string $newProspectLastName last name for this prospect
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data is not out of bounds
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs.
 	 */
 	public function __construct(int $newProspectId = null, int $newProspectCohortId, string $newProspectPhoneNumber, string $newProspectEmail, string $newProspectFirstName, string $newProspectLastName){
 		try {
@@ -56,64 +75,84 @@ class Prospect implements \JsonSerializable {
 			throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
 	}
+
 	/**
-	 * @return int
+	 * accessor method for prospect id
+	 * @return int  value of prospect id
 	 */
 	public function getProspectId(){
 		return($this->getProspectId());
 	}
 	/**
-	 * @return int
+	 * accessor method for prospect cohort id
+	 * @return int value of prospect cohort id
 	 */
 	public function getProspectCohortId(){
 		return($this->getProspectCohortId());
 	}
 	/**
-	 * @return string
+	 * accessor method for prospect phone number
+	 * @return string value of prospect phone number
 	 */
 	public function getProspectPhoneNumber(){
 		return($this->getProspectPhoneNumber());
 	}
 	/**
-	 * @return string
+	 * accessor method for prospect email
+	 * @return string value of prospect email
 	 */
 	public function getProspectEmail(){
 		return($this->getProspectEmail());
 	}
 	/**
-	 * @return string
+	 * accessor method for prospect first name
+	 * @return string value of prospect first name
 	 */
 	public function getProspectFirstName(){
 		return($this->getProspectFirstName());
 	}
 	/**
-	 * @return string
+	 * accessor method for prospect last name
+	 * @return string value of prospect last name
 	 */
 	public function getProspectLastName(){
 		return($this->getProspectLastName());
 	}
+
 	/**
-	 * @param $newProspectId
+	 * mutator method for prospect id
+	 * @param int|null $newProspectId new value for prospect Id
+	 * @throws \RangeException throws this if number is negative, or 0.
+	 * @throws \TypeError throws this if $newProspectId is not an integer.
 	 */
-	public function setProspectId($newProspectId){
+	public function setProspectId(int $newProspectId){
 		if ($newProspectId <= 0) {
 			throw(new \RangeException("Prospect ID cannot be negative."));
 		}
 		$this->prospectId=$newProspectId;
 	}
+
 	/**
-	 * @param $newProspectCohortId
+	 * mutator method for prospect cohort id
+	 * @param int $newProspectCohortId new value for prospect cohort id
+	 * @throws \RangeException throws this if number is negative, or 0.
+	 * @throws \TypeError throws this if $newProspectId is not an integer.
 	 */
-	public function setProspectCohortId($newProspectCohortId){
+	public function setProspectCohortId(int $newProspectCohortId){
 		if ($newProspectCohortId <= 0) {
 			throw(new \RangeException("Prospect Cohort ID cannot be negative."));
 		}
 		$this->prospectCohortId=$newProspectCohortId;
 	}
+
 	/**
-	 * @param $newProspectPhoneNumber
+	 * mutator method for prospect phone number
+	 * @param string $newProspectPhoneNumber new value for prospect phone number
+	 * @throws \InvalidArgumentException if $newProspectPhoneNumber is not a string or insecure
+	 * @throws \RangeException if $newProspectPhoneNumber is > 100 characters
+	 * @throws \TypeError if $newProspectPhoneNumber is not a string
 	 */
-	public function setProspectPhoneNumber($newProspectPhoneNumber){
+	public function setProspectPhoneNumber(string $newProspectPhoneNumber){
 		// verify the prospect phone number is secure
 		$newProspectPhoneNumber = trim($newProspectPhoneNumber);
 		$newProspectPhoneNumber = filter_var($newProspectPhoneNumber, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -127,10 +166,15 @@ class Prospect implements \JsonSerializable {
 		// store phone number
 		$this->prospectPhoneNumber=$newProspectPhoneNumber;
 	}
+
 	/**
-	 * @param $newProspectEmail
+	 * mutator method for prospect email
+	 * @param string $newProspectEmail new value for prospect email
+	 * @throws \InvalidArgumentException if $newProspectEmail is not a string or insecure
+	 * @throws \RangeException if $newProspectEmail is > 30 characters
+	 * @throws \TypeError if $newProspectEmail is not a string
 	 */
-	public function setProspectEmail($newProspectEmail){
+	public function setProspectEmail(string $newProspectEmail){
 		// verify the email is secure
 		$newProspectEmail = trim($newProspectEmail);
 		$newProspectEmail = filter_var($newProspectEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -144,10 +188,15 @@ class Prospect implements \JsonSerializable {
 		// store email
 		$this->prospectEmail=$newProspectEmail;
 	}
+
 	/**
-	 * @param $newProspectFirstName
+	 * mutator method for prospect first name
+	 * @param string $newProspectFirstName new value for prospect first name
+	 * @throws \InvalidArgumentException if $newProspectFirstName is not a string or insecure
+	 * @throws \RangeException if $newProspectFirstName is > 40 characters
+	 * @throws \TypeError if $newProspectFirstName is not a string
 	 */
-	public function setProspectFirstName($newProspectFirstName){
+	public function setProspectFirstName(string $newProspectFirstName){
 		// verify the first name is secure
 		$newProspectFirstName = trim($newProspectFirstName);
 		$newProspectFirstName = filter_var($newProspectFirstName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -161,10 +210,15 @@ class Prospect implements \JsonSerializable {
 		// store first name
 		$this->prospectFirstName=$newProspectFirstName;
 	}
+
 	/**
-	 * @param $newProspectLastName
+	 * mutator method for prospect last name
+	 * @param string $newProspectLastName new value for prospect last name
+	 * @throws \InvalidArgumentException if $newProspectLastName is not a string or insecure
+	 * @throws \RangeException if $newProspectLastName is > 40 characters
+	 * @throws \TypeError if $newProspectLastName is not a string
 	 */
-	public function setProspectLastName($newProspectLastName){
+	public function setProspectLastName(string $newProspectLastName){
 		// verify the last name is secure
 		$newProspectLastName = trim($newProspectLastName);
 		$newProspectLastName = filter_var($newProspectLastName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -180,8 +234,10 @@ class Prospect implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * insert this prospect into mySQL
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL errors occur.
+	 * @throws \TypeError if $pdo is not a PDO connection object
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the prospectId is null (i.e., don't insert a prospect that already exists)
@@ -209,11 +265,14 @@ class Prospect implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $prospectId
-	 * @return Prospect|null
-	 * @throws \PDOException
-	 */
+	 * gets prospects by prospect id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $prospectId to search by
+	 * @return Prospect|null prospect if found, null if not
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
 	public static function getProspectByProspectId(\PDO $pdo, int $prospectId){
 		// sanitize the prospectId before searching
 		if($prospectId <= 0){
@@ -251,12 +310,15 @@ class Prospect implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $prospectCohortId
-	 * @return Prospect|null
-	 * @throws \PDOException
-	 */
-	public static function getProspectByProspectCohortId(\PDO $pdo, int $prospectCohortId){
+	 * gets prospects by prospect cohort id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $prospectCohortId to search by
+	 * @return \SplFixedArray SplFixedArray of prospects found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getProspectByProspectsCohortId(\PDO $pdo, int $prospectCohortId){
 		// sanitize the prospectId before searching
 		if($prospectCohortId <= 0){
 			throw(new \PDOException("prospectCohortId not positive"));
@@ -271,6 +333,7 @@ class Prospect implements \JsonSerializable {
 		$statement->execute($parameters);
 
 		// grab prospect from SQL
+		// TODO change to plural -- use while loop and \SPL array
 		try {
 			$prospect = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
@@ -293,11 +356,14 @@ class Prospect implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param int $prospectEmail
-	 * @return Prospect|null
-	 * @throws \PDOException
-	 */
+	 * gets the prospect by prospect email
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $prospectEmail to search by
+	 * @return Prospect|null prospect found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
 	public static function getProspectByProspectEmail(\PDO $pdo, int $prospectEmail){
 		// sanitize the prospectEmail before searching
 		$prospectEmail = trim($prospectEmail);
@@ -337,10 +403,14 @@ class Prospect implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param string $prospectName
-	 * @return Prospect|null
-	 */
+	 * gets prospects by prospect name
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $prospectName to search by
+	 * @return \SplFixedArray SplFixedArray of prospects found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
 	public static function getProspectsByProspectName(\PDO $pdo, string $prospectName){
 		// sanitize the prospectEmail before searching
 		$prospectName = trim($prospectName);
@@ -359,6 +429,7 @@ class Prospect implements \JsonSerializable {
 		$statement->execute($parameters);
 
 		// grab prospect from SQL
+		// TODO change to plural -- use SPL array
 		try {
 			$prospect = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
@@ -381,8 +452,10 @@ class Prospect implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @return \SplFixedArray
+	 * get all prospects
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of prospects found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
@@ -416,8 +489,10 @@ class Prospect implements \JsonSerializable {
 	}
 
 	/**
-	 * @return array
-	 */
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		return($fields);
