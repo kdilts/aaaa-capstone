@@ -100,6 +100,8 @@ class Note {
 	}
 
 	/**
+	 * accessor method for Id of prospect note
+	 *
 	 * @return mixed
 	 */
 	public function getNoteProspectId() {
