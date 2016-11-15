@@ -153,6 +153,39 @@ class Cohort implements \JsonSerializable {
 
 	/**
 	 * @param \PDO $pdo
+	 * @param int $cohortApplicationId
+	 * @return Cohort|null
+	 */
+	public static function getCohortByCohortApplicationId(\PDO $pdo, int $cohortApplicationId){
+		// sanitize the cohortId before searching
+		if($cohortApplicationId <= 0){
+			throw(new \PDOException("cohortApplicationId not positive"));
+		}
+
+		// create query template
+		$query = "SELECT cohortId, cohortApplicationId From cohort WHERE cohortApplicationId = :cohortApplicationId";
+		$statement = $pdo->prepare($query);
+
+		// bind the cohort id to the place holder in template
+		$parameters = ["cohortApplicationId" => $cohortApplicationId];
+		$statement->execute($parameters);
+
+		// grab cohort from SQL
+		try {
+			$cohort = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$cohort = new Cohort($row["cohortId"], $row["cohortApplicationId"]);
+			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($cohort);
+	}
+	/**
+	 * @param \PDO $pdo
 	 * @return \SplFixedArray
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type

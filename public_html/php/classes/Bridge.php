@@ -137,7 +137,6 @@ namespace Edu\Cnm\DdcAaaa;
 			// update the null bridgeStaffId with what mySQL just gave us
 			$this->bridgeStaffId = intval($pdo->lastInsertId());
 		}
-
 		/**
 		 * @param \PDO $pdo
 		 * @param string $bridgeStaffId
@@ -173,13 +172,11 @@ namespace Edu\Cnm\DdcAaaa;
 			}
 			return ($bridge);
 		}
-
 		/**
 		 * @param \PDO $pdo
 		 * @param int $bridgeName
 		 * @return \SplFixedArray
 		 */
-
 		public static function getBridgeByBridgeName(\PDO $pdo, int $bridgeName) {
 			// sanitize the bridgeName before searching
 			$bridgeName = trim($bridgeName);
@@ -211,13 +208,11 @@ namespace Edu\Cnm\DdcAaaa;
 			}
 			return $bridges;
 		}
-
 		/**
 		 * @param \PDO $pdo
 		 * @param string $bridgeUserName
 		 * @return \SplFixedArray
 		 */
-
 		public static function getBridgeByBridgeUserName(\PDO $pdo, string $bridgeUserName) {
 			// sanitize the bridgeUserName before searching
 			$bridgeUserName = trim($bridgeUserName);
