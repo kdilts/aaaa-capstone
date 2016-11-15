@@ -140,6 +140,11 @@ class ApplicationCohort implements \JsonSerializable {
 		$this->applicationCohortId = intval($pdo->lastInsertId());
 	}
 
+	/**
+	 * @param \PDO $pdo
+	 * @param int $applicationCohortId
+	 * @return ApplicationCohort|null
+	 */
 	public static function getApplicationCohortByApplicationCohortId(\PDO $pdo, int $applicationCohortId){
 		// sanitize the applicationCohortId before searching
 		if($applicationCohortId <= 0){
@@ -169,6 +174,11 @@ class ApplicationCohort implements \JsonSerializable {
 		return($applicationCohort);
 	}
 
+	/**
+	 * @param \PDO $pdo
+	 * @param int $applicationCohortId
+	 * @return ApplicationCohort|null
+	 */
 	public function getApplicationCohortByApplicationId (\PDO $pdo, int $applicationCohortId){
 		//sanitize the applicationCohortId before searching
 		if ($applicationCohortId <=0) {
@@ -193,6 +203,12 @@ class ApplicationCohort implements \JsonSerializable {
 		}
 		return($applicationCohort);
 	}
+
+	/**
+	 * @param \PDO $pdo
+	 * @param int $applicationCohortId
+	 * @return ApplicationCohort|null
+	 */
 	public function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortId){
 		//sanitize the applicationCohortId before searching
 		if ($applicationCohortId <=0){
