@@ -7,7 +7,7 @@ namespace Edu\Cnm\DdcAaaa;
  *
  * @version 1.0.0
  **/
-class applicationCohort implements \JsonSerializable {
+class ApplicationCohort implements \JsonSerializable {
 
 	/**
 	 * @var $applicationCohortId

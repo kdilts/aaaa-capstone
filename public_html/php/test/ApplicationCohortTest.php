@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{applicationCohort};
+use Edu\Cnm\DdcAaaa\{ApplicationCohort, Application};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -21,7 +21,7 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
 class ApplicationCohortTest extends AaaaTest {
 
 	private $VALID_APPLICATIONCOHORTAPPLICATIONID = 1;
-	PRIVATE $VALID_APPLICATIONCOHORTCOHORTID = 2;
+	private $VALID_APPLICATIONCOHORTCOHORTID = 2;
 
 	/**
 	 * create dependent objects before running each test
