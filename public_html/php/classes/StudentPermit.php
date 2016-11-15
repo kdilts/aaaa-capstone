@@ -249,8 +249,10 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo connection object
-	 * @throws \PDOException if unable to update a student permit that does not exist
+	 * update this studentPermit in mySQL
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL errors occur.
+	 * @throws \TypeError if $pdo is not a PDO connection object
 	 */
 	public function update(\PDO $pdo) {
 		// enforce the studentPermitId is not null (i.e., don't update a studentPermit that hasn't been inserted)
@@ -278,10 +280,13 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param $studentPermitId
-	 * @return StudentPermit|null
-	 * @throws \PDOException
+	 * gets studentPermit by studentPermit Id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $studentPermitPlacardId id to search for
+	 * @return StudentPermit student permit found, or null if none are found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
 	 */
 	public static function getStudentPermitByStudentPermitId(\PDO $pdo, $studentPermitId){
 		// sanitize the studentPermitId before searching
@@ -321,10 +326,13 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param $studentPermitApplicationId
-	 * @return StudentPermit|null
-	 * @throws \PDOException
+	 * gets studentPermit by studentPermit placard Id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $studentPermitPlacardId placard id to search for
+	 * @return StudentPermit student permit found, or null if none are found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
 	 */
 	public static function getStudentPermitByStudentPermitApplicationId(\PDO $pdo, $studentPermitApplicationId){
 		// sanitize the studentPermitId before searching
@@ -364,12 +372,15 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param $studentPermitSwipeId
-	 * @return StudentPermit|null
-	 * @throws \PDOException
+	 * gets studentPermit by studentPermit swipe Id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $studentPermitSwipeId swipe id to search for
+	 * @return StudentPermit student swipe found, or null if none are found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getStudentPermitByStudentPermitSwipeId(\PDO $pdo, $studentPermitSwipeId){
+	public static function getStudentPermitByStudentPermitSwipeId(\PDO $pdo, int $studentPermitSwipeId){
 		// sanitize the studentPermitId before searching
 		if($studentPermitSwipeId <= 0){
 			throw(new \PDOException("studentPermitSwipeId not positive"));
@@ -407,12 +418,15 @@ class StudentPermit implements \JsonSerializable {
 	}
 
 	/**
-	 * @param \PDO $pdo
-	 * @param $studentPermitPlacardId
-	 * @return StudentPermit|null
-	 * @throws \PDOException
+	 * gets studentPermit by studentPermit placard Id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $studentPermitPlacardId placard id to search for
+	 * @return StudentPermit student permit found, or null if none are found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getStudentPermitByStudentPermitPlacardId(\PDO $pdo, $studentPermitPlacardId){
+	public static function getStudentPermitByStudentPermitPlacardId(\PDO $pdo, int $studentPermitPlacardId){
 		// sanitize the studentPermitId before searching
 		if($studentPermitPlacardId <= 0){
 			throw(new \PDOException("studentPermitPlacardId not positive"));
