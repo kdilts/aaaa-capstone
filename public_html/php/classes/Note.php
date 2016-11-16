@@ -168,7 +168,7 @@ class Note {
 	public function setNoteApplicationId(int $newNoteApplicationId) {
 		if($newNoteApplicationId < 0) {
 			throw(new \RangeException("Note Application Id can't be negative."));
-
+//set application Id
 		}
 		$this->noteApplicationId = $newNoteApplicationId;
 	}
@@ -181,7 +181,7 @@ class Note {
 	public function setNoteProspectId(int $newNoteProspectId) {
 		if($newNoteProspectId < 0) {
 			throw(new \RangeException("Note Prospect Id can't be negative."));
-
+//set prospect Id
 		}
 		$this->noteProspectId = $newNoteProspectId;
 	}
