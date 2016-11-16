@@ -1,7 +1,6 @@
 <phpunit>
 	<testsuites>
 		<testsuite name="AAAA Data Design">
-			<file>StatusTypeTest.php</file>
 			<file>PlacardTest.php</file>
 		</testsuite>
 	</testsuites>
