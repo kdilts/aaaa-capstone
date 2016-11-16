@@ -218,6 +218,7 @@ class Note {
 	}
 
 	/**
+	 * insert note, by the note Id into the mySQL
 	 * @param \PDO $pdo
 	 * @param int $noteId
 	 * @return \SplFixedArray
