@@ -140,6 +140,7 @@ class Note {
 		$newNoteContent = filter_var($newNoteContent, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newNoteContent) === true) {
 			throw (new \InvalidArgumentException("Note content is either empty or insecure."));
+			//set content of the note
 		}
 		$this->noteContent = $newNoteContent;
 	}
