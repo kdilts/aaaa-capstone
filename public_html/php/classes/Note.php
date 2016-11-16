@@ -189,8 +189,10 @@ class Note {
 	}
 
 	/**
+	 * inserts note Id into mySQL
 	 * @param \PDO $pdo
 	 * @throws \PDOException
+	 *
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the noteId is null (i.e., don't insert a noteId that already exists)
