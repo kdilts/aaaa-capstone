@@ -18,7 +18,7 @@ class Placard implements \JsonSerializable {
 	 * current status of placard
 	 * @var int $placardStatus
 	 */
-	private $placardStatusId;
+	private $placardStatusTypeId;
 
 	/**
 	 * number on the placard
@@ -29,18 +29,18 @@ class Placard implements \JsonSerializable {
 	/**
 	 * Placard constructor.
 	 * @param int|null $newPlacardId ID of this placard or null if empty
-	 * @param int $newPlacardStatusId status of placard, int because it will be an enumerator
+	 * @param int $newPlacardStatusTypeId status of placard, int because it will be an enumerator
 	 * @param int $newPlacardNumber number on the physical placard
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data is not out of bounds
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs.
 	 */
-	public function __construct(int $newPlacardId = null, int $newPlacardStatusId, int $newPlacardNumber) {
+	public function __construct(int $newPlacardId = null, int $newPlacardStatusTypeId, int $newPlacardNumber) {
 		try {
 			$this->setPlacardId($newPlacardId);
 			$this->setPlacardNumber($newPlacardNumber);
-			$this->setPlacardStatusId($newPlacardStatusId);
+			$this->setPlacardStatusTypeId($newPlacardStatusTypeId);
 			}catch(\InvalidArgumentException $invalidArgument) {
 				throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
 			}catch(\RangeException $range) {
@@ -73,8 +73,8 @@ class Placard implements \JsonSerializable {
 	 * accessor for placard status
 	 * @return int value of placardStatus
 	 */
-	public function getPlacardStatusId() {
-		return $this->placardStatusId;
+	public function getPlacardStatusTypeId() {
+		return $this->placardStatusTypeId;
 	}
 
 	/**
@@ -112,15 +112,15 @@ class Placard implements \JsonSerializable {
 
 	/**
 	 * mutator for placard status
-	 * @param int $newPlacardStatusId new placard status
+	 * @param int $newPlacardStatusTypeId new placard status
 	 * @throws \RangeException throws if status is less than 0
-	 * @throws \TypeError throws this if $newPlacardStatusId is not an integer.
+	 * @throws \TypeError throws this if $newPlacardStatusTypeId is not an integer.
 	 */
-	public function setPlacardStatusId(int $newPlacardStatusId) {
-		if ($newPlacardStatusId < 0) {
+	public function setPlacardStatusTypeId(int $newPlacardStatusTypeId) {
+		if ($newPlacardStatusTypeId < 0) {
 			throw(new \RangeException("Placard status invalid."));
 		}
-		$this->placardStatusId = $newPlacardStatusId;
+		$this->placardStatusTypeId = $newPlacardStatusTypeId;
 	}
 
 	/**
@@ -136,11 +136,11 @@ class Placard implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "INSERT INTO placard(placardId, placardStatusId, placardNumber) VALUES(:placardId, :placardStatusId, :placardNumber)";
+		$query = "INSERT INTO placard(placardId, placardStatusTypeId, placardNumber) VALUES(:placardId, :placardStatusTypeId, :placardNumber)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["placardId" => $this->placardId, "placardStatusId" => $this->placardStatusId, "placardNumber" => $this->placardNumber];
+		$parameters = ["placardId" => $this->placardId, "placardStatusTypeId" => $this->placardStatusTypeId, "placardNumber" => $this->placardNumber];
 		$statement->execute($parameters);
 
 		// update the null placardId with what mySQL just gave us
@@ -160,11 +160,11 @@ class Placard implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "UPDATE placard SET placardId = :placardId, placardStatusId = :placardStatus, placardNumber = :placardNumber WHERE placardId = :placardId";
+		$query = "UPDATE placard SET placardId = :placardId, placardStatusTypeId = :placardStatus, placardNumber = :placardNumber WHERE placardId = :placardId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["placardId" => $this->placardId, "placardStatus" => $this->placardStatusId, "placardNumber" => $this->placardNumber];
+		$parameters = ["placardId" => $this->placardId, "placardStatus" => $this->placardStatusTypeId, "placardNumber" => $this->placardNumber];
 		$statement->execute($parameters);
 	}
 
@@ -184,7 +184,7 @@ class Placard implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT placardId, placardStatusId, placardNumber From placard WHERE placardId = :placardId";
+		$query = "SELECT placardId, placardStatusTypeId, placardNumber From placard WHERE placardId = :placardId";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
@@ -197,7 +197,7 @@ class Placard implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$placard = new Placard($row["placardId"], $row["placardStatusId"], $row["placardNumber"]);
+				$placard = new Placard($row["placardId"], $row["placardStatusTypeId"], $row["placardNumber"]);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
@@ -210,23 +210,23 @@ class Placard implements \JsonSerializable {
 	 * gets placards by placard status id
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $placardStatusId current placard status.
+	 * @param int $placardStatusTypeId current placard status.
 	 * @return \SplFixedArray of placards found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getPlacardsByPlacardStatusId(\PDO $pdo, int $placardStatusId){
+	public static function getPlacardsByPlacardStatusTypeId(\PDO $pdo, int $placardStatusTypeId){
 		// sanitize the placardId before searching
-		if($placardStatusId <= 0){
-			throw(new \PDOException("placardStatusId not positive"));
+		if($placardStatusTypeId <= 0){
+			throw(new \PDOException("placardStatusTypeId not positive"));
 		}
 
 		// create query template
-		$query = "SELECT placardId, placardStatusId, placardNumber From placard WHERE placardStatusId = :placardStatusId";
+		$query = "SELECT placardId, placardStatusTypeId, placardNumber From placard WHERE placardStatusTypeId = :placardStatusTypeId";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
-		$parameters = ["placardStatusId" => $placardStatusId];
+		$parameters = ["placardStatusTypeId" => $placardStatusTypeId];
 		$statement->execute($parameters);
 
 		// build an array of placards
@@ -234,7 +234,7 @@ class Placard implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false){
 			try {
-				$placard = new Placard($row["placardId"], $row["placardStatusId"], $row["placardNumber"]);
+				$placard = new Placard($row["placardId"], $row["placardStatusTypeId"], $row["placardNumber"]);
 				$placards[$placards->key()] = $placard;
 				$placards->next();
 			} catch(\Exception $exception){
@@ -261,7 +261,7 @@ class Placard implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT placardId, placardStatusId, placardNumber From placard WHERE placardNumber = :placardNumber";
+		$query = "SELECT placardId, placardStatusTypeId, placardNumber From placard WHERE placardNumber = :placardNumber";
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
@@ -274,7 +274,7 @@ class Placard implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$placard = new Placard($row["placardId"], $row["placardStatusId"], $row["placardNumber"]);
+				$placard = new Placard($row["placardId"], $row["placardStatusTypeId"], $row["placardNumber"]);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
@@ -293,7 +293,7 @@ class Placard implements \JsonSerializable {
 	 */
 	public static function getAllPlacards(\PDO $pdo){
 		// create query template
-		$query = "SELECT placardId, placardStatusId, placardNumber From placard";
+		$query = "SELECT placardId, placardStatusTypeId, placardNumber From placard";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -302,7 +302,7 @@ class Placard implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false){
 			try {
-				$placard = new Placard($row["placardId"], $row["placardStatusId"], $row["placardNumber"]);
+				$placard = new Placard($row["placardId"], $row["placardStatusTypeId"], $row["placardNumber"]);
 				$placards[$placards->key()] = $placard;
 				$placards->next();
 			} catch(\Exception $exception){
