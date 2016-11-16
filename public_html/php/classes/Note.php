@@ -123,6 +123,7 @@ class Note {
 
 		if($newNoteId <= 0) {
 			throw(new \RangeException("Note Id is not positive."));
+			//store the Note Id
 		}
 		$this->noteId = $newNoteId;
 	}
