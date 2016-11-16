@@ -326,6 +326,7 @@ class Note {
 	}
 
 	/**
+	 * get note by note of the noteId
 	 * @param \PDO $pdo
 	 * @param int $noteNoteTypeId
 	 * @return \SplFixedArray
