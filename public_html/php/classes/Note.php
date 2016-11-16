@@ -155,7 +155,7 @@ class Note {
 		if($newNoteNoteTypeId < 0) {
 			throw(new \RangeException("Note Note Type Id can't be negative."));
 		}
-
+//set id for the Note type
 		$this->noteNoteTypeId = $newNoteNoteTypeId;
 	}
 
