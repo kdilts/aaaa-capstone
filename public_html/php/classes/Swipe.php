@@ -5,21 +5,25 @@ namespace Edu\Cnm\DdcAaaa;
 class Swipe {
 
 	/**
+	 * id for this swipe is the primary key
 	 * @var int $swipeId Id for parking swipe card
 	 */
 	private $swipeId;
 
 	/**
+	 * number is always growing for the data
 	 * @var int $swipeNumber
 	 */
 	private $swipeNumber;
 
 	/**
+	 * the status show allows you to track each swipe card
 	 * @var int $swipeStatus current status of swipe card
 	 */
 	private $swipeStatusTypeId;
 
 	/**
+	 * the constructor for this swipe
 	 * Swipe constructor.
 	 * @param int|null $newSwipeId if id for this swipe is null or new
 	 * @param int $newSwipeNumber swipe card to search for
@@ -49,7 +53,7 @@ class Swipe {
 
 	/**
 	 * accessor method for swipeId
-	 * @return int
+	 * @return int \ null value of swipeId
 	 */
 	public function getSwipeId() {
 		return ($this->swipeId);
@@ -57,7 +61,7 @@ class Swipe {
 
 	/**
 	 * accessor method for swipe number
-	 * @return int
+	 * @return int value for swipe number
 	 */
 	public function getSwipeNumber() {
 		return ($this->swipeNumber);
@@ -65,7 +69,7 @@ class Swipe {
 
 	/**
 	 * accessor method for swipe status.
-	 * @return int
+	 * @return int value for swipeStatusId
 	 */
 	public function getSwipeStatus() {
 		return ($this->swipeStatusTypeId);
