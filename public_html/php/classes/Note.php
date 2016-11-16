@@ -141,7 +141,7 @@ class Note {
 		$newNoteContent = filter_var($newNoteContent, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newNoteContent) === true) {
 			throw (new \InvalidArgumentException("Note content is either empty or insecure."));
-			//set content of the note
+			//store content of the note
 		}
 		$this->noteContent = $newNoteContent;
 	}
@@ -157,7 +157,7 @@ class Note {
 		if($newNoteNoteTypeId < 0) {
 			throw(new \RangeException("Note Note Type Id can't be negative."));
 		}
-//set id for the Note type
+//store id for the Note type
 		$this->noteNoteTypeId = $newNoteNoteTypeId;
 	}
 
@@ -183,7 +183,7 @@ class Note {
 	public function setNoteProspectId(int $newNoteProspectId) {
 		if($newNoteProspectId < 0) {
 			throw(new \RangeException("Note Prospect Id can't be negative."));
-//set prospect Id
+//store prospect Id
 		}
 		$this->noteProspectId = $newNoteProspectId;
 	}
