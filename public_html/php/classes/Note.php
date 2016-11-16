@@ -145,6 +145,8 @@ class Note {
 	}
 
 	/**
+	 * mutator method for note of the note Id
+	 *
 	 * @param int|null $newNoteNoteTypeId
 	 * @throws \RangeException
 	 * @throws \TypeError if $newNoteNoteId is not an integer
