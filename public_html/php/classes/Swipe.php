@@ -76,6 +76,7 @@ class Swipe {
 	}
 
 	/**
+	 *
 	 * mutator method for swipeId
 	 * @param int|null $newSwipeId id of this swipe is null or new
 	 * @throws \RangeException if $new value of swipe is out of bounds
@@ -90,12 +91,12 @@ class Swipe {
 		if($newSwipeId <= 0) {
 			throw(new \RangeException("swipe id is not positive"));
 		}
-
+		//convert and store the swipeId
 		$this->swipeId = $newSwipeId;
 	}
 
 	/**
-	 * mutator method for swipeId
+	 * mutator method for swipeNumber
 	 * @param int $newSwipeNumber new value for swipe card number null or new
 	 * @throws \RangeException if $new swipe number is out of bounds
 	 */
@@ -104,6 +105,7 @@ class Swipe {
 		if($newSwipeNumber <= 0) {
 			throw(new \RangeException("swipe number is not positive"));
 		}
+		//convert and store the swipeNumber
 		$this->swipeNumber = $newSwipeNumber;
 	}
 
@@ -117,6 +119,7 @@ class Swipe {
 		if($newSwipeStatusTypeId <= 0) {
 			throw(new \RangeException("swipe status is not positive"));
 		}
+		//convert and store the swipeStatusId
 		$this->swipeStatusTypeId = $newSwipeStatusTypeId;
 	}
 
