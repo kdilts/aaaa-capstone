@@ -462,8 +462,62 @@ class StudentPermit implements \JsonSerializable {
 		}
 		return($studentPermit);
 	}
+	/**
+	 * gets studentPermit by studentPermit check in date range
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param \DateTime $startDate start date of search
+	 * @param \DateTime $endDate end date of search
+	 * @return \SplFixedArray studentPermits found, or null if none are found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getStudentPermitsByStudentPermitChecInDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate){
+		// validate dates
+		try {
+			$startDate = self::validateDateTime($startDate);
+			$endDate = self::validateDateTime($endDate);
+		} catch(\InvalidArgumentException $invalidArgument) {
+			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		} catch(\RangeException $range) {
+			throw(new \RangeException($range->getMessage(), 0, $range));
+		}
 
-	// TODO add getStudentPermitByCheckInDateRange
+		// format dates
+		$startDate = $startDate->format("Y-m-d H:i:s");
+		$endDate = $endDate->format("Y-m-d H:i:s");
+
+		// create query template
+		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit WHERE studentPermitCheckInDate >= :startDate AND  studentPermitCheckInDate <= :endDate";
+		$statement = $pdo->prepare($query);
+
+		// bind the parameters
+		$parameters = ["$startDate" => $startDate, "$endDate" => $endDate];
+		$statement->execute($parameters);
+
+		// build an array of studentPermits
+		$studentPermits = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$studentPermit = new studentPermit(
+					$row["studentPermitId"],
+					$row["studentPermitApplicationId"],
+					$row["studentPermitPlacardId"],
+					$row["studentPermitSwipeId"],
+					$row["studentPermitCheckOutDate"],
+					$row["studentPermitCheckInDate"]
+				);
+				$studentPermits[$studentPermits->key()] = $studentPermit;
+				$studentPermits->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($studentPermits);
+	}
+
 
 	/**
 	 * gets studentPermit by studentPermit check out date range
