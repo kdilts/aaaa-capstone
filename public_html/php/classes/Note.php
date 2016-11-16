@@ -174,6 +174,8 @@ class Note {
 	}
 
 	/**
+	 * mutator method for note of the prospect Id
+	 *
 	 * @param int $newNoteProspectId
 	 */
 	public function setNoteProspectId(int $newNoteProspectId) {
