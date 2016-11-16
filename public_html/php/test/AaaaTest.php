@@ -50,16 +50,17 @@ abstract class AaaaTest extends \PHPUnit_Extensions_Database_TestCase {
 
 		// add all the tables for the project here
 		// THESE TABLES *MUST* BE LISTED IN THE SAME ORDER THEY WERE CREATED!!!!
-		$dataset->addTable("cohort");
-		$dataset->addTable("note");
-		$dataset->addTable("noteType");
-		$dataset->addTable("placard");
-		$dataset->addTable("prospect");
-		$dataset->addTable("application");
-		$dataset->addTable("swipe");
-		$dataset->addTable("statusType");
 		$dataset->addTable("bridge");
+		$dataset->addTable("cohort");
+		$dataset->addTable("noteType");
+		$dataset->addTable("statusType");
+		$dataset->addTable("placard");
+		$dataset->addTable("swipe");
+		$dataset->addTable("application");
+		$dataset->addTable("applicationCohort");
 		$dataset->addTable("studentPermit");
+		$dataset->addTable("prospect");
+		$dataset->addTable("note");
 		return($dataset);
 	}
 

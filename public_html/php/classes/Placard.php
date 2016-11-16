@@ -39,8 +39,8 @@ class Placard implements \JsonSerializable {
 	public function __construct(int $newPlacardId = null, int $newPlacardStatusTypeId, int $newPlacardNumber) {
 		try {
 			$this->setPlacardId($newPlacardId);
-			$this->setPlacardNumber($newPlacardNumber);
 			$this->setPlacardStatusTypeId($newPlacardStatusTypeId);
+			$this->setPlacardNumber($newPlacardNumber);
 			}catch(\InvalidArgumentException $invalidArgument) {
 				throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
 			}catch(\RangeException $range) {
@@ -136,11 +136,11 @@ class Placard implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "INSERT INTO placard(placardId, placardStatusTypeId, placardNumber) VALUES(:placardId, :placardStatusTypeId, :placardNumber)";
+		$query = "INSERT INTO placard(placardStatusTypeId, placardNumber) VALUES(:placardStatusTypeId, :placardNumber)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["placardId" => $this->placardId, "placardStatusTypeId" => $this->placardStatusTypeId, "placardNumber" => $this->placardNumber];
+		$parameters = ["placardStatusTypeId" => $this->placardStatusTypeId, "placardNumber" => $this->placardNumber];
 		$statement->execute($parameters);
 
 		// update the null placardId with what mySQL just gave us

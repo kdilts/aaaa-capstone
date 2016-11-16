@@ -48,10 +48,13 @@ class PlacardTest extends AaaaTest {
 
 		// create a new Placard and insert to into mySQL
 		$placard = new Placard(null, $this->status->getStatusTypeId(), $this->VALID_PLACARDNUMBER);
+		var_dump($this->status);
 		$placard->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoPlacard = Placard::getPlacardByPlacardId($this->getPDO(), $placard->getPlacardId());
+
+
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
 		//$this->assertEquals($pdoPlacard->getPlacardId(), $this->VALID_PLACARDID);
 		$this->assertEquals($pdoPlacard->getPlacardStatusTypeId(), $this->status->getStatusTypeId());

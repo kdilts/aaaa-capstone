@@ -1,9 +1,7 @@
 <?php
-namespace Edu\Cnm\DdcAaa\Test;
+namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{
-	StatusType, Test\AaaaTest
-};
+use Edu\Cnm\DdcAaaa\StatusType;
 
 // grab the project test parameters
 require_once("AaaaTest.php");

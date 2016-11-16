@@ -101,11 +101,11 @@ class StatusType implements \JsonSerializable {
 		if($this->statusTypeId !== null) {
 			throw(new \PDOException("cannot insert a statusType that already exists."));
 		}
-		$query = "INSERT INTO statusType(statusTypeId, statusTypeName) VALUES(:statusTypeId, :statusTypeName)";
+		$query = "INSERT INTO statusType(statusTypeName) VALUES(:statusTypeName)";
 		$statement = $pdo->prepare($query);
 
 
-		$parameters = ["statusTypeId" => $this->statusTypeId, "statusTypeName" => $this->statusTypeName];
+		$parameters = ["statusTypeName" => $this->statusTypeName];
 		$statement->execute($parameters);
 
 
