@@ -62,7 +62,7 @@ class StatusType implements \JsonSerializable {
 	}
 	/**
 	 * mutator method for statusType id
-	 * @param int|null $statusTypeId  new value of statusType id
+	 * @param int|null $newStatusTypeId  new value of statusType id
 	 * @throws \RangeException throws if $newStatusTypeId is not positive
 	 * @throws \TypeError throws if $newStatusTypedId is not an integer
 	 */
@@ -79,7 +79,7 @@ class StatusType implements \JsonSerializable {
 	}
 	/**
 	 * mutator method for statusType name
-	 * @param int $statusTypeName  new value of statusType name
+	 * @param string $newStatusTypeName  new value of statusType name
 	 * @throws \RangeException throws if $newStatusTypeName is not positive
 	 * @throws \TypeError throws if $newStatusTypedName is not an integer
 	 *
@@ -140,7 +140,8 @@ class StatusType implements \JsonSerializable {
 	/**
 	 * gets statusType by statusType id
 	 * @param \PDO $pdo pdo connection object
-	 * @param $statusTypeId statusType id to search for
+	 * @param int $statusTypeId statusType id to search for
+	 * @return StatusType|null statusType found, or null if not found
 	 * @throws \PDOException throws when mySQL errors occur
 	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
@@ -175,7 +176,8 @@ class StatusType implements \JsonSerializable {
 	/**
 	 * gets statusType by statusType name
 	 * @param \PDO $pdo pdo connection object
-	 * @param $statusTypeName statusType name to search for
+	 * @param string $statusTypeName statusType name to search for
+	 * @return \SplFixedArray array of statusTypes found
 	 * @throws \PDOException throws when mySQL errors occur
 	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
