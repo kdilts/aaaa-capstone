@@ -37,7 +37,7 @@ class StatusTypeTest extends AaaaTest {
 	/**
 	 * test inserting a valid Status and verify that the actual mySQL data matches
 	 */
-	public function testInsertValidStatus() {
+	public function testInsertValidStatusType() {
 
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("statusType");
@@ -56,7 +56,7 @@ class StatusTypeTest extends AaaaTest {
 	 * test inserting a Status that already exists
 	 * @expectedException \PDOException
 	 **/
-	public function testInsertInvalidStatus() {
+	public function testInsertInvalidStatusType() {
 		// create a Status with a non null status id and watch it fail
 		$status = new StatusType(AaaaTest::INVALID_KEY, $this->VALID_STATUSTYPENAME);
 		$status->insert($this->getPDO());
@@ -65,7 +65,7 @@ class StatusTypeTest extends AaaaTest {
 	/**
 	 * test inserting a Status, editing it, and then updating it
 	 **/
-	public function testUpdateValidStatus() {
+	public function testUpdateValidStatusType() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("statusType");
 
