@@ -31,11 +31,12 @@ class Swipe {
 	 * @throws \Exception if some other exception occurs
 	 * @throws \TypeError if data types violate type hints
 	 */
-	 	public function __construct(int $newSwipeId = null, int $newSwipeNumber, int $newSwipeStatusTypeId) {
+	 	public function __construct(int $newSwipeId = null, int $newSwipeStatusTypeId, int $newSwipeNumber ) {
 		try {
 			$this->setSwipeId($newSwipeId);
-			$this->setSwipeNumber($newSwipeNumber);
 			$this->setSwipeStatus($newSwipeStatusTypeId);
+			$this->setSwipeNumber($newSwipeNumber);
+
 		} catch(\InvalidArgumentException $invalidArgumentException) {
 			// rethrow exception to the caller
 			throw(new \InvalidArgumentException($invalidArgumentException->getMessage(), 0, $invalidArgumentException));
@@ -135,7 +136,7 @@ class Swipe {
 		}
 
 		// create query template
-		$query = "INSERT INTO swipe(swipeId, swipeStatusTypeId, swipeNumber) VALUES(:swipeId, :swipeStatus, :swipeNumber)";
+		$query = "INSERT INTO swipe(swipeId, swipeStatusTypeId, swipeNumber) VALUES(:swipeId, :swipeStatusTypeId, :swipeNumber)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -206,7 +207,7 @@ class Swipe {
 	 * @throws \PDOException when swipe id is not valid
 	 * @throws \TypeError when swipe id is not an integer
 	 */
-	public static function getSwipeBySwipeStatus(\PDO $pdo, int $swipeStatusTypeId) {
+	public static function getSwipesBySwipeStatus(\PDO $pdo, int $swipeStatusTypeId) {
 		// sanitize the swipeId before searching
 		if($swipeStatusTypeId <= 0) {
 			throw(new \PDOException("swipeStatusTypeId not positive"));
