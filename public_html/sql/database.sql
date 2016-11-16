@@ -42,11 +42,11 @@ PRIMARY KEY (statusTypeId)
 CREATE TABLE placard(
 	placardId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	placardNumber INT UNSIGNED NOT NULL,
-	placardStatusId INT UNSIGNED NOT NULL,
+	placardStatusTypeId INT UNSIGNED NOT NULL,
 	INDEX (placardId),
-	INDEX (placardStatusId),
+	INDEX (placardStatusTypeId),
 	PRIMARY KEY(placardId),
-	FOREIGN KEY(placardStatusId) REFERENCES statusType(statusTypeId)
+	FOREIGN KEY(placardStatusTypeId) REFERENCES statusType(statusTypeId)
 
 );
 
