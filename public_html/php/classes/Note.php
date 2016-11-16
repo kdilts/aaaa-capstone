@@ -109,6 +109,8 @@ class Note {
 	}
 
 	/**
+	 * mutator method for note Id
+	 *
 	 * @param int $newNoteId
 	 * @throws \RangeException
 	 * @throws \TypeError if new note id is not an integer
@@ -126,6 +128,8 @@ class Note {
 	}
 
 	/**
+	 * mutator method for the Content of the Note
+	 *
 	 * @param string $newNoteContent
 	 * @throws \InvalidArgumentException if $newNoteContent is not a string or insecure
 	 * @throws \RangeException
