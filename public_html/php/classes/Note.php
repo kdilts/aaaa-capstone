@@ -160,6 +160,8 @@ class Note {
 	}
 
 	/**
+	 * mutator method for application of the note
+	 *
 	 * @param int $newNoteApplicationId
 	 * @throws \RangeException
 	 */
