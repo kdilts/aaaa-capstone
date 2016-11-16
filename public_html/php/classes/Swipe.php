@@ -167,6 +167,7 @@ class Swipe {
 	}
 
 	/**
+	 * gets the swipeId for the swipe
 	 * @param \PDO $pdo
 	 * @param int $swipeId
 	 * @return Swipe|null
@@ -201,6 +202,7 @@ class Swipe {
 	}
 
 	/**
+	 * gets the swipe from the SwipeStatus
 	 * @param \PDO $pdo PDO connection object
 	 * @param int $swipeStatusTypeId new value for swipe status
 	 * @return \SplFixedArray SplFixedArray of swipe
@@ -238,6 +240,7 @@ class Swipe {
 	}
 
 	/**
+	 * gets the swipe from the swipeNumber
 	 * @param \PDO $pdo connection object
 	 * @param int $swipeNumber new value
 	 * @return \SplFixedArray SplFixedArray of swipe
@@ -275,6 +278,7 @@ class Swipe {
 	}
 
 	/**
+	 * gets all swipe info
 	 * @param \PDO $pdo connection objects
 	 * @return \SplFixedArray SplFi
 	 * @throws \PDOException when mySQL related errors occur

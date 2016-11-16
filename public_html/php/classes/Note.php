@@ -361,7 +361,7 @@ class Note {
 		return $notes;
 	}
 	/**
-	 * get all notes
+	 * gets all notes
 	 * @param \PDO $pdo PDO connection object
 	 * @return \SplFixedArray SplFixedArray of notes found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
