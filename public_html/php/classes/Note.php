@@ -290,6 +290,7 @@ class Note {
 	}
 
 	/**
+	 * gets the note by the prospect Id
 	 * @param \PDO $pdo
 	 * @param int $noteProspectId
 	 * @return \SplFixedArray
