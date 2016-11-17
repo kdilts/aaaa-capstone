@@ -122,8 +122,7 @@ class ApplicationTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("application");
 
 		// create a new Application and insert to into mySQL
-		$application = new Application(null, $this->applicationId->getApplicationCohortId(), $this->VALID_APPLICATIONPHONENUMBER,
-			$application->VALID_APPLICATIONLASTNAME);
+		$application = new Application(null, $this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONLASTNAME);
 		$application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
