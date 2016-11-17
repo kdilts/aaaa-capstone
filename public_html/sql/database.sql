@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS note;
-DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS prospectCohort;
+DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS studentPermit;
-DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS applicationCohort;
+DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS swipe;
 DROP TABLE IF EXISTS placard;
 DROP TABLE IF EXISTS statusType;
@@ -34,10 +34,10 @@ CREATE TABLE noteType(
 );
 
 CREATE TABLE statusType(
-statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-statusTypeName VARCHAR(40) NOT NULL,
-INDEX (statusTypeId),
-PRIMARY KEY (statusTypeId)
+	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	statusTypeName VARCHAR(40) NOT NULL,
+	INDEX (statusTypeId),
+	PRIMARY KEY (statusTypeId)
 );
 
 CREATE TABLE placard(
@@ -61,6 +61,26 @@ CREATE TABLE swipe(
 	FOREIGN KEY(swipeStatusTypeId) REFERENCES statusType(statusTypeId)
 );
 
+CREATE TABLE application(
+	applicationId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	applicationFirstName VARCHAR(40) NOT NULL,
+	applicationLastName VARCHAR(40) NOT NULL,
+	applicationEmail VARCHAR(100) NOT NULL,
+	applicationPhoneNumber VARCHAR(30) NOT NULL,
+	applicationSource VARCHAR(200) NOT NULL,
+	applicationCohortId INT UNSIGNED NOT NULL,
+	applicationAboutYou VARCHAR(2000) NOT NULL,
+	applicationHopeToAccomplish VARCHAR(2000) NOT NULL,
+	applicationExperience VARCHAR(2000) NOT NULL,
+	applicationDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	applicationUtmCampaign VARCHAR(500) NOT NULL,
+	applicationUtmMedium VARCHAR(500) NOT NULL,
+	applicationUtmSource VARCHAR(500) NOT NULL,
+	INDEX (applicationId),
+	PRIMARY KEY(applicationId),
+	FOREIGN KEY(applicationCohortId) REFERENCES cohort (cohortId)
+);
+
 CREATE TABLE applicationCohort(
 	applicationCohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	applicationCohortApplicationId INT UNSIGNED NOT NULL,
@@ -69,26 +89,6 @@ CREATE TABLE applicationCohort(
 	PRIMARY KEY (applicationCohortId),
 	FOREIGN KEY(applicationCohortApplicationId) REFERENCES application(applicationId),
 	FOREIGN KEY(applicationCohortCohortId) REFERENCES cohort(cohortId)
-);
-
-CREATE TABLE application(
-applicationId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-applicationFirstName VARCHAR(40) NOT NULL,
-applicationLastName VARCHAR(40) NOT NULL,
-applicationEmail VARCHAR(100) NOT NULL,
-applicationPhoneNumber VARCHAR(30) NOT NULL,
-applicationSource VARCHAR(200) NOT NULL,
-applicationCohortId INT UNSIGNED NOT NULL,
-applicationAboutYou VARCHAR(2000) NOT NULL,
-applicationHopeToAccomplish VARCHAR(2000) NOT NULL,
-applicationExperience VARCHAR(2000) NOT NULL,
-applicationDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-applicationUtmCampaign VARCHAR(500) NOT NULL,
-applicationUtmMedium VARCHAR(500) NOT NULL,
-applicationUtmSource VARCHAR(500) NOT NULL,
-INDEX (applicationId),
-PRIMARY KEY(applicationId),
-FOREIGN KEY(applicationCohortId) REFERENCES applicationCohort (applicationCohortCohortId)
 );
 
 CREATE TABLE studentPermit(
@@ -109,6 +109,18 @@ CREATE TABLE studentPermit(
 	FOREIGN KEY(studentPermitPlacardId) REFERENCES placard(placardId)
 );
 
+CREATE TABLE prospect(
+	prospectId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	prospectFirstName VARCHAR(40) NOT NULL,
+	prospectLastName VARCHAR(40) NOT NULL,
+	prospectEmail VARCHAR(100) NOT NULL,
+	prospectPhoneNumber VARCHAR(30) NOT NULL,
+	prospectCohortId INT UNSIGNED NOT NULL,
+	INDEX (prospectId),
+	PRIMARY KEY(prospectId),
+	FOREIGN KEY(prospectCohortId) REFERENCES cohort(cohortId)
+);
+
 CREATE TABLE prospectCohort(
 	prospectCohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	prospectCohortProspectId INT UNSIGNED NOT NULL,
@@ -117,18 +129,6 @@ CREATE TABLE prospectCohort(
 	PRIMARY KEY (prospectCohortId),
 	FOREIGN KEY(prospectCohortProspectId) REFERENCES prospect(prospectId),
 	FOREIGN KEY(prospectCohortCohortId) REFERENCES cohort(cohortId)
-);
-
-CREATE TABLE prospect(
-prospectId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-prospectFirstName VARCHAR(40) NOT NULL,
-prospectLastName VARCHAR(40) NOT NULL,
-prospectEmail VARCHAR(100) NOT NULL,
-prospectPhoneNumber VARCHAR(30) NOT NULL,
-prospectCohortId INT UNSIGNED NOT NULL,
-INDEX (prospectId),
-PRIMARY KEY(prospectId),
-FOREIGN KEY(prospectCohortId) REFERENCES prospectCohort(prospectCohortCohortId)
 );
 
 CREATE TABLE note(
@@ -141,4 +141,3 @@ CREATE TABLE note(
 	PRIMARY KEY(noteId),
 	FOREIGN KEY(noteProspectId) REFERENCES prospect (prospectId)
 );
-
