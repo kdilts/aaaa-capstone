@@ -199,7 +199,7 @@ class Application {
 
 	/**
 	 * accessor method for DateTime
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getApplicationDateTime() {
 		return $this->applicationDateTime;
