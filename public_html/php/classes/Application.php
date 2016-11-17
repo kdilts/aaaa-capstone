@@ -542,24 +542,27 @@ class Application {
 	 * @param $startDate
 	 * @return \SplFixedArray
 	 */
-	public static function getApplicationsByApplicationDateTime(\PDO $pdo, \DateTime $startDate){
+	public static function getApplicationsByApplicationDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate){
 		// validate dates
 		try {
 			$startDate = self::validateDateTime($startDate);
+			$endDate = self::validateDateTime($endDate);
 		} catch(\InvalidArgumentException $invalidArgument) {
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
 		} catch(\RangeException $range) {
 			throw(new \RangeException($range->getMessage(), 0, $range));
 		}
+
 		// format dates
 		$startDate = $startDate->format("Y-m-d H:i:s");
+		$endDate = $endDate->format("Y-m-d H:i:s");
 
 		// create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationDateTime = :startDate";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationDateTime >= :startDate AND applicationDateTime <= :endDate";
 		$statement = $pdo->prepare($query);
 
-		// bind the placard id to the place holder in template
-		$parameters = ["$startDate" => $startDate];
+		// bind the parameters
+		$parameters = ["$startDate" => $startDate, "$endDate" => $endDate];
 		$statement->execute($parameters);
 
 		// build an array of applications
