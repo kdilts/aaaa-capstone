@@ -88,7 +88,7 @@ class ApplicationCohort implements \JsonSerializable {
 
 	/**
 	 * mutator method for the application cohort id
-	 * @param int $newApplicationCohortId new value of tweet id
+	 * @param int $newApplicationCohortId new value of applicationCohort id
 	 * @throws \RangeException if $newApplicationCohortId is not positive
 	 */
 	public function setApplicationCohortId($newApplicationCohortId) {
@@ -108,7 +108,7 @@ class ApplicationCohort implements \JsonSerializable {
 	}
 
 	/**
-	 * mutator method for tweet profile id
+	 * mutator method for applicationCohort profile id
 	 *
 	 * @param int $newApplicationCohortApplicationId new value of application cohort application id
 	 * @throws \RangeException if new application cohort application id is not positive
