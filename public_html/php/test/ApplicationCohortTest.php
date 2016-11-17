@@ -10,12 +10,11 @@ require_once("AaaaTest.php");
 require_once(dirname(__DIR__) . "/classes/autoload.php");
 
 /**
- * Full PHPUnit test for the Placard class
+ * Full PHPUnit test for the Application class
  *
- * This is a complete PHPUnit test of the Placard class. It is complete because *ALL* mySQL/PDO enabled methods
- * are tested for both invalid and valid inputs.
+ * This is a complete PHPUnit test of the Application class.
  *
- * @see Placard
+ * @see Application
  * @author Kevin Dilts <kdilts@cnm.edu>
  **/
 class ApplicationCohortTest extends AaaaTest {
@@ -30,11 +29,8 @@ class ApplicationCohortTest extends AaaaTest {
 		// run the default setUp() method first
 		parent::setUp();
 
-//		int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, int $newApplicationCohortId, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, string $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource
-
 		// create date
 		$date = new \DateTime();
-		//$date = $date->format("Y-m-d H:i:s");
 
 		// create cohort
 		$this->cohort = new Cohort(null, 1);
