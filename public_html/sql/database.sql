@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS note;
+DROP TABLE IF EXISTS prospectCohort;
 DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS studentPermit;
 DROP TABLE IF EXISTS applicationCohort;
@@ -118,6 +119,16 @@ CREATE TABLE prospect(
 	INDEX (prospectId),
 	PRIMARY KEY(prospectId),
 	FOREIGN KEY(prospectCohortId) REFERENCES cohort(cohortId)
+);
+
+CREATE TABLE prospectCohort(
+	prospectCohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	prospectCohortApplicationId INT UNSIGNED NOT NULL,
+	prospectCohortCohortId INT UNSIGNED NOT NULL,
+	INDEX (prospectCohortId),
+	PRIMARY KEY (prospectCohortId),
+	FOREIGN KEY(prospectCohortApplicationId) REFERENCES prospect(prospectId),
+	FOREIGN KEY(prospectCohortCohortId) REFERENCES cohort(cohortId)
 );
 
 CREATE TABLE note(

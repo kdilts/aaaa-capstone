@@ -3,50 +3,50 @@
 namespace Edu\Cnm\DdcAaaa;
 
 /**
- * cross section of the Application Cohort assignments
+ * cross section of the Prospect Cohort assignments
  *
- * This example of the assignations and uses within the app that cnm will use to automatize the application
+ * This example of the assignations and uses within the app that cnm will use to automatize the prospect
  * process
  *
- * class applicationCohort for aaaa
+ * class prospectCohort for aaaa
  *
  * @version 1.0.0
  **/
-class ApplicationCohort implements \JsonSerializable {
+class ProspectCohort implements \JsonSerializable {
 
 	/**
-	 * id for this applicationCohort; this is the primary key
-	 * @var $applicationCohortId
+	 * id for this prospectCohort; this is the primary key
+	 * @var $prospectCohortId
 	 */
-	private $applicationCohortId;
+	private $prospectCohortId;
 
 	/**
-	 * id for the application cohort; this is a foreign key
-	 * @var $applicationCohortApplicationId
+	 * id for the prospect cohort; this is a foreign key
+	 * @var $prospectCohortProspectId
 	 */
-	private $applicationCohortApplicationId;
+	private $prospectCohortProspectId;
 
 	/**
-	 * id for the application assigned according to applicable cohort
-	 * @var $applicationCohortCohortId
+	 * id for the prospect assigned according to applicable cohort
+	 * @var $prospectCohortCohortId
 	 */
-	private $applicationCohortCohortId;
+	private $prospectCohortCohortId;
 
 	/**
-	 * applicationCohort constructor.
-	 * @param int|null $newApplicationCohortId id of this application or null if a new application
-	 * @param int $newApplicationCohortApplicationId id of the application assigned to a cohort
-	 * @param int $newApplicationCohortCohortId id of the cohort
+	 * prospectCohort constructor.
+	 * @param int|null $newProspectCohortId id of this prospect or null if a new prospect
+	 * @param int $newProspectCohortProspectId id of the prospect assigned to a cohort
+	 * @param int $newProspectCohortCohortId id of the cohort
 	 * @throws \InvalidArgumentException if data is not valid
 	 * @throws \RangeException if data values are out of bounds
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	 */
-	public function __construct(int $newApplicationCohortId = null, int $newApplicationCohortApplicationId, int $newApplicationCohortCohortId) {
+	public function __construct(int $newProspectCohortId = null, int $newProspectCohortProspectId, int $newProspectCohortCohortId) {
 		try {
-			$this->setApplicationCohortId($newApplicationCohortId);
-			$this->setApplicationCohortApplicationId($newApplicationCohortApplicationId);
-			$this->setApplicationCohortCohortId($newApplicationCohortCohortId);
+			$this->setProspectCohortId($newProspectCohortId);
+			$this->setProspectCohortProspectId($newProspectCohortProspectId);
+			$this->setProspectCohortCohortId($newProspectCohortCohortId);
 		} catch(\InvalidArgumentException $invalidArgument) {
 			// rethrow the exception to the caller
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0,$invalidArgument));
@@ -66,205 +66,205 @@ class ApplicationCohort implements \JsonSerializable {
 	 * accessor method for the cohort id
 	 * @return int|null value for the cohort id
 	 */
-	public function getApplicationCohortId() {
-		return($this->applicationCohortId);
+	public function getProspectCohortId() {
+		return($this->prospectCohortId);
 	}
 
 	/**
-	 * accessor method for the cohort application id
-	 * @return int value for the cohort application id
+	 * accessor method for the cohort prospect id
+	 * @return int value for the cohort prospect id
 	 */
-	public function getApplicationCohortApplicationId() {
-		return($this->applicationCohortApplicationId);
+	public function getProspectCohortProspectId() {
+		return($this->prospectCohortProspectId);
 	}
 
 	/**
-	 * accessor method for the application cohort cohort id
-	 * @return int value of the application cohort cohort id
+	 * accessor method for the prospect cohort cohort id
+	 * @return int value of the prospect cohort cohort id
 	 */
-	public function getApplicationCohortCohortId() {
-		return($this->applicationCohortCohortId);
+	public function getProspectCohortCohortId() {
+		return($this->prospectCohortCohortId);
 	}
 
 	/**
-	 * mutator method for the application cohort id
-	 * @param int $newApplicationCohortId new value of tweet id
-	 * @throws \RangeException if $newApplicationCohortId is not positive
+	 * mutator method for the prospect cohort id
+	 * @param int $newProspectCohortId new value of tweet id
+	 * @throws \RangeException if $newProspectCohortId is not positive
 	 */
-	public function setApplicationCohortId($newApplicationCohortId) {
-		// base case: if the applicationCohortId is null, this is a new applicationCohortId without a mySQL assigned id (yet)
-		if($newApplicationCohortId === null)	{
-			$this->applicationCohortId = null;
+	public function setProspectCohortId($newProspectCohortId) {
+		// base case: if the prospectCohortId is null, this is a new prospectCohortId without a mySQL assigned id (yet)
+		if($newProspectCohortId === null)	{
+			$this->prospectCohortId = null;
 			return;
 		}
 
-		// verify the application cohort id is positive
-		if($newApplicationCohortId <= 0){
-			throw(new \RangeException("applicationCohortId is not positive"));
+		// verify the prospect cohort id is positive
+		if($newProspectCohortId <= 0){
+			throw(new \RangeException("prospectCohortId is not positive"));
 		}
 
-		// convert and store the application cohort id
-		$this->applicationCohortId = $newApplicationCohortId;
+		// convert and store the prospect cohort id
+		$this->prospectCohortId = $newProspectCohortId;
 	}
 
 	/**
 	 * mutator method for tweet profile id
 	 *
-	 * @param int $newApplicationCohortApplicationId new value of application cohort application id
-	 * @throws \RangeException if new application cohort application id is not positive
+	 * @param int $newProspectCohortProspectId new value of prospect cohort prospect id
+	 * @throws \RangeException if new prospect cohort prospect id is not positive
 	 */
-	public function setApplicationCohortApplicationId($newApplicationCohortApplicationId) {
-		// verify the application cohort application id is positive
-		if($newApplicationCohortApplicationId <= 0){
-			throw(new \RangeException("applicationCohortApplicationId is not positive"));
+	public function setProspectCohortProspectId($newProspectCohortProspectId) {
+		// verify the prospect cohort prospect id is positive
+		if($newProspectCohortProspectId <= 0){
+			throw(new \RangeException("prospectCohortProspectId is not positive"));
 		}
 
 		// convert and store the profile id
-		$this->applicationCohortApplicationId = $newApplicationCohortApplicationId;
+		$this->prospectCohortProspectId = $newProspectCohortProspectId;
 	}
 
 	/**
-	 * mutator method for application cohort cohort id
+	 * mutator method for prospect cohort cohort id
 	 *
-	 * @param int $newApplicationCohortCohortId new value of application cohort cohort id
-	 * @throws \RangeException if $newApplicationCohortCohortId is not positive
+	 * @param int $newProspectCohortCohortId new value of prospect cohort cohort id
+	 * @throws \RangeException if $newProspectCohortCohortId is not positive
 	 */
-	public function setApplicationCohortCohortId($newApplicationCohortCohortId) {
-		// verify the application cohort cohort id is positive
-		if($newApplicationCohortCohortId <= 0){
-			throw(new \RangeException("applicationCohortCohortId is not positive"));
+	public function setProspectCohortCohortId($newProspectCohortCohortId) {
+		// verify the prospect cohort cohort id is positive
+		if($newProspectCohortCohortId <= 0){
+			throw(new \RangeException("prospectCohortCohortId is not positive"));
 		}
 
-		// store the application cohort cohort id
-		$this->applicationCohortCohortId = $newApplicationCohortCohortId;
+		// store the prospect cohort cohort id
+		$this->prospectCohortCohortId = $newProspectCohortCohortId;
 	}
 
 	/**
-	 * insert this Application Cohort into mySQL
+	 * insert this Prospect Cohort into mySQL
 	 * @param \PDO $pdo connection object
-	 * @throws \PDOException if application cohort is not positive
+	 * @throws \PDOException if prospect cohort is not positive
 	 */
 	public function insert(\PDO $pdo) {
-		// enforce the applicationsCohortId is null (i.e., don't insert an applicationCohort that already exists)
-		if($this->applicationCohortId !== null) {
-			throw(new \PDOException("not a new applicationCohort"));
+		// enforce the prospectsCohortId is null (i.e., don't insert an prospectCohort that already exists)
+		if($this->prospectCohortId !== null) {
+			throw(new \PDOException("not a new prospectCohort"));
 		}
 		// create query template
-		$query = "INSERT INTO applicationCohort(applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId) VALUES(:applicationCohortId, :applicationCohortApplicationId, :applicationCohortCohortId)";
+		$query = "INSERT INTO prospectCohort(prospectCohortId, prospectCohortProspectId, prospectCohortCohortId) VALUES(:prospectCohortId, :prospectCohortProspectId, :prospectCohortCohortId)";
 		$statement = $pdo->prepare($query);
-		// bind the application variables to the place holders in the template
+		// bind the prospect variables to the place holders in the template
 		$parameters = [
-			"applicationCohortId" => $this->applicationCohortId,
-			"applicationCohortApplicationId" => $this->applicationCohortApplicationId,
-			"applicationCohortCohortId" => $this->applicationCohortCohortId
+			"prospectCohortId" => $this->prospectCohortId,
+			"prospectCohortProspectId" => $this->prospectCohortProspectId,
+			"prospectCohortCohortId" => $this->prospectCohortCohortId
 		];
 		$statement->execute($parameters);
-		// update the null applicationCohortId with what mySQL just gave us
-		$this->applicationCohortId = intval($pdo->lastInsertId());
+		// update the null prospectCohortId with what mySQL just gave us
+		$this->prospectCohortId = intval($pdo->lastInsertId());
 	}
 
 	/**
-	 * gets the application Cohort by application cohort id
+	 * gets the prospect Cohort by prospect cohort id
 	 *
 	 * @param \PDO $pdo connection to the object
-	 * @param int $applicationCohortId new value of application cohort id
-	 * @return \SplFixedArray SplFixedArray of Applications Cohort found
-	 * @return applicationCohort|null Application Cohort found or null if not found
-	 * @throws \PDOException if application cohort id is not positive
+	 * @param int $prospectCohortId new value of prospect cohort id
+	 * @return \SplFixedArray SplFixedArray of Prospects Cohort found
+	 * @return prospectCohort|null Prospect Cohort found or null if not found
+	 * @throws \PDOException if prospect cohort id is not positive
 
 */
-	public static function getApplicationCohortByApplicationCohortId(\PDO $pdo, int $applicationCohortId){
-		// sanitize the applicationCohortId before searching
-		if($applicationCohortId <= 0){
-			throw(new \PDOException("applicationCohortId not positive"));
+	public static function getProspectCohortByProspectCohortId(\PDO $pdo, int $prospectCohortId){
+		// sanitize the prospectCohortId before searching
+		if($prospectCohortId <= 0){
+			throw(new \PDOException("prospectCohortId not positive"));
 		}
 
 		// create query template
-		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId From applicationCohort WHERE applicationCohortId = :applicationCohortId";
+		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId From prospectCohort WHERE prospectCohortId = :prospectCohortId";
 		$statement = $pdo->prepare($query);
 
-		// bind the applicationCohortId to the place holder in template
-		$parameters = ["applicationCohortId" => $applicationCohortId];
+		// bind the prospectCohortId to the place holder in template
+		$parameters = ["prospectCohortId" => $prospectCohortId];
 		$statement->execute($parameters);
 
 		// grab placard from SQL
 		try {
-			$applicationCohort = null;
+			$prospectCohort = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$applicationCohort = new applicationCohort($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+				$prospectCohort = new prospectCohort($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($applicationCohort);
+		return($prospectCohort);
 	}
 
 	/**
-	 * gets the Application Cohort by application id
+	 * gets the Prospect Cohort by prospect id
 	 * @param \PDO $pdo connection object
-	 * @param int $applicationCohortId application cohort id to search for
-	 * @return \SplFixedArray SplFixedArray of applications cohorts found
-	 * @return applicationCohort|null when application cohort found or null if not found
-	 * @throws \PDOException if application cohort application id is not positive
+	 * @param int $prospectCohortId prospect cohort id to search for
+	 * @return \SplFixedArray SplFixedArray of prospects cohorts found
+	 * @return prospectCohort|null when prospect cohort found or null if not found
+	 * @throws \PDOException if prospect cohort prospect id is not positive
 	 */
 
-	public function getApplicationCohortByApplicationId (\PDO $pdo, int $applicationCohortId){
-		//sanitize the applicationCohortId before searching
-		if ($applicationCohortId <=0) {
-			throw(new \PDOException("applicationCohortId not positive"));
+	public function getProspectCohortByProspectId (\PDO $pdo, int $prospectCohortId){
+		//sanitize the prospectCohortId before searching
+		if ($prospectCohortId <=0) {
+			throw(new \PDOException("prospectCohortId not positive"));
 		}
 
 		//create query template
-		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId From applicationCohort WHERE applicationCohortId = : applicationCohortId";
+		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId From prospectCohort WHERE prospectCohortId = : prospectCohortId";
 		$statement = $pdo->prepare($query);
 
 		//grab placard from SQL
 		try {
-			$applicationCohort = null;
+			$prospectCohort = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$applicationCohort = new applicationCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+				$prospectCohort = new prospectCohort ($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
 			}
 		} catch(\Exception $exception){
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($applicationCohort);
+		return($prospectCohort);
 	}
 
 	/**
-	 * gets the Application Cohort Id
+	 * gets the Prospect Cohort Id
 	 * @param \PDO $pdo connection object
-	 * @param int $applicationCohortId application cohort id to search for
-	 * @return ApplicationCohort|null found or not found
-	 * @throws \PDOException if application cohort cohort id is not positive
+	 * @param int $prospectCohortId prospect cohort id to search for
+	 * @return ProspectCohort|null found or not found
+	 * @throws \PDOException if prospect cohort cohort id is not positive
 	 */
-	public function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortId){
-		//sanitize the applicationCohortId before searching
-		if ($applicationCohortId <=0){
-			throw(new \PDOException("applicationCohortId not positive"));
+	public function getProspectCohortByCohortId (\PDO $pdo, int $prospectCohortId){
+		//sanitize the prospectCohortId before searching
+		if ($prospectCohortId <=0){
+			throw(new \PDOException("prospectCohortId not positive"));
 		}
 		//create query template
-		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId FROM applicationCohort WHERE applicationCohortId = : applicaitonCohortId";
+		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId FROM prospectCohort WHERE prospectCohortId = : applicaitonCohortId";
 		$statement = $pdo->prepare($query);
 
 		//grab placard from SQL
 		try {
-			$applicationCohort = null;
+			$prospectCohort = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if ($row !==false){
-				$applicationCohort = new applicationCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+				$prospectCohort = new prospectCohort ($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
 			}
 		} catch(\Exception $exception){
 			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($applicationCohort);
+		return($prospectCohort);
 	}
 
 	/**
@@ -273,26 +273,26 @@ class ApplicationCohort implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getAllApplicationCohorts(\PDO $pdo) {
+	public static function getAllProspectCohorts(\PDO $pdo) {
 		// create query template
-		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId FROM applicationCohort";
+		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId FROM prospectCohort";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
-		// build an array of application cohorts
-		$applicationCohorts = new \SplFixedArray($statement->rowCount());
+		// build an array of prospect cohorts
+		$prospectCohorts = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$applicationCohort = new ApplicationCohort($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
-				$applicationCohorts[$applicationCohorts->key()] = $applicationCohort;
-				$applicationCohorts->next();
+				$prospectCohort = new ProspectCohort($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
+				$prospectCohorts[$prospectCohorts->key()] = $prospectCohort;
+				$prospectCohorts->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return $applicationCohorts;
+		return $prospectCohorts;
 	}
 	/**
 	 * @return array
