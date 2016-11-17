@@ -1,7 +1,9 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{StudentPermit};
+use Edu\Cnm\DdcAaaa\{
+	StudentPermit
+};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -81,9 +83,9 @@ class StudentPermitTest extends AaaaTest {
 		$pdoSstudentPermit = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(),
 			$studentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
-		$this->assertEquals($pdoSstudentPermit->getStudentPermitApplicationId(), $this->studentPermit->getStudentPermitApplicationId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckOutDate(), $this->VALID_STUDENTPERMITPLACARDID);
-		$this->assertEquals($pdoSstudentPermit->getStudentPermit(), $this->VALID_STUDENTPERMITSWIPEID);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->studentPermit->getStudentPermitApplicationId());
+		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITPLACARDID);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->VALID_STUDENTPERMITSWIPEID);
 	}
 
 	/**
@@ -94,15 +96,14 @@ class StudentPermitTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
 		// create a new Student Permit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->studentPermit->getStudentPermitApplicationId(),
-			$this->VALID_STUDENTPERMITAPPLICATIONID, $this->VALID_STUDENTPERMITAPPLICATIONID);
+		$studentPermit = new StudentPermit(null, $this->studentPermit->getStudentPermitApplicationId(), $this->VALID_STUDENTPERMITPLACARDID);
 		$studentPermit->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = StudentPermit::getAllStudentPermits($this->getPDO());
+		$results = StudentPermit::getAllStudentPermits($this->getPDO(), $studentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf($results, "Edu\\Cnm\\DdcAaaa\\Test\\StudentPermit");
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Test\\StudentPermit", $results);
 
 		// grab the result from the array and validate it
 		$pdoStudentPermit = $results[0];

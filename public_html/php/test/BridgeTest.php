@@ -144,15 +144,15 @@ class BridgeTest extends AaaaTest {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Bridge and insert to into mySQL
+		$bridge = new Bridge(null, $this->profile->getBridgeStaffId(), $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		BBridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Tweet::getAllTweets($this->getPDO());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
+		$results = Bridge::getAllBridges($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Tweet", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Bridge", $results);
 
 		// grab the result from the array and validate it
 		$pdoTweet = $results[0];
