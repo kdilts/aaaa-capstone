@@ -688,11 +688,11 @@ class Application {
 		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource From application WHERE applicationFirstName LIKE :applicationName OR applicationLastName LIKE :applicationName";
 		$statement = $pdo->prepare($query);
 
-		// bind the prospect id to the place holder in template
+		// bind the application name to the place holder in template
 		$parameters = ["applicationName" => $applicationName];
 		$statement->execute($parameters);
 
-		// build an array of prospects
+		// build an array of applications
 		$applications = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {

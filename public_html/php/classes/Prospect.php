@@ -424,7 +424,7 @@ class Prospect implements \JsonSerializable {
 		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectFirstName LIKE :prospectName OR prospectLastName LIKE :proscpectName";
 		$statement = $pdo->prepare($query);
 
-		// bind the prospect id to the place holder in template
+		// bind the prospect name to the place holder in template
 		$parameters = ["prospectName" => $prospectName];
 		$statement->execute($parameters);
 
