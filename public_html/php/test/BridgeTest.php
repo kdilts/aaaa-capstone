@@ -81,99 +81,68 @@ class BridgeTest extends AaaaTest {
 		$bridge->insert($this->getPDO());
 
 		// edit the Bridge and update it in mySQL
-		$bridge->setBridgeName($this->VALID_BRIDGENAME2);
+		$bridge->setBridgeName($this->VALID_BRIDGENAME);
 		$bridge->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoBridge = Bridge::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT2);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoBridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
+		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->profile->getBridgeStaffId());
+		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME2);
+		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
 
 	/**
-	 * test updating a Tweet that does not exist
+	 * test updating a Bridge that does not exist
 	 *
 	 * @expectedException PDOException
 	 **/
-	public function testUpdateInvalidTweet() {
-		// create a Tweet, try to update it without actually updating it and watch it fail
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->update($this->getPDO());
+	public function testUpdateInvalidBridge() {
+		// create a Bridge, try to update it without actually updating it and watch it fail
+		$bridge = new Bridge(null, $this->bridge>getBridgeUserName(), $this->VALID_BRIDGESTAFFID);
+		$bridge>update($this->getPDO());
 	}
 
+
 	/**
-	 * test creating a Tweet and then deleting it
+	 * test grabbing a Bridge by bridge content
 	 **/
-	public function testDeleteValidTweet() {
+	public function testGetValidBridgeByBridgeStaffId() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("bridge");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
-
-		// delete the Tweet from mySQL
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$tweet->delete($this->getPDO());
-
-		// grab the data from mySQL and enforce the Tweet does not exist
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertNull($pdoTweet);
-		$this->assertEquals($numRows, $this->getConnection()->getRowCount("tweet"));
-	}
-
-	/**
-	 * test deleting a Tweet that does not exist
-	 *
-	 * @expectedException PDOException
-	 **/
-	public function testDeleteInvalidTweet() {
-		// create a Tweet and try to delete it without actually inserting it
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->delete($this->getPDO());
-	}
-
-	/**
-	 * test grabbing a Tweet by tweet content
-	 **/
-	public function testGetValidTweetByTweetContent() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
-
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Bridge and insert to into mySQL
+		$bridge = new Bridge(null, $this->bridge->getBridgeUserName(), $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME);
+		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Tweet::getTweetByTweetContent($this->getPDO(), $tweet->getTweetContent());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
+		$results = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Tweet", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Bridge", $results);
 
 		// grab the result from the array and validate it
-		$pdoTweet = $results[0];
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoBridge = $results[0];
+		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->bridge->getBridgeStaffId());
+		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
+		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
 
 	/**
-	 * test grabbing a Tweet by content that does not exist
+	 * test grabbing aBridge by content that does not exist
 	 **/
-	public function testGetInvalidTweetByTweetContent() {
-		// grab a tweet by searching for content that does not exist
-		$tweet = Tweet::getTweetByTweetContent($this->getPDO(), "you will find nothing");
-		$this->assertCount(0, $tweet);
+	public function testGetInvalidTweetByBridgeStaffId() {
+		// grab a bridge by searching for content that does not exist
+		$bridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), "you will find nothing");
+		$this->assertCount(0, $bridge);
 	}
 
 	/**
-	 * test grabbing all Tweets
+	 * test grabbing all Bridges
 	 **/
-	public function testGetAllValidTweets() {
+	public function testGetAllValidBridges() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("bridge");
 
 		// create a new Tweet and insert to into mySQL
 		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
