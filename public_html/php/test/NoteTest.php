@@ -130,25 +130,25 @@ class NoteTest extends AaaaTest {
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Tweet::getTweetByTweetContent($this->getPDO(), $tweet->getTweetContent());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
+		$results = Tweet::getTweetByTweetContent($this->getPDO(), $note->getNoteContent());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Tweet", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Note", $results);
 
 		// grab the result from the array and validate it
-		$pdoTweet = $results[0];
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoNote = $results[0];
+		$this->assertEquals($pdoNote->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
+		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTEDATE);
 	}
 
 	/**
-	 * test grabbing a Tweet by content that does not exist
+	 * test grabbing a Note by content that does not exist
 	 **/
-	public function testGetInvalidTweetByTweetContent() {
-		// grab a tweet by searching for content that does not exist
-		$tweet = Tweet::getTweetByTweetContent($this->getPDO(), "you will find nothing");
-		$this->assertCount(0, $tweet);
+	public function testGetInvalidNoteByNoteContent() {
+		// grab a note by searching for content that does not exist
+		$note = Note::getNoteByNoteContent($this->getPDO(), "you will find nothing");
+		$this->assertCount(0, $note);
 	}
 
 	/**
