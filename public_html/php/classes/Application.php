@@ -700,7 +700,7 @@ class Application {
 	 * @throws \PDOException if there is an sql error
 	 * @throws \TypeError if $applicationName is not a string
 	 */
-	public function getApplicationsByApplicationName (\PDO $pdo, string $applicationName){
+	public function getApplicationsByApplicationName (\PDO $pdo, string $applicationName) {
 		// sanitize the prospectEmail before searching
 		$applicationName = trim($applicationName);
 		$applicationName = filter_var($applicationName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -710,7 +710,7 @@ class Application {
 		$applicationName = "%$applicationName%";
 
 		// create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource From application WHERE applicationFirstName LIKE :applicationName OR applicationLastName LIKE :applicationName";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationFirstName LIKE :applicationName OR applicationLastName LIKE :applicationName";
 		$statement = $pdo->prepare($query);
 
 		// bind the application name to the place holder in template
@@ -747,6 +747,43 @@ class Application {
 		}
 		return ($applications);
 	}
+		public static function getAllApplications(\PDO $pdo){
+			// create query template
+			$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application";
+			$statement = $pdo->prepare($query);
+			$statement->execute();
+
+			// build an array of applications
+			$applications = new \SplFixedArray($statement->rowCount());
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			while(($row = $statement->fetch()) !== false) {
+				try {
+					$application = new application(
+						$row["applicationId"],
+						$row["applicationFirstName"],
+						$row["applicationLastName"],
+						$row["applicationEmail"],
+						$row["applicationPhoneNumber"],
+						$row["applicationSource"],
+						$row["applicationCohortId"],
+						$row["applicationAboutYou"],
+						$row["applicationHopeToAccomplish"],
+						$row["applicationExperience"],
+						$row["applicationDateTime"],
+						$row["applicationUtmCampaign"],
+						$row["applicationUtmMedium"],
+						$row["applicationUtmSource"]
+					);
+					$applications[$applications->key()] = $application;
+					$applications->next();
+				} catch(\Exception $exception){
+					// if the row couldn't be converted, rethrow it
+					throw(new \PDOException($exception->getMessage(), 0, $exception));
+				}
+			}
+			return $applications;
+		}
+
 
 	/**
 	 * @return array
