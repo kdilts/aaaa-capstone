@@ -109,14 +109,14 @@ class NoteTest extends AaaaTest {
 	}
 
 	/**
-	 * test updating a Tweet that does not exist
+	 * test updating a Note that does not exist
 	 *
 	 * @expectedException PDOException
 	 **/
-	public function testUpdateInvalidTweet() {
-		// create a Tweet, try to update it without actually updating it and watch it fail
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->update($this->getPDO());
+	public function testUpdateInvalidNote() {
+		// create a Note try to update it without actually updating it and watch it fail
+		$note = new Note(null, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note->update($this->getPDO());
 	}
 
 	/**
