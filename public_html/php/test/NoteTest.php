@@ -152,15 +152,15 @@ class NoteTest extends AaaaTest {
 	}
 
 	/**
-	 * test grabbing all Tweets
+	 * test grabbing all Notes
 	 **/
-	public function testGetAllValidTweets() {
+	public function testGetAllValidNotes() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("note");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Note and insert to into mySQL
+		$note = new Note(null, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = Tweet::getAllTweets($this->getPDO());
