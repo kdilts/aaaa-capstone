@@ -34,11 +34,10 @@ class ApplicationCohortTest extends AaaaTest {
 
 		// create date
 		$date = new \DateTime();
-		//$date = $date->format("Y-m-d H:i:s");
+		$date = $date->format("Y-m-d H:i:s");
 
 		// create an application
-		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source",
-			1, "about you", "hope", "exp", "utmC", $date,"utmM", "utmS");
+		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", 5, "about you", "hope", "exp", $date, "utmC","utmM", "utmS");
 		$this->application->insert($this->getPDO());
 
 		// create cohort

@@ -332,17 +332,17 @@ class Application {
 
 	/**
 	 * mutator method for applicationCohortId
-	 * @param string $newApplicationCohortId
+	 * @param int $newApplicationCohortId
 	 */
-	public function setApplicationCohortId(string $newApplicationCohortId) {
-		$this->applicationCohortId = trim($newApplicationCohortId);
-		$this->applicationCohortId = filter_var($newApplicationCohortId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty ($newApplicationCohortId) === true) {
-			throw (new \InvalidArgumentException("Application Cohort Id is empty or secure"));
+	public function setApplicationCohortId(int $newApplicationCohortId) {
+		if($newApplicationCohortId === null){
+			$this->applicationCohortId = null;
+			return;
 		}
-		//verify source will fit in the database
-		if(strlen($newApplicationCohortId) > 20) {
-			throw (new \RangeException("Application Cohort Id is to large"));
+
+		//check if applicationId is negative
+		if($newApplicationCohortId <= 0) {
+			throw(new \RangeException("Application Cohort Id must be positive."));
 		}
 		//store the Application Cohort Id
 		$this->applicationCohortId = $newApplicationCohortId;
@@ -353,8 +353,8 @@ class Application {
 	 * @param string $newApplicationAboutYou
 	 */
 	public function setApplicationAboutYou(string $newApplicationAboutYou) {
-		//$this->applicationAboutYou = trim ($newApplicationAboutYou);
-		$this->applicationAboutYou = filter_var($newApplicationAboutYou, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$newApplicationAboutYou = trim ($newApplicationAboutYou);
+		$newApplicationAboutYou = filter_var($newApplicationAboutYou, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty ($newApplicationAboutYou) === true) {
 			throw (new \InvalidArgumentException("application About You is empty or secure"));
 		}
@@ -371,8 +371,8 @@ class Application {
 	 * @param string $newApplicationHopeToAccomplish
 	 */
 	public function setApplicationHopeToAccomplish(string $newApplicationHopeToAccomplish) {
-		$this->applicationHopeToAccomplish = trim($newApplicationHopeToAccomplish);
-		$this->applicationHopeToAccomplish = filter_var($newApplicationHopeToAccomplish, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$newApplicationHopeToAccomplish = trim($newApplicationHopeToAccomplish);
+		$newApplicationHopeToAccomplish = filter_var($newApplicationHopeToAccomplish, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty ($newApplicationHopeToAccomplish) === true) {
 			throw (new\InvalidArgumentException("application Hope to Accomplish is empty or secure"));
 		}
@@ -387,11 +387,11 @@ class Application {
 	/**
 	 * mutator method for applicationExperience
 	 *
-	 * @param string $ApplicationExperience
+	 * @param string $newApplicationExperience
 	 */
 	public function setApplicationExperience(string $newApplicationExperience) {
-		$this->applicationExperience = trim($newApplicationExperience);
-		$this->applicationExperience = filter_var($newApplicationExperience, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$newApplicationExperience = trim($newApplicationExperience);
+		$newApplicationExperience = filter_var($newApplicationExperience, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty ($newApplicationExperience) === true) {
 			throw (new\InvalidArgumentException("application Experience is empty or secure"));
 		}
@@ -405,7 +405,7 @@ class Application {
 
 	/**
 	 * mutator method for applicationDateTime
-	 * @param \DateTime $newApplicationDateTime
+	 * @param \DateTime|null $newApplicationDateTime
 	 * @throws \InvalidArgumentException if $newApplicationDateTime is not a valid object or string
 	 * @throws \RangeException if $newApplicationDateTime is a date that does not exist
 	 */
@@ -427,8 +427,8 @@ class Application {
 	 * @param string $newApplicationUtmCampaign
 	 */
 	public function setApplicationUtmCampaign(string $newApplicationUtmCampaign) {
-		$this->applicationUtmCampaign = trim($newApplicationUtmCampaign);
-		$this->applicationUtmCampaign = filter_var($newApplicationUtmCampaign, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$newApplicationUtmCampaign = trim($newApplicationUtmCampaign);
+		$newApplicationUtmCampaign = filter_var($newApplicationUtmCampaign, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if (empty($newApplicationUtmCampaign)=== true) {
 			throw (new\InvalidArgumentException("application UTM Campaign is an empty or secure"));
 		}
@@ -445,8 +445,8 @@ class Application {
 	 * @param string $newApplicationUtmMedium
 	 */
 	public function setApplicationUtmMedium(string $newApplicationUtmMedium) {
-		$this->applicationUtmMedium = trim($newApplicationUtmMedium);
-		$this->applicationUtmMedium = filter_var($newApplicationUtmMedium, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$newApplicationUtmMedium = trim($newApplicationUtmMedium);
+		$newApplicationUtmMedium = filter_var($newApplicationUtmMedium, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if (empty($newApplicationUtmMedium)=== true){
 			throw (new\InvalidArgumentException("application UTM Medium is an empty or secure"));
 		}
@@ -462,13 +462,13 @@ class Application {
 	/**
 	 * mutator method for applicationUtmSource
 	 *
-	 * @param string $applicationUtmSource
+	 * @param string $newApplicationUtmSource
 	 */
 	public function setApplicationUtmSource(string $newApplicationUtmSource) {
-		$this->applicationUtmSource = trim($newApplicationUtmSource);
-		$this->applicationUtmSource = filter_var($newApplicationUtmSource, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
-		if (empty($newApplicationSource)=== true){
-			throw (new\InvalidArgumentException("application UTM Source is an empty or secure"));
+		$newApplicationUtmSource = trim($newApplicationUtmSource);
+		$newApplicationUtmSource = filter_var($newApplicationUtmSource, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+		if (empty($newApplicationUtmSource)=== true){
+			throw (new\InvalidArgumentException("application UTM Source is empty or secure"));
 		}
 		//verify application UTM Source
 		if (strlen($newApplicationUtmSource)>500){
@@ -521,7 +521,7 @@ class Application {
 	 * @param $startDate
 	 * @return \SplFixedArray
 	 */
-	public static function getApplicationsByApplicationDateTime(\PDO $pdo, $startDate){
+	public static function getApplicationsByApplicationDateTime(\PDO $pdo, \DateTime $startDate){
 		// validate dates
 		try {
 			$startDate = self::validateDateTime($startDate);
@@ -622,7 +622,7 @@ class Application {
 	/**
 	 * searches applications by applicationId
 	 * @param \PDO $pdo
-	 * @param int $applicationID
+	 * @param int $applicationId
 	 * @return Application
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
