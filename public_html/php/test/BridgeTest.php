@@ -88,7 +88,7 @@ class BridgeTest extends AaaaTest {
 		$pdoBridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
 		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->profile->getBridgeStaffId());
-		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME2);
+		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
 		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
 
@@ -119,7 +119,7 @@ class BridgeTest extends AaaaTest {
 		$results = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Bridge", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Bridge", $results);
 
 		// grab the result from the array and validate it
 		$pdoBridge = $results[0];
@@ -129,11 +129,11 @@ class BridgeTest extends AaaaTest {
 	}
 
 	/**
-	 * test grabbing aBridge by content that does not exist
+	 * test grabbing a Bridge by content that does not exist
 	 **/
-	public function testGetInvalidTweetByBridgeStaffId() {
+	public function testGetInvalidbRIDGEByBridgeStaffId() {
 		// grab a bridge by searching for content that does not exist
-		$bridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), "you will find nothing");
+		$bridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), " AaaaTest::INVALID_KEY");
 		$this->assertCount(0, $bridge);
 	}
 
@@ -146,18 +146,18 @@ class BridgeTest extends AaaaTest {
 
 		// create a new Bridge and insert to into mySQL
 		$bridge = new Bridge(null, $this->profile->getBridgeStaffId(), $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
-		BBridge->insert($this->getPDO());
+		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = Bridge::getAllBridges($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\Dmcdonald21\\DataDesign\\Bridge", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Bridge", $results);
 
 		// grab the result from the array and validate it
-		$pdoTweet = $results[0];
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoBridge = $results[0];
+		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->profile->getBridgeStaffId());
+		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
+		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
 }
