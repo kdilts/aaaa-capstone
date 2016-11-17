@@ -656,7 +656,8 @@ class Application {
 					$row["applicationDateTime"],
 					$row["applicationUtmCampaign"],
 					$row["applicationUtmMedium"],
-					$row["applicationUtmSource"]);
+					$row["applicationUtmSource"]
+				);
 			}
 
 		} catch(\Exception $exception){
@@ -664,7 +665,65 @@ class Application {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return($application);
-	}	/**
+	}
+
+	/**
+	 * get applications by fuzzy name search - takes a string and matches against both first and last names
+	 * @param \PDO $pdo pdo object
+	 * @param string $applicationName string to search for
+	 * @return \SplFixedArray array of applications found
+	 * @throws \PDOException if there is an sql error
+	 * @throws \TypeError if $applicationName is not a string
+	 */
+	public function getApplicationsByApplicationName (\PDO $pdo, string $applicationName){
+		// sanitize the prospectEmail before searching
+		$applicationName = trim($applicationName);
+		$applicationName = filter_var($applicationName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($applicationName) === true) {
+			throw(new \PDOException("Application Name is empty or insecure"));
+		}
+		$applicationName = "%$applicationName%";
+
+		// create query template
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource From application WHERE applicationFirstName LIKE :applicationName OR applicationLastName LIKE :applicationName";
+		$statement = $pdo->prepare($query);
+
+		// bind the prospect id to the place holder in template
+		$parameters = ["applicationName" => $applicationName];
+		$statement->execute($parameters);
+
+		// build an array of prospects
+		$applications = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$application = new application(
+					$row["applicationId"],
+					$row["applicationFirstName"],
+					$row["applicationLastName"],
+					$row["applicationEmail"],
+					$row["applicationPhoneNumber"],
+					$row["applicationSource"],
+					$row["applicationCohortId"],
+					$row["applicationAboutYou"],
+					$row["applicationHopeToAccomplish"],
+					$row["applicationExperience"],
+					$row["applicationDateTime"],
+					$row["applicationUtmCampaign"],
+					$row["applicationUtmMedium"],
+					$row["applicationUtmSource"]
+				);
+				$applications[$applications->key()] = $application;
+				$applications->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($applications);
+	}
+
+	/**
 	 * @return array
 	 */
 	public function jsonSerialize() {
