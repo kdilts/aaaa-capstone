@@ -52,26 +52,26 @@ class NoteTest extends AaaaTest {
 		$this->profile->insert($this->getPDO());
 
 		// calculate the date (just use the time the unit test was setup...)
-		$this->VALID_TWEETDATE = new \DateTime();
+		$this->VALID_NOTEDATE = new \DateTime();
 	}
 
 	/**
-	 * test inserting a valid Tweet and verify that the actual mySQL data matches
+	 * test inserting a valid Note and verify that the actual mySQL data matches
 	 **/
-	public function testInsertValidTweet() {
+	public function testInsertValidNote() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("note");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Note and insert to into mySQL
+		$note = new Note(null, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoNote = Note::getNoteByNoteId($this->getPDO(), $note->getNoteId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
+		$this->assertEquals($pdoNote->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
+		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTEDATE);
 	}
 
 	/**
