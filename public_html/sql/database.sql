@@ -68,7 +68,6 @@ CREATE TABLE application(
 	applicationEmail VARCHAR(100) NOT NULL,
 	applicationPhoneNumber VARCHAR(30) NOT NULL,
 	applicationSource VARCHAR(200) NOT NULL,
-	applicationCohortId INT UNSIGNED NOT NULL,
 	applicationAboutYou VARCHAR(2000) NOT NULL,
 	applicationHopeToAccomplish VARCHAR(2000) NOT NULL,
 	applicationExperience VARCHAR(2000) NOT NULL,
@@ -76,9 +75,7 @@ CREATE TABLE application(
 	applicationUtmCampaign VARCHAR(500) NOT NULL,
 	applicationUtmMedium VARCHAR(500) NOT NULL,
 	applicationUtmSource VARCHAR(500) NOT NULL,
-	INDEX (applicationId),
-	PRIMARY KEY(applicationId),
-	FOREIGN KEY(applicationCohortId) REFERENCES cohort (cohortId)
+	PRIMARY KEY(applicationId)
 );
 
 CREATE TABLE applicationCohort(
@@ -115,10 +112,7 @@ CREATE TABLE prospect(
 	prospectLastName VARCHAR(40) NOT NULL,
 	prospectEmail VARCHAR(100) NOT NULL,
 	prospectPhoneNumber VARCHAR(30) NOT NULL,
-	prospectCohortId INT UNSIGNED NOT NULL,
-	INDEX (prospectId),
-	PRIMARY KEY(prospectId),
-	FOREIGN KEY(prospectCohortId) REFERENCES cohort(cohortId)
+	PRIMARY KEY(prospectId)
 );
 
 CREATE TABLE prospectCohort(
