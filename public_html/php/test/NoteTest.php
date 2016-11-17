@@ -10,32 +10,32 @@ require_once("AaaaTest.php");
 require_once(dirname(__DIR__) . "/classes/autoload.php");
 
 /**
- * Full PHPUnit test for the Tweet class
+ * Full PHPUnit test for the Note class
  *
- * This is a complete PHPUnit test of the Tweet class. It is complete because *ALL* mySQL/PDO enabled methods
+ * This is a complete PHPUnit test of the Note class. It is complete because *ALL* mySQL/PDO enabled methods
  * are tested for both invalid and valid inputs.
  *
- * @see Tweet
- * @author Dylan McDonald <dmcdonald21@cnm.edu>
+ * @see Note
+ * @author Jeremiah Z. Wood jwood47@cnm.edu
  **/
 class NoteTest extends AaaaTest {
 	/**
-	 * content of the Tweet
+	 * content of the Note
 	 * @var string $VALID_NOTECONTENT
 	 **/
 	protected $VALID_NOTECONTENT = "PHPUnit test passing";
 	/**
-	 * content of the updated Tweet
-	 * @var string $VALID_TWEETCONTENT2
+	 * content of the updated Note
+	 * @var string $VALID_NOTECONTENT2
 	 **/
-	protected $VALID_TWEETCONTENT2 = "PHPUnit test still passing";
+	protected $VALID_NOTECONTENT2 = "PHPUnit test still passing";
 	/**
-	 * timestamp of the Tweet; this starts as null and is assigned later
-	 * @var DateTime $VALID_TWEETDATE
+	 * timestamp of the Note; this starts as null and is assigned later
+	 * @var DateTime $VALID_NOTEDATE
 	 **/
-	protected $VALID_TWEETDATE = null;
+	protected $VALID_NOTEDATE = null;
 	/**
-	 * Profile that created the Tweet; this is for foreign key relations
+	 * Profile that created the Note; this is for foreign key relations
 	 * @var Profile profile
 	 **/
 	protected $profile = null;
