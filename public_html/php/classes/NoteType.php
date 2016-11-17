@@ -129,13 +129,38 @@ class NoteType implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeIdId"]);
+				$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeId"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return($noteType);
+		}
+		public static function getNoteTypeByNoteTypeName(\PDO $pdo, string $noteTypeName){
+			// sanitize the placardId before searching
+			$noteTypeName = trim($noteTypeName);
+			$noteTypeName = filter_var($noteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			if($noteTypeName === null){
+				throw(new\PDOException("noteType name can not be empty or may be insecure."));
+			}
+// create query template
+			$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName = :noteTypeName";
+			$statement = $pdo->prepare($query);
+			$statement->execute();
+// grab note from SQL
+			try {
+				$noteType = null;
+				$statement->setFetchMode(\PDO::FETCH_ASSOC);
+				$row = $statement->fetch();
+				if($row !== false) {
+					$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeId"]);
+				}
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+			return($noteType);
 	}
 
 	/**
