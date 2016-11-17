@@ -60,6 +60,7 @@ abstract class AaaaTest extends \PHPUnit_Extensions_Database_TestCase {
 		$dataset->addTable("applicationCohort");
 		$dataset->addTable("studentPermit");
 		$dataset->addTable("prospect");
+		$dataset->addTable("prospectCohort");
 		$dataset->addTable("note");
 		return($dataset);
 	}
