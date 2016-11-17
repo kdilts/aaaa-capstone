@@ -20,8 +20,8 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  **/
 class ApplicationCohortTest extends AaaaTest {
 
-	private $application = null;
 	private $cohort = null;
+	private $application = null;
 
 	/**
 	 * create dependent objects before running each test
@@ -36,13 +36,13 @@ class ApplicationCohortTest extends AaaaTest {
 		$date = new \DateTime();
 		//$date = $date->format("Y-m-d H:i:s");
 
-		// create an application
-		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", 5, "about you", "hope", "exp", $date, "utmC","utmM", "utmS");
-		$this->application->insert($this->getPDO());
-
 		// create cohort
 		$this->cohort = new Cohort(null, 1);
 		$this->cohort->insert($this->getPDO());
+
+		// create an application
+		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", $this->cohort->getCohortId(), "about you", "hope", "exp", $date, "utmC","utmM", "utmS");
+		$this->application->insert($this->getPDO());
 	}
 
 	/**
@@ -53,7 +53,7 @@ class ApplicationCohortTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("applicationCohort");
 
 		// create a new ApplicationCohort and insert to into mySQL
-		$applicationCohort = new ApplicationCohort(null, $this->application->getApplicationId(), $this->cohort->getCohortId);
+		$applicationCohort = new ApplicationCohort(null, $this->application->getApplicationId(), $this->cohort->getCohortId());
 		$applicationCohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
