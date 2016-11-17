@@ -15,12 +15,13 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  * This is a complete PHPUnit test of the StatusTest class. It is complete because *ALL* mySQL/PDO enabled methods
  * are tested for both invalid and valid inputs.
  *
- * @see status
+ * @see statusType
+ *
  **/
 class StatusTypeTest extends AaaaTest {
 	/**
-	 * content of the Status
-	 * @var string $VALID_ST
+	 * content of the Status Type
+	 * @var string $VALID_STATUSTYPENAME
 	 **/
 	protected $VALID_STATUSTYPENAME = 1;
 	protected $VALID_STATUSTYPENAME2 = 2;
@@ -31,7 +32,9 @@ class StatusTypeTest extends AaaaTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-	}
+
+	}// create and insert a Status Type
+
 	/**
 	 * test inserting a valid Status and verify that the actual mySQL data matches
 	 */
@@ -81,4 +84,29 @@ class StatusTypeTest extends AaaaTest {
 		$this->assertEquals($pdoStatus->getStatusTypeName(), $this->VALID_STATUSTYPENAME2);
 	}
 
+	/**
+	 * test grabbing all StatusType
+	 */
+	public function testUpdateInvalidStatusType() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("statusType");
+
+		// create a new Student Permit and insert to into mySQL
+		$statusType = new StatusType(null, $this->VALID_STATUSTYPENAME, $this->VALID_STATUSTYPENAME2);
+		$statusType->insert($this->getPDO());
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = StatusType::getAllStatusTypes($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("statusType"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf($results, "Edu\\Cnm\\DdcAaaa\\Test\\StatusType");
+		// grab the result from the array and validate it
+		$pdoStatusType = $results[0];
+		$this->assertEquals($pdoStatusType->getStudentPermitApplicationId(), $this->VALID_STATUSTYPENAME2);
+		$this->assertEquals($pdoStatusType->getStudentPermitCheckInDate);
+		$this->assertEquals($pdoStatusType->getstatusType(), $this->VALID_STATUSTYPENAME2);
+	}
 }
+
+
+
+
