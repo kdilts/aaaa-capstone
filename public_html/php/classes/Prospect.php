@@ -125,7 +125,12 @@ class Prospect implements \JsonSerializable {
 	 * @throws \RangeException throws this if number is negative, or 0.
 	 * @throws \TypeError throws this if $newProspectId is not an integer.
 	 */
-	public function setProspectId(int $newProspectId){
+	public function setProspectId(int $newProspectId = null){
+		if($newProspectId === null){
+			$this->prospectId = null;
+			return;
+		}
+
 		if ($newProspectId <= 0) {
 			throw(new \RangeException("Prospect ID cannot be negative."));
 		}
@@ -246,12 +251,11 @@ class Prospect implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "INSERT INTO prospect(prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName) VALUES(:prospectId, :prospectCohortId, :prospectPhoneNumber, :prospectEmail, :prospectFirstName, :prospectLastName)";
+		$query = "INSERT INTO prospect(prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName) VALUES(:prospectCohortId, :prospectPhoneNumber, :prospectEmail, :prospectFirstName, :prospectLastName)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
 		$parameters = [
-			"prospectId" => $this->prospectId,
 			"prospectCohortId" => $this->prospectCohortId,
 			"prospectPhoneNumber" => $this->prospectPhoneNumber,
 			"prospectEmail" => $this->prospectEmail,

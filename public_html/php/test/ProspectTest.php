@@ -20,8 +20,7 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  **/
 class ProspectTest extends AaaaTest {
 
-	protected $VALID_PROSPECTID = 1;
-	protected $VALID_PROSPECTCOHORTID = null;
+	protected $VALID_PROSPECTCOHORTID = 1;
 	protected $VALID_PROSPECTPHONENUMBER = "555-555-5555";
 	protected $VALID_PROSPECTEMAIL = "validemail@gmail.com";
 	protected $VALID_PROSPECTFIRSTNAME = "John";
@@ -49,7 +48,6 @@ class ProspectTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoProspect = Prospect::getProspectByProspectId($this->getPDO(), $prospect->getProspectId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospect"));
-		$this->assertEquals($pdoProspect->getProspectId(), $this->VALID_PROSPECTID);
 		$this->assertEquals($pdoProspect->getProspectCohortId(), $this->VALID_PROSPECTCOHORTID);
 		$this->assertEquals($pdoProspect->getProspectPhoneNumber(), $this->VALID_PROSPECTPHONENUMBER);
 		$this->assertEquals($pdoProspect->getProspectEmail(), $this->VALID_PROSPECTEMAIL);
