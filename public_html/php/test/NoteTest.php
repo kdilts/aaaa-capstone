@@ -75,14 +75,14 @@ class NoteTest extends AaaaTest {
 	}
 
 	/**
-	 * test inserting a Tweet that already exists
+	 * test inserting a Note that already exists
 	 *
 	 * @expectedException PDOException
 	 **/
-	public function testInsertInvalidTweet() {
-		// create a Tweet with a non null tweet id and watch it fail
-		$tweet = new Tweet(DataDesignTest::INVALID_KEY, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+	public function testInsertInvalidNote() {
+		// create a Note with a non null note id and watch it fail
+		$note = new Note(DataDesignTest::INVALID_KEY, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note->insert($this->getPDO());
 	}
 
 	/**
