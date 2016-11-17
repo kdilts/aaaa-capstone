@@ -483,12 +483,12 @@ class Application {
 	 * @throws \PDOException
 	 */
 	public function insert(\PDO $pdo) {
-		// enforce the application ID is not null (i.e., don't update a application Id that hasn't been inserted)
+		// enforce the application Id is not null (i.e., don't update a application Id that hasn't been inserted)
 		if($this->applicationId !== null) {
 			throw(new \PDOException("unable to update a applicationId that already exists"));
 		}
 		//create query template
-		$query="INSERT INTO application (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationCohortId, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCompaign, :applicationUtmMedium, :applicationUtmSource)";
+		$query="INSERT INTO application (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationCohortId, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCampaign, :applicationUtmMedium, :applicationUtmSource)";
 		$statement = $pdo->prepare($query);
 
 		//bind the members variable to the place holder in the template
@@ -507,7 +507,7 @@ class Application {
 			"applicationDateTime" => $this->applicationDateTime,
 			"applicationUtmCampaign" => $this->applicationUtmCampaign,
 			"applicationUtmMedium" => $this->applicationUtmMedium,
-			"applicaitonUtmSource" => $this->applicationUtmSource,
+			"applicationUtmSource" => $this->applicationUtmSource
 		];
 		$statement->execute($parameters);
 
@@ -610,7 +610,8 @@ class Application {
 					$row["applicationDateTime"],
 					$row["applicationUtmCampaign"],
 					$row["applicationUtmMedium"],
-					$row["applicationUtmSource"]);
+					$row["applicationUtmSource"]
+				);
 			}
 		} catch(\Exception $exception){
 			//if the row couldn't be converted, rethrow it
