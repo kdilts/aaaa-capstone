@@ -230,7 +230,7 @@ class Application {
 	/**
 	 * mutator method for applicationId
 	 * @param int $newApplicationId
-	 * @throws \RangeException
+	 * @throws \RangeException if negative
 	 **/
 	public function setApplicationId(int $newApplicationId = null) {
 		if($newApplicationId === null){
@@ -247,8 +247,8 @@ class Application {
 
 	/**
 	 * mutator method for applicationFirstName
+	 * @throws \InvalidArgumentException if empty or insecure.
 	 * @param string $newApplicationFirstName
-	 * @throws \RangeException
 	 **/
 	public function setApplicationFirstName($newApplicationFirstName) {
 		// verify first name is secure
@@ -262,6 +262,7 @@ class Application {
 
 	/**
 	 * mutator method for applicationLastName
+	 * @throws \InvalidArgumentException if empty or insecure.
 	 * @param string $newApplicationLastName
 	 */
 	public function setApplicationLastName(string $newApplicationLastName) {
@@ -276,8 +277,10 @@ class Application {
 
 	/**
 	 * mutator method for applicationEmail
+	 * @throws \InvalidArgumentException if empty or insecure.
 	 * @param string $newApplicationEmail
-	 * @throws \RangeException
+	 * @throws \RangeException if email is too long.
+	 * TODO: maybe increase possible string length? 30 is a bit limitting.
 	 */
 	public function setApplicationEmail(string $newApplicationEmail) {
 		$newApplicationEmail = trim($newApplicationEmail);
@@ -295,7 +298,10 @@ class Application {
 
 	/**
 	 * mutator method for applicationPhoneNumber
+	 * @throws \InvalidArgumentException if empty or insecure.
 	 * @param string $newApplicationPhoneNumber
+	 * @throws \RangeException if too large or too small.
+	 * TODO: Change strlen check = 10 to ensure it's a phone number? a phone number shouldn't be 100 characters long right?
 	 */
 	public function setApplicationPhoneNumber(string $newApplicationPhoneNumber) {
 		$newApplicationPhoneNumber = trim($newApplicationPhoneNumber);
@@ -313,7 +319,10 @@ class Application {
 
 	/**
 	 * mutator method for applicationSource
+	 * @throws \InvalidArgumentException if empty or insecure.
+	 * @throws \RangeException checks if the text will fit in the database and return RangeException if unable
 	 * @param string $newApplicationSource
+	 * TODO: Is 1000 characters the limit? If no may want to increase it. That's not very much text.
 	 */
 	public function setApplicationSource(string $newApplicationSource) {
 		$newApplicationSource = trim ($newApplicationSource);
@@ -333,6 +342,7 @@ class Application {
 	/**
 	 * mutator method for applicationCohortId
 	 * @param int $newApplicationCohortId
+	 * @throws \RangeException if cohortId is negative
 	 */
 	public function setApplicationCohortId(int $newApplicationCohortId) {
 		if($newApplicationCohortId === null){
@@ -350,7 +360,10 @@ class Application {
 
 	/**
 	 * mutator method for applicationAboutYou
+	 * @throws \InvalidArgumentException if empty or insecure.
+	 * @throws \RangeException if About you is too large
 	 * @param string $newApplicationAboutYou
+	 * TODO: Again increase character limit?
 	 */
 	public function setApplicationAboutYou(string $newApplicationAboutYou) {
 		$newApplicationAboutYou = trim ($newApplicationAboutYou);
@@ -360,7 +373,7 @@ class Application {
 		}
 		//verify source will fit in the database
 		if(strlen($newApplicationAboutYou) > 1000){
-			throw (new \RangeException("application About You is to large"));
+			throw (new \RangeException("application About You is too large"));
 		}
 //store the Application About You
 		$this->applicationAboutYou = $newApplicationAboutYou;
@@ -369,6 +382,8 @@ class Application {
 	/**
 	 * mutator method for applicationHopeToAccomplish
 	 * @param string $newApplicationHopeToAccomplish
+	 * @throws \InvalidArgumentException if empty or insecure.
+	 * @throws \RangeException if too large
 	 */
 	public function setApplicationHopeToAccomplish(string $newApplicationHopeToAccomplish) {
 		$newApplicationHopeToAccomplish = trim($newApplicationHopeToAccomplish);
@@ -376,9 +391,9 @@ class Application {
 		if(empty ($newApplicationHopeToAccomplish) === true) {
 			throw (new\InvalidArgumentException("application Hope to Accomplish is empty or secure"));
 		}
-//verify source will fit in the datanase
+//verify source will fit in the database
 		if(strlen($newApplicationHopeToAccomplish) > 2000) {
-			throw (new \RangeException("application Hope to Accomplish is to large"));
+			throw (new \RangeException("application Hope to Accomplish is too large"));
 		}
 //store the Application Hope To Accomplish
 		$this->applicationHopeToAccomplish = $newApplicationHopeToAccomplish;
@@ -386,8 +401,10 @@ class Application {
 
 	/**
 	 * mutator method for applicationExperience
-	 *
+	 * @throws \InvalidArgumentException if empty or insecure.
 	 * @param string $newApplicationExperience
+	 * @throws \RangeException if too large
+	 * TODO: change character limit?
 	 */
 	public function setApplicationExperience(string $newApplicationExperience) {
 		$newApplicationExperience = trim($newApplicationExperience);
@@ -395,7 +412,7 @@ class Application {
 		if(empty ($newApplicationExperience) === true) {
 			throw (new\InvalidArgumentException("application Experience is empty or secure"));
 		}
-//verify applcation experience will fir in the database
+//verify applcation experience will fit in the database
 		if(strlen($newApplicationExperience) > 2000) {
 			throw (new \RangeException("application experience is to large"));
 		}
@@ -424,7 +441,9 @@ class Application {
 
 	/**
 	 * mutator method for ApplicationUtmCampaign
+	 * @throws \InvalidArgumentException if empty or insecure.
 	 * @param string $newApplicationUtmCampaign
+	 * @throws \RangeException if too large
 	 */
 	public function setApplicationUtmCampaign(string $newApplicationUtmCampaign) {
 		$newApplicationUtmCampaign = trim($newApplicationUtmCampaign);
@@ -434,15 +453,16 @@ class Application {
 		}
 		//verify application experience will fit in the database
 		if (strlen($newApplicationUtmCampaign)>500){
-			throw (new\RangeException("application UTM Campaign is to large"));
+			throw (new\RangeException("application UTM Campaign is too large"));
 		}
 		//store the application UTM Campaign
 		$this->applicationUtmCampaign = $newApplicationUtmCampaign;
 	}
 	/**
 	 * mutator method for ApplicationUtmMedium
-	 *
+	 * @throws \InvalidArgumentException if empty or insecure.
 	 * @param string $newApplicationUtmMedium
+	 * @throws \RangeException if too large
 	 */
 	public function setApplicationUtmMedium(string $newApplicationUtmMedium) {
 		$newApplicationUtmMedium = trim($newApplicationUtmMedium);
@@ -461,8 +481,9 @@ class Application {
 
 	/**
 	 * mutator method for applicationUtmSource
-	 *
+	 * @throws \InvalidArgumentException if empty or insecure.
 	 * @param string $newApplicationUtmSource
+	 * @throws \RangeException if too large.
 	 */
 	public function setApplicationUtmSource(string $newApplicationUtmSource) {
 		$newApplicationUtmSource = trim($newApplicationUtmSource);
@@ -480,7 +501,7 @@ class Application {
 	/**
 	 * inserts application into SQL database
 	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * @throws \PDOException if applicationId already exists
 	 */
 	public function insert(\PDO $pdo) {
 		// enforce the application Id is not null (i.e., don't update a application Id that hasn't been inserted)
@@ -621,7 +642,7 @@ class Application {
 	}
 
 	/**
-	 * searches applications by applicationId
+	 * searches applicfffffffffations by applicationId
 	 * @param \PDO $pdo
 	 * @param int $applicationId
 	 * @return Application
