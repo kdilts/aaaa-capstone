@@ -118,49 +118,16 @@ class NoteTest extends AaaaTest {
 		$note = new Note(null, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
 		$note->update($this->getPDO());
 	}
-
 	/**
-	 * test creating a Tweet and then deleting it
+	 * test grabbing a Note by note content
 	 **/
-	public function testDeleteValidTweet() {
+	public function testGetValidNoteByNoteContent() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
+		$numRows = $this->getConnection()->getRowCount("note");
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
-
-		// delete the Tweet from mySQL
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$tweet->delete($this->getPDO());
-
-		// grab the data from mySQL and enforce the Tweet does not exist
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
-		$this->assertNull($pdoTweet);
-		$this->assertEquals($numRows, $this->getConnection()->getRowCount("tweet"));
-	}
-
-	/**
-	 * test deleting a Tweet that does not exist
-	 *
-	 * @expectedException PDOException
-	 **/
-	public function testDeleteInvalidTweet() {
-		// create a Tweet and try to delete it without actually inserting it
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->delete($this->getPDO());
-	}
-
-	/**
-	 * test grabbing a Tweet by tweet content
-	 **/
-	public function testGetValidTweetByTweetContent() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
-
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new Note and insert to into mySQL
+		$note = new Note(null, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = Tweet::getTweetByTweetContent($this->getPDO(), $tweet->getTweetContent());
