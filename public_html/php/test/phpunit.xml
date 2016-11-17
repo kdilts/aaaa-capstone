@@ -1,6 +1,7 @@
 <phpunit>
 	<testsuites>
 		<testsuite name="AAAA Data Design">
+			<file>ApplicationCohortTest.php</file>
 			<file>ProspectCohortTest.php</file>
 		</testsuite>
 	</testsuites>

@@ -81,42 +81,42 @@ class Prospect implements \JsonSerializable {
 	 * @return int  value of prospect id
 	 */
 	public function getProspectId(){
-		return($this->getProspectId());
+		return($this->prospectId);
 	}
 	/**
 	 * accessor method for prospect cohort id
 	 * @return int value of prospect cohort id
 	 */
 	public function getProspectCohortId(){
-		return($this->getProspectCohortId());
+		return($this->prospectCohortId);
 	}
 	/**
 	 * accessor method for prospect phone number
 	 * @return string value of prospect phone number
 	 */
 	public function getProspectPhoneNumber(){
-		return($this->getProspectPhoneNumber());
+		return($this->prospectPhoneNumber);
 	}
 	/**
 	 * accessor method for prospect email
 	 * @return string value of prospect email
 	 */
 	public function getProspectEmail(){
-		return($this->getProspectEmail());
+		return($this->prospectEmail);
 	}
 	/**
 	 * accessor method for prospect first name
 	 * @return string value of prospect first name
 	 */
 	public function getProspectFirstName(){
-		return($this->getProspectFirstName());
+		return($this->prospectFirstName);
 	}
 	/**
 	 * accessor method for prospect last name
 	 * @return string value of prospect last name
 	 */
 	public function getProspectLastName(){
-		return($this->getProspectLastName());
+		return($this->prospectLastName);
 	}
 
 	/**
