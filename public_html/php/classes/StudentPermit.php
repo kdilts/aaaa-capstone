@@ -472,7 +472,7 @@ class StudentPermit implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getStudentPermitsByStudentPermitChecInDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate){
+	public static function getStudentPermitsByStudentPermitCheckInDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate){
 		// validate dates
 		try {
 			$startDate = self::validateDateTime($startDate);
