@@ -243,7 +243,7 @@ class Swipe {
 	 * gets the swipe from the swipeNumber
 	 * @param \PDO $pdo connection object
 	 * @param int $swipeNumber new value
-	 * @return \SplFixedArray SplFixedArray of swipe
+	 *
 	 * @throws \PDOException when mySQL related error occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
@@ -261,20 +261,19 @@ class Swipe {
 		$parameters = ["swipeNumber" => $swipeNumber];
 		$statement->execute($parameters);
 
-		// build an array of swipes
-		$swipes = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
+		// grab placard from SQL
+		try {
+			$swipe = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
 				$swipe = new Swipe($row["swipeId"], $row["swipeStatusTypeId"], $row["swipeNumber"]);
-				$swipes[$swipes->key()] = $swipe;
-				$swipes->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return $swipes;
+		return $swipe;
 	}
 
 	/**
