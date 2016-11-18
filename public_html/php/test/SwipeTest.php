@@ -165,7 +165,7 @@ class SwipeTest extends AaaaTest {
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Swipe", $results);
 		// grab the result from the array and validate it
 		$pdoSwipe = $results[0];
-		$this->assertEquals($pdoSwipe->getSwipeStatusypeId(), $this->swipeStatus->getStatusTypeId());
+		$this->assertEquals($pdoSwipe->getSwipeStatusTypeId(), $this->swipeStatus->getStatusTypeId());
 		$this->assertEquals($pdoSwipe->getSwipeNumber(), $this->VALID_SWIPENUMBER);
 	}
 
