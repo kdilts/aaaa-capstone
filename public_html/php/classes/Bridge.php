@@ -67,7 +67,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \Exception if some other exception occurs
 		 **/
 		public function setBridgeStaffId(string $newBridgeStaffId) {
-			$this->bridgeStaffId = trim ($newBridgeStaffId);
+			$newBridgeStaffId = trim ($newBridgeStaffId);
 			$newBridgeStaffId = filter_var($newBridgeStaffId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 			if(empty($newBridgeStaffId) === true) {
 				throw (new \InvalidArgumentException("Bridge staff id is either empty or insecure."));
@@ -89,7 +89,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \Exception if some other exception occurs
 		 **/
 		public function setBridgeName(string $newBridgeName) {
-			$this->bridgeName = trim ($newBridgeName);
+			$newBridgeName = trim ($newBridgeName);
 			$newBridgeName = filter_var($newBridgeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 			if(empty($newBridgeName) === true) {
 				throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
