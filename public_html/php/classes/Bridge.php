@@ -10,7 +10,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 **/
 
 		/**
-		 * @var int $bridgeStaffId
+		 * @var string $bridgeStaffId
 		 **/
 
 		private $bridgeStaffId;
