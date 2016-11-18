@@ -2,7 +2,7 @@
 namespace Edu\Cnm\DdcAaaa\Test;
 
 use Edu\Cnm\DdcAaaa\{
-	Swipe
+	Swipe, StatusType
 };
 
 // grab the project test parameters
@@ -21,7 +21,7 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
  * @author Kevin Dilts <kdilts@cnm.edu>
  **/
 class SwipeTest extends AaaaTest {
-
+	protected $swipeStatus = null;
 	protected $VALID_SWIPEID = 0;
 
 	protected $VALID_SWIPESTATUS = 1;
@@ -34,7 +34,7 @@ class SwipeTest extends AaaaTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-		$this->swipeStatus = new StatusType(null, "2");
+		$this->swipeStatus = new StatusType(null, 2);
 		$this->swipeStatus->insert($this->getPDO());
 	}
 	/**
@@ -45,7 +45,7 @@ class SwipeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("swipe");
 
 		// create a new Swipe and insert to into mySQL
-		$swipe = new Swipe(null, $this->VALID_SWIPENUMBER, $this->VALID_SWIPESTATUS );
+		$swipe = new Swipe(null, $this->swipeStatus->getStatusTypeId(), $this->VALID_SWIPENUMBER );
 		$swipe->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -75,7 +75,7 @@ class SwipeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("swipe");
 
 		// create a new Swipe status and insert into mySQL
-		$swipe = new Swipe(null, $this->VALID_SWIPENUMBER, $this->VALID_SWIPESTATUS);
+		$swipe = new Swipe(null, $this->VALID_SWIPESTATUS, $this->VALID_SWIPENUMBER);
 		$swipe->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -93,7 +93,7 @@ class SwipeTest extends AaaaTest {
 	 **/
 	public function testGetInvalidSwipeBySwipeId() {
 		// grab a swipe by searching for id that does not exist
-		$swipe = Swipe::getSwipeByPSwipeId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$swipe = Swipe::getSwipeBySwipeId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertNull($swipe);
 	}
 	/**
