@@ -63,7 +63,7 @@ class SwipeTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidSwipe() {
 		// create a Swipe with a non null Swipe id and watch it fail
-		$swipe = new Swipe(AaaaTest::INVALID_KEY, $this->VALID_SWIPENUMBER, $this->VALID_SWIPESTATUS);
+		$swipe = new Swipe(AaaaTest::INVALID_KEY, $this->VALID_SWIPESTATUS, $this->VALID_SWIPENUMBER);
 		$swipe->insert($this->getPDO());
 	}
 
