@@ -25,7 +25,7 @@ class BridgeTest extends AaaaTest {
 	 * content of the Bridge
 	 * @var string $VALID_BRIDGESTAFFID
 	 **/
-	protected $VALID_BRIDGESTAFFID = 5;
+	protected $VALID_BRIDGESTAFFID = '5';
 
 	protected $VALID_BRIDGENAME = 'Dylan';
 
