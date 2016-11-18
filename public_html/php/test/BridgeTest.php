@@ -25,11 +25,11 @@ class BridgeTest extends AaaaTest {
 	 * content of the Bridge
 	 * @var string $VALID_BRIDGESTAFFID
 	 **/
-	protected $VALID_BRIDGESTAFFID = 0;
+	protected $VALID_BRIDGESTAFFID = 5;
 
-	protected $VALID_BRIDGENAME = 1;
+	protected $VALID_BRIDGENAME = 'Dylan';
 
-	protected $VALID_BRIDGEUSERNAME = 2;
+	protected $VALID_BRIDGEUSERNAME = 'deepdivedylan';
 
 	/**
 	 * create dependent objects before running each test
@@ -99,7 +99,7 @@ class BridgeTest extends AaaaTest {
 	 **/
 	public function testUpdateInvalidBridge() {
 		// create a Bridge, try to update it without actually updating it and watch it fail
-		$bridge = new Bridge(null, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGESTAFFID);
+		$bridge = new Bridge(null, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
 		$bridge->update($this->getPDO());
 	}
 
@@ -112,7 +112,7 @@ class BridgeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
 		// create a new Bridge and insert to into mySQL
-		$bridge = new Bridge(null, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME);
+		$bridge = new Bridge(null, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
 		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -145,7 +145,7 @@ class BridgeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
 		// create a new Bridge and insert to into mySQL
-		$bridge = new Bridge(null, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		$bridge = new Bridge(null, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
 		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
