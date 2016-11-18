@@ -59,6 +59,36 @@ class CohortTest extends AaaaTest {
 	}
 
 	/**
+	 * test grabbing valid cohort by the cohort Id
+	 **/
+	public function testGetValidCohortByCohortId(){
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("cohort");
+
+		// create a new Cohort and insert to into mySQL
+		$cohort = new Cohort(null, $this->VALID_COHORTAPPLICATIONID);
+		$cohort->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$result = Cohort::getCohortByCohortId($this->getPDO(), $cohort->getCohortId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
+		$this->assertNotNull($result);
+		$this->assertInstanceOF("Edu\\Cnm\\DdcAaaa\\Cohort", $result);
+
+		// grab the result from the array and validate it
+		$this->assertEquals($result->getCohortApplicationId(), $this->getCohortApplicationId());
+		$this->assertEquals($result->getCohortId(), $this->getCohortId());
+	}
+
+	/**
+	 * test grabbing a Cohort by id that does not exist
+	 **/
+public function testGetInvalidCohortByCohortId(){
+	// grab a cohort by searching for id that does not exist
+	$cohort = Cohort::getCohortByCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
+	$this->assertNull($cohort);
+}
+	/**
 	 * test grabbing all Cohorts
 	 **/
 	public function testGetAllValidCohorts() {
@@ -79,5 +109,4 @@ class CohortTest extends AaaaTest {
 		$pdoCohort = $results[0];
 		$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
 	}
-	
 }
