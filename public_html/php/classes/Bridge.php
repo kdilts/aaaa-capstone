@@ -127,8 +127,25 @@ namespace Edu\Cnm\DdcAaaa;
 		 */
 		public function insert(\PDO $pdo) {
 			// enforce the bridgeStaffId is null (i.e., don't insert a bridge that already exists)
+			$bridgeStaffIdQuery = "SELECT bridgeStaffId FROM bridge WHERE bridgeStaffId = :bridgeStaffId";
+			$bridgeIdStatement = $pdo->prepare($bridgeStaffIdQuery);
+			$bridgeIdParameters = ["bridgeStaffId" => $this->bridgeStaffId];
+			$bridgeIdStatement->execute($bridgeIdParameters);
+			try {
+				$bridge = null;
+				$bridgeIdStatement->setFetchMode(\PDO::FETCH_ASSOC);
+				$row = $bridgeIdStatement->fetch();
+				if($row !== false){
+					$bridge = new Bridge($row["bridgeStaffId"], $row["bridgeName"], $row["bridgeUserName"]);
+				}
+			} catch(\Exception $exception){
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
 
-			if(empty($bridgeStaffId) === true) {
+			var_dump($bridge);
+
+			if($bridge === null) {
 				throw(new \PDOException("not a new bridge"));
 			}
 			// create query template
