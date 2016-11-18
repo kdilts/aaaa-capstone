@@ -55,7 +55,6 @@ class PlacardTest extends AaaaTest {
 
 
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
-		//$this->assertEquals($pdoPlacard->getPlacardId(), $this->VALID_PLACARDID);
 		$this->assertEquals($pdoPlacard->getPlacardStatusTypeId(), $this->status->getStatusTypeId());
 		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
