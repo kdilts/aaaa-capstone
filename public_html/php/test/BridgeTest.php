@@ -65,7 +65,7 @@ class BridgeTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidBridge() {
 		// create a Bridge with a non null bridge id and watch it fail
-		$bridge = new Bridge(AaaaTest::INVALID_KEY, $this->bridge->get->BridgeStaffId(), $this->VALID_BRIDGENAME);
+		$bridge = new Bridge(AaaaTest::INVALID_KEY, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME);
 		$bridge->insert($this->getPDO());
 	}
 
@@ -99,8 +99,8 @@ class BridgeTest extends AaaaTest {
 	 **/
 	public function testUpdateInvalidBridge() {
 		// create a Bridge, try to update it without actually updating it and watch it fail
-		$bridge = new Bridge(null, $this->bridge>getBridgeUserName(), $this->VALID_BRIDGESTAFFID);
-		$bridge>update($this->getPDO());
+		$bridge = new Bridge(null, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGESTAFFID);
+		$bridge->update($this->getPDO());
 	}
 
 
@@ -112,7 +112,7 @@ class BridgeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
 		// create a new Bridge and insert to into mySQL
-		$bridge = new Bridge(null, $this->bridge->getBridgeUserName(), $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME);
+		$bridge = new Bridge(null, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME);
 		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -123,7 +123,7 @@ class BridgeTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoBridge = $results[0];
-		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->bridge->getBridgeStaffId());
+		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
 		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
 		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
@@ -145,7 +145,7 @@ class BridgeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
 		// create a new Bridge and insert to into mySQL
-		$bridge = new Bridge(null, $this->profile->getBridgeStaffId(), $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		$bridge = new Bridge(null, $this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
 		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -156,7 +156,7 @@ class BridgeTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoBridge = $results[0];
-		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->profile->getBridgeStaffId());
+		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
 		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
 		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
