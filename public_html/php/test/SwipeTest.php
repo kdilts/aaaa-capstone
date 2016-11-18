@@ -99,14 +99,14 @@ class SwipeTest extends AaaaTest {
 	/**
 	 * test grabbing Swipe by Swipe status id
 	 **/
-	public function testGetValidSwipeBySwipeStatus() {
+	public function testGetValidSwipeBySwipeStatusId() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("swipe");
 		// create a new Swipe and insert to into mySQL
-		$swipe = new Swipe(null, $this->VALID_SWIPENUMBER, $this->VALID_SWIPESTATUS);
+		$swipe = new Swipe(null, $this->VALID_SWIPESTATUS, $this->VALID_SWIPENUMBER);
 		$swipe->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Swipe::getSwipeBySwipeStatus($this->getPDO(), $swipe->getSwipeStatus());
+		$results = Swipe::getSwipesBySwipeStatus($this->getPDO(), $swipe->getSwipeStatusTypeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Swipe", $results);

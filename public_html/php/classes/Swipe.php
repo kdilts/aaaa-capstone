@@ -72,7 +72,7 @@ class Swipe {
 	 * accessor method for swipe status.
 	 * @return int value for swipeStatusId
 	 */
-	public function getSwipeStatus() {
+	public function getSwipeStatusTypeId() {
 		return ($this->swipeStatusTypeId);
 	}
 
