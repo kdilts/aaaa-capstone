@@ -145,7 +145,7 @@ namespace Edu\Cnm\DdcAaaa;
 			echo 'Hello World';
 			var_dump($bridge);
 
-			if($bridge === null) {
+			if($bridge !== null) {
 				throw(new \PDOException("not a new bridge"));
 			}
 			// create query template
