@@ -15,11 +15,11 @@ namespace Edu\Cnm\DdcAaaa;
 
 		private $bridgeStaffId;
 		/**
-		 * @var int $bridgeName
+		 * @var string $bridgeName
 		 **/
 		private $bridgeName;
 		/**
-		 * @var int $bridgeUserName
+		 * @var string $bridgeUserName
 		 **/
 		private $bridgeUserName;
 
