@@ -109,7 +109,7 @@ class CohortTest extends AaaaTest {
 
 		//grab the result from the array and validate it
 		$this->assertEquals($result->getCohortApplicationId(), $cohort->getCohortApplicationId());
-		$this->assertEquals($result->getCohortId(), $this->VALID_COHORTAPPLICATIONID);
+		$this->assertEquals($result->getCohortId(), $cohort->getCohortId());
 	}
 /**
  * test grabbing a Cohort by Application Id that does not exist
@@ -117,7 +117,7 @@ class CohortTest extends AaaaTest {
 public function testGetInvalidCohortByCohortApplicationId(){
 	//grab a cohort by searching for application id that does not exist
 	$cohort = Cohort::getCohortByCohortApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
-	$this->asserNull($cohort);
+	$this->assertNull($cohort);
 }
 /**
  * test grabbing all Cohorts
