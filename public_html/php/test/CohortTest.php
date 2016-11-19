@@ -76,8 +76,8 @@ class CohortTest extends AaaaTest {
 		$this->assertInstanceOF("Edu\\Cnm\\DdcAaaa\\Cohort", $result);
 
 		// grab the result from the array and validate it
-		$this->assertEquals($result->getCohortApplicationId(), $this->getCohortApplicationId());
-		$this->assertEquals($result->getCohortId(), $this->getCohortId());
+		$this->assertEquals($result->getCohortApplicationId(), $cohort->getCohortApplicationId());
+		$this->assertEquals($result->getCohortId(), $cohort->getCohortId());
 	}
 
 	/**
@@ -87,6 +87,39 @@ public function testGetInvalidCohortByCohortId(){
 	// grab a cohort by searching for id that does not exist
 	$cohort = Cohort::getCohortByCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
 	$this->assertNull($cohort);
+}
+
+
+	/**
+	 * test grabbing valid Cohort by the valid Cohort Application Id
+	 */
+public function testGetValidCohortByCohortApplicationId(){
+	//count the number of rows and save it for later
+	$numRows = $this->getConnection()->getRowCount("cohort");
+
+	//create a new Cohort and insert to into mySQL
+	$cohort = new Cohort(null, $this->VALID_COHORTAPPLICATIONID);
+	$cohort->insert($this->getPDO());
+
+	//grab the data from mySQL and enforce the fields match our expectations
+	$result = Cohort::getCohortByCohortApplicationId($this->getPDO(), $cohort->getCohortApplicationId());
+	$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
+	$this->assertNotNull($result);
+	$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Cohort", $result);
+
+	//grab the result from the array and validate it
+	$this->assertEquals($result->getCohortApplicationId(), $cohort->getCohortApplicationId());
+	$this->assertEquals($result->getCohortId(), $this->VALID_COHORTAPPLICATIONID);
+}
+
+
+	/**
+	 * test grabbing a Cohort by Application Id that does not exist
+	 */
+	puublic function testGetInvalidCohortByCohortApplicationId(){
+		//grab a cohort by searching for application id that does not exist
+	$cohort = Cohort::getCohortByCohortApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
+	$this->asserNull($cohort);
 }
 	/**
 	 * test grabbing all Cohorts
