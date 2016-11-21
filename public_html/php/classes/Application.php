@@ -525,7 +525,7 @@ class Application {
 		$endDate = $endDate->format("Y-m-d H:i:s");
 
 		// create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationDateTime >= :startDate AND applicationDateTime <= :endDate";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationDateTime >= :startDate AND applicationDateTime <= :endDate";
 		$statement = $pdo->prepare($query);
 
 		// bind the parameters
