@@ -100,7 +100,41 @@ class ProspectTest extends AaaaTest {
 		$prospect = Prospect::getProspectsByProspectName($this->getPDO(), "not a valid key");
 		$this->assertEmpty($prospect);
 	}
-	
+
+	/**
+	 * test grabbing a Prospect by prospect content
+	 **/
+	public function testGetValidProspectByProspectEmail() {
+
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("prospect");
+
+		// create a new Prospect and insert to into mySQL
+		$prospect = new Prospect(null, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
+		$prospect->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoProspect = Prospect::getProspectByProspectEmail($this->getPDO(), $prospect->getProspectEmail());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospect"));
+		$this->assertNotNull($pdoProspect);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Prospect", $pdoProspect);
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospect"));
+		$this->assertEquals($pdoProspect->getProspectPhoneNumber(), $this->VALID_PROSPECTPHONENUMBER);
+		$this->assertEquals($pdoProspect->getProspectEmail(), $this->VALID_PROSPECTEMAIL);
+		$this->assertEquals($pdoProspect->getProspectFirstName(), $this->VALID_PROSPECTFIRSTNAME);
+		$this->assertEquals($pdoProspect->getProspectLastName(), $this->VALID_PROSPECTLASTNAME);
+	}
+
+	/**
+	 * test grabbing a Prospect by content that does not exist
+	 **/
+	public function testGetInvalidProspectByProspectEmail() {
+		// grab a prospect by searching for content that does not exist
+		$prospect = Prospect::getProspectByProspectEmail($this->getPDO(), "not a valid key");
+		$this->assertNull($prospect);
+	}
 	
 	/**
 	 * test grabbing all Prospects

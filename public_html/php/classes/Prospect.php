@@ -288,12 +288,12 @@ class Prospect implements \JsonSerializable {
 	 * gets the prospect by prospect email
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $prospectEmail to search by
+	 * @param string $prospectEmail to search by
 	 * @return Prospect|null prospect found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getProspectByProspectEmail(\PDO $pdo, int $prospectEmail){
+	public static function getProspectByProspectEmail(\PDO $pdo, string $prospectEmail){
 		// sanitize the prospectEmail before searching
 		$prospectEmail = trim($prospectEmail);
 		$prospectEmail = filter_var($prospectEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
