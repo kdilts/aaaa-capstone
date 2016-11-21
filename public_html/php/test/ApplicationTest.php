@@ -124,7 +124,7 @@ class ApplicationTest extends AaaaTest {
 	 **/
 	public function testGetInvalidApplicationByApplicationId() {
 		// grab a Application by searching for content that does not exist
-		$application = Application::getApplicationId($this->getPDO(), "AaaaTest::INVALID_KEY");
+		$application = Application::getApplicationByApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertNull($application);
 	}
 	/**
