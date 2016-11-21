@@ -237,20 +237,18 @@ class Note {
 		$parameters = ["noteId" => $noteId];
 		$statement->execute($parameters);
 
-		// build an array of notes
-		$notes = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
+		try {
+			$note = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
 				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
-				$notes[$notes->key()] = $note;
-				$notes->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return $notes;
+		return($note);
 	}
 
 	/**
