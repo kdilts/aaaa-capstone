@@ -167,7 +167,7 @@ class ProspectCohort implements \JsonSerializable {
 	 * gets the prospect Cohort by prospect cohort id
 	 *
 	 * @param \PDO $pdo connection to the object
-	 * @param int $prospectCohortId new value of prospect cohort id
+	 * @param int $prospectCohortCohortId new value of prospect cohort id
 	 * @return \SplFixedArray SplFixedArray of Prospects Cohort found
 	 * @return prospectCohort|null Prospect Cohort found or null if not found
 	 * @throws \PDOException if prospect cohort id is not positive
