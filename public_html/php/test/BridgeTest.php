@@ -112,7 +112,7 @@ class BridgeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
 		// create a new Bridge and insert to into mySQL
-		$bridge = new Bridge(null, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		$bridge = new Bridge($this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
 		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -145,7 +145,7 @@ class BridgeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
 		// create a new Bridge and insert to into mySQL
-		$bridge = new Bridge(null, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		$bridge = new Bridge($this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
 		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
