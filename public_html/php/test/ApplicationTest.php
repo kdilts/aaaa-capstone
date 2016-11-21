@@ -76,7 +76,7 @@ class ApplicationTest extends AaaaTest {
 		$this->assertEquals($pdoApplication->getApplicationId(), $application->getApplicationId());
 		var_dump($pdoApplication->getApplicationDateTime());
 		var_dump($application->getApplicationDateTime());
-		$this->assertEquals($pdoApplication->getApplicationDateTime(), $application->getApplicationDateTime());
+		$this->assertEquals($pdoApplication->getApplicationDateTime(), \DateTime::createFromFormat("Y-m-d H:i:s", $application->getApplicationDateTime()));
 	}
 
 	/**
