@@ -72,7 +72,7 @@ class BridgeTest extends AaaaTest {
 	/**
 	 * test inserting a Bridge, editing it, and then updating it
 	 **/
-	public function testUpdateValidBridge() {
+	/**public function testUpdateValidBridge() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
@@ -91,7 +91,7 @@ class BridgeTest extends AaaaTest {
 		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
 		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
-
+**/
 	/**
 	 * test updating a Bridge that does not exist
 	 *
