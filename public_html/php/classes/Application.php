@@ -544,7 +544,6 @@ class Application {
 					$row["applicationEmail"],
 					$row["applicationPhoneNumber"],
 					$row["applicationSource"],
-					$row["applicationCohortId"],
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
@@ -570,7 +569,7 @@ class Application {
 	 * @return Application|null
 	 */
 	public function getApplicationByApplicationEmail (\PDO $pdo, string $applicationEmail){
-		//sanitize the applicationCohortId before searching
+		//sanitize the email before searching
 		$applicationEmail = trim($applicationEmail);
 		$applicationEmail = filter_var($applicationEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($applicationEmail) === null) {
@@ -578,7 +577,7 @@ class Application {
 		}
 
 		//create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationEmail = :applicationEmail";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationEmail = :applicationEmail";
 		$statement = $pdo->prepare($query);
 
 		//grab placard from SQL
@@ -594,7 +593,6 @@ class Application {
 					$row["applicationEmail"],
 					$row["applicationPhoneNumber"],
 					$row["applicationSource"],
-					$row["applicationCohortId"],
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
@@ -625,7 +623,7 @@ class Application {
 			throw(new \PDOException("applicationId not positive"));
 		}
 		//create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationId = :applicationId";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationId = :applicationId";
 		$statement = $pdo->prepare($query);
 
 		//grab placard from SQL
@@ -641,7 +639,6 @@ class Application {
 					$row["applicationEmail"],
 					$row["applicationPhoneNumber"],
 					$row["applicationSource"],
-					$row["applicationCohortId"],
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
@@ -677,7 +674,7 @@ class Application {
 		$applicationName = "%$applicationName%";
 
 		// create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationFirstName LIKE :applicationName OR applicationLastName LIKE :applicationName";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationFirstName LIKE :applicationName OR applicationLastName LIKE :applicationName";
 		$statement = $pdo->prepare($query);
 
 		// bind the application name to the place holder in template
@@ -696,7 +693,6 @@ class Application {
 					$row["applicationEmail"],
 					$row["applicationPhoneNumber"],
 					$row["applicationSource"],
-					$row["applicationCohortId"],
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
@@ -716,7 +712,7 @@ class Application {
 	}
 	public static function getAllApplications(\PDO $pdo){
 		// create query template
-		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application";
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -732,7 +728,6 @@ class Application {
 					$row["applicationEmail"],
 					$row["applicationPhoneNumber"],
 					$row["applicationSource"],
-					$row["applicationCohortId"],
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
