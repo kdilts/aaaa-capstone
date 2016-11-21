@@ -37,10 +37,7 @@ class Application {
 	 * @var string $applicationSource
 	 */
 	private $applicationSource;
-	/**
-	 * @var int $applicationCohortId
-	 */
-	private $applicationCohortId;
+
 	/**
 	 * @var string $applicationAboutYou
 	 */
@@ -80,7 +77,6 @@ class Application {
 	 * @param string $newApplicationEmail
 	 * @param string $newApplicationPhoneNumber
 	 * @param string $newApplicationSource
-	 * @param int $newApplicationCohortId
 	 * @param string $newApplicationAboutYou
 	 * @param string $newApplicationHopeToAccomplish
 	 * @param string $newApplicationExperience
@@ -91,7 +87,7 @@ class Application {
 	 * @throws \Exception
 	 * @throws \TypeError
 	 */
-	public function __construct(int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, int $newApplicationCohortId, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, \DateTime $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource){
+	public function __construct(int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, \DateTime $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource){
 		try {
 			$this->setApplicationId($newApplicationId);
 			$this->setApplicationFirstName($newApplicationFirstName);
@@ -99,7 +95,6 @@ class Application {
 			$this->setApplicationEmail($newApplicationEmail);
 			$this->setApplicationPhoneNumber($newApplicationPhoneNumber);
 			$this->setApplicationSource($newApplicationSource);
-			$this->setApplicationCohortId($newApplicationCohortId);
 			$this->setApplicationAboutYou($newApplicationAboutYou);
 			$this->setApplicationHopeToAccomplish($newApplicationHopeToAccomplish);
 			$this->setApplicationExperience($newApplicationExperience);
@@ -163,14 +158,6 @@ class Application {
 	 */
 	public function getApplicationSource() {
 		return $this->applicationSource;
-	}
-
-	/**
-	 * accessor method for CohortId
-	 * @return int
-	 */
-	public function getApplicationCohortId() {
-		return $this->applicationCohortId;
 	}
 
 	/**
@@ -335,27 +322,8 @@ class Application {
 		if(strlen($newApplicationSource) > 1000) {
 			throw (new \RangeException("Application source is to large"));
 		}
-//store the source
+		//store the source
 		$this->applicationSource = $newApplicationSource;
-	}
-
-	/**
-	 * mutator method for applicationCohortId
-	 * @param int $newApplicationCohortId
-	 * @throws \RangeException if cohortId is negative
-	 */
-	public function setApplicationCohortId(int $newApplicationCohortId) {
-		if($newApplicationCohortId === null){
-			$this->applicationCohortId = null;
-			return;
-		}
-
-		//check if applicationId is negative
-		if($newApplicationCohortId <= 0) {
-			throw(new \RangeException("Application Cohort Id must be positive."));
-		}
-		//store the Application Cohort Id
-		$this->applicationCohortId = $newApplicationCohortId;
 	}
 
 	/**
@@ -509,7 +477,7 @@ class Application {
 			throw(new \PDOException("unable to update a applicationId that already exists"));
 		}
 		//create query template
-		$query="INSERT INTO application (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationCohortId, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCampaign, :applicationUtmMedium, :applicationUtmSource)";
+		$query="INSERT INTO application (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCampaign, :applicationUtmMedium, :applicationUtmSource)";
 		$statement = $pdo->prepare($query);
 
 		//bind the members variable to the place holder in the template
@@ -521,7 +489,6 @@ class Application {
 			"applicationEmail" => $this->applicationEmail,
 			"applicationPhoneNumber" => $this->applicationPhoneNumber,
 			"applicationSource" => $this->applicationSource,
-			"applicationCohortId" => $this->applicationCohortId,
 			"applicationAboutYou" => $this->applicationAboutYou,
 			"applicationHopeToAccomplish" => $this->applicationHopeToAccomplish,
 			"applicationExperience" => $this->applicationExperience,
@@ -747,42 +714,42 @@ class Application {
 		}
 		return ($applications);
 	}
-		public static function getAllApplications(\PDO $pdo){
-			// create query template
-			$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application";
-			$statement = $pdo->prepare($query);
-			$statement->execute();
+	public static function getAllApplications(\PDO $pdo){
+		// create query template
+		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationCohortId, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
 
-			// build an array of applications
-			$applications = new \SplFixedArray($statement->rowCount());
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			while(($row = $statement->fetch()) !== false) {
-				try {
-					$application = new application(
-						$row["applicationId"],
-						$row["applicationFirstName"],
-						$row["applicationLastName"],
-						$row["applicationEmail"],
-						$row["applicationPhoneNumber"],
-						$row["applicationSource"],
-						$row["applicationCohortId"],
-						$row["applicationAboutYou"],
-						$row["applicationHopeToAccomplish"],
-						$row["applicationExperience"],
-						$row["applicationDateTime"],
-						$row["applicationUtmCampaign"],
-						$row["applicationUtmMedium"],
-						$row["applicationUtmSource"]
-					);
-					$applications[$applications->key()] = $application;
-					$applications->next();
-				} catch(\Exception $exception){
-					// if the row couldn't be converted, rethrow it
-					throw(new \PDOException($exception->getMessage(), 0, $exception));
-				}
+		// build an array of applications
+		$applications = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$application = new application(
+					$row["applicationId"],
+					$row["applicationFirstName"],
+					$row["applicationLastName"],
+					$row["applicationEmail"],
+					$row["applicationPhoneNumber"],
+					$row["applicationSource"],
+					$row["applicationCohortId"],
+					$row["applicationAboutYou"],
+					$row["applicationHopeToAccomplish"],
+					$row["applicationExperience"],
+					$row["applicationDateTime"],
+					$row["applicationUtmCampaign"],
+					$row["applicationUtmMedium"],
+					$row["applicationUtmSource"]
+				);
+				$applications[$applications->key()] = $application;
+				$applications->next();
+			} catch(\Exception $exception){
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-			return $applications;
 		}
+		return $applications;
+	}
 
 
 	/**

@@ -37,7 +37,7 @@ class ApplicationCohortTest extends AaaaTest {
 		$this->cohort->insert($this->getPDO());
 
 		// create an application
-		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", $this->cohort->getCohortId(), "about you", "hope", "exp", $date, "utmC","utmM", "utmS");
+		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", "about you", "hope", "exp", $date, "utmC","utmM", "utmS");
 		$this->application->insert($this->getPDO());
 	}
 
