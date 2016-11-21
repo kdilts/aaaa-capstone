@@ -96,7 +96,7 @@ class ApplicationTest extends AaaaTest {
 	/**
 	 * test grabbing a Application by Application content
 	 **/
-	public function testGetValidApplicationByApplicationApplicationCohortId() {
+	public function testGetValidApplicationByApplicationApplicationId() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("application");
 
@@ -113,7 +113,7 @@ class ApplicationTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoApplication = $results[0];
-		$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONCOHORTID);
+		$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONID);
 		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONLASTNAME);
 		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONLASTNAME);
 	}
@@ -123,8 +123,8 @@ class ApplicationTest extends AaaaTest {
 	 **/
 	public function testGetInvalidApplicationByApplicationId() {
 		// grab a Application by searching for content that does not exist
-		$Application = Application::getApplicationId($this->getPDO(), "you will find nothing");
-		$this->assertCount(0, $Application);
+		$application = Application::getApplicationId($this->getPDO(), "you will find nothing");
+		$this->assertNull(0, $application);
 	}
 
 	/**
