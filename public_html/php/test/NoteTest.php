@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{Note,Prospect};
+use Edu\Cnm\DdcAaaa\{Note,Prospect,noteType};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -39,6 +39,11 @@ class NoteTest extends AaaaTest {
 	 * @var Prospect profile
 	 **/
 	protected $prospect = null;
+	/**
+	 * prospect that created the Note;
+	 * @var null
+	 */
+	protected $noteType = null;
 
 	/**
 	 * create dependent objects before running each test
@@ -50,6 +55,8 @@ class NoteTest extends AaaaTest {
 		// create and insert a Prospect to own the test note
 		$this->prospect = new Prospect(null, "@phpunit", "test@phpunit.de", "+12125551212","first name","last name");
 		$this->prospect->insert($this->getPDO());
+
+		$this->noteType = new NoteType(null, 3);
 
 		// calculate the date (just use the time the unit test was setup...)
 		$this->VALID_NOTEDATE = new \DateTime();
