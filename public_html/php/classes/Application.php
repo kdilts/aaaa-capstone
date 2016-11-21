@@ -626,6 +626,9 @@ class Application {
 		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationId = :applicationId";
 		$statement = $pdo->prepare($query);
 
+		// bind the placard id to the place holder in template
+		$parameters = ["applicationId" => $applicationId];
+		$statement->execute($parameters);
 		//grab placard from SQL
 		try {
 			$application = null;
