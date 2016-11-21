@@ -57,7 +57,7 @@ class ProspectTest extends AaaaTest {
 	/**
 	 * test inserting a Prospect that already exists
 	 *
-	 * @expectedException PDOException
+	 * @expectedException \PDOException
 	 **/
 	public function testInsertInvalidProspect() {
 		// create a Prospect with a non null prospect id and watch it fail
@@ -65,6 +65,45 @@ class ProspectTest extends AaaaTest {
 		$prospect->insert($this->getPDO());
 	}
 
+	/**
+	 * test grabbing a Prospect by prospect content
+	 **/
+	public function testGetValidProspectByProspectName() {
+
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("prospect");
+
+		// create a new Prospect and insert to into mySQL
+		$prospect = new Prospect(null, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
+		$prospect->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = Prospect::getProspectsByProspectName($this->getPDO(), $prospect->getProspectFirstName());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospect"));
+		$this->assertNotNull($results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Prospect", $results);
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoProspect = $results[0];
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospect"));
+		$this->assertEquals($pdoProspect->getProspectPhoneNumber(), $this->VALID_PROSPECTPHONENUMBER);
+		$this->assertEquals($pdoProspect->getProspectEmail(), $this->VALID_PROSPECTEMAIL);
+		$this->assertEquals($pdoProspect->getProspectFirstName(), $this->VALID_PROSPECTFIRSTNAME);
+		$this->assertEquals($pdoProspect->getProspectLastName(), $this->VALID_PROSPECTLASTNAME);
+	}
+	
+	/**
+	 * test grabbing a Prospect by content that does not exist
+	 *
+	 * @expectedException \PDOException
+	 **/
+	public function testGetInvalidProspectByProspectStaffId() {
+		// grab a prospect by searching for content that does not exist
+		$prospect = new Prospect(AaaaTest::INVALID_KEY, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
+		$prospect->insert($this->getPDO());
+	}
+	
+	
 	/**
 	 * test grabbing all Prospects
 	 **/
