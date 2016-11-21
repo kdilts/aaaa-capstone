@@ -153,7 +153,7 @@ class NoteTest extends AaaaTest {
 		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
 		$note->insert($this->getPDO());
 
-		//grab the data from mySQL and enforce the fields match our ex[ectations
+		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
 		$this->assertEquals($pdoNote->getProfileId(), $this->profile->getProfileId());
@@ -171,11 +171,19 @@ class NoteTest extends AaaaTest {
 			$this->assertNul($note);
 		}
 
+		public function getValidNoteByNoteNoteTypeId(){
+			//count the number of rows and save it for later
+			$numRows = $this->getConneciton()->getRowCount("note");
 
+			//create a new Note and insert it to mySQL
+			$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+			$note->insert($this->getPDO());
 
-	//TODO getValidNoteByNoteProspectId
+			//grab the data from mySQL and enforce the fields match our expectations
+			$pdoNote = Note::getNoteByNoteNoteTypeId($this->getPDO(), $note->getNoteId());
+			$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
+}
 
-	//TODO getInvalidNoteByNoteProspectId
 
 	//TODO getValidNoteByNoteNoteTypeId
 
