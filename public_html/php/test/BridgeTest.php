@@ -97,12 +97,10 @@ class BridgeTest extends AaaaTest {
 	}
 	/**
 	 * test grabbing a Bridge by content that does not exist
-	 *
-	 * @expectedException \PDOException
 	 **/
 	public function testGetInvalidBridgeByBridgeStaffId() {
 		// grab a bridge by searching for content that does not exist
-		$bridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$bridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), "not a valid key");
 		$this->assertNull($bridge);
 	}
 
