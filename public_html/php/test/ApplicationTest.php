@@ -72,7 +72,18 @@ class ApplicationTest extends AaaaTest {
 		$pdoApplication = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		$this->assertEquals($pdoApplication->getApplicationId(), $application->getApplicationId());
+		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONFIRSTNAME);
+		$this->assertEquals($pdoApplication->getApplicationLastName(), $this->VALID_APPLICATIONLASTNAME);
+		$this->assertEquals($pdoApplication->getApplicationEmail(), $this->VALID_APPLICATIONEMAIL);
+		$this->assertEquals($pdoApplication->getApplicationPhoneNumber(), $this->VALID_APPLICATIONPHONENUMBER);
+		$this->assertEquals($pdoApplication->getApplicationSource(), $this->VALID_APPLICATIONSOURCE);
+		$this->assertEquals($pdoApplication->getApplicationAboutYou(), $this->VALID_APPLICATIONABOUTYOU);
+		$this->assertEquals($pdoApplication->getApplicationHopeToAccomplish(), $this->VALID_APPLICATIONHOPETOACCOMPLISH);
+		$this->assertEquals($pdoApplication->getApplicationExperience(), $this->VALID_APPLICATIONEXPERIENCE);
 		$this->assertEquals($pdoApplication->getApplicationDateTime(), \DateTime::createFromFormat("Y-m-d H:i:s", $application->getApplicationDateTime()));
+		$this->assertEquals($pdoApplication->getApplicationUtmCampaign(), $this->VALID_APPLICATIONUTMCAMPAIGN);
+		$this->assertEquals($pdoApplication->getApplicationUtmMedium(), $this->VALID_APPLICATIONUTMMEDIUM);
+		$this->assertEquals($pdoApplication->getApplicationUtmSource(), $this->VALID_APPLICATIONUTMSOURCE);
 	}
 
 	/**
@@ -115,6 +126,16 @@ class ApplicationTest extends AaaaTest {
 		$this->assertEquals($pdoApplication->getApplicationId(), $application->getApplicationId());
 		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONFIRSTNAME);
 		$this->assertEquals($pdoApplication->getApplicationLastName(), $this->VALID_APPLICATIONLASTNAME);
+		$this->assertEquals($pdoApplication->getApplicationEmail(), $this->VALID_APPLICATIONEMAIL);
+		$this->assertEquals($pdoApplication->getApplicationPhoneNumber(), $this->VALID_APPLICATIONPHONENUMBER);
+		$this->assertEquals($pdoApplication->getApplicationSource(), $this->VALID_APPLICATIONSOURCE);
+		$this->assertEquals($pdoApplication->getApplicationAboutYou(), $this->VALID_APPLICATIONABOUTYOU);
+		$this->assertEquals($pdoApplication->getApplicationHopeToAccomplish(), $this->VALID_APPLICATIONHOPETOACCOMPLISH);
+		$this->assertEquals($pdoApplication->getApplicationExperience(), $this->VALID_APPLICATIONEXPERIENCE);
+		$this->assertEquals($pdoApplication->getApplicationDateTime(), \DateTime::createFromFormat("Y-m-d H:i:s", $application->getApplicationDateTime()));
+		$this->assertEquals($pdoApplication->getApplicationUtmCampaign(), $this->VALID_APPLICATIONUTMCAMPAIGN);
+		$this->assertEquals($pdoApplication->getApplicationUtmMedium(), $this->VALID_APPLICATIONUTMMEDIUM);
+		$this->assertEquals($pdoApplication->getApplicationUtmSource(), $this->VALID_APPLICATIONUTMSOURCE);
 	}
 
 	/**
@@ -148,6 +169,16 @@ class ApplicationTest extends AaaaTest {
 		$this->assertEquals($pdoApplication->getApplicationId(), $application->getApplicationId());
 		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONFIRSTNAME);
 		$this->assertEquals($pdoApplication->getApplicationLastName(), $this->VALID_APPLICATIONLASTNAME);
+		$this->assertEquals($pdoApplication->getApplicationEmail(), $this->VALID_APPLICATIONEMAIL);
+		$this->assertEquals($pdoApplication->getApplicationPhoneNumber(), $this->VALID_APPLICATIONPHONENUMBER);
+		$this->assertEquals($pdoApplication->getApplicationSource(), $this->VALID_APPLICATIONSOURCE);
+		$this->assertEquals($pdoApplication->getApplicationAboutYou(), $this->VALID_APPLICATIONABOUTYOU);
+		$this->assertEquals($pdoApplication->getApplicationHopeToAccomplish(), $this->VALID_APPLICATIONHOPETOACCOMPLISH);
+		$this->assertEquals($pdoApplication->getApplicationExperience(), $this->VALID_APPLICATIONEXPERIENCE);
+		$this->assertEquals($pdoApplication->getApplicationDateTime(), \DateTime::createFromFormat("Y-m-d H:i:s", $application->getApplicationDateTime()));
+		$this->assertEquals($pdoApplication->getApplicationUtmCampaign(), $this->VALID_APPLICATIONUTMCAMPAIGN);
+		$this->assertEquals($pdoApplication->getApplicationUtmMedium(), $this->VALID_APPLICATIONUTMMEDIUM);
+		$this->assertEquals($pdoApplication->getApplicationUtmSource(), $this->VALID_APPLICATIONUTMSOURCE);
 	}
 
 
