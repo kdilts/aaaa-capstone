@@ -123,10 +123,10 @@ class BridgeTest extends AaaaTest {
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Bridge", $results);
 
 		// grab the result from the array and validate it
-		$pdoBridge = $results[0];
-		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
-		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
-		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
+
+		$this->assertEquals($results->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
+		$this->assertEquals($results->getBridgeName(), $this->VALID_BRIDGENAME);
+		$this->assertEquals($results->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
 	/**
 	 * test grabbing a Bridge by content that does not exist
