@@ -200,7 +200,7 @@ class Note {
 			throw(new \PDOException("not a new noteId"));
 		}
 		// create query template
-		$query = "INSERT INTO note(noteId, noteContent, noteProspectId, noteNoteTypeId, noteApplicationId, noteProspectId) VALUES(:noteId, :noteApplicationId, :noteProspectId, :noteNoteTypeId, :noteContent)";
+		$query = "INSERT INTO note(noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId) VALUES(:noteId, :noteContent, :noteNoteTypeId, :noteApplicationId, :noteProspectId)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
