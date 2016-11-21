@@ -106,7 +106,7 @@ class ApplicationTest extends AaaaTest {
 		$application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationtCohortId());
+		$results = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf(results, "Edu\\Cnm\\DdcAaaa\\Test\\Application");
