@@ -635,6 +635,7 @@ class Application {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			var_dump($row["applicationDateTime"]);
+			var_dump(\DateTime::createFromFormat("Y-m-d H:i:s",$row["applicationDateTime"]));
 			if($row !== false){
 				$application = new Application(
 					$row["applicationId"],
@@ -646,7 +647,7 @@ class Application {
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
-					\DateTime::createFromFormat("Y-m-d H:i	:s",$row["applicationDateTime"]),
+					\DateTime::createFromFormat("Y-m-d H:i:s",$row["applicationDateTime"]),
 					$row["applicationUtmCampaign"],
 					$row["applicationUtmMedium"],
 					$row["applicationUtmSource"]
