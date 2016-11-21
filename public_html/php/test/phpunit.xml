@@ -1,7 +1,7 @@
 <phpunit>
 	<testsuites>
 		<testsuite name="AAAA Data Design">
-			<file>ApplicationTest.php</file>
+			<!--file>ApplicationTest.php</file-->
 			<!--file>ApplicationCohortTest.php</file>
 			<file>BridgeTest.php</file>
 			<file>CohortTest.php</file-->
@@ -12,7 +12,7 @@
 			<file>ProspectCohortTest.php</file>
 			<file>StatusTypeTest.php</file-->
 			<!--file>StudentPermitTest.php</file-->
-			<!--file>SwipeTest.php</file-->
+			<file>SwipeTest.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>
