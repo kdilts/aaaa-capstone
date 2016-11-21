@@ -224,7 +224,7 @@ class Prospect implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "INSERT INTO prospect(prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName) VALUES(::prospectPhoneNumber, :prospectEmail, :prospectFirstName, :prospectLastName)";
+		$query = "INSERT INTO prospect(prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName) VALUES(:prospectPhoneNumber, :prospectEmail, :prospectFirstName, :prospectLastName)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
