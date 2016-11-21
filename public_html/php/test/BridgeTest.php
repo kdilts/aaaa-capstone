@@ -61,7 +61,7 @@ class BridgeTest extends AaaaTest {
 	/**
 	 * test inserting a Bridge that already exists
 	 *
-	 * @expectedException PDOException
+	 * @expectedException \PDOException
 	 **/
 	public function testInsertInvalidBridge() {
 		// create a Bridge with a non null bridge id and watch it fail
