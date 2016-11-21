@@ -108,11 +108,11 @@ class NoteTypeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("noteType");
 
 		// create a new NoteType and insert to into mySQL
-		$noteType = new NoteType(null, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
+		$noteType = new NoteType(null, $this->NoteType->getNoteTypeName), $this->VALID_NOTETYPEID);
 		$noteType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Tweet::getAllNoteTypes($this->getPDO());
+		$results = NoteType::getAllNoteTypes($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("Edu\\EduCnm\\NoteType", $results);
