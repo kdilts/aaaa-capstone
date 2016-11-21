@@ -16,17 +16,32 @@ class ApplicationTest extends AaaaTest {
 
 	protected $VALID_APPLICATIONID = 0;
 
-	protected $VALID_APPLICATIONFIRSTNAME = 1;
+	protected $VALID_APPLICATIONFIRSTNAME = 'Joe';
 
-	protected $VALID_APPLICATIONLASTNAME = 1;
+	protected $VALID_APPLICATIONLASTNAME = 'Shmoe';
 
 	protected $VALID_APPLICATIONEMAIL = "foo@bar.com";
 
 	protected $VALID_APPLICATIONPHONENUMBER = "+12125551212";
 
-	protected $VALID_APPLICATIONCOHORTID = null;
+	protected $VALID_APPLICATIONSOURCE = 'test';
+
+	protected $VALID_APPLICATIONABOUTYOU = 'test2';
+
+	protected $VALID_APPLICATIONHOPETOACCOMPLISH = 'test3';
+
+	protected $VALID_APPLICATIONEXPERIENCE = 'test4';
 
 	protected $VALID_APPLICATIONDATETIME = null;
+
+	protected $VALID_APPLICATIONUTMCAMPAIGN = 'test5';
+
+	protected $VALID_APPLICATIONUTMMEDIUM = 'test6';
+
+	protected $VALID_APPLICATIONUTMSOURCE = 'test7';
+
+
+
 
 
 	/**
@@ -49,8 +64,8 @@ class ApplicationTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("application");
 
 		// create a new Application and insert to into mySQL
-		$application = new Application(null, $this->VALID_APPLICATIONID, $this->VALID_APPLICATIONCOHORTID,
-			$this->VALID_APPLICATIONPHONENUMBER);
+		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL,
+			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
