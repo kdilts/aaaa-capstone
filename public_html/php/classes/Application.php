@@ -537,7 +537,7 @@ class Application {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$application = new application(
+				$application = new Application(
 					$row["applicationId"],
 					$row["applicationFirstName"],
 					$row["applicationLastName"],
@@ -634,6 +634,7 @@ class Application {
 			$application = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
+			var_dump($row["applicationDateTime"]);
 			if($row !== false){
 				$application = new Application(
 					$row["applicationId"],
