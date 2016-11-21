@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{Note};
+use Edu\Cnm\DdcAaaa\{Note,Prospect};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -35,10 +35,10 @@ class NoteTest extends AaaaTest {
 	 **/
 	protected $VALID_NOTEDATE = null;
 	/**
-	 * Profile that created the Note; this is for foreign key relations
-	 * @var Profile profile
+	 * Prospect that created the Note; this is for foreign key relations
+	 * @var Prospect profile
 	 **/
-	protected $profile = null;
+	protected $prospect = null;
 
 	/**
 	 * create dependent objects before running each test
@@ -47,9 +47,9 @@ class NoteTest extends AaaaTest {
 		// run the default setUp() method first
 		parent::setUp();
 
-		// create and insert a Profile to own the test Tweet
-		$this->profile = new Profile(null, "@phpunit", "test@phpunit.de", "+12125551212");
-		$this->profile->insert($this->getPDO());
+		// create and insert a Prospect to own the test note
+		$this->prospect = new Prospect(null, "@phpunit", "test@phpunit.de", "+12125551212","first name","last name");
+		$this->prospect->insert($this->getPDO());
 
 		// calculate the date (just use the time the unit test was setup...)
 		$this->VALID_NOTEDATE = new \DateTime();
@@ -63,13 +63,13 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		// create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(null, $this->prospect->getProspectId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTEDATE);
 	}
@@ -81,7 +81,7 @@ class NoteTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidNote() {
 		// create a Note with a non null note id and watch it fail
-		$note = new Note(DataDesignTest::INVALID_KEY, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(DataDesignTest::INVALID_KEY, $this->prospect->getProspectId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
 		$note->insert($this->getPDO());
 	}
 
@@ -99,7 +99,7 @@ class NoteTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getValidNoteByNoteId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProfileId(),$this->profile->getProfileId());
+		$this->assertEquals($pdoNote->getProspectId(),$this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
@@ -127,7 +127,7 @@ class NoteTest extends AaaaTest {
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getvalidNoteByNoteApplicationId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
@@ -156,7 +156,7 @@ class NoteTest extends AaaaTest {
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
@@ -184,7 +184,7 @@ class NoteTest extends AaaaTest {
 			//grab the data from mySQL and enforce the fields match our expectations
 			$pdoNote = Note::getNoteByNoteNoteTypeId($this->getPDO(), $note->getNoteId());
 			$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
-			$this->assertEquals($pdoNote->getProfileId(), $this->profile->getProfileId());
+			$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
 			$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 			$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTECONTENT);
 			$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
@@ -206,7 +206,7 @@ public function testInsertInvalidNoteByNoteNoteTypeId(){
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		// create a new Note and insert to into mySQL
-		$note = new Note(null, $this->profile->getProfileId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(null, $this->prospect->getProspecteId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -217,7 +217,7 @@ public function testInsertInvalidNoteByNoteNoteTypeId(){
 
 		// grab the result from the array and validate it
 		$pdoNote = $results[0];
-		$this->assertEquals($pdoNote->getProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoNote->getProfileId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT2);
 		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTEDATE);
 	}
