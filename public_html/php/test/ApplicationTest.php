@@ -108,8 +108,8 @@ class ApplicationTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
-		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf(results, "Edu\\Cnm\\DdcAaaa\\Test\\Application");
+		$this->assertNotNull($results);
+		$this->assertInstanceOf(results, "Edu\\Cnm\\DdcAaaa\\Test\\Application");
 
 		// grab the result from the array and validate it
 		$pdoApplication = $results[0];
