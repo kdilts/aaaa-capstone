@@ -110,7 +110,7 @@ class ApplicationTest extends AaaaTest {
 		$results = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		$this->assertNotNull($results);
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Test\\Application, $results");
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Application, $results");
 
 		// grab the result from the array and validate it
 		$pdoApplication = $results[0];
@@ -148,7 +148,7 @@ class ApplicationTest extends AaaaTest {
 		// grab the result from the array and validate it
 		$pdoApplication = $results[0];
 		$this->assertEquals($pdoApplication->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONIDLASTNAME);
+		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONFIRSTNAME);
 		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONLASTNAME);
 	}
 }
