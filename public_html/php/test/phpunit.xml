@@ -1,11 +1,11 @@
 <phpunit>
 	<testsuites>
 		<testsuite name="AAAA Data Design">
-			<file>PlacardTest.php</file>
+			<!--<file>PlacardTest.php</file>-->
 			<file>SwipeTest.php</file>
-			<file>ApplicationCohortTest.php</file>
+			<!--<file>ApplicationCohortTest.php</file>
 			<file>ProspectCohortTest.php</file>
-			<file>CohortTest.php</file>
+			<file>CohortTest.php</file>-->
 		</testsuite>
 	</testsuites>
 	<filter>
