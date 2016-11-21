@@ -113,7 +113,7 @@ class ApplicationTest extends AaaaTest {
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Application", $results);
 
 		// grab the result from the array and validate it
-		$pdoApplication = $results[0];
+		$pdoApplication = $results;
 		$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONID);
 		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONLASTNAME);
 		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONLASTNAME);
