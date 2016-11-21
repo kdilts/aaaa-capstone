@@ -15,12 +15,6 @@ class Prospect implements \JsonSerializable {
 	private $prospectId;
 
 	/**
-	 * cohort id for this prospect
-	 * @var int $prospectCohortId
-	 */
-	private $prospectCohortId;
-
-	/**
 	 * phone number for this prospect
 	 * @var string $prospectPhoneNumber
 	 */
@@ -47,7 +41,6 @@ class Prospect implements \JsonSerializable {
 	/**
 	 * Prospect constructor.
 	 * @param int|null $newProspectId new id for this prospect, null if new prospect
-	 * @param int $newProspectCohortId cohort id for this prospect
 	 * @param string $newProspectPhoneNumber phone number for this prospect
 	 * @param string $newProspectEmail email for this prospect
 	 * @param string $newProspectFirstName first name for this prospect
@@ -57,10 +50,9 @@ class Prospect implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs.
 	 */
-	public function __construct(int $newProspectId = null, int $newProspectCohortId, string $newProspectPhoneNumber, string $newProspectEmail, string $newProspectFirstName, string $newProspectLastName){
+	public function __construct(int $newProspectId = null, string $newProspectPhoneNumber, string $newProspectEmail, string $newProspectFirstName, string $newProspectLastName){
 		try {
 			$this->setProspectId($newProspectId);
-			$this->setProspectCohortId($newProspectCohortId);
 			$this->setProspectPhoneNumber($newProspectPhoneNumber);
 			$this->setProspectEmail($newProspectEmail);
 			$this->setProspectFirstName($newProspectFirstName);
@@ -83,13 +75,7 @@ class Prospect implements \JsonSerializable {
 	public function getProspectId(){
 		return($this->prospectId);
 	}
-	/**
-	 * accessor method for prospect cohort id
-	 * @return int value of prospect cohort id
-	 */
-	public function getProspectCohortId(){
-		return($this->prospectCohortId);
-	}
+
 	/**
 	 * accessor method for prospect phone number
 	 * @return string value of prospect phone number
@@ -135,19 +121,6 @@ class Prospect implements \JsonSerializable {
 			throw(new \RangeException("Prospect ID cannot be negative."));
 		}
 		$this->prospectId=$newProspectId;
-	}
-
-	/**
-	 * mutator method for prospect cohort id
-	 * @param int $newProspectCohortId new value for prospect cohort id
-	 * @throws \RangeException throws this if number is negative, or 0.
-	 * @throws \TypeError throws this if $newProspectId is not an integer.
-	 */
-	public function setProspectCohortId(int $newProspectCohortId){
-		if ($newProspectCohortId <= 0) {
-			throw(new \RangeException("Prospect Cohort ID cannot be negative."));
-		}
-		$this->prospectCohortId=$newProspectCohortId;
 	}
 
 	/**
