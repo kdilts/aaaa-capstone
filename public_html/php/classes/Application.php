@@ -474,7 +474,7 @@ class Application {
 	public function insert(\PDO $pdo) {
 		// enforce the application Id is not null (i.e., don't update a application Id that hasn't been inserted)
 		if($this->applicationId !== null) {
-			throw(new \PDOException("unable to update a applicationId that already exists"));
+			throw(new \PDOException("unable to insert a applicationId that already exists"));
 		}
 		//create query template
 		$query="INSERT INTO application (applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource) VALUE(:applicationId, :applicationFirstName, :applicationLastName, :applicationEmail, :applicationPhoneNumber, :applicationSource, :applicationAboutYou, :applicationHopeToAccomplish, :applicationExperience, :applicationDateTime, :applicationUtmCampaign, :applicationUtmMedium, :applicationUtmSource)";
