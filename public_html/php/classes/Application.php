@@ -568,7 +568,7 @@ class Application {
 	 * @param string $applicationEmail
 	 * @return Application|null
 	 */
-	public function getApplicationByApplicationEmail (\PDO $pdo, string $applicationEmail){
+	public static function getApplicationByApplicationEmail (\PDO $pdo, string $applicationEmail){
 		//sanitize the email before searching
 		$applicationEmail = trim($applicationEmail);
 		$applicationEmail = filter_var($applicationEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -617,7 +617,7 @@ class Application {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public function getApplicationByApplicationId (\PDO $pdo, int $applicationId){
+	public static function getApplicationByApplicationId (\PDO $pdo, int $applicationId){
 		//sanitize the applicationId before searching
 		if ($applicationId <=0){
 			throw(new \PDOException("applicationId not positive"));
@@ -664,7 +664,7 @@ class Application {
 	 * @throws \PDOException if there is an sql error
 	 * @throws \TypeError if $applicationName is not a string
 	 */
-	public function getApplicationsByApplicationName (\PDO $pdo, string $applicationName) {
+	public static function getApplicationsByApplicationName (\PDO $pdo, string $applicationName) {
 		// sanitize the prospectEmail before searching
 		$applicationName = trim($applicationName);
 		$applicationName = filter_var($applicationName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);

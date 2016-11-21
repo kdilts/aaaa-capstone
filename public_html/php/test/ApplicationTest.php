@@ -56,6 +56,7 @@ class ApplicationTest extends AaaaTest {
 		$this->VALID_APPLICATIONDATETIME = new \DateTime();
 	}
 
+
 	/**
 	 * test inserting a valid Application and verify that the actual mySQL data matches
 	 **/
