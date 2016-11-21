@@ -69,39 +69,6 @@ class BridgeTest extends AaaaTest {
 		$bridge->insert($this->getPDO());
 	}
 
-	/**
-	 * test inserting a Bridge, editing it, and then updating it
-	 **/
-	/**public function testUpdateValidBridge() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("bridge");
-
-		// create a new Bridge and insert to into mySQL
-		$bridge = new Bridge($this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
-		$bridge->insert($this->getPDO());
-
-		// edit the Bridge and update it in mySQL
-		$bridge->setBridgeName($this->VALID_BRIDGENAME);
-		$bridge->update($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoBridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
-		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
-		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
-		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
-	}
-**/
-	/**
-	 * test updating a Bridge that does not exist
-	 *
-	 * @expectedException PDOException
-	 **/
-	public function testUpdateInvalidBridge() {
-		// create a Bridge, try to update it without actually updating it and watch it fail
-		$bridge = new Bridge($this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
-		$bridge->update($this->getPDO());
-	}
 
 
 	/**
