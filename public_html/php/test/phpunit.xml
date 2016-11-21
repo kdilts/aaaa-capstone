@@ -6,7 +6,7 @@
 			<file>BridgeTest.php</file>
 			<file>CohortTest.php</file>
 			<file>NoteTest.php</file>
-			<file>NoteTypeTest.php</file>
+			<!--<file>NoteTypeTest.php</file>-->
 			<file>PlacardTest.php</file>
 			<file>ProspectTest.php</file>
 			<file>ProspectCohortTest.php</file>
