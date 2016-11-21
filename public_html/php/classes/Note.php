@@ -200,7 +200,7 @@ class Note {
 			throw(new \PDOException("not a new noteId"));
 		}
 		// create query template
-		$query = "INSERT INTO note(noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent) VALUES(:noteId, :noteApplicationId, :noteProspectId, :noteNoteTypeId, :noteContent)";
+		$query = "INSERT INTO note(noteId, noteContent, noteProspectId, noteNoteTypeId, noteApplicationId, noteProspectId) VALUES(:noteId, :noteApplicationId, :noteProspectId, :noteNoteTypeId, :noteContent)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -230,7 +230,7 @@ class Note {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent FROM note WHERE noteId = :noteId";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteId = :noteId";
 		$statement = $pdo->prepare($query);
 
 		// bind the note id to the place holder in template
@@ -242,7 +242,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
@@ -266,7 +266,7 @@ class Note {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent FROM note WHERE noteId = :noteApplicationId";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteId = :noteApplicationId";
 		$statement = $pdo->prepare($query);
 
 		// bind the noteApplication id to the place holder in template
@@ -278,7 +278,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$note = new Note($row["noteId"],$row["noteContent"], $row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
@@ -314,7 +314,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
@@ -350,7 +350,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteNoteTypeId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
@@ -378,7 +378,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false){
 			try{
-				$notes = new Note($row["noteId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteNoteTypeId"], $row["noteContent"]);
+				$notes = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
 				$notes[$notes->key()] = $notes;
 				$notes->next();
 			} catch (\Exception $exception){

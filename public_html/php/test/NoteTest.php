@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{Note,Prospect,noteType};
+use Edu\Cnm\DdcAaaa\{Note,Prospect,NoteType,Application};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -44,7 +44,10 @@ class NoteTest extends AaaaTest {
 	 * @var null
 	 */
 	protected $noteType = null;
-
+	/**
+	 *
+	 */
+protected $application = null;
 	/**
 	 * create dependent objects before running each test
 	 **/
@@ -58,6 +61,9 @@ class NoteTest extends AaaaTest {
 
 		$this->noteType = new NoteType(null,"string");
 		$this->noteType->insert($this->getPDO());
+
+		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", "about you", "hope", "exp",new \DateTime(), "utmC","utmM", "utmS");
+		$this->application->insert($this->getPDO());
 
 		// calculate the date (just use the time the unit test was setup...)
 		$this->VALID_NOTEDATE = new \DateTime();
@@ -74,7 +80,7 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		// create a new Note and insert it to into mySQL
-		$note = new Note(null,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->noteType->getNoteApplicationId(), $this->prospect->getProspectId());
+		$note = new Note(null,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(), $this->prospect->getProspectId());
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
