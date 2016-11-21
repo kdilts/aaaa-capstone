@@ -209,15 +209,19 @@ class ApplicationCohort implements \JsonSerializable {
 	 * @throws \PDOException if application cohort application id is not positive
 	 */
 
-	public static function getApplicationCohortByApplicationId (\PDO $pdo, int $applicationCohortId){
+	public static function getApplicationCohortByApplicationId (\PDO $pdo, int $applicationCohortApplicationId){
 		//sanitize the applicationCohortId before searching
-		if ($applicationCohortId <=0) {
-			throw(new \PDOException("applicationCohortId not positive"));
+		if ($applicationCohortApplicationId <=0) {
+			throw(new \PDOException("applicationCohortApplicationId not positive"));
 		}
 
 		//create query template
-		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId From applicationCohort WHERE applicationCohortId = : applicationCohortId";
+		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId From applicationCohort WHERE applicationCohortApplicationId = :applicationCohortApplicationId";
 		$statement = $pdo->prepare($query);
+
+		// bind the applicationCohortId to the place holder in template
+		$parameters = ["applicationCohortApplicationId" => $applicationCohortApplicationId];
+		$statement->execute($parameters);
 
 		//grab placard from SQL
 		try {
@@ -237,32 +241,37 @@ class ApplicationCohort implements \JsonSerializable {
 	/**
 	 * gets the Application Cohort Id
 	 * @param \PDO $pdo connection object
-	 * @param int $applicationCohortId application cohort id to search for
-	 * @return ApplicationCohort|null applicationCohort if found or null if not found
+	 * @param int $applicationCohortCohortId application cohort id to search for
+	 * @return \SplFixedArray array of applicationCohorts found
 	 * @throws \PDOException if application cohort cohort id is not positive
 	 */
-	public static function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortId){
+	public static function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortCohortId){
 		//sanitize the applicationCohortId before searching
-		if ($applicationCohortId <=0){
-			throw(new \PDOException("applicationCohortId not positive"));
+		if ($applicationCohortCohortId <=0){
+			throw(new \PDOException("applicationCohortCohortId not positive"));
 		}
 		//create query template
-		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId FROM applicationCohort WHERE applicationCohortId = : applicaitonCohortId";
+		$query = "SELECT applicationCohortId, applicationCohortApplicationId, applicationCohortCohortId FROM applicationCohort WHERE applicationCohortCohortId = :applicationCohortCohortId";
 		$statement = $pdo->prepare($query);
 
-		//grab placard from SQL
-		try {
-			$applicationCohort = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if ($row !==false){
-				$applicationCohort = new applicationCohort ($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+		// bind the applicationCohortId to the place holder in template
+		$parameters = ["applicationCohortCohortId" => $applicationCohortCohortId];
+		$statement->execute($parameters);
+
+		// build an array of applicationCohort
+		$applicationCohorts = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$applicationCohort = new ApplicationCohort($row["applicationCohortId"], $row["applicationCohortApplicationId"], $row["applicationCohortCohortId"]);
+				$applicationCohorts[$applicationCohorts->key()] = $applicationCohort;
+				$applicationCohorts->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception){
-			//if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($applicationCohort);
+		return $applicationCohorts;
 	}
 
 	/**
