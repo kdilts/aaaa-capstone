@@ -70,6 +70,9 @@ class ApplicationCohortTest extends AaaaTest {
 		$placard->insert($this->getPDO());
 	}
 
+	/**
+	 *  test grabbing an ApplicationCohort by ApplicationCohortId
+	 */
 	public function testGetValidApplicationCohortByApplicationCohortId(){
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("applicationCohort");
@@ -85,12 +88,18 @@ class ApplicationCohortTest extends AaaaTest {
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}
 
+	/**
+	 *  test grabbing an ApplicationCohort by ApplicationCohortId that does not exist
+	 */
 	public function testGetInvalidApplicationCohortByApplicationCohortId(){
 		// grab a applicationCohort by searching for id that does not exist
 		$applicationCohort = ApplicationCohort::getApplicationCohortByApplicationCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertNull($applicationCohort);
 	}
 
+	/**
+	 *  test grabbing ApplicationCohorts by ApplicationCohortCohortId
+	 */
 	public function testGetValidApplicationCohortByCohortId(){
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("applicationCohort");
@@ -112,12 +121,18 @@ class ApplicationCohortTest extends AaaaTest {
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}
 
+	/**
+	 *  test grabbing ApplicationCohorts by ApplicationCohortCohortId that does not exit
+	 */
 	public function testGetInvalidApplicationCohortByCohortId(){
 		// grab a applicationCohort by searching for id that does not exist
 		$applicationCohort = ApplicationCohort::getApplicationCohortByCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertCount(0, $applicationCohort);
 	}
 
+	/**
+	 *  test grabbing an ApplicationCohort by ApplicationCohortApplicationId
+	 */
 	public function testGetValidApplicationCohortByApplicationId(){
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("applicationCohort");
@@ -133,12 +148,18 @@ class ApplicationCohortTest extends AaaaTest {
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}
 
+	/**
+	 *  test grabbing an ApplicationCohort by ApplicationCohortApplicationId
+	 */
 	public function testGetInvalidApplicationCohortByApplicationId(){
 		// grab a applicationCohort by searching for id that does not exist
 		$applicationCohort = ApplicationCohort::getApplicationCohortByApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertNull($applicationCohort);
 	}
 
+	/**
+	 *  test grabbing all ApplicationCohorts
+	 */
 	public function testGetAllValidApplicationCohorts(){
 // count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("applicationCohort");
