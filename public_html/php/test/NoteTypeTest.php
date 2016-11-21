@@ -23,17 +23,17 @@ class NoteTypeTest extends AaaaTest {
 	 */
 	protected $VALID_NOTETYPEID = null;
 
+
 	/**
 	 * create dependent objects before running each test
 	 **/
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-
-		// create and insert a profile to own the test Application
-		$this->noteType = new NoteTypeName(null, 0);
-		$this->noteType->insert(this->getPDO());
+		$this->noteType = new NoteType(null, 2);
+		$this->noteType->insert($this->getPDO());
 	}
+
 	/**
 	 * test inserting a valid NoteType and verify that the actual mySQL data matches
 	 **/
@@ -48,7 +48,7 @@ class NoteTypeTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoNoteType = NoteType::getNoteTypeByNoteTypeId($this->getPDO(), $noteType->getNoteTypeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
-		//$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME0;
+		//$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME;
 		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->noteType->getNoteTypeId());
 		$this->assertEquals($pdoNoteType->getNoteTypeId(), $this->VALID_NOTETYPEID);
 	}
@@ -85,7 +85,6 @@ class NoteTypeTest extends AaaaTest {
 		$this->assertNotNull($result);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\NoteType", $result);
 		// grab the result from the array and validate it
-		$this->noteType->getNoteTypeId());
 		$this->assertEquals($result->getNoteTypeName(), $this->noteType-getNoteTypeName());
 		$this->assertEquals($result->getNoteTypeId->getnoteType(), $this->VALID_NOTETYPEID);
 	}
@@ -99,7 +98,7 @@ class NoteTypeTest extends AaaaTest {
 		// create a NoteType, try to update it without actually updating it and watch it fail
 		$noteType = new NoteType(null, $this->noteType->getNoteTypeId->getNoteTypeId(), $this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
 		$noteType->update($this->getPDO());
-	}
+		}
 
 	/**
 	 * test grabbing all NoteType
@@ -123,5 +122,6 @@ class NoteTypeTest extends AaaaTest {
 		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->profile->getNoteTypeId());
 		$this->assertEquals($pdoNoteType>getNoteTypeName(), $this->VALID_NOTETYPENAME);
 		$this->assertEquals($pdoNoteType->getNoteTypeId(), $this->VALID_NOTETYPEID);
+		}
+
 	}
-}
