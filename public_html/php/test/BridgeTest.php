@@ -118,7 +118,7 @@ class BridgeTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
-		$this->assertCount(1, $results);
+		$this->assertCount($results);
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Bridge", $results);
 
 		// grab the result from the array and validate it
@@ -131,7 +131,7 @@ class BridgeTest extends AaaaTest {
 	/**
 	 * test grabbing a Bridge by content that does not exist
 	 **/
-	public function testGetInvalidbRIDGEByBridgeStaffId() {
+	public function testGetInvalidBridgeByBridgeStaffId() {
 		// grab a bridge by searching for content that does not exist
 		$bridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), " AaaaTest::INVALID_KEY");
 		$this->assertCount(0, $bridge);
