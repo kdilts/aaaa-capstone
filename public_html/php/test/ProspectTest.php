@@ -94,13 +94,11 @@ class ProspectTest extends AaaaTest {
 	
 	/**
 	 * test grabbing a Prospect by content that does not exist
-	 *
-	 * @expectedException \PDOException
 	 **/
-	public function testGetInvalidProspectByProspectStaffId() {
+	public function testGetInvalidProspectByProspectName() {
 		// grab a prospect by searching for content that does not exist
-		$prospect = new Prospect(AaaaTest::INVALID_KEY, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
-		$prospect->insert($this->getPDO());
+		$prospect = Prospect::getProspectsByProspectName($this->getPDO(), "not a valid key");
+		$this->assertEmpty($prospect);
 	}
 	
 	
