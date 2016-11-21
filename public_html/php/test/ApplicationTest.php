@@ -97,7 +97,7 @@ class ApplicationTest extends AaaaTest {
 	/**
 	 * test grabbing a Application by Application content
 	 **/
-	public function testGetValidApplicationByApplicationApplicationId() {
+	public function testGetValidApplicationByApplicationId() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("application");
 
@@ -124,8 +124,8 @@ class ApplicationTest extends AaaaTest {
 	 **/
 	public function testGetInvalidApplicationByApplicationId() {
 		// grab a Application by searching for content that does not exist
-		$application = Application::getApplicationId($this->getPDO(), "you will find nothing");
-		$this->assertNull(0, $application);
+		$application = Application::getApplicationId($this->getPDO(), "AaaaTest::INVALID_KEY");
+		$this->assertNull($application);
 	}
 	/**
 	 * test grabbing all ApplicationId
