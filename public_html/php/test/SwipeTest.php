@@ -27,7 +27,7 @@ class SwipeTest extends AaaaTest {
 	protected $VALID_SWIPESTATUS = 1;
 
 	protected $VALID_SWIPENUMBER = 2;
-
+	protected $VALID_SWIPENUMBER2 = 3;
 	/**
 	 * create dependent objects before running each test
 	 **/
@@ -66,6 +66,37 @@ class SwipeTest extends AaaaTest {
 		$swipe = new Swipe(AaaaTest::INVALID_KEY, $this->swipeStatus->getStatusTypeId(), $this->VALID_SWIPENUMBER);
 		$swipe->insert($this->getPDO());
 	}
+	public function testUpdateValidSwipe() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("swipe");
+
+		// create a new Placard and insert to into mySQL
+		$swipe = new Swipe(null, $this->swipeStatus->getSwipeStatusTypeId(), $this->VALID_SWIPENUMBER);
+		$swipe->insert($this->getPDO());
+
+		// edit the Tweet and update it in mySQL
+		$swipe->setSwipeNumber($this->VALID_SWIPENUMBER2);
+		$swipe->update($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoSwipe = Swipe::getSwipeBySwipeId($this->getPDO(), $swipe->getSwipeId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
+		$this->assertEquals($pdoSwipe->getSwipeStatusTypeId(), $this->swipeStatus->getSwipeStatusTypeId());
+		$this->assertEquals($pdoSwipe->getSwipeNumber(), $this->VALID_SWIPENUMBER2);
+	}
+
+
+	/**
+	 * test updating a Placard that does not exist
+	 *
+	 * @expectedException PDOException
+	 **/
+	public function testUpdateInvalidPlacard() {
+		// create a Placard, try to update it without actually updating it and watch it fail
+		$swipe = new Swipe(null, $this->swipeStatus->getSwipeStatusTypeId(), $this->VALID_SWIPENUMBER);
+		$swipe->update($this->getPDO());
+	}
+
 
 	/**
 	 * test inserting a swipe, editing it, and then updating it
@@ -75,7 +106,7 @@ class SwipeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("swipe");
 
 		// create a new Swipe status and insert into mySQL
-		$swipe = new Swipe(null, $this->swipeStatus->getStatusTypeId(), $this->VALID_SWIPENUMBER);
+		$swipe = new Swipe(null, $this->swipeStatus->getSwipeStatusTypeId(), $this->VALID_SWIPENUMBER);
 		$swipe->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -84,7 +115,7 @@ class SwipeTest extends AaaaTest {
 		$this->assertNotNull($result);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Swipe", $result);
 		// grab the result from the array and validate it
-		$this->assertEquals($result->getSwipeStatusTypeId(), $this->swipeStatus->getStatusTypeId());
+		$this->assertEquals($result->getSwipeStatusTypeId(), $this->swipeStatus->getSwipeStatusTypeId());
 		$this->assertEquals($result->getSwipeNumber(), $this->VALID_SWIPENUMBER);
 	}
 
