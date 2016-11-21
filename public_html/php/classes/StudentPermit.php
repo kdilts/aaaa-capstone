@@ -264,7 +264,7 @@ class StudentPermit implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "UPDATE studentpermit SET studentPermitId = :studentPermitId, studentPermitApplicationId = :studentPermitApplicationId, studentPermitPlacardId = :studentPermitPlacardId, studentPermitSwipeId = :studentPermitSwipeId, studentPermitCheckOutDate = :studentPermitCheckOutDate, studentPermitCheckInDate = :studentPermitCheckInDate WHERE studentPermitApplicationId = :studentPermitApplicationId";
+		$query = "UPDATE studentPermit SET studentPermitId = :studentPermitId, studentPermitApplicationId = :studentPermitApplicationId, studentPermitPlacardId = :studentPermitPlacardId, studentPermitSwipeId = :studentPermitSwipeId, studentPermitCheckOutDate = :studentPermitCheckOutDate, studentPermitCheckInDate = :studentPermitCheckInDate WHERE studentPermitApplicationId = :studentPermitApplicationId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -363,8 +363,8 @@ class StudentPermit implements \JsonSerializable {
 					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
-					$row["studentPermitCheckOutDate"],
-					$row["studentPermitCheckInDate"]
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckOutDate"]),
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckInDate"])
 				);
 			}
 		} catch(\Exception $exception){
@@ -409,8 +409,8 @@ class StudentPermit implements \JsonSerializable {
 					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
-					$row["studentPermitCheckOutDate"],
-					$row["studentPermitCheckInDate"]
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckOutDate"]),
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckInDate"])
 				);
 			}
 		} catch(\Exception $exception){
@@ -440,7 +440,7 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
-		$parameters = ["$studentPermitPlacardId" => $studentPermitPlacardId];
+		$parameters = ["studentPermitPlacardId" => $studentPermitPlacardId];
 		$statement->execute($parameters);
 
 		// grab placard from SQL
@@ -455,8 +455,8 @@ class StudentPermit implements \JsonSerializable {
 					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
-					$row["studentPermitCheckOutDate"],
-					$row["studentPermitCheckInDate"]
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckOutDate"]),
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckInDate"])
 				);
 			}
 		} catch(\Exception $exception){
@@ -508,8 +508,8 @@ class StudentPermit implements \JsonSerializable {
 					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
-					$row["studentPermitCheckOutDate"],
-					$row["studentPermitCheckInDate"]
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckOutDate"]),
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckInDate"])
 				);
 				$studentPermits[$studentPermits->key()] = $studentPermit;
 				$studentPermits->next();
@@ -565,8 +565,8 @@ class StudentPermit implements \JsonSerializable {
 					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
-					$row["studentPermitCheckOutDate"],
-					$row["studentPermitCheckInDate"]
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckOutDate"]),
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckInDate"])
 				);
 				$studentPermits[$studentPermits->key()] = $studentPermit;
 				$studentPermits->next();
@@ -602,8 +602,8 @@ class StudentPermit implements \JsonSerializable {
 					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
-					$row["studentPermitCheckOutDate"],
-					$row["studentPermitCheckInDate"]
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckOutDate"]),
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckInDate"])
 				);
 				$studentPermits[$studentPermits->key()] = $studentPermit;
 				$studentPermits->next();
