@@ -110,7 +110,7 @@ class ApplicationTest extends AaaaTest {
 		$results = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		$this->assertNotNull($results);
-		$this->assertInstanceOf(results, "Edu\\Cnm\\DdcAaaa\\Test\\Application");
+		$this->assertInstanceOf($results, "Edu\\Cnm\\DdcAaaa\\Test\\Application");
 
 		// grab the result from the array and validate it
 		$pdoApplication = $results[0];
