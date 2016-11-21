@@ -283,7 +283,7 @@ class StudentPermit implements \JsonSerializable {
 	 * gets studentPermit by studentPermit Id
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $studentPermitPlacardId id to search for
+	 * @param int $studentPermitId id to search for
 	 * @return StudentPermit student permit found, or null if none are found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
@@ -329,7 +329,7 @@ class StudentPermit implements \JsonSerializable {
 	 * gets studentPermit by studentPermit placard Id
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $studentPermitPlacardId placard id to search for
+	 * @param int $studentPermitApplicationId placard id to search for
 	 * @return StudentPermit student permit found, or null if none are found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type

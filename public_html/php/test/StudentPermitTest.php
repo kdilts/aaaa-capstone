@@ -30,6 +30,9 @@ class StudentPermitTest extends AaaaTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
+
+		$this->STUDENTPERMITCHECKOUTDATE = new \DateTime();
+		$this->STUDENTPERMITCHECKINDATE = new \DateTime();
 	}
 
 	/**
@@ -39,8 +42,10 @@ class StudentPermitTest extends AaaaTest {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
+		//int $newStudentPermitId = null, int $newStudentPermitApplicationId, int $newStudentPermitPlacardId, int $newStudentPermitSwipeId, \DateTime $newStudentPermitCheckOutDate, \DateTime $newStudentPermitCheckInDate
+
 		// create a Student Permit and insert into mySQL
-		$studentPermit = new StudentPermit(null, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID);
+		$studentPermit = new StudentPermit(null, $this->VALID_STUDENTPERMITAPPLICATIONID, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID, $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINTDATE);
 		$studentPermit->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -59,8 +64,7 @@ class StudentPermitTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidStudentPermit() {
 		// create a StudentPermit with a non null studentPermit Application Id and watch it fail
-		$studentPermit = new StudentPermit(AaaaTest::INVALID_KEY, $this->studentPermit->getStudentPemitApplicationId(),
-			$this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID);
+		$studentPermit = new StudentPermit(null, $this->VALID_STUDENTPERMITAPPLICATIONID, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID, $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINTDATE);
 		$studentPermit->insert($this->getPDO());
 	}
 
@@ -72,7 +76,7 @@ class StudentPermitTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
 		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->STUDENTPERMITAPPLICATIONID->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITSWIPEID);
+		$studentPermit = new StudentPermit(null, $this->VALID_STUDENTPERMITAPPLICATIONID, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID, $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINTDATE);
 		$studentPermit->insert($this->getPDO());
 
 		// edit the StudentPermit and update it in mySQL
@@ -80,8 +84,7 @@ class StudentPermitTest extends AaaaTest {
 		$studentPermit->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoSstudentPermit = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(),
-			$studentPermit->getStudentPermitApplicationId());
+		$pdoStudentPermit = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(), $studentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->studentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->VALID_STUDENTPERMITPLACARDID);
@@ -96,7 +99,7 @@ class StudentPermitTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
 		// create a new Student Permit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->studentPermit->getStudentPermitApplicationId(), $this->VALID_STUDENTPERMITPLACARDID);
+		$studentPermit = new StudentPermit(null, $this->VALID_STUDENTPERMITAPPLICATIONID, $this->VALID_STUDENTPERMITPLACARDID, $this->VALID_STUDENTPERMITSWIPEID, $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINTDATE);
 		$studentPermit->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
