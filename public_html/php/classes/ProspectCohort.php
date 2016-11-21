@@ -88,7 +88,7 @@ class ProspectCohort implements \JsonSerializable {
 
 	/**
 	 * mutator method for the prospect cohort id
-	 * @param int $newProspectCohortId new value of tweet id
+	 * @param int $newProspectCohortId new value of prospectCohort id
 	 * @throws \RangeException if $newProspectCohortId is not positive
 	 */
 	public function setProspectCohortId($newProspectCohortId) {
@@ -108,7 +108,7 @@ class ProspectCohort implements \JsonSerializable {
 	}
 
 	/**
-	 * mutator method for tweet profile id
+	 * mutator method for prospectCohort profile id
 	 *
 	 * @param int $newProspectCohortProspectId new value of prospect cohort prospect id
 	 * @throws \RangeException if new prospect cohort prospect id is not positive
@@ -167,59 +167,61 @@ class ProspectCohort implements \JsonSerializable {
 	 * gets the prospect Cohort by prospect cohort id
 	 *
 	 * @param \PDO $pdo connection to the object
-	 * @param int $prospectCohortCohortId new value of prospect cohort id
-	 * @return \SplFixedArray SplFixedArray of Prospects Cohort found
-	 * @return prospectCohort|null Prospect Cohort found or null if not found
+	 * @param int $prospectCohortId new value of prospect cohort id
+	 * @return ProspectCohort|null prospectCohort if found or null if not found
 	 * @throws \PDOException if prospect cohort id is not positive
 
-*/
-	public static function getProspectCohortByProspectCohortId(\PDO $pdo, int $prospectCohortCohortId){
+	 */
+	public static function getProspectCohortByProspectCohortId(\PDO $pdo, int $prospectCohortId){
 		// sanitize the prospectCohortId before searching
-		if($prospectCohortCohortId <= 0){
+		if($prospectCohortId <= 0){
 			throw(new \PDOException("prospectCohortId not positive"));
 		}
 
 		// create query template
-		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId From prospectCohort WHERE prospectCohortCohortId = :prospectCohortCohortId";
+		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId From prospectCohort WHERE prospectCohortId = :prospectCohortId";
 		$statement = $pdo->prepare($query);
 
 		// bind the prospectCohortId to the place holder in template
-		$parameters = ["prospectCohortCohortId" => $prospectCohortCohortId];
+		$parameters = ["prospectCohortId" => $prospectCohortId];
 		$statement->execute($parameters);
 
-		// build an array of prospect cohorts
-		$prospectCohorts = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
-				$prospectCohort = new ProspectCohort($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
-				$prospectCohorts[$prospectCohorts->key()] = $prospectCohort;
-				$prospectCohorts->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
+		// grab placard from SQL
+		try {
+			$prospectCohort = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false){
+				$prospectCohort = new prospectCohort($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
 			}
+		} catch(\Exception $exception){
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return $prospectCohorts;
+		return($prospectCohort);
 	}
 
 	/**
 	 * gets the Prospect Cohort by prospect id
 	 * @param \PDO $pdo connection object
 	 * @param int $prospectCohortId prospect cohort id to search for
-	 * @return prospectCohort|null when prospect cohort found or null if not found
+	 * @return ProspectCohort|null prospectCohort if found or null if not found
 	 * @throws \PDOException if prospect cohort prospect id is not positive
 	 */
 
-	public static function getProspectCohortByProspectId (\PDO $pdo, int $prospectCohortId){
+	public static function getProspectCohortByProspectId (\PDO $pdo, int $prospectCohortProspectId){
 		//sanitize the prospectCohortId before searching
-		if ($prospectCohortId <=0) {
-			throw(new \PDOException("prospectCohortId not positive"));
+		if ($prospectCohortProspectId <=0) {
+			throw(new \PDOException("prospectCohortProspectId not positive"));
 		}
 
 		//create query template
-		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId From prospectCohort WHERE prospectCohortId = : prospectCohortId";
+		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId From prospectCohort WHERE prospectCohortProspectId = :prospectCohortProspectId";
 		$statement = $pdo->prepare($query);
+
+		// bind the prospectCohortId to the place holder in template
+		$parameters = ["prospectCohortProspectId" => $prospectCohortProspectId];
+		$statement->execute($parameters);
 
 		//grab placard from SQL
 		try {
@@ -239,32 +241,37 @@ class ProspectCohort implements \JsonSerializable {
 	/**
 	 * gets the Prospect Cohort Id
 	 * @param \PDO $pdo connection object
-	 * @param int $prospectCohortId prospect cohort id to search for
-	 * @return ProspectCohort|null found or not found
+	 * @param int $prospectCohortCohortId prospect cohort id to search for
+	 * @return \SplFixedArray array of prospectCohorts found
 	 * @throws \PDOException if prospect cohort cohort id is not positive
 	 */
-	public static function getProspectCohortByCohortId (\PDO $pdo, int $prospectCohortId){
+	public static function getProspectCohortByCohortId (\PDO $pdo, int $prospectCohortCohortId){
 		//sanitize the prospectCohortId before searching
-		if ($prospectCohortId <=0){
-			throw(new \PDOException("prospectCohortId not positive"));
+		if ($prospectCohortCohortId <=0){
+			throw(new \PDOException("prospectCohortCohortId not positive"));
 		}
 		//create query template
-		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId FROM prospectCohort WHERE prospectCohortId = : applicaitonCohortId";
+		$query = "SELECT prospectCohortId, prospectCohortProspectId, prospectCohortCohortId FROM prospectCohort WHERE prospectCohortCohortId = :prospectCohortCohortId";
 		$statement = $pdo->prepare($query);
 
-		//grab prospectCohort from SQL
-		try {
-			$prospectCohort = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if ($row !==false){
-				$prospectCohort = new prospectCohort ($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
+		// bind the prospectCohortId to the place holder in template
+		$parameters = ["prospectCohortCohortId" => $prospectCohortCohortId];
+		$statement->execute($parameters);
+
+		// build an array of prospectCohort
+		$prospectCohorts = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$prospectCohort = new ProspectCohort($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
+				$prospectCohorts[$prospectCohorts->key()] = $prospectCohort;
+				$prospectCohorts->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception){
-			//if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($prospectCohort);
+		return $prospectCohorts;
 	}
 
 	/**
