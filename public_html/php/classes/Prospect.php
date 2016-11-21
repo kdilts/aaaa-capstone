@@ -224,12 +224,11 @@ class Prospect implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "INSERT INTO prospect(prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName) VALUES(:prospectCohortId, :prospectPhoneNumber, :prospectEmail, :prospectFirstName, :prospectLastName)";
+		$query = "INSERT INTO prospect(prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName) VALUES(::prospectPhoneNumber, :prospectEmail, :prospectFirstName, :prospectLastName)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
 		$parameters = [
-			"prospectCohortId" => $this->prospectCohortId,
 			"prospectPhoneNumber" => $this->prospectPhoneNumber,
 			"prospectEmail" => $this->prospectEmail,
 			"prospectFirstName" => $this->prospectFirstName,
@@ -257,7 +256,7 @@ class Prospect implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectId = :prospectId";
+		$query = "SELECT prospectId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectId = :prospectId";
 		$statement = $pdo->prepare($query);
 
 		// bind the prospect id to the place holder in template
@@ -272,7 +271,6 @@ class Prospect implements \JsonSerializable {
 			if($row !== false){
 				$prospect = new Prospect(
 					$row["prospectId"],
-					$row["prospectCohortId"],
 					$row["prospectPhoneNumber"],
 					$row["prospectEmail"],
 					$row["prospectFirstName"],
@@ -284,52 +282,6 @@ class Prospect implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return($prospect);
-	}
-
-	/**
-	 * gets prospects by prospect cohort id
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @param int $prospectCohortId to search by
-	 * @return \SplFixedArray SplFixedArray of prospects found
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
-	 **/
-	public static function getProspectsByProspectsCohortId(\PDO $pdo, int $prospectCohortId){
-		// sanitize the prospectId before searching
-		if($prospectCohortId <= 0){
-			throw(new \PDOException("prospectCohortId not positive"));
-		}
-
-		// create query template
-		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectCohortId = :prospectCohortId";
-		$statement = $pdo->prepare($query);
-
-		// bind the prospect id to the place holder in template
-		$parameters = ["prospectCohortId" => $prospectCohortId];
-		$statement->execute($parameters);
-
-		// build an array of prospects
-		$prospects = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
-				$prospect = new prospect(
-					$row["prospectId"],
-					$row["prospectCohortId"],
-					$row["prospectPhoneNumber"],
-					$row["prospectEmail"],
-					$row["prospectFirstName"],
-					$row["prospectLastName"]
-				);
-				$prospects[$prospects->key()] = $prospect;
-				$prospects->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-		return ($prospects);
 	}
 
 	/**
@@ -350,7 +302,7 @@ class Prospect implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectEmail = :prospectEmail";
+		$query = "SELECT prospectId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectEmail = :prospectEmail";
 		$statement = $pdo->prepare($query);
 
 		// bind the prospect id to the place holder in template
@@ -365,7 +317,6 @@ class Prospect implements \JsonSerializable {
 			if($row !== false){
 				$prospect = new Prospect(
 					$row["prospectId"],
-					$row["prospectCohortId"],
 					$row["prospectPhoneNumber"],
 					$row["prospectEmail"],
 					$row["prospectFirstName"],
@@ -398,7 +349,7 @@ class Prospect implements \JsonSerializable {
 		$prospectName = "%$prospectName%";
 
 		// create query template
-		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectFirstName LIKE :prospectName OR prospectLastName LIKE :proscpectName";
+		$query = "SELECT prospectId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName From prospect WHERE prospectFirstName LIKE :prospectName OR prospectLastName LIKE :proscpectName";
 		$statement = $pdo->prepare($query);
 
 		// bind the prospect name to the place holder in template
@@ -412,7 +363,6 @@ class Prospect implements \JsonSerializable {
 			try {
 				$prospect = new prospect(
 					$row["prospectId"],
-					$row["prospectCohortId"],
 					$row["prospectPhoneNumber"],
 					$row["prospectEmail"],
 					$row["prospectFirstName"],
@@ -438,7 +388,7 @@ class Prospect implements \JsonSerializable {
 	 */
 	public static function getAllProspects(\PDO $pdo){
 		// create query template
-		$query = "SELECT prospectId, prospectCohortId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName FROM prospect";
+		$query = "SELECT prospectId, prospectPhoneNumber, prospectEmail, prospectFirstName, prospectLastName FROM prospect";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -449,7 +399,6 @@ class Prospect implements \JsonSerializable {
 			try {
 				$prospect = new prospect(
 					$row["prospectId"],
-					$row["prospectCohortId"],
 					$row["prospectPhoneNumber"],
 					$row["prospectEmail"],
 					$row["prospectFirstName"],
