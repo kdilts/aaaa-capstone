@@ -547,7 +547,7 @@ class Application {
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
-					$row["applicationDateTime"],
+					\DateTime::createFromFormat("Y-m-d",$row["applicationDateTime"]),
 					$row["applicationUtmCampaign"],
 					$row["applicationUtmMedium"],
 					$row["applicationUtmSource"]
@@ -596,7 +596,7 @@ class Application {
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
-					$row["applicationDateTime"],
+					\DateTime::createFromFormat("Y-m-d",$row["applicationDateTime"]),
 					$row["applicationUtmCampaign"],
 					$row["applicationUtmMedium"],
 					$row["applicationUtmSource"]
@@ -645,7 +645,7 @@ class Application {
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
-					$row["applicationDateTime"],
+					\DateTime::createFromFormat("Y-m-d",$row["applicationDateTime"]),
 					$row["applicationUtmCampaign"],
 					$row["applicationUtmMedium"],
 					$row["applicationUtmSource"]
