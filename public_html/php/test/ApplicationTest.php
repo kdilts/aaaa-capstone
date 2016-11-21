@@ -149,6 +149,6 @@ class ApplicationTest extends AaaaTest {
 		$pdoApplication = $results[0];
 		$this->assertEquals($pdoApplication->getApplicationId(), $application->getApplicationId());
 		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONFIRSTNAME);
-		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONLASTNAME);
+		$this->assertEquals($pdoApplication->getApplicationLastName(), $this->VALID_APPLICATIONLASTNAME);
 	}
 }
