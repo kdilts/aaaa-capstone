@@ -65,7 +65,13 @@ class SwipeTest extends AaaaTest {
 		// create a Swipe with a non null Swipe id and watch it fail
 		$swipe = new Swipe(AaaaTest::INVALID_KEY, $this->swipeStatus->getStatusTypeId(), $this->VALID_SWIPENUMBER);
 		$swipe->insert($this->getPDO());
+
+
 	}
+
+	/**
+	 * test updating a Swipe
+	 */
 	public function testUpdateValidSwipe() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("swipe");
@@ -87,7 +93,7 @@ class SwipeTest extends AaaaTest {
 
 
 	/**
-	 * test updating a Placard that does not exist
+	 * test updating a Swipe that does not exist
 	 *
 	 * @expectedException PDOException
 	 **/
