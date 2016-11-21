@@ -151,6 +151,7 @@ class NoteTest extends AaaaTest {
 		$this->assertCount(0, $note);
 	}
 
+	public function test
 	/**
 	 * test grabbing all Notes
 	 **/
