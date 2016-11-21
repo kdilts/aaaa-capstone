@@ -61,8 +61,34 @@ class ProspectTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidProspect() {
 		// create a Prospect with a non null prospect id and watch it fail
-		$prospect = new Prospect(AaaaTest::INVALID_KEY, $this->VALID_PROSPECTCOHORTID, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
+		$prospect = new Prospect(AaaaTest::INVALID_KEY, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
 		$prospect->insert($this->getPDO());
 	}
 
+	/**
+	 * test grabbing all Prospects
+	 **/
+	public function testGetAllValidProspects() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("prospect");
+
+		// create a new Prospect and insert to into mySQL
+		$prospect = new Prospect(null, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
+		$prospect->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = Prospect::getAllProspects($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospect"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Prospect", $results);
+
+		// grab the result from the array and validate it
+		$pdoProspect = $results[0];
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospect"));
+		$this->assertEquals($pdoProspect->getProspectPhoneNumber(), $this->VALID_PROSPECTPHONENUMBER);
+		$this->assertEquals($pdoProspect->getProspectEmail(), $this->VALID_PROSPECTEMAIL);
+		$this->assertEquals($pdoProspect->getProspectFirstName(), $this->VALID_PROSPECTFIRSTNAME);
+		$this->assertEquals($pdoProspect->getProspectLastName(), $this->VALID_PROSPECTLASTNAME);
+	}
+	
 }
