@@ -120,7 +120,7 @@ class BridgeTest extends AaaaTest {
 		$results = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
 		$this->assertNotNull($results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Bridge", $results);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Bridge", $results);
 
 		// grab the result from the array and validate it
 		$pdoBridge = $results[0];
