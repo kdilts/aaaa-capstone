@@ -41,7 +41,7 @@ class Note {
 	 * @throws \TypeError
 	 * @throws \Exception
 	 */
-	public function __construct(int $newNoteId, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId) {
+	public function __construct(int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId) {
 		try {
 			$this->setNoteId($newNoteId);
 			$this->setNoteContent($newNoteContent);
