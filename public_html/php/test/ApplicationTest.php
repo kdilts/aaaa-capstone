@@ -72,7 +72,7 @@ class ApplicationTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoApplication = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
-		//$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONID);
+		$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONID);
 		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONDATETIME);
 	}
 
