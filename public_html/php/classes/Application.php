@@ -87,7 +87,7 @@ class Application {
 	 * @throws \Exception
 	 * @throws \TypeError
 	 */
-	public function __construct(int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, \DateTime $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource){
+	public function __construct(int $newApplicationId, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, \DateTime $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource){
 		try {
 			$this->setApplicationId($newApplicationId);
 			$this->setApplicationFirstName($newApplicationFirstName);
