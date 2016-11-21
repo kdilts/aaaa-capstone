@@ -209,7 +209,7 @@ class ApplicationCohort implements \JsonSerializable {
 	 * @throws \PDOException if application cohort application id is not positive
 	 */
 
-	public function getApplicationCohortByApplicationId (\PDO $pdo, int $applicationCohortId){
+	public static function getApplicationCohortByApplicationId (\PDO $pdo, int $applicationCohortId){
 		//sanitize the applicationCohortId before searching
 		if ($applicationCohortId <=0) {
 			throw(new \PDOException("applicationCohortId not positive"));
@@ -241,7 +241,7 @@ class ApplicationCohort implements \JsonSerializable {
 	 * @return ApplicationCohort|null applicationCohort if found or null if not found
 	 * @throws \PDOException if application cohort cohort id is not positive
 	 */
-	public function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortId){
+	public static function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortId){
 		//sanitize the applicationCohortId before searching
 		if ($applicationCohortId <=0){
 			throw(new \PDOException("applicationCohortId not positive"));
