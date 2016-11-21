@@ -133,5 +133,6 @@ CREATE TABLE note(
 	noteContent VARCHAR(2000) NOT NULL,
 	INDEX (noteId),
 	PRIMARY KEY(noteId),
-	FOREIGN KEY(noteProspectId) REFERENCES prospect (prospectId)
+	FOREIGN KEY(noteProspectId) REFERENCES prospect (prospectId),
+	FOREIGN KEY(noteApplicationId) REFERENCES application (applicationId)
 );

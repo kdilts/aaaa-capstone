@@ -95,7 +95,7 @@ class SwipeTest extends AaaaTest {
 	/**
 	 * test updating a Swipe that does not exist
 	 *
-	 * @expectedException PDOException
+	 * @expectedException \PDOException
 	 **/
 	public function testUpdateInvalidSwipe() {
 		// create a Placard, try to update it without actually updating it and watch it fail
