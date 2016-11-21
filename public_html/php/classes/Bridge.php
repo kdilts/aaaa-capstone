@@ -153,7 +153,7 @@ namespace Edu\Cnm\DdcAaaa;
 			$parameters = ["bridgeStaffId" => $this->bridgeStaffId, "bridgeName" => $this->bridgeName, "bridgeUserName" => $this->bridgeUserName];
 			$statement->execute($parameters);
 			// update the null bridgeStaffId with what mySQL just gave us
-			$this->bridgeStaffId = intval($pdo->lastInsertId());
+			//$this->bridgeStaffId = intval($pdo->lastInsertId());
 		}
 
 		/**
