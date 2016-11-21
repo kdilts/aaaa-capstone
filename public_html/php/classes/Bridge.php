@@ -34,7 +34,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 * @throws \Exception
 		 */
 
-		public function __construct(string $newBridgeStaffId = null, string $newBridgeName, string $newBridgeUserName) {
+		public function __construct(string $newBridgeStaffId, string $newBridgeName, string $newBridgeUserName) {
 			try {
 				$this->setBridgeStaffId($newBridgeStaffId);
 				$this->setBridgeName($newBridgeName);
