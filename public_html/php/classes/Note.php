@@ -302,7 +302,7 @@ class Note {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent FROM note WHERE noteId = :noteProspectId";
+		$query = "SELECT noteId, noteContent, noteApplicationId, noteProspectId, noteNoteTypeId FROM note WHERE noteId = :noteProspectId";
 		$statement = $pdo->prepare($query);
 
 		// bind the noteProspect id to the place holder in template
