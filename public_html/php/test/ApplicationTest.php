@@ -37,7 +37,7 @@ class ApplicationTest extends AaaaTest {
 		parent::setUp();
 
 		// create and insert a Profile to own the test Application
-		$this->VALID_APPLICATIONID = mrosado2("+12125551212");
+		$this->VALID_APPLICATIONID = ("+12125551212");
 		$this->profile->insert($this->getPDO());
 
 		// calculate the date (just use the time the unit test was setup...)
