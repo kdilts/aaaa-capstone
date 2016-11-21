@@ -211,7 +211,7 @@ class ProspectCohort implements \JsonSerializable {
 	 * @throws \PDOException if prospect cohort prospect id is not positive
 	 */
 
-	public function getProspectCohortByProspectId (\PDO $pdo, int $prospectCohortId){
+	public static function getProspectCohortByProspectId (\PDO $pdo, int $prospectCohortId){
 		//sanitize the prospectCohortId before searching
 		if ($prospectCohortId <=0) {
 			throw(new \PDOException("prospectCohortId not positive"));
@@ -243,7 +243,7 @@ class ProspectCohort implements \JsonSerializable {
 	 * @return ProspectCohort|null found or not found
 	 * @throws \PDOException if prospect cohort cohort id is not positive
 	 */
-	public function getProspectCohortByCohortId (\PDO $pdo, int $prospectCohortId){
+	public static function getProspectCohortByCohortId (\PDO $pdo, int $prospectCohortId){
 		//sanitize the prospectCohortId before searching
 		if ($prospectCohortId <=0){
 			throw(new \PDOException("prospectCohortId not positive"));
