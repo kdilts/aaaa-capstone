@@ -99,7 +99,7 @@ class BridgeTest extends AaaaTest {
 	 **/
 	public function testUpdateInvalidBridge() {
 		// create a Bridge, try to update it without actually updating it and watch it fail
-		$bridge = new Bridge(null, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		$bridge = new Bridge($this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
 		$bridge->update($this->getPDO());
 	}
 
