@@ -53,7 +53,7 @@ class BridgeTest extends AaaaTest {
 		$pdoBridge = Bridge::getBridgeByBridgeStaffId($this->getPDO(), $bridge->getBridgeStaffId());
 
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
-		//$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
+		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
 		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
 		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
