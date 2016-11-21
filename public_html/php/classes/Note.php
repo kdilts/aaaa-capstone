@@ -369,7 +369,7 @@ class Note {
 	 */
 	public static function getAllNotes(\PDO $pdo){
 		//create query template
-	$query = "SELECT noteId, noteApplicationId, noteProspectId, noteNoteTypeId, noteContent FROM note";
+	$query = "SELECT noteId, noteContent,noteNoteTypeId, noteApplicationId, noteProspectId FROM note";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
