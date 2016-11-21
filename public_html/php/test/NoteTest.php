@@ -166,11 +166,13 @@ class NoteTest extends AaaaTest {
 	 * test inserting a note that already exists
 	 */
 		public function testInsertInvalidNoteByNoteProspectId(){
-			//creat a note with a non null note id and watch it fail
+			//creat a note with a none null note id and watch it fail
 			$note = Note::getNoteByNoteProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
 			$this->assertNul($note);
 		}
-
+	/**
+	 * test inserting a valid Note and verify that the actual mySQL data matches
+	 */
 		public function getValidNoteByNoteNoteTypeId(){
 			//count the number of rows and save it for later
 			$numRows = $this->getConneciton()->getRowCount("note");
@@ -188,11 +190,14 @@ class NoteTest extends AaaaTest {
 			$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
 }
 
-
-	//TODO getValidNoteByNoteNoteTypeId
-
-	//TODO getInvalidNoteByNoteNoteTypeId
-
+	/**
+	 * test inserting a note that already exists
+	 */
+public function testInsertInvalidNoteByNoteNoteTypeId(){
+	//create a note with a none null note id and watch it fail
+	$note = Note::getNoteByNoteNoteTypeId($this->getPDO(), AaaaTest::INVALID_KEY);
+	$this->assertNul($note);
+}
 	/**
 	 * test grabbing all Notes
 	 **/
