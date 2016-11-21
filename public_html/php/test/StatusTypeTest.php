@@ -21,7 +21,7 @@ require_once(dirname(__DIR__) . "/classes/autoload.php");
 class StatusTypeTest extends AaaaTest {
 	/**
 	 * content of the Status Type
-	 * @var string $VALID_STATUSTYPENAME
+	 * @var int $VALID_STATUSTYPENAME
 	 **/
 	protected $VALID_STATUSTYPENAME = 1;
 	protected $VALID_STATUSTYPENAME2 = 2;
@@ -85,26 +85,49 @@ class StatusTypeTest extends AaaaTest {
 	}
 
 	/**
-	 * test grabbing all StatusType
-	 */
+	 * test updating a StatusType that does not exist
+	 *
+	 * @expectedException PDOException
+	 **/
 	public function testUpdateInvalidStatusType() {
+		// create a StatusType, try to update it without actually updating it and watch it fail
+		$status = new StatusType(null, $this->VALID_STATUSTYPENAME);
+		$status->update($this->getPDO());
+	}
+
+	// TODO test valid / invalid getById
+
+	// TODO test valid / invalid getByName
+
+	/**
+	 * test grabbing all StatusTypes
+	 **/
+	public function testGetAllValidStatusTypes() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("statusType");
 
-		// create a new Student Permit and insert to into mySQL
-		$statusType = new StatusType(null, $this->VALID_STATUSTYPENAME, $this->VALID_STATUSTYPENAME2);
-		$statusType->insert($this->getPDO());
+		// create a new StatusType and insert to into mySQL
+		$status = new StatusType(null, $this->VALID_STATUSTYPENAME);
+		$status->insert($this->getPDO());
+
+		//var_dump($status);
+
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = StatusType::getAllStatusTypes($this->getPDO());
+
+		//var_dump($results);
+		//var_dump($results[0]);
+
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("statusType"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf($results, "Edu\\Cnm\\DdcAaaa\\Test\\StatusType");
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\StatusType", $results);
+
 		// grab the result from the array and validate it
 		$pdoStatusType = $results[0];
-		$this->assertEquals($pdoStatusType->getStudentPermitApplicationId(), $this->VALID_STATUSTYPENAME2);
-		$this->assertEquals($pdoStatusType->getStudentPermitCheckInDate);
-		$this->assertEquals($pdoStatusType->getstatusType(), $this->VALID_STATUSTYPENAME2);
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("statusType"));
+		$this->assertEquals($pdoStatusType->getStatusTypeName(), $this->VALID_STATUSTYPENAME);
 	}
+
 }
 
 

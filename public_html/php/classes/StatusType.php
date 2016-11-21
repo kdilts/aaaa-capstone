@@ -79,12 +79,12 @@ class StatusType implements \JsonSerializable {
 	}
 	/**
 	 * mutator method for statusType name
-	 * @param string $newStatusTypeName  new value of statusType name
+	 * @param int $newStatusTypeName  new value of statusType name
 	 * @throws \RangeException throws if $newStatusTypeName is not positive
 	 * @throws \TypeError throws if $newStatusTypedName is not an integer
 	 *
 	 */
-	public function setStatusTypeName(string $newStatusTypeName) {
+	public function setStatusTypeName(int $newStatusTypeName) {
 		if($newStatusTypeName <= 0){
 			throw (new \RangeException("Status type name must be positive"));
 		}
@@ -176,12 +176,12 @@ class StatusType implements \JsonSerializable {
 	/**
 	 * gets statusType by statusType name
 	 * @param \PDO $pdo pdo connection object
-	 * @param string $statusTypeName statusType name to search for
+	 * @param int $statusTypeName statusType name to search for
 	 * @return \SplFixedArray array of statusTypes found
 	 * @throws \PDOException throws when mySQL errors occur
 	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
-	public static function getStatusTypeByStatusTypeName(\PDO $pdo, string $statusTypeName) {
+	public static function getStatusTypeByStatusTypeName(\PDO $pdo, int $statusTypeName) {
 		// sanitize the statusTypeId before searching
 		if($statusTypeName <= 0) {
 			throw(new \PDOException("statusTypeName not positive"));
@@ -220,7 +220,7 @@ class StatusType implements \JsonSerializable {
 	 */
 	public static function getAllStatusTypes(\PDO $pdo) {
 		// create query template
-		$query = "SELECT statusTypeName, statusTypeID FROM statusType";
+		$query = "SELECT statusTypeId, statusTypeName FROM statusType";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 

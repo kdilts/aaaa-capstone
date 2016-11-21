@@ -35,7 +35,7 @@ CREATE TABLE noteType(
 
 CREATE TABLE statusType(
 	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	statusTypeName VARCHAR(40) NOT NULL,
+	statusTypeName INT UNSIGNED NOT NULL,
 	INDEX (statusTypeId),
 	PRIMARY KEY (statusTypeId)
 );
