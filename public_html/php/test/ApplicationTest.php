@@ -126,7 +126,6 @@ class ApplicationTest extends AaaaTest {
 		$application = Application::getApplicationId($this->getPDO(), "you will find nothing");
 		$this->assertNull(0, $application);
 	}
-
 	/**
 	 * test grabbing all ApplicationId
 	 **/
