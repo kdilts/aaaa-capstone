@@ -646,7 +646,7 @@ class Application {
 					$row["applicationAboutYou"],
 					$row["applicationHopeToAccomplish"],
 					$row["applicationExperience"],
-					\DateTime::createFromFormat("Y-m-d",$row["applicationDateTime"]),
+					\DateTime::createFromFormat("Y-m-d H:i:s",$row["applicationDateTime"]),
 					$row["applicationUtmCampaign"],
 					$row["applicationUtmMedium"],
 					$row["applicationUtmSource"]
