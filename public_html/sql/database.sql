@@ -2,7 +2,6 @@ DROP TABLE IF EXISTS note;
 DROP TABLE IF EXISTS prospectCohort;
 DROP TABLE IF EXISTS studentPermit;
 DROP TABLE IF EXISTS applicationCohort;
-DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS swipe;
 DROP TABLE IF EXISTS placard;
 DROP TABLE IF EXISTS statusType;
@@ -10,6 +9,24 @@ DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS noteType;
 DROP TABLE IF EXISTS cohort;
 DROP TABLE IF EXISTS bridge;
+DROP TABLE IF EXISTS application;
+
+CREATE TABLE application(
+	applicationId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	applicationFirstName VARCHAR(40) NOT NULL,
+	applicationLastName VARCHAR(40) NOT NULL,
+	applicationEmail VARCHAR(100) NOT NULL,
+	applicationPhoneNumber VARCHAR(30) NOT NULL,
+	applicationSource VARCHAR(200) NOT NULL,
+	applicationAboutYou VARCHAR(2000) NOT NULL,
+	applicationHopeToAccomplish VARCHAR(2000) NOT NULL,
+	applicationExperience VARCHAR(2000) NOT NULL,
+	applicationDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	applicationUtmCampaign VARCHAR(500) NOT NULL,
+	applicationUtmMedium VARCHAR(500) NOT NULL,
+	applicationUtmSource VARCHAR(500) NOT NULL,
+	PRIMARY KEY(applicationId)
+);
 
 CREATE TABLE bridge(
 	bridgeStaffId VARCHAR(9),
@@ -70,28 +87,13 @@ CREATE TABLE swipe(
 	FOREIGN KEY(swipeStatusTypeId) REFERENCES statusType(statusTypeId)
 );
 
-CREATE TABLE application(
-	applicationId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	applicationFirstName VARCHAR(40) NOT NULL,
-	applicationLastName VARCHAR(40) NOT NULL,
-	applicationEmail VARCHAR(100) NOT NULL,
-	applicationPhoneNumber VARCHAR(30) NOT NULL,
-	applicationSource VARCHAR(200) NOT NULL,
-	applicationAboutYou VARCHAR(2000) NOT NULL,
-	applicationHopeToAccomplish VARCHAR(2000) NOT NULL,
-	applicationExperience VARCHAR(2000) NOT NULL,
-	applicationDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	applicationUtmCampaign VARCHAR(500) NOT NULL,
-	applicationUtmMedium VARCHAR(500) NOT NULL,
-	applicationUtmSource VARCHAR(500) NOT NULL,
-	PRIMARY KEY(applicationId)
-);
-
 CREATE TABLE applicationCohort(
 	applicationCohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	applicationCohortApplicationId INT UNSIGNED NOT NULL,
 	applicationCohortCohortId INT UNSIGNED NOT NULL,
 	INDEX (applicationCohortId),
+	INDEX (applicationCohortApplicationId),
+	INDEX (applicationCohortCohortId),
 	PRIMARY KEY (applicationCohortId),
 	FOREIGN KEY(applicationCohortApplicationId) REFERENCES application(applicationId),
 	FOREIGN KEY(applicationCohortCohortId) REFERENCES cohort(cohortId)
@@ -120,6 +122,8 @@ CREATE TABLE prospectCohort(
 	prospectCohortProspectId INT UNSIGNED NOT NULL,
 	prospectCohortCohortId INT UNSIGNED NOT NULL,
 	INDEX (prospectCohortId),
+	INDEX (prospectCohortProspectId),
+	INDEX (prospectCohortCohortId),
 	PRIMARY KEY (prospectCohortId),
 	FOREIGN KEY(prospectCohortProspectId) REFERENCES prospect(prospectId),
 	FOREIGN KEY(prospectCohortCohortId) REFERENCES cohort(cohortId)
