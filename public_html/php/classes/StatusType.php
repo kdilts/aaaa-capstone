@@ -218,21 +218,21 @@ class StatusType implements \JsonSerializable {
 	 * @throws \PDOException throws when mySQL errors occur
 	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
-	public static function getAllStatusTypes(\PDO $pdo) {
+	public static function getAllStatusTypes(\PDO $pdo){
 		// create query template
-		$query = "SELECT statusTypeId, statusTypeName FROM statusType";
+		$query = "SELECT statusTypeId, statusTypeName From statusType";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
-		// build an array of application cohorts
+		// build an array of statusTypes
 		$statusTypes = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
+		while(($row = $statement->fetch()) !== false){
 			try {
-				$statusType = new StatusType($row["statusTypeName"], $row["statusTypeId"]);
+				$statusType = new StatusType($row["statusTypeId"], $row["statusTypeName"]);
 				$statusTypes[$statusTypes->key()] = $statusType;
 				$statusTypes->next();
-			} catch(\Exception $exception) {
+			} catch(\Exception $exception){
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}

@@ -125,7 +125,8 @@ class StatusTypeTest extends AaaaTest {
 		// grab the result from the array and validate it
 		$pdoStatusType = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("statusType"));
-		$this->assertEquals($pdoStatusType->getStatusTypeName(), $this->VALID_STATUSTYPENAME);
+		$this->assertEquals($pdoStatusType->getStatusTypeId(), $status->getStatusTypeId());
+		$this->assertEquals($pdoStatusType->getStatusTypeName(), $status->getStatusTypeName());
 	}
 
 }
