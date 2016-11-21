@@ -65,37 +65,54 @@ class ApplicationCohortTest extends AaaaTest {
 	 * @expectedException \PDOException
 	 **/
 	public function testInsertInvalidApplicationCohort() {
-		// create a Placard with a non null placard id and watch it fail
+		// create a Placard with a non null applicationCohort id and watch it fail
 		$placard = new ApplicationCohort(AaaaTest::INVALID_KEY, $this->application->getApplicationId(), $this->cohort->getCohortId());
 		$placard->insert($this->getPDO());
 	}
 
-	public function testGetValidApplicationCohortByApplicationCohortId(){
-
-	}
-
-	public function testGetInvalidApplicationCohortByApplicationCohortId(){
-
-	}
-
-	public function testGetValidApplicationCohortByCohortId(){
-
-	}
-
-	public function testGetInvalidApplicationCohortByCohortId(){
-
-	}
-
-	public function testGetValidApplicationCohortByApplicationId(){
-
-	}
-
-	public function testGetInvalidApplicationCohortByApplicationId(){
-
-	}
+//	public function testGetValidApplicationCohortByApplicationCohortId(){
+//
+//	}
+//
+//	public function testGetInvalidApplicationCohortByApplicationCohortId(){
+//
+//	}
+//
+//	public function testGetValidApplicationCohortByCohortId(){
+//
+//	}
+//
+//	public function testGetInvalidApplicationCohortByCohortId(){
+//
+//	}
+//
+//	public function testGetValidApplicationCohortByApplicationId(){
+//
+//	}
+//
+//	public function testGetInvalidApplicationCohortByApplicationId(){
+//
+//	}
 
 	public function testGetAllValidApplicationCohorts(){
+// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("applicationCohort");
 
+		// create a new ApplicationCohort and insert to into mySQL
+		$applicationCohort = new ApplicationCohort(null, $this->application->getApplicationId(), $this->cohort->getCohortId());
+		$applicationCohort->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = ApplicationCohort::getAllApplicationCohorts($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\ApplicationCohort", $results);
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoApplicationCohort = ApplicationCohort::getApplicationCohortByApplicationCohortId($this->getPDO(), $applicationCohort->getApplicationCohortId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}
 
 }
