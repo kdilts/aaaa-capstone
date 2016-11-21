@@ -70,13 +70,26 @@ class ApplicationCohortTest extends AaaaTest {
 		$placard->insert($this->getPDO());
 	}
 
-//	public function testGetValidApplicationCohortByApplicationCohortId(){
-//
-//	}
-//
-//	public function testGetInvalidApplicationCohortByApplicationCohortId(){
-//
-//	}
+	public function testGetValidApplicationCohortByApplicationCohortId(){
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("applicationCohort");
+
+		// create a new ApplicationCohort and insert to into mySQL
+		$applicationCohort = new ApplicationCohort(null, $this->application->getApplicationId(), $this->cohort->getCohortId());
+		$applicationCohort->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoApplicationCohort = ApplicationCohort::getApplicationCohortByApplicationCohortId($this->getPDO(), $applicationCohort->getApplicationCohortId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
+	}
+
+	public function testGetInvalidApplicationCohortByApplicationCohortId(){
+		// grab a applicationCohort by searching for id that does not exist
+		$applicationCohort = ApplicationCohort::getApplicationCohortByApplicationCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertNull($applicationCohort);
+	}
 //
 //	public function testGetValidApplicationCohortByCohortId(){
 //
@@ -109,7 +122,7 @@ class ApplicationCohortTest extends AaaaTest {
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\ApplicationCohort", $results);
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoApplicationCohort = ApplicationCohort::getApplicationCohortByApplicationCohortId($this->getPDO(), $applicationCohort->getApplicationCohortId());
+		$pdoApplicationCohort = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());

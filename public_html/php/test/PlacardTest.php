@@ -121,7 +121,6 @@ class PlacardTest extends AaaaTest {
 		$this->assertNotNull($result);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Placard", $result);
 
-		// grab the result from the array and validate it
 		$this->assertEquals($result->getPlacardStatusTypeId(), $this->status->getStatusTypeId());
 		$this->assertEquals($result->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
