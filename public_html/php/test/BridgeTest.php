@@ -108,7 +108,8 @@ class BridgeTest extends AaaaTest {
 	 * test grabbing a Bridge by bridge content
 	 **/
 	public function testGetValidBridgeByBridgeStaffId() {
-		// count the number of rows and save it for later
+
+		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("bridge");
 
 		// create a new Bridge and insert to into mySQL
@@ -127,7 +128,6 @@ class BridgeTest extends AaaaTest {
 		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
 		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
 	}
-
 	/**
 	 * test grabbing a Bridge by content that does not exist
 	 **/
