@@ -188,7 +188,7 @@ namespace Edu\Cnm\DdcAaaa;
 				$statement->setFetchMode(\PDO::FETCH_ASSOC);
 				$row = $statement->fetch();
 				if($row !== false) {
-					$bridge = new bridge($row["bridgeStaffId"], $row["bridgeName"], $row["bridgeUserName"]);
+					$bridge = new Bridge($row["bridgeStaffId"], $row["bridgeName"], $row["bridgeUserName"]);
 				}
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
