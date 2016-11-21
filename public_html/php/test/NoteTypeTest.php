@@ -1,7 +1,9 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{NoteType};
+use Edu\Cnm\DdcAaaa\{
+	NoteType
+};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -15,29 +17,40 @@ class NoteTypeTest extends AaaaTest {
 	 * content of the NoteType
 	 * @var string $VALID_NOTETYPENAME
 	 **/
-	protected $VALID_NOTETYPENAME = "PHPUnit test passing";
+	protected $VALID_NOTETYPENAME = null;
 	/**
 	 * @var string $VALID_NOTETYPEID
 	 */
-	protected $VALID_NOTETYPEID = "PHPUnit test still passing";
+	protected $VALID_NOTETYPEID = null;
 
 	/**
 	 * create dependent objects before running each test
 	 **/
 
 	/**
-	 * test inserting a valid Tweet and verify that the actual mySQL data matches
+	 * @return string
+	 */
+	public final function setUp() {
+		// run the default setUp() method first
+		parent::setUp();
+
+		//
+		$this->noteType = new NoteTypeName(null, 0);
+		$this->noteType->
+	}
+	/**
+	 * test inserting a valid NoteType and verify that the actual mySQL data matches
 	 **/
 	public function testInsertNoteTypeName() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("notetype"); //What does this do? -Trevor
 
-		// create a new Tweet and insert to into mySQL
-		$tweet = new Tweet(null, $this->profile->getNoteTypeId(), $this->VALID_NOTETYPEID, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+		// create a new NoteType and insert to into mySQL
+		$noteType = new NoteType(null, $this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
+		$noteType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoTweet = Tweet::getTweetByTweetId($this->getPDO(), $tweet->getTweetId());
+		$pdoNoteType = NoteType::getNoteTypeByNoteTypeId($this->getPDO(), $NoteType->getNoteTypeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
 		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
 		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
