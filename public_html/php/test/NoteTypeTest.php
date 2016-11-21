@@ -108,7 +108,7 @@ class NoteTypeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("noteType");
 
 		// create a new NoteType and insert to into mySQL
-		$noteType = new NoteType(null, $this->NoteType->getNoteTypeName), $this->VALID_NOTETYPEID);
+		$noteType = new NoteType(null, $this->noteType->getNoteTypeName(), $this->VALID_NOTETYPEID);
 		$noteType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
