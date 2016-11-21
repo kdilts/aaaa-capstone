@@ -42,13 +42,12 @@ class ProspectTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("prospect");
 
 		// create a new Prospect and insert to into mySQL
-		$prospect = new Prospect(null, $this->VALID_PROSPECTCOHORTID, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
+		$prospect = new Prospect(null, $this->VALID_PROSPECTPHONENUMBER, $this->VALID_PROSPECTEMAIL, $this->VALID_PROSPECTFIRSTNAME, $this->VALID_PROSPECTLASTNAME);
 		$prospect->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoProspect = Prospect::getProspectByProspectId($this->getPDO(), $prospect->getProspectId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospect"));
-		$this->assertEquals($pdoProspect->getProspectCohortId(), $this->VALID_PROSPECTCOHORTID);
 		$this->assertEquals($pdoProspect->getProspectPhoneNumber(), $this->VALID_PROSPECTPHONENUMBER);
 		$this->assertEquals($pdoProspect->getProspectEmail(), $this->VALID_PROSPECTEMAIL);
 		$this->assertEquals($pdoProspect->getProspectFirstName(), $this->VALID_PROSPECTFIRSTNAME);
