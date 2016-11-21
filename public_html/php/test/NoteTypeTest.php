@@ -26,46 +26,42 @@ class NoteTypeTest extends AaaaTest {
 	/**
 	 * create dependent objects before running each test
 	 **/
-
-	/**
-	 * @return string
-	 */
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
 
-		//
+		// create and insert a profile to own the test Application
 		$this->noteType = new NoteTypeName(null, 0);
-		$this->noteType->
+		$this->noteType->insert(this->getPDO());
 	}
 	/**
 	 * test inserting a valid NoteType and verify that the actual mySQL data matches
 	 **/
-	public function testInsertNoteTypeName() {
+	public function testInsertValidNoteTypeName() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("notetype"); //What does this do? -Trevor
 
 		// create a new NoteType and insert to into mySQL
-		$noteType = new NoteType(null, $this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
+		$noteType = new NoteType(null, $this->noteType->getNoteTypeName(), $this->VALID_NOTETYPEID);
 		$noteType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoNoteType = NoteType::getNoteTypeByNoteTypeId($this->getPDO(), $NoteType->getNoteTypeId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("tweet"));
-		$this->assertEquals($pdoTweet->getProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoTweet->getTweetContent(), $this->VALID_TWEETCONTENT);
-		$this->assertEquals($pdoTweet->getTweetDate(), $this->VALID_TWEETDATE);
+		$pdoNoteType = NoteType::getNoteTypeByNoteTypeId($this->getPDO(), $noteType->getNoteTypeId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
+		//$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME0;
+		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNoteType->getNoteTypeId(), $this->VALID_NOTETYPEID);
 	}
 
 	/**
-	 * test inserting a Tweet that already exists
+	 * test inserting a NoteType that already exists
 	 *
 	 * @expectedException PDOException
 	 **/
-	public function testInsertInvalidTweet() {
-		// create a Tweet with a non null tweet id and watch it fail
-		$tweet = new Tweet(DataDesignTest::INVALID_KEY, $this->profile->getProfileId(), $this->VALID_TWEETCONTENT, $this->VALID_TWEETDATE);
-		$tweet->insert($this->getPDO());
+	public function testInsertInvalidNoteType() {
+		// create a NoteType with a non null NoteTypeName and watch it fail
+		$noteType = new NoteType(AaaaTest::INVALID_KEY, $this->noteType->getNoteTypeName(), $this->VALID_NOTETYPEID);
+		$noteType->insert($this->getPDO());
 	}
 
 	/**
