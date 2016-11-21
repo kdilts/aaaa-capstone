@@ -87,7 +87,7 @@ class StatusTypeTest extends AaaaTest {
 	/**
 	 * test updating a StatusType that does not exist
 	 *
-	 * @expectedException PDOException
+	 * @expectedException \PDOException
 	 **/
 	public function testUpdateInvalidStatusType() {
 		// create a StatusType, try to update it without actually updating it and watch it fail
