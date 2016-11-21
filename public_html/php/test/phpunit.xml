@@ -2,7 +2,7 @@
 	<testsuites>
 		<testsuite name="AAAA Data Design">
 			<!--<file>PlacardTest.php</file>-->
-			<file>SwipeTest.php</file>
+			<file>BridgeTest.php</file>
 			<!--<file>ApplicationCohortTest.php</file>
 			<file>ProspectCohortTest.php</file>
 			<file>CohortTest.php</file>-->
