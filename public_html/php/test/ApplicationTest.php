@@ -73,8 +73,8 @@ class ApplicationTest extends AaaaTest {
 		$pdoApplication = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
 		var_dump($pdoApplication);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
-		$this->assertEquals($pdoApplication->getApplicationId(), $this->VALID_APPLICATIONID);
-		$this->assertEquals($pdoApplication->getApplicationDateTime(), $this->VALID_APPLICATIONDATETIME);
+		$this->assertEquals($pdoApplication->getApplicationId(), $application->getApplicationId());
+		$this->assertEquals($pdoApplication->getApplicationDateTime(), $application->getApplicationDateTime());
 	}
 
 	/**
