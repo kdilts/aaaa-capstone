@@ -30,6 +30,8 @@ class NoteType implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs.
 	 */
 	public function __construct(int $newNoteTypeId = null, string $newNoteTypeName) {
+		echo PHP_EOL ."$newNoteTypeId $newNoteTypeName".PHP_EOL;
+
 		try {
 			$this->setNoteTypeId($newNoteTypeId);
 			$this->setNoteTypeName($newNoteTypeName);
@@ -64,13 +66,16 @@ class NoteType implements \JsonSerializable {
 	 * mutator method for NoteTypeId
 	 * @param int $newNoteTypeId new value for NoteTypeId
 	 */
-	public function setNoteTypeId(int $newNoteTypeId) {
-		if($newNoteTypeId <= 0){
-			throw(new \RangeException("NoteTypeId must be positive"));
+	public function setNoteTypeId(int $newNoteTypeId = null) {
+		if($newNoteTypeId === null) {
+			$this->noteId = null;
+			return;
+			if($newNoteTypeId <= 0) {
+				throw(new \RangeException("NoteTypeId must be positive"));
+			}
+			$this->noteTypeId = $newNoteTypeId;
 		}
-		$this->noteTypeId = $newNoteTypeId;
 	}
-
 	/**
 	 * mutator method for NoteTypeName
 	 * @param string $newNoteTypeName new value for NoteTypeName
@@ -78,7 +83,7 @@ class NoteType implements \JsonSerializable {
 	public function setNoteTypeName(string $newNoteTypeName) {
 		$newNoteTypeName = trim($newNoteTypeName);
 		$newNoteTypeName = filter_var($newNoteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newNoteTypeName === true)){
+		if(empty($newNoteTypeName) === true){
 			throw(new \InvalidArgumentException("NoteTypeName is empty or insecure."));
 		}
 		$this->noteTypeName = $newNoteTypeName;

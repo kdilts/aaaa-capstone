@@ -44,7 +44,7 @@ CREATE TABLE cohort(
 );
 
 CREATE TABLE noteType(
-	noteTypeId INT UNSIGNED NOT NULL,
+	noteTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	noteTypeName VARCHAR(40) NOT NULL,
 	INDEX (noteTypeName),
 	PRIMARY KEY(noteTypeId)
@@ -138,7 +138,9 @@ CREATE TABLE note(
 	INDEX (noteId),
 	INDEX (noteProspectId),
 	INDEX (noteApplicationId),
+	INDEX (noteNoteTypeId),
 	PRIMARY KEY(noteId),
 	FOREIGN KEY(noteProspectId) REFERENCES prospect (prospectId),
-	FOREIGN KEY(noteApplicationId) REFERENCES application (applicationId)
+	FOREIGN KEY(noteApplicationId) REFERENCES application (applicationId),
+	FOREIGN KEY (noteNoteTypeId) REFERENCES noteType(noteTypeId)
 );

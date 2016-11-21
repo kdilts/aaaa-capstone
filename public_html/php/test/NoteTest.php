@@ -56,7 +56,8 @@ class NoteTest extends AaaaTest {
 		$this->prospect = new Prospect(null, "@phpunit", "test@phpunit.de", "+12125551212","first name","last name");
 		$this->prospect->insert($this->getPDO());
 
-		$this->noteType = new NoteType(null, 3);
+		$this->noteType = new NoteType(null,"string");
+		$this->noteType->insert($this->getPDO());
 
 		// calculate the date (just use the time the unit test was setup...)
 		$this->VALID_NOTEDATE = new \DateTime();
