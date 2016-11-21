@@ -101,7 +101,7 @@ class SwipeTest extends AaaaTest {
 	/**
 	 * test inserting a swipe, editing it, and then updating it
 	 **/
-	public function testUpdateValidApplication() {
+/**	public function testUpdateValidSwipe() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("swipe");
 
@@ -117,7 +117,7 @@ class SwipeTest extends AaaaTest {
 		// grab the result from the array and validate it
 		$this->assertEquals($result->getSwipeStatusTypeId(), $this->swipeStatus->getSwipeStatusTypeId());
 		$this->assertEquals($result->getSwipeNumber(), $this->VALID_SWIPENUMBER);
-	}
+	}**/
 
 	/**
 	 * test grabbing a Swipe by id that does not exist
