@@ -1,12 +1,12 @@
 DROP TABLE IF EXISTS note;
 DROP TABLE IF EXISTS prospectCohort;
-DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS studentPermit;
 DROP TABLE IF EXISTS applicationCohort;
 DROP TABLE IF EXISTS application;
 DROP TABLE IF EXISTS swipe;
 DROP TABLE IF EXISTS placard;
 DROP TABLE IF EXISTS statusType;
+DROP TABLE IF EXISTS prospect;
 DROP TABLE IF EXISTS noteType;
 DROP TABLE IF EXISTS cohort;
 DROP TABLE IF EXISTS bridge;
@@ -31,6 +31,15 @@ CREATE TABLE noteType(
 	noteTypeName VARCHAR(40) NOT NULL,
 	INDEX (noteTypeName),
 	PRIMARY KEY(noteTypeId)
+);
+
+CREATE TABLE prospect(
+	prospectId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	prospectFirstName VARCHAR(40) NOT NULL,
+	prospectLastName VARCHAR(40) NOT NULL,
+	prospectEmail VARCHAR(100) NOT NULL,
+	prospectPhoneNumber VARCHAR(30) NOT NULL,
+	PRIMARY KEY(prospectId)
 );
 
 CREATE TABLE statusType(
@@ -106,15 +115,6 @@ CREATE TABLE studentPermit(
 	FOREIGN KEY(studentPermitPlacardId) REFERENCES placard(placardId)
 );
 
-CREATE TABLE prospect(
-	prospectId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	prospectFirstName VARCHAR(40) NOT NULL,
-	prospectLastName VARCHAR(40) NOT NULL,
-	prospectEmail VARCHAR(100) NOT NULL,
-	prospectPhoneNumber VARCHAR(30) NOT NULL,
-	PRIMARY KEY(prospectId)
-);
-
 CREATE TABLE prospectCohort(
 	prospectCohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	prospectCohortProspectId INT UNSIGNED NOT NULL,
@@ -132,6 +132,8 @@ CREATE TABLE note(
 	noteNoteTypeId INT UNSIGNED NOT NULL,
 	noteContent VARCHAR(2000) NOT NULL,
 	INDEX (noteId),
+	INDEX (noteProspectId),
+	INDEX (noteApplicationId),
 	PRIMARY KEY(noteId),
 	FOREIGN KEY(noteProspectId) REFERENCES prospect (prospectId),
 	FOREIGN KEY(noteApplicationId) REFERENCES application (applicationId)
