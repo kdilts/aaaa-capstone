@@ -127,11 +127,15 @@ class StudentPermit implements \JsonSerializable {
 
 	/**
 	 * mutator method for this studentPermit id
-	 * @param int $newStudentPermitId
+	 * @param int|null $newStudentPermitId
 	 * @throws \RangeException if new value of student permit id is out of range
 	 * @throws \TypeError if $newStudentPermitId is not an integer
 	 */
-	public function setStudentPermitId(int $newStudentPermitId){
+	public function setStudentPermitId(int $newStudentPermitId = null){
+		if($newStudentPermitId === null){
+			$this->studentPermitId = null;
+			return;
+		}
 		if ($newStudentPermitId <= 0) {
 			throw(new \RangeException("StudentPermit Id must be positive."));
 		}
@@ -227,7 +231,7 @@ class StudentPermit implements \JsonSerializable {
 		}
 		
 		// create query template
-		$query = "INSERT INTO studentPermit(studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitId, :studentPermitStudentId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
+		$query = "INSERT INTO studentPermit(studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate) VALUES(:studentPermitApplicationId, :studentPermitPlacardId, :studentPermitSwipeId, :studentPermitCheckOutDate, :studentPermitCheckInDate)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -235,7 +239,6 @@ class StudentPermit implements \JsonSerializable {
 		$formattedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
 
 		$parameters = [
-			"studentPermitId" => $this->studentPermitId,
 			"studentPermitApplicationId" => $this->studentPermitApplicationId,
 			"studentPermitPlacardId" => $this->studentPermitPlacardId,
 			"studentPermitSwipeId" => $this->studentPermitSwipeId,
@@ -288,7 +291,7 @@ class StudentPermit implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getStudentPermitByStudentPermitId(\PDO $pdo, $studentPermitId){
+	public static function getStudentPermitByStudentPermitId(\PDO $pdo, int $studentPermitId){
 		// sanitize the studentPermitId before searching
 		if($studentPermitId <= 0){
 			throw(new \PDOException("studentPermitId not positive"));
@@ -314,8 +317,8 @@ class StudentPermit implements \JsonSerializable {
 					$row["studentPermitApplicationId"],
 					$row["studentPermitPlacardId"],
 					$row["studentPermitSwipeId"],
-					$row["studentPermitCheckOutDate"],
-					$row["studentPermitCheckInDate"]
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckOutDate"]),
+					\DateTime::createFromFormat("Y-m-d",$row["studentPermitCheckInDate"])
 				);
 			}
 		} catch(\Exception $exception){
