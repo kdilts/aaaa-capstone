@@ -69,4 +69,10 @@ class ApplicationCohortTest extends AaaaTest {
 		$placard = new ApplicationCohort(AaaaTest::INVALID_KEY, $this->application->getApplicationId(), $this->cohort->getCohortId());
 		$placard->insert($this->getPDO());
 	}
+
+	// TODO getApplicationCohortByApplicationCohortId - valid
+
+	// TODO getApplicationCohortByCohortId
+
+	// TODO getAllApplicationCohorts
 }

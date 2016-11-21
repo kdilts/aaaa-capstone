@@ -168,8 +168,7 @@ class ApplicationCohort implements \JsonSerializable {
 	 *
 	 * @param \PDO $pdo connection to the object
 	 * @param int $applicationCohortId new value of application cohort id
-	 * @return \SplFixedArray SplFixedArray of Applications Cohort found
-	 * @return applicationCohort|null Application Cohort found or null if not found
+	 * @return ApplicationCohort|null applicationCohort if found or null if not found
 	 * @throws \PDOException if application cohort id is not positive
 
 */
@@ -206,8 +205,7 @@ class ApplicationCohort implements \JsonSerializable {
 	 * gets the Application Cohort by application id
 	 * @param \PDO $pdo connection object
 	 * @param int $applicationCohortId application cohort id to search for
-	 * @return \SplFixedArray SplFixedArray of applications cohorts found
-	 * @return applicationCohort|null when application cohort found or null if not found
+	 * @return ApplicationCohort|null applicationCohort if found or null if not found
 	 * @throws \PDOException if application cohort application id is not positive
 	 */
 
@@ -240,7 +238,7 @@ class ApplicationCohort implements \JsonSerializable {
 	 * gets the Application Cohort Id
 	 * @param \PDO $pdo connection object
 	 * @param int $applicationCohortId application cohort id to search for
-	 * @return ApplicationCohort|null found or not found
+	 * @return ApplicationCohort|null applicationCohort if found or null if not found
 	 * @throws \PDOException if application cohort cohort id is not positive
 	 */
 	public function getApplicationCohortByCohortId (\PDO $pdo, int $applicationCohortId){
