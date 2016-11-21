@@ -11,7 +11,7 @@
 			<file>ProspectTest.php</file>
 			<file>ProspectCohortTest.php</file>
 			<file>StatusTypeTest.php</file>
-			<file>StudentPermit.php</file>
+			<file>StudentPermitTest.php</file>
 			<file>SwipeTest.php</file>
 		</testsuite>
 	</testsuites>
