@@ -83,8 +83,8 @@ class ApplicationTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidApplication() {
 		// create a Application with a non null application id and watch it fail
-		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONID, $this->VALID_APPLICATIONCOHORTID,
-			$this->VALID_APPLICATIONDATETIME);
+		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL,
+			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 	}
 
@@ -109,7 +109,7 @@ class ApplicationTest extends AaaaTest {
 		$results = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationtCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf(results, "Edu\\Cnm\\DdcAaaa\\Test\\StudentPermit");
+		$this->assertContainsOnlyInstancesOf(results, "Edu\\Cnm\\DdcAaaa\\Test\\Application");
 
 		// grab the result from the array and validate it
 		$pdoApplication = $results[0];
