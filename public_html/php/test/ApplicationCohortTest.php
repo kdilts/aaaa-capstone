@@ -70,9 +70,32 @@ class ApplicationCohortTest extends AaaaTest {
 		$placard->insert($this->getPDO());
 	}
 
-	// TODO getApplicationCohortByApplicationCohortId - valid
+	public function testGetValidApplicationCohortByApplicationCohortId(){
 
-	// TODO getApplicationCohortByCohortId
+	}
 
-	// TODO getAllApplicationCohorts
+	public function testGetInvalidApplicationCohortByApplicationCohortId(){
+
+	}
+
+	public function testGetValidApplicationCohortByCohortId(){
+
+	}
+
+	public function testGetInvalidApplicationCohortByCohortId(){
+
+	}
+
+	public function testGetValidApplicationCohortByApplicationId(){
+
+	}
+
+	public function testGetInvalidApplicationCohortByApplicationId(){
+
+	}
+
+	public function testGetAllValidApplicationCohorts(){
+
+	}
+
 }
