@@ -85,7 +85,22 @@ class NoteTest extends AaaaTest {
 		$note->insert($this->getPDO());
 	}
 
-	public function test
+	//TODO function getValidNoteByNoteId
+
+	//TODO function getInvalidNoteByNoteId
+
+	//TODO getValidNoteByNoteApplicationId
+
+	//TODO getInvalidNoteByNoteApplicationId
+
+	//TODO getValidNoteByNoteProspectId
+
+	//TODO getInvalidNoteByNoteProspectId
+
+	//TODO getValidNoteByNoteNoteTypeId
+
+	//TODO getInvalidNoteByNoteNoteTypeId
+
 	/**
 	 * test grabbing all Notes
 	 **/
