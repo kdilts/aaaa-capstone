@@ -136,11 +136,11 @@ protected $application = null;
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT);
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId());
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$pdoNote = Note::getvalidNoteByNoteApplicationId($this->getPDO(), $note->getNoteId());
+		$pdoNote = Note::getNoteByNoteApplicationId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
@@ -153,7 +153,7 @@ protected $application = null;
 	public function testInsertInvalidNoteByNoteApplicationId() {
 		//create a note with a non null note id  and watch it fail
 		$note = Note::getNoteByNoteApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNul($note);
+		$this->assertNull($note);
 	}
 
 	/**
@@ -170,7 +170,7 @@ protected $application = null;
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
 	}
@@ -181,7 +181,7 @@ protected $application = null;
 	public function testInsertInvalidNoteByNoteProspectId(){
 		//creat a note with a none null note id and watch it fail
 		$note = Note::getNoteByNoteProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNul($note);
+		$this->assertNull($note);
 	}
 	/**
 	 * test inserting a valid Note and verify that the actual mySQL data matches
