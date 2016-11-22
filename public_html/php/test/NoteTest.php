@@ -93,11 +93,11 @@ protected $application = null;
 	/**
 	 * test inserting a Note that already exists
 	 *
-	 * @expectedException \PDOException
+	 * @expectedException PDOException
 	 **/
 	public function testInsertInvalidNote() {
 		// create a Note with a non null note id and watch it fail
-		$note = new Note(AaaaTest::INVALID_KEY, $this->prospect->getProspectId(), $this->VALID_NOTECONTENT);
+		$note = new Note(AaaaTest::INVALID_KEY,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(), $this->application->getApplicationId(),$this->prospect->getProspectId());
 		$note->insert($this->getPDO());
 	}
 
@@ -142,7 +142,7 @@ protected $application = null;
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteApplicationId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
 	}
@@ -197,7 +197,7 @@ protected $application = null;
 		//grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteNoteTypeId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
 	}
