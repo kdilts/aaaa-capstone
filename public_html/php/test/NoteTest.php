@@ -30,11 +30,6 @@ class NoteTest extends AaaaTest {
 	 **/
 	protected $VALID_NOTECONTENT2 = "PHPUnit test still passing";
 	/**
-	 * timestamp of the Note; this starts as null and is assigned later
-	 * @var \DateTime $VALID_NOTEDATE
-	 **/
-	protected $VALID_NOTEDATE = null;
-	/**
 	 * Prospect that created the Note; this is for foreign key relations
 	 * @var Prospect profile
 	 **/
@@ -64,9 +59,6 @@ class NoteTest extends AaaaTest {
 
 		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", "about you", "hope", "exp",new \DateTime(), "utmC","utmM", "utmS");
 		$this->application->insert($this->getPDO());
-
-		// calculate the date (just use the time the unit test was setup...)
-		$this->VALID_NOTEDATE = new \DateTime();
 	}
 	/**
 	 * int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId
@@ -160,12 +152,12 @@ class NoteTest extends AaaaTest {
 	/**
 	 * test inserting a valid Note and verify that the actual mySQL data matches
 	 */
-	public function getValidNoteByNoteProspectId(){
+	public function testGetValidNoteByNoteProspectId(){
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId());
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
@@ -187,12 +179,12 @@ class NoteTest extends AaaaTest {
 	/**
 	 * test inserting a valid Note and verify that the actual mySQL data matches
 	 */
-	public function getValidNoteByNoteNoteTypeId(){
+	public function testGetValidNoteByNoteNoteTypeId(){
 		//count the number of rows and save it for later
 		$numRows = $this->getConneciton()->getRowCount("note");
 
 		//create a new Note and insert it to mySQL
-		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId());
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
