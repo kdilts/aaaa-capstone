@@ -235,8 +235,8 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$formattedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d H:i:s");
-		$formattedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
+		$formattedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d");
+		$formattedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d");
 
 		$parameters = [
 			"studentPermitApplicationId" => $this->studentPermitApplicationId,
@@ -268,8 +268,8 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$formattedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d H:i:s");
-		$formattedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d H:i:s");
+		$formattedCheckOutDate = $this->getStudentPermitCheckOutDate()->format("Y-m-d");
+		$formattedCheckInDate = $this->getStudentPermitCheckInDate()->format("Y-m-d");
 
 		$parameters = [
 			"studentPermitId" => $this->studentPermitId,
@@ -487,8 +487,8 @@ class StudentPermit implements \JsonSerializable {
 		}
 
 		// format dates
-		$startDate = $startDate->format("Y-m-d H:i:s");
-		$endDate = $endDate->format("Y-m-d H:i:s");
+		$startDate = $startDate->format("Y-m-d");
+		$endDate = $endDate->format("Y-m-d");
 
 		// create query template
 		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit WHERE studentPermitCheckInDate >= :startDate AND  studentPermitCheckInDate <= :endDate";
@@ -544,8 +544,8 @@ class StudentPermit implements \JsonSerializable {
 		}
 
 		// format dates
-		$startDate = $startDate->format("Y-m-d H:i:s");
-		$endDate = $endDate->format("Y-m-d H:i:s");
+		$startDate = $startDate->format("Y-m-d");
+		$endDate = $endDate->format("Y-m-d");
 
 		// create query template
 		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit WHERE studentPermitCheckOutDate >= :startDate AND studentPermitCheckOutDate <= :endDate";
