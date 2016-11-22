@@ -104,13 +104,10 @@ class StatusType implements \JsonSerializable {
 		$query = "INSERT INTO statusType(statusTypeName) VALUES(:statusTypeName)";
 		$statement = $pdo->prepare($query);
 
-
 		$parameters = ["statusTypeName" => $this->statusTypeName];
 		$statement->execute($parameters);
 
-
 		$this->statusTypeId = intval($pdo->lastInsertId());
-
 	}
 
 	/**
@@ -181,14 +178,14 @@ class StatusType implements \JsonSerializable {
 	 * @throws \PDOException throws when mySQL errors occur
 	 * @throws \TypeError throws if $pdo is not a connection object
 	 */
-	public static function getStatusTypeByStatusTypeName(\PDO $pdo, int $statusTypeName) {
+	public static function getStatusTypesByStatusTypeName(\PDO $pdo, int $statusTypeName) {
 		// sanitize the statusTypeId before searching
 		if($statusTypeName <= 0) {
 			throw(new \PDOException("statusTypeName not positive"));
 		}
 
 		// create query template
-		$query = "SELECT statusTypeName, statusTypeId FROM statusType WHERE statusTypeName = :statusTypeName";
+		$query = "SELECT statusTypeId, statusTypeName FROM statusType WHERE statusTypeName = :statusTypeName";
 		$statement = $pdo->prepare($query);
 
 		// bind the swipe id to the place holder in template
@@ -200,7 +197,7 @@ class StatusType implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$statusType = new StatusType($row["statusTypeName"], $row["statusTypeId"]);
+				$statusType = new StatusType($row["statusTypeId"], $row["statusTypeName"]);
 				$statusTypes[$statusTypes->key()] = $statusType;
 				$statusTypes->next();
 			} catch(\Exception $exception) {

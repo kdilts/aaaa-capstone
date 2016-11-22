@@ -97,40 +97,37 @@ class StatusTypeTest extends AaaaTest {
 
 	// TODO test valid / invalid getById
 
-	//TODO VVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 	/**
-	 * test grabbing a StatusType by statusType content
+	 * test grabbing a StatusType by statusType name
 	 **/
-	public function testGetValidStatusTypeByStatusTypeName() {
+	public function testGetValidStatusesTypeByStatusTypeName() {
 
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("statusType");
 
 		// create a new StatusType and insert to into mySQL
-		$statusType = new StatusType($this->VALID_BRIDGESTAFFID, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		$statusType = new StatusType(null, $this->VALID_STATUSTYPENAME);
 		$statusType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = StatusType::getStatusTypeByStatusTypeStaffId($this->getPDO(), $statusType->getStatusTypeStaffId());
+		$results = StatusType::getStatusTypesByStatusTypeName($this->getPDO(), $statusType->getStatusTypeName());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("statusType"));
 		$this->assertNotNull($results);
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\StatusType", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\StatusType", $results);
 
 		// grab the result from the array and validate it
-
-		$this->assertEquals($results->getStatusTypeStaffId(), $this->VALID_BRIDGESTAFFID);
-		$this->assertEquals($results->getStatusTypeName(), $this->VALID_BRIDGENAME);
-		$this->assertEquals($results->getStatusTypeUserName(), $this->VALID_BRIDGEUSERNAME);
+		$pdoStatusType = $results[0];
+		//$this->assertEquals($pdoStatusType->getStatusTypeId(), $statusType->getStatusTypeId());
+		$this->assertEquals($pdoStatusType->getStatusTypeName(), $this->VALID_STATUSTYPENAME);
 	}
 	/**
 	 * test grabbing a StatusType by content that does not exist
 	 **/
-	public function testGetInvalidStatusTypeByStatusTypeStaffId() {
+	public function testGetInvalidStatusTypesByStatusTypeName() {
 		// grab a statusType by searching for content that does not exist
-		$statusType = StatusType::getStatusTypeByStatusTypeStaffId($this->getPDO(), "not a valid key");
-		$this->assertNull($statusType);
+		$statusTypes = StatusType::getStatusTypesByStatusTypeName($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertEmpty($statusTypes);
 	}
-//TODO ^^^^^^^^^^^^^^^^^^^^^^
 	
 	/**
 	 * test grabbing all StatusTypes
