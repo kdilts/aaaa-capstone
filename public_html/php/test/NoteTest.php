@@ -31,7 +31,7 @@ class NoteTest extends AaaaTest {
 	protected $VALID_NOTECONTENT2 = "PHPUnit test still passing";
 	/**
 	 * timestamp of the Note; this starts as null and is assigned later
-	 * @var DateTime $VALID_NOTEDATE
+	 * @var \DateTime $VALID_NOTEDATE
 	 **/
 	protected $VALID_NOTEDATE = null;
 	/**
@@ -94,11 +94,11 @@ protected $application = null;
 	/**
 	 * test inserting a Note that already exists
 	 *
-	 * @expectedException PDOException
+	 * @expectedException \PDOException
 	 **/
 	public function testInsertInvalidNote() {
 		// create a Note with a non null note id and watch it fail
-		$note = new Note(DataDesignTest::INVALID_KEY, $this->prospect->getProspectId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(AaaaTest::INVALID_KEY, $this->prospect->getProspectId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
 		$note->insert($this->getPDO());
 	}
 
