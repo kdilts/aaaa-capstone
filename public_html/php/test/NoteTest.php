@@ -86,7 +86,7 @@ protected $application = null;
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTEDATE);
 	}
