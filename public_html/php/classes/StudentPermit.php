@@ -495,7 +495,7 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the parameters
-		$parameters = ["$startDate" => $startDate, "$endDate" => $endDate];
+		$parameters = ["startDate" => $startDate, "endDate" => $endDate];
 		$statement->execute($parameters);
 
 		// build an array of studentPermits
@@ -552,7 +552,7 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the parameters
-		$parameters = ["$startDate" => $startDate, "$endDate" => $endDate];
+		$parameters = ["startDate" => $startDate, "endDate" => $endDate];
 		$statement->execute($parameters);
 
 		// build an array of studentPermits
