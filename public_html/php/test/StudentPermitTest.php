@@ -1,7 +1,9 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{ StudentPermit, Placard, Swipe, Application, StatusType };
+use Edu\Cnm\DdcAaaa\{
+	Application, Placard, StatusType, StudentPermit, Swipe
+};
 
 // grab the project test parameters
 require_once("AaaaTest.php");
@@ -21,9 +23,9 @@ class StudentPermitTest extends AaaaTest {
 
 	protected $statusType = null;
 
-	protected $STUDENTPERMITCHECKOUTDATE = null;
+	protected $StudentPermitCheckOutDate = null;
 
-	protected $STUDENTPERMITCHECKINDATE = null;
+	protected $StudentPermitCheckInDate = null;
 
 	/**
 	 * create dependent objects before running each test
@@ -47,8 +49,8 @@ class StudentPermitTest extends AaaaTest {
 		$this->swipe = new Swipe(null, $this->statusType->getStatusTypeId(),1);
 		$this->swipe->insert($this->getPDO());
 
-		$this->STUDENTPERMITCHECKOUTDATE = \DateTime::createFromFormat("Y-m-d","2015-1-1");
-		$this->STUDENTPERMITCHECKINDATE = \DateTime::createFromFormat("Y-m-d","2015-10-1");
+		$this->StudentPermitCheckOutDate = new \DateTime();
+		$this->StudentPermitCheckInDate = new \DateTime();
 	}
 
 	/**
@@ -108,202 +110,7 @@ class StudentPermitTest extends AaaaTest {
 		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate(), $this->STUDENTPERMITCHECKINDATE);
 	}
 
-	/**
-	 * test grabbing a StudentPermit by studentPermit id
-	 **/
-	public function testGetValidStudentPermitByStudentPermitId() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("studentPermit");
 
-		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$studentPermit->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$result = StudentPermit::getStudentPermitByStudentPermitId($this->getPDO(), $studentPermit->getStudentPermitId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
-		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
-		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
-		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
-		$this->assertEquals($result->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
-		$this->assertEquals($result->getStudentPermitCheckInDate(), $this->STUDENTPERMITCHECKINDATE);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by id that does not exist
-	 **/
-	public function testGetInvalidStudentPermitByStudentPermitId() {
-		// grab a studentPermit by searching for id that does not exist
-		$studentPermit = StudentPermit::getStudentPermitByStudentPermitId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($studentPermit);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by studentPermit id
-	 **/
-	public function testGetValidStudentPermitByStudentPermitApplicationId() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("studentPermit");
-
-		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$studentPermit->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$result = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(), $studentPermit->getStudentPermitApplicationId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
-		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
-		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
-		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
-		$this->assertEquals($result->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
-		$this->assertEquals($result->getStudentPermitCheckInDate(), $this->STUDENTPERMITCHECKINDATE);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by id that does not exist
-	 **/
-	public function testGetInvalidStudentPermitByStudentPermitApplicationId() {
-		// grab a studentPermit by searching for id that does not exist
-		$studentPermit = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($studentPermit);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by studentPermit swipe id
-	 **/
-	public function testGetValidStudentPermitByStudentPermitSwipeId() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("studentPermit");
-
-		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$studentPermit->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$result = StudentPermit::getStudentPermitByStudentPermitSwipeId($this->getPDO(), $studentPermit->getStudentPermitSwipeId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
-		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
-		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
-		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
-		$this->assertEquals($result->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
-		$this->assertEquals($result->getStudentPermitCheckInDate(), $this->STUDENTPERMITCHECKINDATE);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by swipe id that does not exist
-	 **/
-	public function testGetInvalidStudentPermitByStudentPermitSwipeId() {
-		// grab a studentPermit by searching for id that does not exist
-		$studentPermit = StudentPermit::getStudentPermitByStudentPermitSwipeId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($studentPermit);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by studentPermit placard id
-	 **/
-	public function testGetValidStudentPermitByStudentPermitPlacardId() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("studentPermit");
-
-		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$studentPermit->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$result = StudentPermit::getStudentPermitByStudentPermitPlacardId($this->getPDO(), $studentPermit->getStudentPermitPlacardId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
-		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
-		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
-		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
-		$this->assertEquals($result->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
-		$this->assertEquals($result->getStudentPermitCheckInDate(), $this->STUDENTPERMITCHECKINDATE);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by placard id that does not exist
-	 **/
-	public function testGetInvalidStudentPermitByStudentPermitPlacardId() {
-		// grab a studentPermit by searching for id that does not exist
-		$studentPermit = StudentPermit::getStudentPermitByStudentPermitPlacardId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($studentPermit);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by studentPermit check out date range
-	 **/
-	public function testGetValidStudentPermitByStudentPermitCheckOutDateRange() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("studentPermit");
-
-		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$studentPermit->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$results = StudentPermit::getStudentPermitsByStudentPermitCheckOutDateRange($this->getPDO(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$pdoStudentPermit = $results[0];
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
-		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $pdoStudentPermit->getStudentPermitApplicationId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard->getPlacardId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
-		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate(), $this->STUDENTPERMITCHECKINDATE);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by studentPermit date range that doesn't exist
-	 **/
-	public function testGetInalidStudentPermitByStudentPermitCheckOutDateRange() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("studentPermit");
-
-		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$studentPermit->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$results = StudentPermit::getStudentPermitsByStudentPermitCheckOutDateRange($this->getPDO(), new \DateTime(), new \DateTime());
-		$this->assertEmpty($results);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by studentPermit check out date range
-	 **/
-	public function testGetValidStudentPermitByStudentPermitCheckInDateRange() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("studentPermit");
-
-		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$studentPermit->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$results = StudentPermit::getStudentPermitsByStudentPermitCheckInDateRange($this->getPDO(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$pdoStudentPermit = $results[0];
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
-		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $pdoStudentPermit->getStudentPermitApplicationId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard->getPlacardId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
-		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate(), $this->STUDENTPERMITCHECKINDATE);
-	}
-
-	/**
-	 * test grabbing a StudentPermit by studentPermit date range that doesn't exist
-	 **/
-	public function testGetInalidStudentPermitByStudentPermitCheckInDateRange() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("studentPermit");
-
-		// create a new StudentPermit and insert to into mySQL
-		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
-		$studentPermit->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$results = StudentPermit::getStudentPermitsByStudentPermitCheckInDateRange($this->getPDO(), new \DateTime(), new \DateTime());
-		$this->assertEmpty($results);
-	}
-	
 	/**
 	 * test grabbing all StudentPermits
 	 **/
@@ -326,7 +133,7 @@ class StudentPermitTest extends AaaaTest {
 		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
-		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
-		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate(), $this->STUDENTPERMITCHECKINDATE);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckOutDate(), $this->VALID_STUDENTPERMITCHECKOUTDATE);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckInDate(), $this->VALID_STUDENTPERMITCHECKINDATE);
 	}
 }
