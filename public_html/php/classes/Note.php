@@ -221,7 +221,7 @@ class Note {
 	 * insert note, by the note Id into the mySQL
 	 * @param \PDO $pdo
 	 * @param int $noteId
-	 * @return \SplFixedArray
+	 * @return Note
 	 */
 	public static function getNoteByNoteId(\PDO $pdo, int $noteId) {
 		// sanitize the noteId before searching

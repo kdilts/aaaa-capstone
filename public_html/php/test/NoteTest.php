@@ -109,15 +109,15 @@ protected $application = null;
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT);
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(), $this->prospect->getProspectId());
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoNote = Note::getValidNoteByNoteId($this->getPDO(), $note->getNoteId());
+		$pdoNote = Note::getNoteByNoteId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getProspectId(),$this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteProspectId(),$this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
 	}
 	/**
 	 * Test inserting a Note that already exists
