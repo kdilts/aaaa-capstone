@@ -95,7 +95,35 @@ class StatusTypeTest extends AaaaTest {
 		$status->update($this->getPDO());
 	}
 
-	// TODO test valid / invalid getById
+	/**
+	 * test grabbing a StatusType by statusType id
+	 **/
+	public function testGetValidStatusTypeByStatusTypeId() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("statusType");
+
+		// create a new StatusType and insert to into mySQL
+		$statusType = new StatusType(null, $this->VALID_STATUSTYPENAME);
+		$statusType->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$result = StatusType::getStatusTypeByStatusTypeId($this->getPDO(), $statusType->getStatusTypeId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("statusType"));
+		$this->assertNotNull($result);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\StatusType", $result);
+
+		$this->assertEquals($result->getStatusTypeId(), $statusType->getStatusTypeId());
+		$this->assertEquals($result->getStatusTypeName(), $this->VALID_STATUSTYPENAME);
+	}
+
+	/**
+	 * test grabbing a StatusType by id that does not exist
+	 **/
+	public function testGetInvalidStatusTypeByStatusTypeId() {
+		// grab a statusType by searching for id that does not exist
+		$statusType = StatusType::getStatusTypeByStatusTypeId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertNull($statusType);
+	}
 
 	/**
 	 * test grabbing a StatusType by statusType name
