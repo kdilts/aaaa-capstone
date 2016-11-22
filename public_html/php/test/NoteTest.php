@@ -117,7 +117,6 @@ protected $application = null;
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertEquals($pdoNote->getProspectId(),$this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
-		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
 	}
 	/**
