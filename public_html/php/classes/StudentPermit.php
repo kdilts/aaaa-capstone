@@ -348,7 +348,7 @@ class StudentPermit implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 
 		// bind the placard id to the place holder in template
-		$parameters = ["$studentPermitApplicationId" => $studentPermitApplicationId];
+		$parameters = ["studentPermitApplicationId" => $studentPermitApplicationId];
 		$statement->execute($parameters);
 
 		// grab placard from SQL
