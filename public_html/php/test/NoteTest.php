@@ -97,7 +97,7 @@ protected $application = null;
 	 **/
 	public function testInsertInvalidNote() {
 		// create a Note with a non null note id and watch it fail
-		$note = new Note(AaaaTest::INVALID_KEY, $this->prospect->getProspectId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(AaaaTest::INVALID_KEY, $this->prospect->getProspectId(), $this->VALID_NOTECONTENT);
 		$note->insert($this->getPDO());
 	}
 
