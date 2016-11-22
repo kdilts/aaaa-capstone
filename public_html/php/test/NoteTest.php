@@ -161,7 +161,8 @@ class NoteTest extends AaaaTest {
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$pdoNote = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteId());
+		$results = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteId());
+		$pdoNote = $results[0];
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
@@ -181,14 +182,15 @@ class NoteTest extends AaaaTest {
 	 */
 	public function testGetValidNoteByNoteNoteTypeId(){
 		//count the number of rows and save it for later
-		$numRows = $this->getConneciton()->getRowCount("note");
+		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to mySQL
 		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId());
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$pdoNote = Note::getNoteByNoteNoteTypeId($this->getPDO(), $note->getNoteId());
+		$results = Note::getNoteByNoteNoteTypeId($this->getPDO(), $note->getNoteNoteTypeId());
+		$pdoNote = $results[0];
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
