@@ -140,11 +140,12 @@ protected $application = null;
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$pdoNote = Note::getNoteByNoteApplicationId($this->getPDO(), $note->getNoteId());
+		$results = Note::getNoteByNoteApplicationId($this->getPDO(), $note->getNoteId());
+		$pdoNote = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
 	}
 
 	/**
@@ -208,7 +209,7 @@ protected $application = null;
 	public function testInsertInvalidNoteByNoteNoteTypeId(){
 		//create a note with a none null note id and watch it fail
 		$note = Note::getNoteByNoteNoteTypeId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNul($note);
+		$this->assertNull($note);
 	}
 	/**
 	 * test grabbing all Notes
