@@ -393,8 +393,8 @@ class StudentPermit implements \JsonSerializable {
 		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate From studentPermit WHERE studentPermitSwipeId = :studentPermitSwipeId";
 		$statement = $pdo->prepare($query);
 
-		// bind the placard id to the place holder in template
-		$parameters = ["$studentPermitSwipeId" => $studentPermitSwipeId];
+		// bind the swipe id to the place holder in template
+		$parameters = ["studentPermitSwipeId" => $studentPermitSwipeId];
 		$statement->execute($parameters);
 
 		// grab placard from SQL
