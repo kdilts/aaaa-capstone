@@ -232,6 +232,5 @@ protected $application = null;
 		$pdoNote = $results[0];
 		$this->assertEquals($pdoNote->getProfileId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT2);
-		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTEDATE);
 	}
 }
