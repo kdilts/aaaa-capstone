@@ -219,7 +219,7 @@ protected $application = null;
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		// create a new Note and insert to into mySQL
-		$note = new Note(null, $this->prospect->getProspecteId(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(null, $this->prospect->getProspecteId(), $this->VALID_NOTECONTENT);
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
