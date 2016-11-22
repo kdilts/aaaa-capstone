@@ -64,147 +64,148 @@ class NoteType implements \JsonSerializable {
 
 	/**
 	 * mutator method for NoteTypeId
-	 * @param int $newNoteTypeId new value for NoteTypeId
+	 * @param int|null $newNoteTypeId new value for NoteTypeId
 	 */
 	public function setNoteTypeId(int $newNoteTypeId = null) {
 		if($newNoteTypeId === null) {
-			$this->noteId = null;
+			$this->noteTypeId = null;
 			return;
-			if($newNoteTypeId <= 0) {
-				throw(new \RangeException("NoteTypeId must be positive"));
-			}
-			$this->noteTypeId = $newNoteTypeId;
 		}
-	}
-	/**
-	 * mutator method for NoteTypeName
-	 * @param string $newNoteTypeName new value for NoteTypeName
-	 */
-	public function setNoteTypeName(string $newNoteTypeName) {
-		$newNoteTypeName = trim($newNoteTypeName);
-		$newNoteTypeName = filter_var($newNoteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newNoteTypeName) === true){
-			throw(new \InvalidArgumentException("NoteTypeName is empty or insecure."));
+		if($newNoteTypeId <= 0) {
+			throw(new \RangeException("NoteTypeId must be positive"));
 		}
-		$this->noteTypeName = $newNoteTypeName;
+		$this->noteTypeId = $newNoteTypeId;
 	}
 
-	/**
-	 * insert this noteType into mySQL
-	 * @param \PDO $pdo PDO connection object
-	 * @throws \PDOException when mySQL errors occur.
-	 * @throws \TypeError if $pdo is not a PDO connection object
-	 */
-	public function insert(\PDO $pdo) {
-		if($this->noteTypeId !== null) {
-			throw(new \PDOException("not a new noteType"));
-		}
-		//create query
-		$query = "INSERT INTO noteType(noteTypeId, noteTypeName) VALUES(:noteTypeId, :noteTypeName)";
-		$statement = $pdo->prepare($query);
-
-		//bind member variables to the place holders in template
-		$parameters = ["noteTypeId" => $this->noteTypeId, "noteTypeName" => $this->noteTypeName];
-		$statement->execute($parameters);
-
-		// update the null noteTypeId with what mySQL just gave us
-
-		$this->noteTypeId = intval($pdo->lastInsertId());
+/**
+ * mutator method for NoteTypeName
+ * @param string $newNoteTypeName new value for NoteTypeName
+ */
+public function setNoteTypeName(string $newNoteTypeName) {
+	$newNoteTypeName = trim($newNoteTypeName);
+	$newNoteTypeName = filter_var($newNoteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if(empty($newNoteTypeName) === true){
+		throw(new \InvalidArgumentException("NoteTypeName is empty or insecure."));
 	}
-	/**
-	 * gets noteType by noteType id
-	 * @param \PDO $pdo PDO connection object
-	 * @param int $noteTypeId Note Id in database
-	 * @return NoteType|null noteType if found, or null if not
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
-	 */
-	public static function getNoteTypeByNoteTypeId(\PDO $pdo, int $noteTypeId){
-		// sanitize the placardId before searching
-		if($noteTypeId <= 0){
-			throw(new\PDOException("noteType id not positive"));
-		}
+	$this->noteTypeName = $newNoteTypeName;
+}
+
+/**
+ * insert this noteType into mySQL
+ * @param \PDO $pdo PDO connection object
+ * @throws \PDOException when mySQL errors occur.
+ * @throws \TypeError if $pdo is not a PDO connection object
+ */
+public function insert(\PDO $pdo) {
+	if($this->noteTypeId !== null) {
+		throw(new \PDOException("not a new noteType"));
+	}
+	//create query
+	$query = "INSERT INTO noteType(noteTypeId, noteTypeName) VALUES(:noteTypeId, :noteTypeName)";
+	$statement = $pdo->prepare($query);
+
+	//bind member variables to the place holders in template
+	$parameters = ["noteTypeId" => $this->noteTypeId, "noteTypeName" => $this->noteTypeName];
+	$statement->execute($parameters);
+
+	// update the null noteTypeId with what mySQL just gave us
+
+	$this->noteTypeId = intval($pdo->lastInsertId());
+}
+/**
+ * gets noteType by noteType id
+ * @param \PDO $pdo PDO connection object
+ * @param int $noteTypeId Note Id in database
+ * @return NoteType|null noteType if found, or null if not
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError when variables are not the correct data type
+ */
+public static function getNoteTypeByNoteTypeId(\PDO $pdo, int $noteTypeId){
+	// sanitize the placardId before searching
+	if($noteTypeId <= 0){
+		throw(new\PDOException("noteType id not positive"));
+	}
 // create query template
-		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeId = :noteTypeId";
-		$statement = $pdo->prepare($query);
-		$statement->execute();
+	$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeId = :noteTypeId";
+	$statement = $pdo->prepare($query);
+	$statement->execute();
 // grab note from SQL
+	try {
+		$noteType = null;
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		$row = $statement->fetch();
+		if($row !== false) {
+			$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeId"]);
+		}
+	} catch(\Exception $exception) {
+		// if the row couldn't be converted, rethrow it
+		throw(new \PDOException($exception->getMessage(), 0, $exception));
+	}
+	return($noteType);
+}
+public static function getNoteTypeByNoteTypeName(\PDO $pdo, string $noteTypeName){
+	// sanitize the placardId before searching
+	$noteTypeName = trim($noteTypeName);
+	$noteTypeName = filter_var($noteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if($noteTypeName === null){
+		throw(new\PDOException("noteType name can not be empty or may be insecure."));
+	}
+// create query template
+	$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName = :noteTypeName";
+	$statement = $pdo->prepare($query);
+	$statement->execute();
+// grab note from SQL
+	try {
+		$noteType = null;
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		$row = $statement->fetch();
+		if($row !== false) {
+			$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeId"]);
+		}
+	} catch(\Exception $exception) {
+		// if the row couldn't be converted, rethrow it
+		throw(new \PDOException($exception->getMessage(), 0, $exception));
+	}
+	return($noteType);
+}
+
+/**
+ * get all noteTypes
+ *
+ * @param \PDO $pdo PDO connection object
+ * @return \SplFixedArray SplFixedArray of noteTypes found
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError when variables are not the correct data type
+ */
+public static function getAllNoteTypes(\PDO $pdo){
+	//create query template
+	$query = "SELECT noteTypeName, noteTypeId FROM noteType";
+	$statement = $pdo->prepare($query);
+	$statement->execute();
+
+	//build an array of placards
+	$noteTypes = new \SplFixedArray($statement->rowCount());
+	$statement->setFetchMode(\PDO::FETCH_ASSOC);
+	while(($row = $statement->fetch()) !== false){
 		try {
-			$noteType = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false) {
-				$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeId"]);
-			}
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
+			$noteType = new NoteType($row["noteTypeId"], $row["noteTypeName"]);
+			$noteTypes[$noteTypes->key()] = $noteType;
+			$noteTypes->next();
+		} catch(\Exception $exception){
+			//if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($noteType);
-		}
-		public static function getNoteTypeByNoteTypeName(\PDO $pdo, string $noteTypeName){
-			// sanitize the placardId before searching
-			$noteTypeName = trim($noteTypeName);
-			$noteTypeName = filter_var($noteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			if($noteTypeName === null){
-				throw(new\PDOException("noteType name can not be empty or may be insecure."));
-			}
-// create query template
-			$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName = :noteTypeName";
-			$statement = $pdo->prepare($query);
-			$statement->execute();
-// grab note from SQL
-			try {
-				$noteType = null;
-				$statement->setFetchMode(\PDO::FETCH_ASSOC);
-				$row = $statement->fetch();
-				if($row !== false) {
-					$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeId"]);
-				}
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-			return($noteType);
 	}
+	return $noteTypes;
+}
 
-	/**
-	 * get all noteTypes
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @return \SplFixedArray SplFixedArray of noteTypes found
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
-	 */
-	public static function getAllNoteTypes(\PDO $pdo){
-		//create query template
-		$query = "SELECT noteTypeName, noteTypeId FROM noteType";
-		$statement = $pdo->prepare($query);
-		$statement->execute();
-
-		//build an array of placards
-		$noteTypes = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false){
-			try {
-				$noteType = new NoteType($row["noteTypeId"], $row["noteTypeName"]);
-				$noteTypes[$noteTypes->key()] = $noteType;
-				$noteTypes->next();
-			} catch(\Exception $exception){
-				//if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-		return $noteTypes;
-	}
-
-	/**
-	 * formats the state variables for JSON serialization
-	 *
-	 * @return array resulting state variables to serialize
-	 **/
-	public function jsonSerialize() {
-		$fields = get_object_vars($this);
-		return($fields);
-	}
+/**
+ * formats the state variables for JSON serialization
+ *
+ * @return array resulting state variables to serialize
+ **/
+public function jsonSerialize() {
+	$fields = get_object_vars($this);
+	return($fields);
+}
 }
