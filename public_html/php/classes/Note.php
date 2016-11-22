@@ -376,8 +376,8 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false){
 			try{
-				$notes = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
-				$notes[$notes->key()] = $notes;
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
+				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch (\Exception $exception){
 				// if the row couldn't be converted, rethrow it
