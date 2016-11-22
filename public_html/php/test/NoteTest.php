@@ -154,7 +154,7 @@ class NoteTest extends AaaaTest {
 	public function testInsertInvalidNoteByNoteApplicationId() {
 		//create a note with a non null note id  and watch it fail
 		$note = Note::getNoteByNoteApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($note);
+		$this->assertEmpty($note);
 	}
 
 	/**
@@ -182,7 +182,7 @@ class NoteTest extends AaaaTest {
 	public function testInsertInvalidNoteByNoteProspectId(){
 		//creat a note with a none null note id and watch it fail
 		$note = Note::getNoteByNoteProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($note);
+		$this->assertEmpty($note);
 	}
 	/**
 	 * test inserting a valid Note and verify that the actual mySQL data matches
@@ -209,7 +209,7 @@ class NoteTest extends AaaaTest {
 	public function testInsertInvalidNoteByNoteNoteTypeId(){
 		//create a note with a none null note id and watch it fail
 		$note = Note::getNoteByNoteNoteTypeId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($note);
+		$this->assertEmpty($note);
 	}
 	/**
 	 * test grabbing all Notes

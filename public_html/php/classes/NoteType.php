@@ -30,8 +30,6 @@ class NoteType implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs.
 	 */
 	public function __construct(int $newNoteTypeId = null, string $newNoteTypeName) {
-		echo PHP_EOL ."$newNoteTypeId $newNoteTypeName".PHP_EOL;
-
 		try {
 			$this->setNoteTypeId($newNoteTypeId);
 			$this->setNoteTypeName($newNoteTypeName);
