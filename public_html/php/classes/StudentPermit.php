@@ -548,7 +548,7 @@ class StudentPermit implements \JsonSerializable {
 		$endDate = $endDate->format("Y-m-d H:i:s");
 
 		// create query template
-		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit WHERE studentPermitCheckOutDate >= :startDate AND  studentPermitCheckOutDate <= :endDate";
+		$query = "SELECT studentPermitId, studentPermitApplicationId, studentPermitPlacardId, studentPermitSwipeId, studentPermitCheckOutDate, studentPermitCheckInDate FROM studentPermit WHERE studentPermitCheckOutDate >= :startDate AND studentPermitCheckOutDate <= :endDate";
 		$statement = $pdo->prepare($query);
 
 		// bind the parameters

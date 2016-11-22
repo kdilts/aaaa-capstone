@@ -214,7 +214,7 @@ class StudentPermitTest extends AaaaTest {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
 		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
 		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
-		$this->assertEquals($result->getStudentPermitSwipeId(), $this->placard->getSwipeId());
+		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
 		$this->assertEquals($result->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
 		$this->assertEquals($result->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKINDATE);
 	}
@@ -227,6 +227,32 @@ class StudentPermitTest extends AaaaTest {
 		$studentPermit = StudentPermit::getStudentPermitByStudentPermitPlacardId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertNull($studentPermit);
 	}
+
+	//////////
+	/**
+	 * test grabbing a StudentPermit by studentPermit placard id
+	 **/
+	public function testGetValidStudentPermitByStudentPermitCheckOutDateRange() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("studentPermit");
+
+		// create a new StudentPermit and insert to into mySQL
+		$studentPermit = new StudentPermit(null, $this->application->getApplicationId(), $this->placard->getPlacardId(), $this->swipe->getSwipeId(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
+		$studentPermit->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = StudentPermit::getStudentPermitsByStudentPermitCheckOutDateRange($this->getPDO(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
+		echo PHP_EOL . "------------" . PHP_EOL;
+		var_dump($results);
+		$pdoStudentPermit = $results[0];
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $pdoStudentPermit->getStudentPermitApplicationId());
+		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard->getPlacardId());
+		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->placard->getSwipeId());
+		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKOUTDATE);
+		$this->assertEquals($pdoStudentPermit->getStudentPermitCheckOutDate(), $this->STUDENTPERMITCHECKINDATE);
+	}
+	//////////
 
 	/**
 	 * test grabbing all StudentPermits
