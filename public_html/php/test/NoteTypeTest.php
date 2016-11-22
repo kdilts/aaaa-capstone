@@ -42,7 +42,7 @@ class NoteTypeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("notetype"); //What does this do? -Trevor
 
 		// create a new NoteType and insert to into mySQL
-		$noteType = new NoteType(null, $this->noteType->getNoteTypeName(), $this->VALID_NOTETYPEID);
+		$noteType = new NoteType($this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
 		$noteType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -60,7 +60,7 @@ class NoteTypeTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidNoteType() {
 		// create a NoteType with a non null NoteTypeName and watch it fail
-		$noteType = new NoteType(AaaaTest::INVALID_KEY, $this->noteType->getNoteTypeName(), $this->VALID_NOTETYPEID);
+		$noteType = new NoteType(AaaaTest::INVALID_KEY, $this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
 		$noteType->insert($this->getPDO());
 	}
 
@@ -90,17 +90,6 @@ class NoteTypeTest extends AaaaTest {
 	}
 
 	/**
-	 * test updating a NoteType that does not exist
-	 *
-	 * @expectedException PDOException
-	 **/
-	public function testUpdateInvalidNoteType() {
-		// create a NoteType, try to update it without actually updating it and watch it fail
-		$noteType = new NoteType(null, $this->noteType->getNoteTypeId->getNoteTypeId(), $this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
-		$noteType->update($this->getPDO());
-		}
-
-	/**
 	 * test grabbing all NoteType
 	 **/
 	public function testGetAllValidNoteType() {
@@ -108,20 +97,18 @@ class NoteTypeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("noteType");
 
 		// create a new NoteType and insert to into mySQL
-		$noteType = new NoteType(null, $this->noteType->getNoteTypeName(), $this->VALID_NOTETYPEID);
+		$noteType = new NoteType($this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
 		$noteType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = NoteType::getAllNoteTypes($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("Edu\\EduCnm\\NoteType", $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\NoteType", $results);
 
 		// grab the result from the array and validate it
 		$pdoNoteType = $results[0];
-		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->profile->getNoteTypeId());
-		$this->assertEquals($pdoNoteType>getNoteTypeName(), $this->VALID_NOTETYPENAME);
+		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME);
 		$this->assertEquals($pdoNoteType->getNoteTypeId(), $this->VALID_NOTETYPEID);
 		}
-
 	}
