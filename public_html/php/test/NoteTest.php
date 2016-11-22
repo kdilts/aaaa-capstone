@@ -88,7 +88,6 @@ protected $application = null;
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
-		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTEDATE);
 	}
 
 	/**
@@ -110,7 +109,7 @@ protected $application = null;
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT);
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -138,7 +137,7 @@ protected $application = null;
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT, $this->VALID_NOTEDATE);
+		$note = new Note(null, $this->status->getValidNote(), $this->VALID_NOTECONTENT);
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
@@ -146,7 +145,6 @@ protected $application = null;
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertEquals($pdoNote->getProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
-		$this->assertEquals($pdoNote->getNoteDate(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note");
 	}
 
