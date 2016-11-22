@@ -183,7 +183,7 @@ class NoteTest extends AaaaTest {
 	public function testGetValidNoteByNoteNoteTypeId(){
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("note");
-
+//TODO error at 193 smile
 		//create a new Note and insert it to mySQL
 		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId());
 		$note->insert($this->getPDO());
