@@ -23,7 +23,8 @@ class NoteType implements \JsonSerializable {
 	/**
 	 * NoteType constructor.
 	 * @param int|null $newNoteTypeId id of this noteType, or null if new noteType
-	 * @param string $newNoteTypeName name of this noteType
+	 * @param int $newNoteTypeId for the name of the noteType
+	 * @param string $newNoteTypeName string contaning the name of this noteType
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data is not out of bounds
 	 * @throws \TypeError if data types violate type hints
@@ -33,13 +34,17 @@ class NoteType implements \JsonSerializable {
 		try {
 			$this->setNoteTypeId($newNoteTypeId);
 			$this->setNoteTypeName($newNoteTypeName);
-		} catch (\InvalidArgumentException $invalidArgumentException) {
-			throw (new \InvalidArgumentException($invalidArgumentException->getMessage(), 0, $invalidArgumentException));
-		} catch (\RangeException $rangeException){
-			throw (new \RangeException($rangeException->getMessage(), 0, $rangeException));
+		} catch (\InvalidArgumentException $invalidArgument) {
+			// rethrow the exception to the caller
+			throw (new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		} catch (\RangeException $range){
+			// rethrow the exception to the caller
+			throw (new \RangeException($range->getMessage(), 0, $range));
 		} catch (\TypeError $typeError){
+			// rethrow the exception to the caller
 			throw (new \TypeError($typeError->getMessage(), 0, $typeError));
 		} catch (\Exception $exception){
+			// rethrow the exception to the caller
 			throw (new \Exception($exception->getMessage(), 0, $exception));
 		}
 	}
