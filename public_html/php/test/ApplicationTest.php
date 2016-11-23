@@ -176,6 +176,11 @@ class ApplicationTest extends AaaaTest {
 		$this->assertEquals($pdoApplication->getApplicationUtmMedium(), $this->VALID_APPLICATIONUTMMEDIUM);
 		$this->assertEquals($pdoApplication->getApplicationUtmSource(), $this->VALID_APPLICATIONUTMSOURCE);
 	}
+	public function testGetInvalidApplicationsByApplicationName() {
+		// grab a Application by searching for content that does not exist
+		$application = Application::getApplicationsByApplicationName($this->getPDO(), "this doesn't exist");
+		$this->assertNull($application);
+	}
 	/**
 	 * test grabbing all ApplicationId
 	 **/

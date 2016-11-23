@@ -687,10 +687,7 @@ class Application {
 		// build an array of applications
 		$applications = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-
-		echo PHP_EOL . "!!!!!!  ".$statement->rowCount()."  !!!!!!!" . PHP_EOL;
 		while(($row = $statement->fetch()) !== false) {
-			echo PHP_EOL . "---------------" . PHP_EOL;
 			try {
 				$application = new Application(
 					$row["applicationId"],
