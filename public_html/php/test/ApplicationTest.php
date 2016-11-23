@@ -155,7 +155,7 @@ class ApplicationTest extends AaaaTest {
 			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Application::getApplicationsByApplicationName($this->getPDO(), $application->getApplicationId());
+		$results = Application::getApplicationsByApplicationName($this->getPDO(), $application->getApplicationFirstName());
 		var_dump($results);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		$this->assertNotNull($results);
