@@ -80,13 +80,11 @@ class NoteTypeTest extends AaaaTest {
 		$noteType->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$result = NoteType::getNoteTypeByNoteTypeId($this->getPDO(), $noteType->getNoteTypeId());
+		$pdoNoteType = NoteType::getNoteTypeByNoteTypeName($this->getPDO(), $noteType->getNoteTypeName());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
-		$this->assertNotNull($result);
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\NoteType", $result);
-		// grab the result from the array and validate it
-		$this->assertEquals($result->getNoteTypeName(), $this->noteType - getNoteTypeName());
-		$this->assertEquals($result->getNoteTypeId->getnoteType(), $this->VALID_NOTETYPEID);
+		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->noteType->getNoteTypeName());
+		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME);
+		$this->assertEquals($pdoNoteType->getNoteTypeId(), $this->VALID_NOTETYPEID);
 	}
 
 	/**
