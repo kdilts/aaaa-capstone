@@ -634,8 +634,6 @@ class Application {
 			$application = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
-			var_dump($row["applicationDateTime"]);
-			var_dump(\DateTime::createFromFormat("Y-m-d H:i:s",$row["applicationDateTime"]));
 			if($row !== false){
 				$application = new Application(
 					$row["applicationId"],
@@ -689,6 +687,7 @@ class Application {
 		// build an array of applications
 		$applications = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$application = new Application(
@@ -706,6 +705,7 @@ class Application {
 					$row["applicationUtmMedium"],
 					$row["applicationUtmSource"]
 				);
+				var_dump($application);
 				$applications[$applications->key()] = $application;
 				$applications->next();
 			} catch(\Exception $exception) {
