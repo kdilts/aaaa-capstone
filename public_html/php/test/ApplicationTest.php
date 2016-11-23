@@ -160,7 +160,7 @@ class ApplicationTest extends AaaaTest {
 		$this->assertNotNull($results);
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Application", $results);
 		// grab the result from the array and validate it
-		$pdoApplication = $results[0];
+		$pdoApplication = $results;
 		$this->assertEquals($pdoApplication->getApplicationId(), $application->getApplicationId());
 		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONFIRSTNAME);
 		$this->assertEquals($pdoApplication->getApplicationLastName(), $this->VALID_APPLICATIONLASTNAME);
