@@ -51,18 +51,10 @@ class NoteType implements \JsonSerializable {
 
 	/**
 	 * accessor method for NoteTypeId
-	 * @return int NoteTypeId
+	 * @return int|null value for Note Type Id
 	 */
 	public function getNoteTypeId() {
-		return $this->noteTypeId;
-	}
-
-	/**
-	 * accessor method for NoteTypeName
-	 * @return string value of NoteTypeName
-	 */
-	public function getNoteTypeName() {
-		return $this->noteTypeName;
+		return $this->noteTypeId);
 	}
 
 	/**
@@ -80,18 +72,38 @@ class NoteType implements \JsonSerializable {
 		$this->noteTypeId = $newNoteTypeId;
 	}
 
+	/**
+	 * accessor method for NoteTypeName
+	 * @return string value of note type name
+	 */
+	public function getNoteTypeName() {
+		return ($this->noteTypeName);
+	}
+
 /**
  * mutator method for NoteTypeName
  * @param string $newNoteTypeName new value for NoteTypeName
+ * @throws \InvalidArgumentException if $newNoteTypeName is not a string or insecure
+ * @throws \RangeException if $newNoteTypeName is >300 characters
+ * @throws \TypeError if $newNoteTypeName is not a string
  */
 public function setNoteTypeName(string $newNoteTypeName) {
+	// verify the tweet content is secure
 	$newNoteTypeName = trim($newNoteTypeName);
 	$newNoteTypeName = filter_var($newNoteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	if(empty($newNoteTypeName) === true){
 		throw(new \InvalidArgumentException("NoteTypeName is empty or insecure."));
 	}
+
+	// verify the note type name will fit in the database
+	if(strlen($newNoteTypeName) > 300) {
+		throw(new \InvalidArgumentException("note content is empty or insecure"));
+	}
+
+	// store the note type name
 	$this->noteTypeName = $newNoteTypeName;
 }
+
 
 /**
  * insert this noteType into mySQL
@@ -100,6 +112,7 @@ public function setNoteTypeName(string $newNoteTypeName) {
  * @throws \TypeError if $pdo is not a PDO connection object
  */
 public function insert(\PDO $pdo) {
+	// enforce the noteTypeId is null (i.e., don't insert a note type that already exists)
 	if($this->noteTypeId !== null) {
 		throw(new \PDOException("not a new noteType"));
 	}
@@ -116,7 +129,7 @@ public function insert(\PDO $pdo) {
 	$this->noteTypeId = intval($pdo->lastInsertId());
 }
 /**
- * gets noteType by noteType id
+ * gets noteType by noteType
  * @param \PDO $pdo PDO connection object
  * @param int $noteTypeId Note Id in database
  * @return NoteType|null noteType if found, or null if not
@@ -147,7 +160,7 @@ public static function getNoteTypeByNoteTypeId(\PDO $pdo, int $noteTypeId){
 	return($noteType);
 }
 public static function getNoteTypeByNoteTypeName(\PDO $pdo, string $noteTypeName){
-	// sanitize the placardId before searching
+	// sanitize the noteTypeId before searching
 	$noteTypeName = trim($noteTypeName);
 	$noteTypeName = filter_var($noteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	if($noteTypeName === null){
