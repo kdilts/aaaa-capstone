@@ -21,7 +21,7 @@ class NoteTypeTest extends AaaaTest {
 	/**
 	 * @var string $VALID_NOTETYPEID
 	 */
-	protected $VALID_NOTETYPEID = n'5';
+	protected $VALID_NOTETYPEID = '5';
 
 
 	/**
@@ -42,7 +42,7 @@ class NoteTypeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("noteType"); //What does this do? -Trevor
 
 		// create a new NoteType and insert to into mySQL
-		$noteType = new NoteType(null, $this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID;
+		$noteType = new NoteType(null, $this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
 		$noteType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
