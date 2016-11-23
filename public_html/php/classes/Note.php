@@ -336,7 +336,7 @@ class Note {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteId = :noteNoteTypeId";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteNoteTypeId = :noteNoteTypeId";
 		$statement = $pdo->prepare($query);
 
 		// bind the noteNoteType id to the place holder in template
@@ -348,7 +348,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteNoteTypeId"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
