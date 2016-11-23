@@ -130,7 +130,7 @@ public function insert(\PDO $pdo) {
 	$this->noteTypeId = intval($pdo->lastInsertId());
 }
 /**
- * gets noteType by noteType
+ * gets noteType by noteTypeId
  * @param \PDO $pdo PDO connection object
  * @param int $noteTypeId Note Id in database
  * @return NoteType|null noteType if found, or null if not
@@ -143,16 +143,18 @@ public static function getNoteTypeByNoteTypeId(\PDO $pdo, int $noteTypeId){
 		throw(new\PDOException("noteType id not positive"));
 	}
 // create query template
-	$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeId = :noteTypeId";
+	$query = "SELECT noteTypeId, noteTypeName FROM noteType WHERE noteTypeId = :noteTypeId";
 	$statement = $pdo->prepare($query);
-	$statement->execute();
+	// bind the noteType id to the place holder in the template
+	$parameters = ["noteTypeId" => $noteTypeId];
+	$statement->execute($parameters);
 // grab note from SQL
 	try {
 		$noteType = null;
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		$row = $statement->fetch();
 		if($row !== false) {
-			$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeId"]);
+			$noteType = new NoteType($row["noteTypeId"], $row["noteTypeName"]);
 		}
 	} catch(\Exception $exception) {
 		// if the row couldn't be converted, rethrow it
