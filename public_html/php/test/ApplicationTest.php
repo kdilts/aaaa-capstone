@@ -179,7 +179,7 @@ class ApplicationTest extends AaaaTest {
 	public function testGetInvalidApplicationsByApplicationName() {
 		// grab a Application by searching for content that does not exist
 		$application = Application::getApplicationsByApplicationName($this->getPDO(), "this doesn't exist");
-		$this->assertNull($application);
+		$this->assertEmpty($application);
 	}
 	/**
 	 * test grabbing all ApplicationId
