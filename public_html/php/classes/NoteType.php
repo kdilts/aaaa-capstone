@@ -50,11 +50,12 @@ class NoteType implements \JsonSerializable {
 	}
 
 	/**
-	 * accessor method for NoteTypeId
+	 * accessor method for note type id
+	 *
 	 * @return int|null value for Note Type Id
 	 */
 	public function getNoteTypeId() {
-		return $this->noteTypeId);
+		return ($this->noteTypeId);
 	}
 
 	/**
