@@ -689,6 +689,7 @@ class Application {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 
 		while(($row = $statement->fetch()) !== false) {
+			echo PHP_EOL . "---------------" . PHP_EOL;
 			try {
 				$application = new Application(
 					$row["applicationId"],
@@ -705,7 +706,6 @@ class Application {
 					$row["applicationUtmMedium"],
 					$row["applicationUtmSource"]
 				);
-				var_dump($application);
 				$applications[$applications->key()] = $application;
 				$applications->next();
 			} catch(\Exception $exception) {
