@@ -193,6 +193,7 @@ class ApplicationTest extends AaaaTest {
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = Application::getApplicationByApplicationEmail($this->getPDO(), $application->getApplicationEmail());
+		var_dump(results);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
 		$this->assertNotNull($results);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Application", $results);
