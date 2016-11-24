@@ -186,14 +186,19 @@ class NoteType implements \JsonSerializable {
 		if($noteTypeName <= null)
 		$noteTypeName = trim($noteTypeName);
 		$noteTypeName = filter_var($noteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($noteTypeName) === true){
-			throw(new\PDOException("noteType name can not be empty or may be insecure."));
+		if(empty($noteTypeName) === null){
+			throw(new\PDOException("noteType name can not be empty or insecure."));
 		}
-		$noteTypeName = "%noteTypeName%";
+		$noteTypeName = "%$noteTypeName$%";
+
 // create query template
-		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName = :noteTypeName";
+		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName LIKE :noteTypeName";
 		$statement = $pdo->prepare($query);
-		$statement->execute();
+
+			//bind the noteType name to the place holder in template
+		$parameters = ["noteTypeName" => $noteTypeName];
+		$statement->execute($parameters);
+
 // grab note from SQL
 		try {
 			$noteType = null;
