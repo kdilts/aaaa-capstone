@@ -19,7 +19,7 @@ class NoteTypeTest extends AaaaTest {
 	 **/
 	protected $VALID_NOTETYPENAME = 'foo';
 	/**
-	 * @var string $VALID_NOTETYPEID
+	 * @var int $VALID_NOTETYPEID
 	 */
 	protected $VALID_NOTETYPEID = '5';
 
