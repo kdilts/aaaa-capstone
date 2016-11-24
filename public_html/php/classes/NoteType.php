@@ -90,7 +90,7 @@ class NoteType implements \JsonSerializable {
 	 *
 	 * @param string $newNoteTypeName new value for NoteTypeName
 	 * @throws \InvalidArgumentException if $newNoteTypeName is not a string or insecure
-	 * @throws \RangeException if $newNoteTypeName is >300 characters
+	 * @throws \RangeException if $newNoteTypeName is >40 characters
 	 * @throws \TypeError if $newNoteTypeName is not a string
 	 */
 	public function setNoteTypeName(string $newNoteTypeName) {
@@ -102,12 +102,12 @@ class NoteType implements \JsonSerializable {
 		}
 
 		// verify the note type name will fit in the database
-		if(strlen($newNoteTypeName) > 300) {
+		if(strlen($newNoteTypeName) > 40) {
 			throw(new \InvalidArgumentException("note content is empty or insecure"));
 		}
 
 		//verify the note type will fit in database
-		if(strlen($newNoteTypeName) > 140) {
+		if(strlen($newNoteTypeName) > 40) {
 			throw (new \RangeException("noteType name too large"));
 		}
 		// store the note type name
@@ -176,7 +176,7 @@ class NoteType implements \JsonSerializable {
 	/** gets the NoteType by NoteType name
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $noteTypeName noteType name to search by
+	 * @param string $noteTypeName noteType name to search by
 	 * @return \SplFixedArray SplFixedArray of NoteTypes found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $applicationName is not a string
@@ -189,7 +189,7 @@ class NoteType implements \JsonSerializable {
 		if(empty($noteTypeName) === true){
 			throw(new\PDOException("noteType name can not be empty or may be insecure."));
 		}
-		$noteTypeName ="%noteTypeName%";
+		$noteTypeName = "%noteTypeName%";
 // create query template
 		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName = :noteTypeName";
 		$statement = $pdo->prepare($query);
