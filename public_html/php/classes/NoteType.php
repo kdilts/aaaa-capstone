@@ -29,7 +29,7 @@ class NoteType implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs.
 	 */
-	public function __construct(int $newNoteTypeId = null, int $newNoteTypeId, string $newNoteTypeName = null) {
+	public function __construct(int $newNoteTypeId = null, string $newNoteTypeName) {
 		try {
 			$this->setNoteTypeId($newNoteTypeId);
 			$this->setNoteTypeName($newNoteTypeName);
@@ -179,16 +179,17 @@ class NoteType implements \JsonSerializable {
 	 * @param int $noteTypeName noteType name to search by
 	 * @return \SplFixedArray SplFixedArray of NoteTypes found
 	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when variables are not the correct data type
+	 * @throws \TypeError if $applicationName is not a string
 	 **/
 	public static function getNoteTypeByNoteTypeName(\PDO $pdo, string $noteTypeName){
 		// sanitize the noteTypeName before searching
 		if($noteTypeName <= null)
 		$noteTypeName = trim($noteTypeName);
 		$noteTypeName = filter_var($noteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if($noteTypeName === null){
+		if(empty($noteTypeName) === true){
 			throw(new\PDOException("noteType name can not be empty or may be insecure."));
 		}
+		$noteTypeName ="%noteTypeName%";
 // create query template
 		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName = :noteTypeName";
 		$statement = $pdo->prepare($query);
