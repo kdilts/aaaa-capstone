@@ -1,8 +1,6 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
 
-use Edu\Cnm\DdcAaaa\ValidateDate;
-
 require_once ("autoload.php");
 
 /**
@@ -611,7 +609,7 @@ class Application {
 	}
 
 	/**
-	 * searches applicfffffffffations by applicationId
+	 * searches applications by applicationId
 	 * @param \PDO $pdo
 	 * @param int $applicationId
 	 * @return Application
