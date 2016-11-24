@@ -49,7 +49,6 @@ class NoteTypeTest extends AaaaTest {
 		$pdoNoteType = NoteType::getNoteTypeByNoteTypeName($this->getPDO(), $noteType->getNoteTypeName());
 
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
-		//$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME;
 		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME);
 	}
 
