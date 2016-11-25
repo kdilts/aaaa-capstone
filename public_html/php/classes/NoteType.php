@@ -182,35 +182,34 @@ class NoteType implements \JsonSerializable {
 	 **/
 	public static function getNoteTypeByNoteTypeName(\PDO $pdo, string $noteTypeName){
 		// sanitize the noteTypeName before searching
-		if($noteTypeName <= null)
 		$noteTypeName = trim($noteTypeName);
 		$noteTypeName = filter_var($noteTypeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($noteTypeName) === null){
-			throw(new\PDOException("noteType name can not be empty or insecure."));
+		if(empty($noteTypeName) === true){
+			throw(new\PDOException("noteType name is empty or insecure."));
 		}
-		$noteTypeName = "%$noteTypeName$%";
 
-// create query template
-		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName LIKE :noteTypeName";
+		// create query template
+		$query = "SELECT noteTypeName, noteTypeId FROM noteType WHERE noteTypeName = :noteTypeName";
 		$statement = $pdo->prepare($query);
 
-			//bind the noteType name to the place holder in template
+		//bind the noteType name to the place holder in template
 		$parameters = ["noteTypeName" => $noteTypeName];
 		$statement->execute($parameters);
 
-// grab note from SQL
-		try {
-			$noteType = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false) {
-				$noteType = new NoteType ($row["noteTypeName"], $row["noteTypeId"]);
+		//build an array of placards
+		$noteTypes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$noteType = new NoteType($row["noteTypeId"], $row["noteTypeName"]);
+				$noteTypes[$noteTypes->key()] = $noteType;
+				$noteTypes->next();
+			} catch(\Exception $exception) {
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($noteType);
+		return $noteTypes;
 	}
 
 	/**

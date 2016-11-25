@@ -88,6 +88,37 @@ class NoteTypeTest extends AaaaTest {
 	}
 
 	/**
+	 * test grabbing a NoteType by noteType id
+	 **/
+	public function testGetValidNoteTypeByNoteTypeName() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("noteType");
+
+		// create a new NoteType and insert to into mySQL
+		$noteType = new NoteType(null, $this->VALID_NOTETYPENAME);
+		$noteType->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = NoteType::getNoteTypeByNoteTypeName($this->getPDO(), $noteType->getNoteTypeName());
+		$pdoNoteType = $results[0];
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\NoteType", $results);
+		$this->assertNotNull($pdoNoteType);
+
+		$this->assertEquals($pdoNoteType->getNoteTypeId(),$noteType->getNoteTypeId());
+		$this->assertEquals($pdoNoteType->getNoteTypeName(), $noteType->getNoteTypeName());
+	}
+
+	/**
+	 * test grabbing a NoteType by id that does not exist
+	 **/
+	public function testGetInvalidNoteTypeByNoteTypeName() {
+		// grab a noteType by searching for id that does not exist
+		$noteType = NoteType::getNoteTypeByNoteTypeName($this->getPDO(), "invalid key");
+		$this->assertEmpty($noteType);
+	}
+
+	/**
 	 * test grabbing all NoteType
 	 **/
 	public function testGetAllValidNoteType() {
