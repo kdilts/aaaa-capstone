@@ -126,7 +126,7 @@ class NoteType implements \JsonSerializable {
 		if($this->noteTypeId !== null) {
 			throw(new \PDOException("not a new noteType"));
 		}
-		//create query tmplate
+		//create query template
 		$query = "INSERT INTO noteType(noteTypeId, noteTypeName) VALUES(:noteTypeId, :noteTypeName)";
 		$statement = $pdo->prepare($query);
 
@@ -135,7 +135,6 @@ class NoteType implements \JsonSerializable {
 		$statement->execute($parameters);
 
 		// update the null noteTypeId with what mySQL just gave us
-
 		$this->noteTypeId = intval($pdo->lastInsertId());
 	}
 	/**

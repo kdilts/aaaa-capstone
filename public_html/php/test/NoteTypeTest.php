@@ -18,10 +18,6 @@ class NoteTypeTest extends AaaaTest {
 	 * @var string $VALID_NOTETYPENAME
 	 **/
 	protected $VALID_NOTETYPENAME = 'foo';
-	/**
-	 * @var int $VALID_NOTETYPEID
-	 */
-	protected $VALID_NOTETYPEID = '5';
 
 
 	/**
@@ -30,8 +26,6 @@ class NoteTypeTest extends AaaaTest {
 	public final function setUp() {
 		// run the default setUp() method first
 		parent::setUp();
-		$this->noteType = new NoteType(null, 2);
-		$this->noteType->insert($this->getPDO());
 	}
 
 	/**
@@ -42,21 +36,20 @@ class NoteTypeTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("noteType"); //What does this do? -Trevor
 
 		// create a new NoteType and insert to into mySQL
-		$noteType = new NoteType(null, $this->VALID_NOTETYPENAME, $this->VALID_NOTETYPEID);
+		$noteType = new NoteType(null, $this->VALID_NOTETYPENAME);
 		$noteType->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoNoteType = NoteType::getNoteTypeByNoteTypeName($this->getPDO(), $noteType->getNoteTypeName());
-
+		$pdoNoteType = NoteType::getNoteTypeByNoteTypeId($this->getPDO(), $noteType->getNoteTypeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
-		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->noteType->getNoteTypeName());
-		$this->assertEquals($pdoNoteType->getNoteTypeId(),$this->VALID_NOTETYPEID);
+		$this->assertEquals($pdoNoteType->getNoteTypeId(),$noteType->getNoteTypeId());
+		$this->assertEquals($pdoNoteType->getNoteTypeName(), $noteType->getNoteTypeName());
 	}
 
 	/**
 	 * test inserting a NoteType that already exists
 	 *
-	 * @expectedException PDOException
+	 * @expectedException \PDOException
 	 **/
 	public function testInsertInvalidNoteType() {
 		// create a NoteType with a non null NoteTypeName and watch it fail
