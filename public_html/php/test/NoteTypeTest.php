@@ -57,28 +57,7 @@ class NoteTypeTest extends AaaaTest {
 		$noteType->insert($this->getPDO());
 	}
 
-	/**
-	 * test inserting a NoteType, editing it, and then updating it
-	 **/
-	public function testUpdateValidNoteType() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("noteType");
 
-		// create a new NoteType and insert to into mySQL
-		$noteType = new NoteType(null, $this->noteType->getNoteTypeName(), $this->VALID_NOTETYPENAME);
-		$noteType->insert($this->getPDO());
-
-		// edit the NoteType and update it in mySQL
-		$noteType->setNoteTypeName($this->VALID_NOTETYPENAME);
-		$noteType->update($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoNoteType = NoteType::getNoteTypeByNoteTypeName($this->getPDO(), $noteType->getNoteTypeName());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("noteType"));
-		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->noteType->getNoteTypeName());
-		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME);
-		$this->assertEquals($pdoNoteType->getNoteTypeId(), $this->VALID_NOTETYPEID);
-	}
 
 	/**
 	 * test grabbing all NoteType
@@ -99,7 +78,7 @@ class NoteTypeTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoNoteType = $results[0];
+		$this->assertEquals($pdoNoteType->getNoteTypeId(), $noteType->getNoteTypeId());
 		$this->assertEquals($pdoNoteType->getNoteTypeName(), $this->VALID_NOTETYPENAME);
-		$this->assertEquals($pdoNoteType->getNoteTypeId(), $this->VALID_NOTETYPEID);
 	}
 }
