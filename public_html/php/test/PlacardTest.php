@@ -55,6 +55,7 @@ class PlacardTest extends AaaaTest {
 
 
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
+		$this->assertEquals($pdoPlacard->getPlacardId(), $placard->getPlacardId());
 		$this->assertEquals($pdoPlacard->getPlacardStatusTypeId(), $this->status->getStatusTypeId());
 		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
@@ -88,6 +89,7 @@ class PlacardTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoPlacard = Placard::getPlacardByPlacardId($this->getPDO(), $placard->getPlacardId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("placard"));
+		$this->assertEquals($pdoPlacard->getPlacardId(), $placard->getPlacardId());
 		$this->assertEquals($pdoPlacard->getPlacardStatusTypeId(), $this->status->getStatusTypeId());
 		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER2);
 	}
@@ -121,6 +123,7 @@ class PlacardTest extends AaaaTest {
 		$this->assertNotNull($result);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Placard", $result);
 
+		$this->assertEquals($result->getPlacardId(), $placard->getPlacardId());
 		$this->assertEquals($result->getPlacardStatusTypeId(), $this->status->getStatusTypeId());
 		$this->assertEquals($result->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
@@ -153,6 +156,7 @@ class PlacardTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoPlacard = $results[0];
+		$this->assertEquals($pdoPlacard->getPlacardId(), $placard->getPlacardId());
 		$this->assertEquals($pdoPlacard->getPlacardStatusTypeId(), $this->status->getStatusTypeId());
 		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
@@ -184,6 +188,7 @@ class PlacardTest extends AaaaTest {
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Placard", $result);
 
 		// grab the result from the array and validate it
+		$this->assertEquals($result->getPlacardId(), $placard->getPlacardId());
 		$this->assertEquals($result->getPlacardStatusTypeId(), $this->status->getStatusTypeId());
 		$this->assertEquals($result->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
@@ -216,6 +221,7 @@ class PlacardTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoPlacard = $results[0];
+		$this->assertEquals($pdoPlacard->getPlacardId(), $placard->getPlacardId());
 		$this->assertEquals($pdoPlacard->getPlacardStatusTypeId(), $this->status->getStatusTypeId());
 		$this->assertEquals($pdoPlacard->getPlacardNumber(), $this->VALID_PLACARDNUMBER);
 	}
