@@ -51,7 +51,7 @@ class SwipeTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoSwipe = Swipe::getSwipeBySwipeId($this->getPDO(), $swipe->getSwipeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
-		//$this->assertEquals($pdoSwipe->getSwipeId(), $this->VALID_SWIPEID);
+		$this->assertEquals($pdoSwipe->getSwipeId(), $swipe->getSwipeId());
 		$this->assertEquals($pdoSwipe->getSwipeStatusTypeId(), $this->swipeStatus->getStatusTypeId());
 		$this->assertEquals($pdoSwipe->getSwipeNumber(), $this->VALID_SWIPENUMBER);
 	}
@@ -87,6 +87,7 @@ class SwipeTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoSwipe = Swipe::getSwipeBySwipeId($this->getPDO(), $swipe->getSwipeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
+		$this->assertEquals($pdoSwipe->getSwipeId(), $swipe->getSwipeId());
 		$this->assertEquals($pdoSwipe->getSwipeStatusTypeId(), $this->swipeStatus->getStatusTypeId());
 		$this->assertEquals($pdoSwipe->getSwipeNumber(), $this->VALID_SWIPENUMBER2);
 	}
@@ -103,15 +104,14 @@ class SwipeTest extends AaaaTest {
 		$swipe->update($this->getPDO());
 	}
 
-
 	/**
-	 * test inserting a swipe, editing it, and then updating it
+	 * test grabbing a Swipe by swipe id
 	 **/
-/**	public function testUpdateValidSwipe() {
+	public function testGetValidSwipeBySwipeId() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("swipe");
 
-		// create a new Swipe status and insert into mySQL
+		// create a new Swipe and insert to into mySQL
 		$swipe = new Swipe(null, $this->swipeStatus->getStatusTypeId(), $this->VALID_SWIPENUMBER);
 		$swipe->insert($this->getPDO());
 
@@ -120,10 +120,11 @@ class SwipeTest extends AaaaTest {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("swipe"));
 		$this->assertNotNull($result);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Swipe", $result);
-		// grab the result from the array and validate it
-		$this->assertEquals($result->getSwipeStatusTypeId(), $this->swipeStatus->getSwipeStatusTypeId());
+
+		$this->assertEquals($result->getSwipeId(), $swipe->getSwipeId());
+		$this->assertEquals($result->getSwipeStatusTypeId(), $this->swipeStatus->getStatusTypeId());
 		$this->assertEquals($result->getSwipeNumber(), $this->VALID_SWIPENUMBER);
-	}**/
+	}
 
 	/**
 	 * test grabbing a Swipe by id that does not exist
@@ -149,6 +150,7 @@ class SwipeTest extends AaaaTest {
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Swipe", $results);
 		// grab the result from the array and validate it
 		$pdoSwipe = $results[0];
+		$this->assertEquals($pdoSwipe->getSwipeId(), $swipe->getSwipeId());
 		$this->assertEquals($pdoSwipe->getSwipeStatusTypeId(), $this->swipeStatus->getStatusTypeId());
 		$this->assertEquals($pdoSwipe->getSwipeNumber(), $this->VALID_SWIPENUMBER);
 	}
@@ -175,6 +177,7 @@ class SwipeTest extends AaaaTest {
 		$this->assertNotNull($result);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Swipe", $result);
 		// grab the result from the array and validate it
+		$this->assertEquals($result->getSwipeId(), $swipe->getSwipeId());
 		$this->assertEquals($result->getSwipeStatusTypeId(), $this->swipeStatus->getStatusTypeId());
 		$this->assertEquals($result->getSwipeNumber(), $this->VALID_SWIPENUMBER);
 	}
@@ -202,6 +205,7 @@ class SwipeTest extends AaaaTest {
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Swipe", $results);
 		// grab the result from the array and validate it
 		$pdoSwipe = $results[0];
+		$this->assertEquals($pdoSwipe->getSwipeId(), $swipe->getSwipeId());
 		$this->assertEquals($pdoSwipe->getSwipeStatusTypeId(), $this->swipeStatus->getStatusTypeId());
 		$this->assertEquals($pdoSwipe->getSwipeNumber(), $this->VALID_SWIPENUMBER);
 	}
