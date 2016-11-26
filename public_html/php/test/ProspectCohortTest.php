@@ -52,6 +52,7 @@ class ProspectCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoProspectCohort = ProspectCohort::getProspectCohortByProspectCohortId($this->getPDO(), $prospectCohort->getProspectCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
+		$this->assertEquals($pdoProspectCohort->getProspectCohortId(), $prospectCohort->getProspectCohortId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortCohortId(), $this->cohort->getCohortId());
 	}
@@ -81,6 +82,7 @@ class ProspectCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoProspectCohort = ProspectCohort::getProspectCohortByProspectCohortId($this->getPDO(), $prospectCohort->getProspectCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
+		$this->assertEquals($pdoProspectCohort->getProspectCohortId(), $prospectCohort->getProspectCohortId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortCohortId(), $this->cohort->getCohortId());
 	}
@@ -114,6 +116,7 @@ class ProspectCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoProspectCohort = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
+		$this->assertEquals($pdoProspectCohort->getProspectCohortId(), $prospectCohort->getProspectCohortId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortCohortId(), $this->cohort->getCohortId());
 	}
@@ -141,6 +144,7 @@ class ProspectCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoProspectCohort = ProspectCohort::getProspectCohortByProspectId($this->getPDO(), $prospectCohort->getProspectCohortProspectId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
+		$this->assertEquals($pdoProspectCohort->getProspectCohortId(), $prospectCohort->getProspectCohortId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortCohortId(), $this->cohort->getCohortId());
 	}
@@ -174,6 +178,7 @@ class ProspectCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoProspectCohort = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
+		$this->assertEquals($pdoProspectCohort->getProspectCohortId(), $prospectCohort->getProspectCohortId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortCohortId(), $this->cohort->getCohortId());
 	}
