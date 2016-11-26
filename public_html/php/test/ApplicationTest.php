@@ -1,16 +1,13 @@
 <?php
 namespace Edu\Cnm\DdcAaaa\Test;
 
-use Edu\Cnm\DdcAaaa\{
-	Application
-};
+use Edu\Cnm\DdcAaaa\{ Application };
 
 // grab the project test parameters
 require_once("AaaaTest.php");
 
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/classes/autoload.php");
-
 
 class ApplicationTest extends AaaaTest {
 
@@ -40,10 +37,6 @@ class ApplicationTest extends AaaaTest {
 
 	protected $VALID_APPLICATIONUTMSOURCE = 'test7';
 
-
-
-
-
 	/**
 	 * create dependent objects before running each test
 	 **/
@@ -51,11 +44,9 @@ class ApplicationTest extends AaaaTest {
 		// run the default setUp() method first
 		parent::setUp();
 
-
 		// calculate the date (just use the time the unit test was setup...)
 		$this->VALID_APPLICATIONDATETIME = new \DateTime();
 	}
-
 
 	/**
 	 * test inserting a valid Application and verify that the actual mySQL data matches
@@ -65,8 +56,7 @@ class ApplicationTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("application");
 
 		// create a new Application and insert to into mySQL
-		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL,
-			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
+		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL, $this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoApplication = Application::getApplicationByApplicationId($this->getPDO(), $application->getApplicationId());
@@ -93,26 +83,19 @@ class ApplicationTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidApplication() {
 		// create a Application with a non null application id and watch it fail
-		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL,
-			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
+		$application = new Application(AaaaTest::INVALID_KEY, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL, $this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 	}
 
 	/**
-	 * test inserting an Application , editing it, and then updating it
-	 **/
-
-
-	/**
-	 * test grabbing a Application by Application content
+	 * test grabbing a Application by Application id
 	 **/
 	public function testGetValidApplicationByApplicationId() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("application");
 
 		// create a new Application and insert to into mySQL
-		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL,
-			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
+		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL, $this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -139,20 +122,22 @@ class ApplicationTest extends AaaaTest {
 	}
 
 	/**
-	 * test grabbing a Application by content that does not exist
+	 * test grabbing an Application by id that does not exist
 	 **/
 	public function testGetInvalidApplicationByApplicationId() {
-		// grab a Application by searching for content that does not exist
+		// grab a Application by searching for id that does not exist
 		$application = Application::getApplicationByApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertNull($application);
 	}
 
+	/**
+	 * test grabbing an Application by Application name
+	 */
 	public function testGetValidApplicationsByApplicationName() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("application");
 		// create a new Swipe and insert to into mySQL
-		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL,
-			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
+		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL, $this->VALID_APPLICATIONPHONENUMBER,$this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME,$this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = Application::getApplicationsByApplicationName($this->getPDO(), $application->getApplicationFirstName());
@@ -176,31 +161,34 @@ class ApplicationTest extends AaaaTest {
 		$this->assertEquals($pdoApplication->getApplicationUtmMedium(), $this->VALID_APPLICATIONUTMMEDIUM);
 		$this->assertEquals($pdoApplication->getApplicationUtmSource(), $this->VALID_APPLICATIONUTMSOURCE);
 	}
+
+	/**
+	 * test grabbing an Application by Application name that doesn't exist
+	 */
 	public function testGetInvalidApplicationsByApplicationName() {
 		// grab a Application by searching for content that does not exist
 		$application = Application::getApplicationsByApplicationName($this->getPDO(), "this doesn't exist");
 		$this->assertEmpty($application);
 	}
 
+	/**
+	 * test grabbing an Application by Application email
+	 */
 	public function testGetValidApplicationByApplicationEmail() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("application");
 
 		// create a new Application and insert to into mySQL
-		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL,
-			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
+		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL, $this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Application::getApplicationByApplicationEmail($this->getPDO(), $application->getApplicationEmail());
-		var_dump($results);
+		$pdoApplication = Application::getApplicationByApplicationEmail($this->getPDO(), $application->getApplicationEmail());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("application"));
-		var_dump($results);
-		$this->assertNotNull($results);
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Application", $results);
+		$this->assertNotNull($pdoApplication);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Application", $pdoApplication);
 
 		// grab the result from the array and validate it
-		$pdoApplication = $results;
 		$this->assertEquals($pdoApplication->getApplicationId(), $application->getApplicationId());
 		$this->assertEquals($pdoApplication->getApplicationFirstName(), $this->VALID_APPLICATIONFIRSTNAME);
 		$this->assertEquals($pdoApplication->getApplicationLastName(), $this->VALID_APPLICATIONLASTNAME);
@@ -215,21 +203,25 @@ class ApplicationTest extends AaaaTest {
 		$this->assertEquals($pdoApplication->getApplicationUtmMedium(), $this->VALID_APPLICATIONUTMMEDIUM);
 		$this->assertEquals($pdoApplication->getApplicationUtmSource(), $this->VALID_APPLICATIONUTMSOURCE);
 	}
+
+	/**
+	 * test grabbing an Application by Application email that doesn't exist
+	 */
 	public function testGetInvalidApplicationByApplicationEmail() {
 		// grab a Application by searching for content that does not exist
 		$application = Application::getApplicationByApplicationEmail($this->getPDO(), "this doesn't exist");
 		$this->assertEmpty($application);
 	}
+
 	/**
-	 * test grabbing all ApplicationId
+	 * test grabbing all Applications
 	 **/
 	public function testGetAllValidApplications() {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("application");
 
 		// create a new Application and insert to into mySQL
-		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL,
-			$this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
+		$application = new Application(null, $this->VALID_APPLICATIONFIRSTNAME, $this->VALID_APPLICATIONLASTNAME, $this->VALID_APPLICATIONEMAIL, $this->VALID_APPLICATIONPHONENUMBER, $this->VALID_APPLICATIONSOURCE, $this->VALID_APPLICATIONABOUTYOU, $this->VALID_APPLICATIONHOPETOACCOMPLISH, $this->VALID_APPLICATIONEXPERIENCE, $this->VALID_APPLICATIONDATETIME, $this->VALID_APPLICATIONUTMCAMPAIGN, $this->VALID_APPLICATIONUTMMEDIUM, $this->VALID_APPLICATIONUTMSOURCE);
 		$application->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -254,6 +246,5 @@ class ApplicationTest extends AaaaTest {
 		$this->assertEquals($pdoApplication->getApplicationUtmMedium(), $this->VALID_APPLICATIONUTMMEDIUM);
 		$this->assertEquals($pdoApplication->getApplicationUtmSource(), $this->VALID_APPLICATIONUTMSOURCE);
 	}
-
 
 }
