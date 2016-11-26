@@ -526,6 +526,9 @@ class Application {
 		$query = "SELECT applicationId, applicationFirstName, applicationLastName, applicationEmail, applicationPhoneNumber, applicationSource, applicationAboutYou, applicationHopeToAccomplish, applicationExperience, applicationDateTime, applicationUtmCampaign, applicationUtmMedium, applicationUtmSource FROM application WHERE applicationDateTime >= :startDate AND applicationDateTime <= :endDate";
 		$statement = $pdo->prepare($query);
 
+		// bind the parameters
+		$parameters = ["startDate" => $startDate, "endDate" => $endDate];
+		$statement->execute($parameters);
 
 		// build an array of applications
 		$applications = new \SplFixedArray($statement->rowCount());
