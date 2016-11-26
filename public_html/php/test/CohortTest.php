@@ -44,13 +44,14 @@ class CohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoCohort = Cohort::getCohortByCohortId($this->getPDO(), $cohort->getCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
+		$this->assertEquals($pdoCohort->getCohortId(), $cohort->getCohortId());
 		$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
 	}
 
 	/**
 	 * test inserting a Cohort that already exists
 	 *
-	 * @expectedException PDOException
+	 * @expectedException \PDOException
 	 **/
 	public function testInsertInvalidCohort() {
 		// create a Cohort with a non null cohort id and watch it fail
@@ -111,33 +112,34 @@ class CohortTest extends AaaaTest {
 		$this->assertEquals($result->getCohortApplicationId(), $cohort->getCohortApplicationId());
 		$this->assertEquals($result->getCohortId(), $cohort->getCohortId());
 	}
-/**
- * test grabbing a Cohort by Application Id that does not exist
- */
-public function testGetInvalidCohortByCohortApplicationId(){
-	//grab a cohort by searching for application id that does not exist
-	$cohort = Cohort::getCohortByCohortApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
-	$this->assertNull($cohort);
-}
-/**
- * test grabbing all Cohorts
- **/
-public function testGetAllValidCohorts() {
-	// count the number of rows and save it for later
-	$numRows = $this->getConnection()->getRowCount("cohort");
+	/**
+	 * test grabbing a Cohort by Application Id that does not exist
+	 */
+	public function testGetInvalidCohortByCohortApplicationId(){
+		//grab a cohort by searching for application id that does not exist
+		$cohort = Cohort::getCohortByCohortApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertNull($cohort);
+	}
+	/**
+	 * test grabbing all Cohorts
+	 **/
+	public function testGetAllValidCohorts() {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("cohort");
 
-	// create a new Cohort and insert to into mySQL
-	$cohort = new Cohort(null, $this->VALID_COHORTAPPLICATIONID);
-	$cohort->insert($this->getPDO());
+		// create a new Cohort and insert to into mySQL
+		$cohort = new Cohort(null, $this->VALID_COHORTAPPLICATIONID);
+		$cohort->insert($this->getPDO());
 
-	// grab the data from mySQL and enforce the fields match our expectations
-	$results = Cohort::getAllCohorts($this->getPDO());
-	$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
-	$this->assertCount(1, $results);
-	$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Cohort", $results);
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = Cohort::getAllCohorts($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Cohort", $results);
 
-	// grab the result from the array and validate it
-	$pdoCohort = $results[0];
-	$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
-}
+		// grab the result from the array and validate it
+		$pdoCohort = $results[0];
+		$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
+		$this->assertEquals($pdoCohort->getCohortId(), $cohort->getCohortId());
+	}
 }
