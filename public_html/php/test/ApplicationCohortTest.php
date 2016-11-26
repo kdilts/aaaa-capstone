@@ -55,6 +55,7 @@ class ApplicationCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoApplicationCohort = ApplicationCohort::getApplicationCohortByApplicationCohortId($this->getPDO(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortId(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}
@@ -84,6 +85,7 @@ class ApplicationCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoApplicationCohort = ApplicationCohort::getApplicationCohortByApplicationCohortId($this->getPDO(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortId(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}
@@ -117,6 +119,7 @@ class ApplicationCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoApplicationCohort = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortId(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}
@@ -144,6 +147,7 @@ class ApplicationCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoApplicationCohort = ApplicationCohort::getApplicationCohortByApplicationId($this->getPDO(), $applicationCohort->getApplicationCohortApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortId(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}
@@ -177,6 +181,7 @@ class ApplicationCohortTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoApplicationCohort = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertEquals($pdoApplicationCohort->getApplicationCohortId(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortCohortId(), $this->cohort->getCohortId());
 	}

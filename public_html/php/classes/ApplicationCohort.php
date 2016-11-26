@@ -204,7 +204,7 @@ class ApplicationCohort implements \JsonSerializable {
 	/**
 	 * gets the Application Cohort by application id
 	 * @param \PDO $pdo connection object
-	 * @param int $applicationCohortId application cohort id to search for
+	 * @param int $applicationCohortApplicationId application cohort id to search for
 	 * @return ApplicationCohort|null applicationCohort if found or null if not found
 	 * @throws \PDOException if application cohort application id is not positive
 	 */
