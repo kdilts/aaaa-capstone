@@ -75,11 +75,16 @@ class NoteTest extends AaaaTest {
 		$note = new Note(null,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(), $this->prospect->getProspectId());
 		$note->insert($this->getPDO());
 
+		//int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId
+
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
+		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 	}
 
 	/**
@@ -107,9 +112,13 @@ class NoteTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoNote = Note::getNoteByNoteId($this->getPDO(), $note->getNoteId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getNoteProspectId(),$this->prospect->getProspectId());
-		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+
+		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
+		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
+		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 	}
 	/**
 	 * Test inserting a Note that already exists
@@ -135,9 +144,13 @@ class NoteTest extends AaaaTest {
 		$results = Note::getNoteByNoteApplicationId($this->getPDO(), $note->getNoteId());
 		$pdoNote = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
-		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+
+		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
+		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
+		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 	}
 
 	/**
@@ -164,16 +177,20 @@ class NoteTest extends AaaaTest {
 		$results = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteId());
 		$pdoNote = $results[0];
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
-		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+
+		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
+		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
+		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 	}
 
 	/**
 	 * test inserting a note that already exists
 	 */
 	public function testInsertInvalidNoteByNoteProspectId(){
-		//creat a note with a none null note id and watch it fail
+		//create a note with a none null note id and watch it fail
 		$note = Note::getNoteByNoteProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertEmpty($note);
 	}
@@ -191,12 +208,13 @@ class NoteTest extends AaaaTest {
 		$results = Note::getNoteByNoteNoteTypeId($this->getPDO(), $note->getNoteNoteTypeId());
 		$pdoNote = $results[0];
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+
 		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
-		$this->assertEquals($pdoNote->getNoteNoteTypeId(),$this->noteType->getNoteTypeId());
-		$this->assertEquals($pdoNote->getNoteApplicationId(),$this->application->getApplicationId());
+		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
 	}
 
 	/**
@@ -226,9 +244,11 @@ class NoteTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoNote = $results[0];
-		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
-		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
+
 	}
 }
