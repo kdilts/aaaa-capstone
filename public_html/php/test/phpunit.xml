@@ -2,17 +2,17 @@
 	<testsuites>
 		<testsuite name="AAAA Data Design">
 			<file>ApplicationTest.php</file>
-			<!--<file>ApplicationCohortTest.php</file>-->
-			<!--<file>BridgeTest.php</file>-->
-			<!--<file>CohortTest.php</file>-->
-			<!--<file>NoteTest.php</file>-->
-			<!--<file>NoteTypeTest.php</file>-->
-			<!--<file>PlacardTest.php</file>-->
-			<!--<file>ProspectTest.php</file>-->
-			<!--<file>ProspectCohortTest.php</file>-->
-			<!--<file>StatusTypeTest.php</file>-->
-			<!--<file>StudentPermitTest.php</file>-->
-			<!--<file>SwipeTest.php</file>-->
+			<file>ApplicationCohortTest.php</file>
+			<file>BridgeTest.php</file>
+			<file>CohortTest.php</file>
+			<file>NoteTest.php</file>
+			<file>NoteTypeTest.php</file>
+			<file>PlacardTest.php</file>
+			<file>ProspectTest.php</file>
+			<file>ProspectCohortTest.php</file>
+			<file>StatusTypeTest.php</file>
+			<file>StudentPermitTest.php</file>
+			<file>SwipeTest.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>
