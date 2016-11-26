@@ -65,6 +65,7 @@ class StudentPermitTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoStudentPermit = StudentPermit::getStudentPermitBystudentPermitId($this->getPDO(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($pdoStudentPermit->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
@@ -101,6 +102,7 @@ class StudentPermitTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoStudentPermit = StudentPermit::getStudentPermitByStudentPermitPlacardId($this->getPDO(), $studentPermit->getStudentPermitPlacardId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($pdoStudentPermit->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $pdoStudentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard2->getPlacardId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
@@ -122,6 +124,7 @@ class StudentPermitTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$result = StudentPermit::getStudentPermitByStudentPermitId($this->getPDO(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($result->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
 		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
@@ -152,6 +155,7 @@ class StudentPermitTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$result = StudentPermit::getStudentPermitByStudentPermitApplicationId($this->getPDO(), $studentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($result->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
 		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
@@ -182,6 +186,7 @@ class StudentPermitTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$result = StudentPermit::getStudentPermitByStudentPermitSwipeId($this->getPDO(), $studentPermit->getStudentPermitSwipeId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($result->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
 		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
@@ -212,6 +217,7 @@ class StudentPermitTest extends AaaaTest {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$result = StudentPermit::getStudentPermitByStudentPermitPlacardId($this->getPDO(), $studentPermit->getStudentPermitPlacardId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($result->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($result->getStudentPermitApplicationId(), $result->getStudentPermitApplicationId());
 		$this->assertEquals($result->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($result->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
@@ -243,6 +249,7 @@ class StudentPermitTest extends AaaaTest {
 		$results = StudentPermit::getStudentPermitsByStudentPermitCheckOutDateRange($this->getPDO(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
 		$pdoStudentPermit = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($pdoStudentPermit->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $pdoStudentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
@@ -281,6 +288,7 @@ class StudentPermitTest extends AaaaTest {
 		$results = StudentPermit::getStudentPermitsByStudentPermitCheckInDateRange($this->getPDO(), $this->STUDENTPERMITCHECKOUTDATE, $this->STUDENTPERMITCHECKINDATE);
 		$pdoStudentPermit = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("studentPermit"));
+		$this->assertEquals($pdoStudentPermit->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $pdoStudentPermit->getStudentPermitApplicationId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
@@ -323,6 +331,7 @@ class StudentPermitTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoStudentPermit = $results[0];
+		$this->assertEquals($pdoStudentPermit->getStudentPermitId(), $studentPermit->getStudentPermitId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitPlacardId(), $this->placard->getPlacardId());
 		$this->assertEquals($pdoStudentPermit->getStudentPermitSwipeId(), $this->swipe->getSwipeId());
