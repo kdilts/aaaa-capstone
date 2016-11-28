@@ -28,7 +28,14 @@ class Note {
 	 * @var int $noteId
 	 */
 	private $noteId;
-
+	/**
+	 * @var \DateTime $noteDateTime
+	 */
+	private $noteDateTime;
+	/**
+	 * @var string $noteBridgeStaffId
+	 */
+	private $noteBridgeStaffId;
 	/***
 	 * Note constructor for this function.
 	 * @param int|null $newNoteId
@@ -36,18 +43,22 @@ class Note {
 	 * @param int $newNoteNoteTypeId
 	 * @param int $newNoteApplicationId
 	 * @param int $newNoteProspectId
+	 * @param \DateTime $newNoteDateTime
+	 * @param string $newNoteBridgeStaffId
 	 * @throws \InvalidArgumentException
 	 * @throws \RangeException
 	 * @throws \TypeError
 	 * @throws \Exception
 	 */
-	public function __construct(int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId) {
+	public function __construct(int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId, \DateTime $newNoteDateTime, string $newNoteBridgeStaffId) {
 		try {
 			$this->setNoteId($newNoteId);
 			$this->setNoteContent($newNoteContent);
 			$this->setNoteNoteTypeId($newNoteNoteTypeId);
 			$this->setNoteApplicationId($newNoteApplicationId);
 			$this->setNoteProspectId($newNoteProspectId);
+			$this->setNoteDateTime($newNoteDateTime);
+			$this->setNoteBridgeStaffId($newNoteBridgeStaffId);
 		} catch(\InvalidArgumentException $invalidArgument) {
 			//rethrow the exception to the caller
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
