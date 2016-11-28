@@ -121,6 +121,24 @@ class Note {
 	}
 
 	/**
+	 * accessor method for note date time
+	 *
+	 * @return \DateTime
+	 */
+	public function getNoteDateTime() {
+		return($this->noteDateTime);
+	}
+
+	/**
+	 * accessor method for Id of note bridge staff
+	 *
+	 * @return mixed
+	 */
+	public function getNoteProspectId() {
+		return($this->noteProspectId);
+	}
+
+	/**
 	 * mutator method for note Id
 	 *
 	 * @param int $newNoteId
