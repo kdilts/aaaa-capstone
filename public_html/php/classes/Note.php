@@ -135,7 +135,7 @@ class Note {
 	 * @return mixed
 	 */
 	public function getNoteBridgeStaffId() {
-		return($this->noteProspectId);
+		return($this->noteBridgeStaffId);
 	}
 
 	/**
@@ -217,6 +217,36 @@ class Note {
 		}
 		$this->noteProspectId = $newNoteProspectId;
 	}
+	/**
+	 * mutator method for noteDateTime
+	 * @param \DateTime|null $newNoteDateTime
+	 * @throws \InvalidArgumentException if $newNoteDateTime is not a valid object or string
+	 * @throws \RangeException if $newNoteDateTime is a date that does not exist
+	 */
+	public function setNoteDateTime(\DateTime $newNoteDateTime) {
+		try {
+			$newNoteDateTime = self::validateDateTime($newNoteDateTime);
+		} catch(\InvalidArgumentException $invalidArgument) {
+			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		} catch(\RangeException $range) {
+			throw(new \RangeException($range->getMessage(), 0, $range));
+		}
+		$this->noteDateTime = $newNoteDateTime;
+	}
+	/**
+	 * mutator method for note bridge staff Id
+	 *
+	 * @param string $newNoteBridgeStaffId
+	 * @throws \RangeException if not valid
+	 * @throws \InvalidArgumentException if $newNoteBridgeStaffId is not a valid object or string
+	 */
+	public function setNoteBridgeStaffId(int $newNoteBridgeStaffId) {
+		if($newNoteBridgeStaffId < 0) {
+			throw(new \RangeException("Note Bridge Staff Id can't be negative."));
+//store the note bridge staff Id
+		}
+		$this->noteBridgeStaffId = $newNoteBridgeStaffId;
+	}
 
 	/**
 	 * inserts note Id into mySQL
@@ -230,7 +260,7 @@ class Note {
 			throw(new \PDOException("not a new noteId"));
 		}
 		// create query template
-		$query = "INSERT INTO note(noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId) VALUES(:noteId, :noteContent, :noteNoteTypeId, :noteApplicationId, :noteProspectId)";
+		$query = "INSERT INTO note(noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId) VALUES(:noteId, :noteContent, :noteNoteTypeId, :noteApplicationId, :noteProspectId, :noteDateTime, :noteBridgeStaffId)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -397,7 +427,7 @@ class Note {
 	 */
 	public static function getAllNotes(\PDO $pdo){
 		//create query template
-	$query = "SELECT noteId, noteContent,noteNoteTypeId, noteApplicationId, noteProspectId FROM note";
+		$query = "SELECT noteId, noteContent,noteNoteTypeId, noteApplicationId, noteProspectId FROM note";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -416,7 +446,7 @@ class Note {
 		}
 		return $notes;
 
-}
+	}
 
 	/**
 	 * formats the state variables for JSON serialization
