@@ -222,7 +222,7 @@ class Note {
 	}
 	/**
 	 * mutator method for noteDateTime
-	 * @param \DateTime|null $newNoteDateTime
+	 * @param \DateTime|null $newNoteDateTime note date as a DateTime object or string (or null to load the current time)
 	 * @throws \InvalidArgumentException if $newNoteDateTime is not a valid object or string
 	 * @throws \RangeException if $newNoteDateTime is a date that does not exist
 	 */
@@ -239,7 +239,7 @@ class Note {
 	/**
 	 * mutator method for note bridge staff Id
 	 *
-	 * @param string $newNoteBridgeStaffId
+	 * @param string $newNoteBridgeStaffId new value of Note bridge staff id
 	 * @throws \RangeException if not valid
 	 * @throws \InvalidArgumentException if $newNoteBridgeStaffId is not a valid object or string
 	 */
@@ -252,8 +252,8 @@ class Note {
 	}
 	/**
 	 * inserts note Id into mySQL
-	 * @param \PDO $pdo
-	 * @throws \PDOException
+	 * @param \PDO $pdo connection object
+	 * @throws \PDOException when mySQL related error occur
 	 *
 	 */
 	public function insert(\PDO $pdo) {
@@ -281,9 +281,11 @@ class Note {
 
 	/**
 	 * insert note, by the note Id into the mySQL
-	 * @param \PDO $pdo
-	 * @param int $noteId
-	 * @return Note
+	 * @param \PDO $pdo connection object
+	 * @param int $noteId note id to search for
+	 * @return Note|NULL note found by note id or null if not found
+	 * @throws \PDOException when mySQL related error occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
 	 */
 	public static function getNoteByNoteId(\PDO $pdo, int $noteId) {
 		// sanitize the noteId before searching
@@ -315,9 +317,11 @@ class Note {
 
 	/**
 	 * get note by the noteApplicationId
-	 * @param \PDO $pdo
+	 * @param \PDO $pdo connection object
 	 * @param int $noteApplicationId
 	 * @return \SplFixedArray
+	 * @throws \PDOException
+	 * @throws \TypeError
 	 */
 	public static function getNoteByNoteApplicationId(\PDO $pdo, int $noteApplicationId) {
 		// sanitize the noteApplicationId before searching
