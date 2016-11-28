@@ -247,7 +247,6 @@ class Note {
 		}
 		$this->noteBridgeStaffId = $newNoteBridgeStaffId;
 	}
-
 	/**
 	 * inserts note Id into mySQL
 	 * @param \PDO $pdo
@@ -360,7 +359,7 @@ class Note {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteContent,noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteId = :noteProspectId";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteId = :noteProspectId";
 		$statement = $pdo->prepare($query);
 
 		// bind the noteProspect id to the place holder in template
@@ -427,7 +426,7 @@ class Note {
 	 */
 	public static function getAllNotes(\PDO $pdo){
 		//create query template
-		$query = "SELECT noteId, noteContent,noteNoteTypeId, noteApplicationId, noteProspectId FROM note";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
