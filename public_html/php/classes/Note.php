@@ -141,7 +141,7 @@ class Note {
 	/**
 	 * mutator method for note Id
 	 *
-	 * @param int $newNoteId
+	 * @param int $newNoteId new value of note id
 	 * @throws \RangeException
 	 * @throws \TypeError if new note id is not an integer
 	 */
