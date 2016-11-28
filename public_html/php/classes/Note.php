@@ -134,7 +134,7 @@ class Note {
 	 *
 	 * @return mixed
 	 */
-	public function getNoteProspectId() {
+	public function getNoteBridgeStaffId() {
 		return($this->noteProspectId);
 	}
 
