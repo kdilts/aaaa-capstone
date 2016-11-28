@@ -10,6 +10,6 @@
 	</head>
 	<body>
 		<!-- This custom tag much match your Angular @Component selector name in app/app.component.ts -->
-		<aaaa-capstone>Loading&hellip;</aaaa-capstone>
+		<aaaacapstone>Loading&hellip;</aaaacapstone>
 	</body>
 </html>
