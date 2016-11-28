@@ -47,7 +47,7 @@ class Note {
 	 * @param \DateTime $newNoteDateTime date and time this Note was created or null if set to current date and time
 	 * @param string $newNoteBridgeStaffId id for the Bridge Staff commenting on this note
 	 * @throws \InvalidArgumentException if data types are not valid
-	 * @throws \RangeException
+	 * @throws \RangeException if data is not within limits
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exceptions occur
 	 */
@@ -142,7 +142,7 @@ class Note {
 	 * mutator method for note Id
 	 *
 	 * @param int $newNoteId new value of note id
-	 * @throws \RangeException
+	 * @throws \RangeException if $newNoteId is not positive
 	 * @throws \TypeError if new note id is not an integer
 	 */
 	public function setNoteId(int $newNoteId = null) {
@@ -163,7 +163,7 @@ class Note {
 	 *
 	 * @param string $newNoteContent new value of tweet content
 	 * @throws \InvalidArgumentException if $newNoteContent is not a string or insecure
-	 * @throws \RangeException
+	 * @throws \RangeException if $newNoteContent is not within limits
 	 * @throws \TypeError if $newNoteContent is not a string
 	 **/
 	public function setNoteContent(string $newNoteContent) {
@@ -179,8 +179,8 @@ class Note {
 	/**
 	 * mutator method for note of the note Id
 	 *
-	 * @param int|null $newNoteNoteTypeId
-	 * @throws \RangeException
+	 * @param int|null $newNoteNoteTypeId new value of note note type id
+	 * @throws \RangeException if $newNoteTypeId is not positive
 	 * @throws \TypeError if $newNoteNoteId is not an integer
 	 */
 	public function setNoteNoteTypeId(int $newNoteNoteTypeId) {
@@ -194,8 +194,9 @@ class Note {
 	/**
 	 * mutator method for application of the note
 	 *
-	 * @param int $newNoteApplicationId
-	 * @throws \RangeException
+	 * @param int $newNoteApplicationId new value of note application id
+	 * @throws \RangeException if $newNoteApplicationId is not positive
+	 * @throws \TypeError if $newNoteApplicationId is not an integer
 	 */
 	public function setNoteApplicationId(int $newNoteApplicationId) {
 		if($newNoteApplicationId < 0) {
@@ -208,7 +209,9 @@ class Note {
 	/**
 	 * mutator method for note of the prospect Id
 	 *
-	 * @param int $newNoteProspectId
+	 * @param int $newNoteProspectId new value of note prospect id
+	 * @throws \RangeException if $newNoteProspectId is not positive
+	 * @throws \TypeError if $newNoteProspectId is not an integer
 	 */
 	public function setNoteProspectId(int $newNoteProspectId) {
 		if($newNoteProspectId < 0) {
