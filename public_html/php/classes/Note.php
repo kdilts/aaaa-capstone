@@ -37,19 +37,19 @@ class Note {
 	 * @var string $noteBridgeStaffId
 	 */
 	private $noteBridgeStaffId;
-	/***
+	/**
 	 * Note constructor for this function.
-	 * @param int|null $newNoteId
-	 * @param string $newNoteContent
-	 * @param int $newNoteNoteTypeId
-	 * @param int $newNoteApplicationId
-	 * @param int $newNoteProspectId
-	 * @param \DateTime $newNoteDateTime
-	 * @param string $newNoteBridgeStaffId
-	 * @throws \InvalidArgumentException
+	 * @param int|null $newNoteId id for this Note or null if a new Note
+	 * @param string $newNoteContent string containing actual note data
+	 * @param int $newNoteNoteTypeId id of the Type of this Note
+	 * @param int $newNoteApplicationId Id of the Application associated with this Note
+	 * @param int $newNoteProspectId id of the Prospect associated with this Note
+	 * @param \DateTime $newNoteDateTime date and time this Note was created or null if set to current date and time
+	 * @param string $newNoteBridgeStaffId id for the Bridge Staff commenting on this note
+	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException
-	 * @throws \TypeError
-	 * @throws \Exception
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exceptions occur
 	 */
 	public function __construct(int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId, \DateTime $newNoteDateTime, string $newNoteBridgeStaffId) {
 		try {
@@ -161,7 +161,7 @@ class Note {
 	/**
 	 * mutator method for the Content of the Note
 	 *
-	 * @param string $newNoteContent
+	 * @param string $newNoteContent new value of tweet content
 	 * @throws \InvalidArgumentException if $newNoteContent is not a string or insecure
 	 * @throws \RangeException
 	 * @throws \TypeError if $newNoteContent is not a string
