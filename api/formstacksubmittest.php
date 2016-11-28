@@ -4,4 +4,4 @@
 //$say = htmlspecialchars($_POST['say']);
 //$to  = htmlspecialchars($_POST['to']);
 
-echo  $_POST;
+var_dump ($_POST);
