@@ -2,6 +2,7 @@
 namespace Edu\Cnm\DdcAaaa;
 
 class Note {
+	use ValidateDate;
 	/**
 	 * actual content of the note
 	 * @var string $noteContent
