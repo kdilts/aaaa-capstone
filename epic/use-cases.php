@@ -50,7 +50,7 @@
 		<ul>
 			<li> Dylan AKA the “Captain” never has much down time and that is by personal choice for the most part.  Dylan has just received my application for the Stimulus Program via from Andrea. With this new software he can easily make notes and adjustments to the applicants while keeping track of there progress in the pre work stage. </li>
 			<li> After submitting my application I go down to CNM to make a payment to begin the process of bettering my life. After making my payment in cash from selling a kidney.  I quickly receive  an email as a notification.</li>
-			<li> Dylan logs back into the AAAA program to see if I and or any other applicants  have started there pre-work.  He sees that I have made my payment and started to:
+			<li> Dylan logs back into the StreamlineCNM program to see if I and or any other applicants  have started there pre-work.  He sees that I have made my payment and started to:
 				<ol>
 					<li>create my CNM and Deep Dive student accounts.</li>
 					<li>set up the toolset and need to get my book so I can self-study.</li>
