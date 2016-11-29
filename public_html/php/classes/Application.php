@@ -448,7 +448,7 @@ class Application {
 	/**
 	 * mutator method for applicationUtmSource
 	 * @throws \InvalidArgumentException if empty or insecure.
-	 * @param string $newApplicationUtmSource
+	 * @param string $newApplicationUtmSource for the utm source
 	 * @throws \RangeException if too large.
 	 */
 	public function setApplicationUtmSource(string $newApplicationUtmSource) {
@@ -504,7 +504,7 @@ class Application {
 	/**
 	 * searches applications by applicationDateTime
 	 * @param \PDO $pdo connection object
-	 * @param $startDate
+	 * @param $startDate \DateTime start for this application
 	 * @return \SplFixedArray SplFixedDate Array of all the applications
 	 */
 	public static function getApplicationsByApplicationDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate){
@@ -562,9 +562,9 @@ class Application {
 
 	/**
 	 * searches applications by applicationEmail
-	 * @param \PDO $pdo
-	 * @param string $applicationEmail
-	 * @return Application|null
+	 * @param \PDO $pdo connection object
+	 * @param string $applicationEmail for the email of applicant
+	 * @return Application|null value of the application
 	 */
 	public static function getApplicationByApplicationEmail (\PDO $pdo, string $applicationEmail){
 		//sanitize the email before searching
@@ -613,8 +613,8 @@ class Application {
 
 	/**
 	 * searches applications by applicationId
-	 * @param \PDO $pdo
-	 * @param int $applicationId
+	 * @param \PDO $pdo connection object
+	 * @param int $applicationId for the application id
 	 * @return Application
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type

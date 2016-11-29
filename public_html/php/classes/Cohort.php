@@ -26,10 +26,10 @@ class Cohort implements \JsonSerializable {
 	 *
 	 * @param int|null $newCohortId
 	 * @param int $newCohortApplicationId
-	 * @throws \InvalidArgumentException
-	 * @throws \RangeException
-	 * @throws \TypeError
-	 * @throws \Exception
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data is not correct or is not positive
+	 * @throws \TypeError when variable are not the correct data type
+	 * @throws \Exception when any other exceptions occur
 	 **/
 
 	public function __construct(int $newCohortId = null, int $newCohortApplicationId) {
@@ -55,7 +55,7 @@ class Cohort implements \JsonSerializable {
 	/**
 	 * accessor method for cohort id
 	 *
-	 * @return int|null
+	 * @return int|null value of the cohort id
 	 **/
 	public function getCohortId() {
 		return ($this->cohortId);
@@ -65,6 +65,8 @@ class Cohort implements \JsonSerializable {
 
 	/**
 	 * @param int|null $newCohortId
+	 * @throws \RangeException if data is not positive
+	 * @throws \TypeError if id is not an integer
 	 */
 	public function setCohortId(int $newCohortId = null) {
 		// base case: if the cohort id is null
@@ -106,7 +108,7 @@ class Cohort implements \JsonSerializable {
 	/**
 	 * inserts this Cohort into database
 	 *
-	 * @param \PDO $pdo
+	 * @param \PDO $pdo connection object
 	 * @throws \PDOException when SQL errors occur
 	 * @throws \TypeError if $pdo is not a pdo connection object
 	 */
@@ -127,9 +129,9 @@ class Cohort implements \JsonSerializable {
 
 	/**
 	 * gets cohorts by cohortId
-	 * @param \PDO $pdo
+	 * @param \PDO $pdo connection object
 	 * @param int $cohortId to search for
-	 * @return Cohort|null
+	 * @return Cohort|null gets value of cohort
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
@@ -164,9 +166,9 @@ class Cohort implements \JsonSerializable {
 
 	/**
 	 * searches cohorts by ApplicationId
-	 * @param \PDO $pdo
+	 * @param \PDO $pdo connection object
 	 * @param int $cohortApplicationId searching cohort by ApplicationId
-	 * @return Cohort|null
+	 * @return Cohort|null id for the application to search for
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
@@ -201,8 +203,8 @@ class Cohort implements \JsonSerializable {
 	}
 	/**
 	 * gets all cohorts
-	 * @param \PDO $pdo
-	 * @return \SplFixedArray of chorts found, or null if not found
+	 * @param \PDO $pdo connection object
+	 * @return \SplFixedArray of cohorts found, or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */

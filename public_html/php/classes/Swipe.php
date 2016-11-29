@@ -168,9 +168,9 @@ class Swipe {
 
 	/**
 	 * gets the swipeId for the swipe
-	 * @param \PDO $pdo
-	 * @param int $swipeId
-	 * @return Swipe|null
+	 * @param \PDO $pdo conncection object
+	 * @param int $swipeId id of the swipe to look for
+	 * @return Swipe|null if id is not valid or not found
 	 */
 	public static function getSwipeBySwipeId(\PDO $pdo, int $swipeId) {
 		// sanitize the swipeId before searching

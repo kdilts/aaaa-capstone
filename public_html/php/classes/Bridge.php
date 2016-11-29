@@ -122,8 +122,9 @@ namespace Edu\Cnm\DdcAaaa;
 		}
 		/**
 		 * inserts this bridge member into database.
-		 * @param \PDO $pdo
-		 * @throws \PDOException
+		 * @param \PDO $pdo connection object
+		 * @throws \PDOException if not positive
+		 * @throws \TypeError when variables are not the correct data type
 		 */
 		public function insert(\PDO $pdo) {
 			// enforce the bridgeStaffId is null (i.e., don't insert a bridge that already exists)
@@ -235,9 +236,9 @@ namespace Edu\Cnm\DdcAaaa;
 		}
 		/**
 		 * searches bridge by userName
-		 * @param \PDO $pdo
+		 * @param \PDO $pdo connection object
 		 * @param \string $bridgeUserName searches bridge by UserName
-		 * @return \SplFixedArray
+		 * @return \SplFixedArray SplArray of all the names of bridge found
 		 * @throws \PDOException when mySQL related errors occur
 		 * @throws \TypeError when variables are not the correct data type
 
@@ -277,7 +278,7 @@ namespace Edu\Cnm\DdcAaaa;
 		/**
 		 * gets all bridge members
 		 * @param \PDO $pdo connection objects
-		 * @return \SplFixedArray SplFi
+		 * @return \SplFixedArray SplFixedArray of all the bridge members found
 		 * @throws \PDOException when mySQL related errors occur
 		 * @throws \TypeError when variables are not the correct data type
 		 */
