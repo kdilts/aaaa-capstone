@@ -113,7 +113,7 @@ class NoteTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidNote() {
 		// create a Note with a non null note id and watch it fail
-		$note = new Note(AaaaTest::INVALID_KEY,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(), $this->application->getApplicationId(), $this->prospect->getProspectId(),($this->NOTEDATETIME, $this->NOTEBRIDGESTAFFID);
+		$note = new Note(AaaaTest::INVALID_KEY,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(), $this->application->getApplicationId(), $this->prospect->getProspectId(),$this->NOTEDATETIME, $this->NOTEBRIDGESTAFFID);
 		$note->insert($this->getPDO());
 	}
 
