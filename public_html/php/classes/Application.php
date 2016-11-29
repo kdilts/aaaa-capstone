@@ -68,22 +68,22 @@ class Application {
 
 	/**
 	 *
-	 * application constructor.
-	 * @param int|null $newApplicationId
-	 * @param string $newApplicationFirstName
-	 * @param string $newApplicationLastName
-	 * @param string $newApplicationEmail
-	 * @param string $newApplicationPhoneNumber
-	 * @param string $newApplicationSource
-	 * @param string $newApplicationAboutYou
-	 * @param string $newApplicationHopeToAccomplish
-	 * @param string $newApplicationExperience
-	 * @param \DateTime $newApplicationDateTime
-	 * @param string $newApplicationUtmCampaign
-	 * @param string $newApplicationUtmMedium
-	 * @param string $newApplicationUtmSource
-	 * @throws \Exception
-	 * @throws \TypeError
+	 * application constructor for this Application
+	 * @param int|null $newApplicationId id of the Application
+	 * @param string $newApplicationFirstName First Name of this Applicant
+	 * @param string $newApplicationLastName Last Name of this Applicant
+	 * @param string $newApplicationEmail email for this Application
+	 * @param string $newApplicationPhoneNumber phone number for the Applicant
+	 * @param string $newApplicationSource the source of this Application
+	 * @param string $newApplicationAboutYou the About You on this Application
+	 * @param string $newApplicationHopeToAccomplish the Hope to accomplish on this Application
+	 * @param string $newApplicationExperience the Experice of the applicant on this Application
+	 * @param \DateTime $newApplicationDateTime date and time this note was created ot null if set to current date and time
+	 * @param string $newApplicationUtmCampaign the UTMCampaign of this Application
+	 * @param string $newApplicationUtmMedium the UtmMedium of this Application
+	 * @param string $newApplicationUtmSource the UtmSource of this Application
+	 * @throws \Exception if some other exception
+	 * @throws \TypeError if data is not within limits
 	 */
 	public function __construct(int $newApplicationId = null, string $newApplicationFirstName, string $newApplicationLastName, string $newApplicationEmail, string $newApplicationPhoneNumber, string $newApplicationSource, string $newApplicationAboutYou, string $newApplicationHopeToAccomplish, string $newApplicationExperience, \DateTime $newApplicationDateTime, string $newApplicationUtmCampaign, string $newApplicationUtmMedium, string $newApplicationUtmSource){
 		try {
@@ -466,7 +466,7 @@ class Application {
 	}
 	/**
 	 * inserts application into SQL database
-	 * @param \PDO $pdo
+	 * @param \PDO $pdo connection object
 	 * @throws \PDOException if applicationId already exists
 	 */
 	public function insert(\PDO $pdo) {
@@ -503,9 +503,9 @@ class Application {
 
 	/**
 	 * searches applications by applicationDateTime
-	 * @param \PDO $pdo
+	 * @param \PDO $pdo connection object
 	 * @param $startDate
-	 * @return \SplFixedArray
+	 * @return \SplFixedArray SplFixedDate Array of all the applications
 	 */
 	public static function getApplicationsByApplicationDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate){
 		// validate dates

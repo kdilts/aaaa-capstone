@@ -294,7 +294,7 @@ class Note {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteId = :noteId";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId FROM note WHERE noteId = :noteId";
 		$statement = $pdo->prepare($query);
 
 		// bind the note id to the place holder in template
@@ -306,7 +306,7 @@ class Note {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteDateTime"], $row["noteBridgeStaffId"]);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
@@ -318,10 +318,10 @@ class Note {
 	/**
 	 * get note by the noteApplicationId
 	 * @param \PDO $pdo connection object
-	 * @param int $noteApplicationId
-	 * @return \SplFixedArray
-	 * @throws \PDOException
-	 * @throws \TypeError
+	 * @param int $noteApplicationId note id to search for
+	 * @return \SplFixedArray SplFixedArray of Notes found
+	 * @throws \PDOException when note application id is not positive
+	 * @throws \TypeError when variables are not the correct data type
 	 */
 	public static function getNoteByNoteApplicationId(\PDO $pdo, int $noteApplicationId) {
 		// sanitize the noteApplicationId before searching
@@ -342,11 +342,11 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"],$row["noteContent"], $row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
+				$note = new Note($row["noteId"], $row["noteContent"], $row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteDateTime"], $row["noteBridgeStaffId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
+				// if the row couldn't be converted, rethrow
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
@@ -355,9 +355,11 @@ class Note {
 
 	/**
 	 * gets the note by the prospect Id
-	 * @param \PDO $pdo
-	 * @param int $noteProspectId
-	 * @return \SplFixedArray
+	 * @param \PDO $pdo connection object
+	 * @param int $noteProspectId id to search for
+	 * @return \SplFixedArray SplFixedArray of Notes found
+	 * @throws \PDOException when data id is not positive
+	 * @throws \TypeError when variables are not the correct data
 	 */
 	public static function getNoteByNoteProspectId(\PDO $pdo, int $noteProspectId) {
 		// sanitize the noteProspectId before searching
@@ -378,7 +380,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteBridgeStaffId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
@@ -391,9 +393,11 @@ class Note {
 
 	/**
 	 * get note by note of the noteId
-	 * @param \PDO $pdo
-	 * @param int $noteNoteTypeId
-	 * @return \SplFixedArray
+	 * @param \PDO $pdo connection object
+	 * @param int $noteNoteTypeId id to search for
+	 * @return \SplFixedArray SplFixedArray of Notes found
+	 * @throws \PDOException if id is not positive
+	 * @throws \TypeError when variables are not the correct data
 	 */
 	public static function getNoteByNoteNoteTypeId(\PDO $pdo, int $noteNoteTypeId) {
 		// sanitize the noteNoteTypeId before searching
@@ -414,7 +418,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteDateTime"], $row["noteBridgeStaffId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
@@ -442,7 +446,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false){
 			try{
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteDateTime"], $row["noteBridgeStaffId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch (\Exception $exception){
