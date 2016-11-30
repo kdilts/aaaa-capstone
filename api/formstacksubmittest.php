@@ -1,15 +1,40 @@
 <?php
-// The global $_POST variable allows you to access the data sent with the POST method
-// To access the data sent with the GET method, you can use $_GET
-//$say = htmlspecialchars($_POST['say']);
-//$to  = htmlspecialchars($_POST['to']);
 
+
+namespace Edu\Cnm\DdcAaaa;
+use Edu\Cnm\DdcAaaa\{ Application };
+require_once(dirname(__DIR__) . "/public_html/php/classes/autoload.php");
 $requestContent = file_get_contents("php://input");
-// Retrieves the JSON package that the front end sent, and stores it in $requestContent. Here we are using file_get_contents("php://input") to get the request from the front end. file_get_contents() is a PHP function that reads a file into a string. The argument for the function, here, is "php://input". This is a read only stream that allows raw data to be read from the front end request which is, in this case, a JSON package.
+$decodeContent = json_decode($requestContent, true);
+$splitContent = explode(",", $requestContent);
 
-
-//$requestObject = json_decode($requestContent);
-
-$fd = fopen("/tmp/ASTM-D4236.txt", "w");
-fwrite($fd, $requestContent);
-fclose($fd);
+$newApp = new Application(
+	null,
+	$decodeContent["46813104"]["first"], //first name
+	$decodeContent["46813104"]["last"],//last name
+	$decodeContent["46813105"], //email
+	$decodeContent["46813106"],//phonenumber
+	$decodeContent["46813107"],//source
+	$decodeContent["46813110"],//about you
+	$decodeContent["46813111"],//hopetoaccomplish
+	$decodeContent["46813112"],//experience
+	new \DateTime(),
+	"empty",
+	"empty",
+	"empty3"
+	//$decodeContent["Campaign Term"],
+	//$decodeContent["Campaign Medium"],
+	//$decodeContent["Campaign Source"]
+);
+$newApp->insert($this->getPDO());
+//$decodeContentString = var_export($decodeContent, true);
+//
+//$fd = fopen("/tmp/posttest.txt", "w");
+//fwrite($fd, $requestContent);
+//fclose($fd);
+//$fd = fopen("/tmp/posttest2.txt", "w");
+//fwrite($fd, $decodeContentString);
+//fclose($fd);
+//$fd = fopen("/tmp/jsonerror.txt", "w");
+//fwrite($fd, json_last_error_msg());
+//fclose($fd);
