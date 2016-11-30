@@ -3,14 +3,15 @@
 <html>
 	<header lang="en">
 		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-COMPATIBLE" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-
-	<title>Stream Line CNM Log in Page</title>
+		<title>Stream Line CNM Log in Page</title>
 	</header>
 
 	<body class="sfooter">
 		<div class="sfooter-content">
-			<div class="row">
+			<div class="row"></div>
 			<header>
 				<nav class="navbar navbar-inverse">
 					<div class="container">
@@ -19,7 +20,6 @@
 					</div><!-- /.container -->
 				</nav>
 			</header>
-			</div>
 
 			<main class="container">
 				<h1 class="text-center">Stream Line CNM</h1>
@@ -44,15 +44,6 @@
 										<i class="fa fa-envelope"></i>
 									</div>
 									<input class="form-control" type="email" name="email" id="email" placeholder="Your Email">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="phone">Phone</label>
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-user"></i>
-									</div>
-									<input class="form-control" type="number" name="number" placeholder="Your Phone">
 								</div>
 							</div>
 		</div>
