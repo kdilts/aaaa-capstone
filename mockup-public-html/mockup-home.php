@@ -74,5 +74,17 @@
 				</div>
 			</div>
 		</section>
+		<!-- add modal here-->
+		<div class="modal fade" id="add-student" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal content">
+					<div class="modal-header">
+						<button type="button"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Add Student</h4>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
