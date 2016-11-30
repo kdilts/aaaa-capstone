@@ -53,7 +53,7 @@ class NoteTest extends AaaaTest {
 	/**
 	 * bridge staff creating this note
 	 **/
-	protected  $VALID_BRIDGESTAFFID = "123456789";
+	protected  $bridge=null;
 	/**
 	 * create dependent objects before running each test
 	 **/
@@ -73,7 +73,8 @@ class NoteTest extends AaaaTest {
 		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", "about you", "hope", "exp", $this->VALID_DATE, "utmC","utmM", "utmS");
 		$this->application->insert($this->getPDO());
 
-
+		$this->bridge = new Bridge(null, "dylanMcD1", "rochelle1");
+		$this->bridge->insert($this->getPDO());
 	}
 	/**
 	 * int $newNoteId = null, string $newNoteContent, in $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId
@@ -87,7 +88,7 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		// create a new Note and insert it to into mySQL
-		$note = new Note(null,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(), $this->prospect->getProspectId(), $this->VALID_DATE, $this->NOTEBRIDGESTAFFID);
+		$note = new Note(null,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(), $this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 		$note->insert($this->getPDO());
 
 		//int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId
@@ -101,7 +102,7 @@ class NoteTest extends AaaaTest {
 		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteDateTime(), $this->NOTEDATETIME);
-		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->noteType->getNoteBridgeStaffId);
+		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
 	}
 
 	/**
@@ -111,7 +112,7 @@ class NoteTest extends AaaaTest {
 	 **/
 	public function testInsertInvalidNote() {
 		// create a Note with a non null note id and watch it fail
-		$note = new Note(AaaaTest::INVALID_KEY,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(), $this->application->getApplicationId(), $this->prospect->getProspectId(),$this->VALID_DATE, $this->NOTEBRIDGESTAFFID);
+		$note = new Note(AaaaTest::INVALID_KEY,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(), $this->application->getApplicationId(), $this->prospect->getProspectId(),$this->VALID_DATE, $this->bridge->getBridgeStaffId());
 		$note->insert($this->getPDO());
 	}
 
@@ -123,7 +124,7 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(), $this->prospect->getProspectId(), $this->VALID_DATE, $this->NOTEBRIDGESTAFFID);
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(), $this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -137,7 +138,7 @@ class NoteTest extends AaaaTest {
 		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteDateTime(), $this->VALID_DATE);
-		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->noteType->getNoteBridgeStaffId);
+		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
 	}
 	/**
 	 * Test inserting a Note that already exists
@@ -156,7 +157,7 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->NOTEBRIDGESTAFFID);
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
@@ -171,7 +172,7 @@ class NoteTest extends AaaaTest {
 		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteDateTime(), $this->VALID_DATE);
-		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->noteType->getNoteBridgeStaffId);
+		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
 	}
 
 	/**
@@ -191,8 +192,7 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		//create a new Note and insert it to into mySQL
-		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->NOTEBRIDGESTAFFID);
-		$note->insert($this->getPDO());
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$results = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteId());
@@ -206,7 +206,7 @@ class NoteTest extends AaaaTest {
 		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteDateTime(), $this->VALID_DATE);
-		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->noteType->getNoteBridgeStaffId);
+		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
 	}
 
 	/**
@@ -224,7 +224,7 @@ class NoteTest extends AaaaTest {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("note");
 		//create a new Note and insert it to mySQL
-		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->NOTEBRIDGESTAFFID);
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
@@ -239,7 +239,7 @@ class NoteTest extends AaaaTest {
 		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteDateTime(), $this->VALID_DATE);
-		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->noteType->getNoteBridgeStaffId);
+		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
 	}
 
 	/**
@@ -258,7 +258,7 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		// create a new Note and insert to into mySQL
-		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->NOTEBRIDGESTAFFID);
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 		$note->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -275,7 +275,7 @@ class NoteTest extends AaaaTest {
 		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
 		$this->assertEquals($pdoNote->getNoteDateTime(), $this->VALID_DATE);
-		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->noteType->getNoteBridgeStaffId);
+		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
 
 	}
 }
