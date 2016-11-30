@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-	<header lang="en">
+	<head lang="en">
 		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-COMPATIBLE" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 		<title>Stream Line CNM Log in Page</title>
-	</header>
+	</head>
 
 	<body class="sfooter">
 		<div class="sfooter-content">
@@ -20,7 +20,11 @@
 				</nav>
 			</header>
 
-			<main class="container">
+			<main>
+				<div class="container">
+					<div class="jumbotron text-center">
+					</div>
+				</div>
 				<h1 class="text-center">Stream Line CNM</h1>
 				<div class="form-wrap row">
 					<div class="col-sm-12 col-sm-offset-12">
