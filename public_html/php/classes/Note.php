@@ -345,7 +345,7 @@ class Note {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"], $row["noteContent"], $row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteDateTime"], $row["noteBridgeStaffId"]);
+				$note = new Note($row["noteId"], $row["noteContent"], $row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], \DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]), $row["noteBridgeStaffId"]);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
