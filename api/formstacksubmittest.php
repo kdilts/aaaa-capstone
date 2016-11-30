@@ -33,6 +33,13 @@ $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 //$this->connection = $this->createDefaultDBConnection($pdo, $config["database"]);
 
 $newApp->insert($pdo);
+
+if($decodeContent["4681308"] === null) {
+	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813109"]);
+}else{
+	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
+}
+$newAppCohort->insert($pdo);
 $decodeContentString = var_export($decodeContent, true);
 //
 //$fd = fopen("/tmp/apptest.txt", "w");
