@@ -102,7 +102,7 @@ class NoteTest extends AaaaTest {
 		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
 		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
 		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
-		$this->assertEquals($pdoNote->getNoteDateTime(), $this->NOTEDATETIME);
+		$this->assertEquals($pdoNote->getNoteDateTime(), $this->VALID_DATE);
 		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
 	}
 
