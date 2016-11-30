@@ -29,7 +29,7 @@ CREATE TABLE application(
 );
 
 CREATE TABLE bridge(
-	bridgeStaffId VARCHAR(9),
+	bridgeStaffId CHAR(9),
 	bridgeName VARCHAR(64),
 	bridgeUserName VARCHAR(20),
 	INDEX (bridgeStaffId),
@@ -135,12 +135,16 @@ CREATE TABLE note(
 	noteProspectId INT UNSIGNED,
 	noteNoteTypeId INT UNSIGNED NOT NULL,
 	noteContent VARCHAR(2000) NOT NULL,
+	noteDateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	noteBridgeStaffId CHAR(9),
 	INDEX (noteId),
 	INDEX (noteProspectId),
 	INDEX (noteApplicationId),
 	INDEX (noteNoteTypeId),
+	INDEX (noteBridgeStaffId),
 	PRIMARY KEY(noteId),
 	FOREIGN KEY(noteProspectId) REFERENCES prospect (prospectId),
 	FOREIGN KEY(noteApplicationId) REFERENCES application (applicationId),
-	FOREIGN KEY (noteNoteTypeId) REFERENCES noteType(noteTypeId)
+	FOREIGN KEY(noteNoteTypeId) REFERENCES noteType(noteTypeId),
+	FOREIGN KEY(noteBridgeStaffId) REFERENCES bridge (bridgeStaffId)
 );
