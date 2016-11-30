@@ -199,7 +199,7 @@ class NoteTest extends AaaaTest {
 		$result = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteProspectId());
 		$pdoNote = $result;
 //		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+		$this->assertOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
 
 		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);

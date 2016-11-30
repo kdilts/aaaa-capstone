@@ -379,18 +379,19 @@ class Note {
 		$statement->execute($parameters);
 
 		// build an array of notes
-		try {
-			$note = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false){
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], \DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]), $row["noteBridgeStaffId"]);
+		$notes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteBridgeStaffId"]);
+				$notes[$notes->key()] = $note;
+				$notes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception){
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return $note;
+		return $notes;
 	}
 
 	/**
