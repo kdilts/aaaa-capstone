@@ -20,7 +20,7 @@
 					<div class="container">
 						<ul class="nav navbar-nav navbar-right">
 						</ul>
-					</div><!-- /.container -->
+					</div><!-- container -->
 				</nav>
 			</header>
 
@@ -35,21 +35,21 @@
 						<!-- insert contact form here -->
 						<form id="contact-form">
 							<div class="form-group">
-								<label for="name">Name</label>
+								<label for="email">Email</label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-user"></i>
 									</div>
-									<input class="form-control" type="text" name="name" id="name" placeholder="Your Name">
+									<input class="form-control" type="text" name="email" id="email" placeholder="Your Email">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="email">Email</label>
+								<label for="password">Password</label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-envelope"></i>
 									</div>
-									<input class="form-control" type="email" name="email" id="email" placeholder="Your Email">
+									<input class="form-control" type="text" name="password" id="password" placeholder="Password">
 								</div>
 							</div>
 		</div>
