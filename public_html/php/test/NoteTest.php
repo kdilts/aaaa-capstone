@@ -53,7 +53,7 @@ class NoteTest extends AaaaTest {
 	/**
 	 * bridge staff creating this note
 	 **/
-	protected  $bridge=null;
+	protected  $bridge = null;
 	/**
 	 * create dependent objects before running each test
 	 **/
