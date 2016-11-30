@@ -34,7 +34,7 @@ $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 
 $newApp->insert($pdo);
 
-if($decodeContent["4681308"] === null) {
+if($decodeContent["46813108"] === null) {
 	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813109"]);
 }else{
 	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
