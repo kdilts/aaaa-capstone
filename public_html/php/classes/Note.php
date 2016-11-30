@@ -271,7 +271,9 @@ class Note {
 			"noteApplicationId" => $this->noteApplicationId,
 			"noteProspectId" => $this->noteProspectId,
 			"noteNoteTypeId" => $this->noteNoteTypeId,
-			"noteContent" => $this->noteContent
+			"noteContent" => $this->noteContent,
+			"noteDateTime" => $this->noteDateTime,
+			"noteBridgeStaffId" => $this->noteBridgeStaffId,
 		];
 		$statement->execute($parameters);
 
