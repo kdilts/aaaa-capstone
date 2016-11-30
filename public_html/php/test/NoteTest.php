@@ -194,7 +194,7 @@ class NoteTest extends AaaaTest {
 
 		//create a new Note and insert it to into mySQL
 		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
-
+		var_dump($note);
 		//grab the data from mySQL and enforce the fields match our expectations
 		$results = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteProspectId());
 		var_dump($results);
