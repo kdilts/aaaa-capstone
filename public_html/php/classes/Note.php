@@ -273,7 +273,7 @@ class Note {
 			"noteNoteTypeId" => $this->noteNoteTypeId,
 			"noteContent" => $this->noteContent,
 			"noteDateTime" => $this->noteDateTime,
-			"noteBridgeStaffId" => $this->noteBridgeStaffId,
+			"noteBridgeStaffId" => $this->noteBridgeStaffId
 		];
 		$statement->execute($parameters);
 
@@ -332,7 +332,7 @@ class Note {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteId = :noteApplicationId";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId FROM note WHERE noteId = :noteApplicationId";
 		$statement = $pdo->prepare($query);
 
 		// bind the noteApplication id to the place holder in template
