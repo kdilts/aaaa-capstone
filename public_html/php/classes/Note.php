@@ -309,7 +309,7 @@ class Note {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteDateTime"], $row["noteBridgeStaffId"]);
+				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], \DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]), $row["noteBridgeStaffId"]);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
