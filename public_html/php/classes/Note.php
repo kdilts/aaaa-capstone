@@ -266,6 +266,7 @@ class Note {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
+		$this->noteDateTime = $this->noteDateTime->format("Y-m-d H:i:s");
 		$parameters = [
 			"noteId" => $this->noteId,
 			"noteApplicationId" => $this->noteApplicationId,
