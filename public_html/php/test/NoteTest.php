@@ -196,10 +196,10 @@ class NoteTest extends AaaaTest {
 		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$result = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteProspectId());
-		$pdoNote = $result;
-//		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+		$results = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteProspectId());
+		$pdoNote = $results[0];
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Note",$results);
 
 		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
 		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
