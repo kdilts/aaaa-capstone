@@ -4,10 +4,9 @@
 namespace Edu\Cnm\DdcAaaa;
 use Edu\Cnm\DdcAaaa\{ Application };
 require_once(dirname(__DIR__) . "/public_html/php/classes/autoload.php");
-//require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
+require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 $requestContent = file_get_contents("php://input");
 $decodeContent = json_decode($requestContent, true);
-$splitContent = explode(",", $requestContent);
 
 $newApp = new Application(
 	null,
@@ -27,7 +26,13 @@ $newApp = new Application(
 	//$decodeContent["Campaign Medium"],
 	//$decodeContent["Campaign Source"]
 );
-//$newApp->insert($this->getPDO());
+
+	//grab the mySQL DataBase connection
+//$config = readConfig("/etc/apache2/capstone-mysql/ddcaaaa.ini");
+$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
+//$this->connection = $this->createDefaultDBConnection($pdo, $config["database"]);
+
+$newApp->insert($pdo);
 $decodeContentString = var_export($decodeContent, true);
 //
 //$fd = fopen("/tmp/apptest.txt", "w");
@@ -35,7 +40,7 @@ $decodeContentString = var_export($decodeContent, true);
 //fclose($fd);
 
 $fd = fopen("/tmp/posttest.txt", "w");
-fwrite($fd, $requestContent);
+fwrite($fd, var_export($pdo, true));
 fclose($fd);
 $fd = fopen("/tmp/posttest2.txt", "w");
 fwrite($fd, $decodeContentString);
