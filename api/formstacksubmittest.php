@@ -40,7 +40,7 @@ $decodeContentString = var_export($decodeContent, true);
 //fclose($fd);
 
 $fd = fopen("/tmp/posttest.txt", "w");
-fwrite($fd, var_export($pdo, true));
+fwrite($fd, $requestContent);
 fclose($fd);
 $fd = fopen("/tmp/posttest2.txt", "w");
 fwrite($fd, $decodeContentString);
