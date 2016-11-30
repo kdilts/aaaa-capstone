@@ -4,6 +4,7 @@
 namespace Edu\Cnm\DdcAaaa;
 use Edu\Cnm\DdcAaaa\{ Application };
 require_once(dirname(__DIR__) . "/public_html/php/classes/autoload.php");
+//require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 $requestContent = file_get_contents("php://input");
 $decodeContent = json_decode($requestContent, true);
 $splitContent = explode(",", $requestContent);
@@ -26,15 +27,19 @@ $newApp = new Application(
 	//$decodeContent["Campaign Medium"],
 	//$decodeContent["Campaign Source"]
 );
-$newApp->insert($this->getPDO());
-//$decodeContentString = var_export($decodeContent, true);
+//$newApp->insert($this->getPDO());
+$decodeContentString = var_export($decodeContent, true);
 //
-//$fd = fopen("/tmp/posttest.txt", "w");
+//$fd = fopen("/tmp/apptest.txt", "w");
 //fwrite($fd, $requestContent);
 //fclose($fd);
-//$fd = fopen("/tmp/posttest2.txt", "w");
-//fwrite($fd, $decodeContentString);
-//fclose($fd);
-//$fd = fopen("/tmp/jsonerror.txt", "w");
-//fwrite($fd, json_last_error_msg());
-//fclose($fd);
+
+$fd = fopen("/tmp/posttest.txt", "w");
+fwrite($fd, $requestContent);
+fclose($fd);
+$fd = fopen("/tmp/posttest2.txt", "w");
+fwrite($fd, $decodeContentString);
+fclose($fd);
+$fd = fopen("/tmp/jsonerror.txt", "w");
+fwrite($fd, json_last_error_msg());
+fclose($fd);
