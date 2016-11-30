@@ -66,6 +66,11 @@
 							<button class="bt btn-info" data-target="#add student" data-toggle="modal">Add Student</button>
 						</div>
 					</div>
+					<div class="col-sm-6">
+						<div class="well">
+							<p> This will be student Info</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
