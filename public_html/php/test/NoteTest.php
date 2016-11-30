@@ -2,7 +2,7 @@
 namespace Edu\Cnm\DdcAaaa\Test;
 
 use Edu\Cnm\DdcAaaa\{
-	Application, Note, NoteType, Prospect
+	Application, Bridge, Note, NoteType, Prospect
 };
 
 // grab the project test parameters
@@ -53,7 +53,7 @@ class NoteTest extends AaaaTest {
 	/**
 	 * bridge staff creating this note
 	 **/
-	protected  $bridge = null;
+	protected $bridge = null;
 	/**
 	 * create dependent objects before running each test
 	 **/
@@ -88,7 +88,7 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		// create a new Note and insert it to into mySQL
-		$note = new Note(null,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(), $this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
+		$note = new Note(null,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(), $this->application->getApplicationId(), $this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 		$note->insert($this->getPDO());
 
 		//int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId
