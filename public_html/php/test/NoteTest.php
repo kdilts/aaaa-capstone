@@ -52,6 +52,7 @@ class NoteTest extends AaaaTest {
 	protected $VALID_DATE = null;
 	/**
 	 * bridge staff creating this note
+	 * @var string
 	 **/
 	protected $bridge = null;
 	/**
@@ -73,7 +74,7 @@ class NoteTest extends AaaaTest {
 		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", "about you", "hope", "exp", $this->VALID_DATE, "utmC","utmM", "utmS");
 		$this->application->insert($this->getPDO());
 
-		$this->bridge = new Bridge(null, "dylanMcD1", "rochelle1");
+		$this->bridge = new Bridge("123456789", "dylanMcD1", "rochelle1");
 		$this->bridge->insert($this->getPDO());
 	}
 	/**
@@ -88,7 +89,7 @@ class NoteTest extends AaaaTest {
 		$numRows = $this->getConnection()->getRowCount("note");
 
 		// create a new Note and insert it to into mySQL
-		$note = new Note(null,$this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(), $this->application->getApplicationId(), $this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(), $this->application->getApplicationId(), $this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
 		$note->insert($this->getPDO());
 
 		//int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId
