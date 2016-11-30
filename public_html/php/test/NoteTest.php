@@ -198,7 +198,7 @@ class NoteTest extends AaaaTest {
 		//grab the data from mySQL and enforce the fields match our expectations
 		$result = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteProspectId());
 		$pdoNote = $result;
-		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
 
 		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
