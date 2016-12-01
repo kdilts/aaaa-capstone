@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
 
-	class Bridge {
+	class Bridge implements \JsonSerializable {
 
 		/**
 		 * class Bridge for Ddcaaaa
@@ -169,7 +169,7 @@ namespace Edu\Cnm\DdcAaaa;
 			// sanitize the bridgeId before searching
 			$bridgeStaffId = trim($bridgeStaffId);
 			$bridgeStaffId = filter_var($bridgeStaffId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			if(empty($bridgeStaffId) === null) {
+			if(empty($bridgeStaffId)) {
 				throw(new \PDOException("bridgeStaffId is empty or insecure."));
 			}
 

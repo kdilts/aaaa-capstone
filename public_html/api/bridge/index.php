@@ -59,7 +59,7 @@ try {
 		} else {
 			$bridges = Bridge::getAllBridges($pdo);
 			if($bridges !== null) {
-				$reply->data = $bridges;
+				$reply->data = $bridges->toArray();
 			}
 		}
 	} else if($method === "POST") {
