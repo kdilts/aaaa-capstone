@@ -31,35 +31,44 @@
 							<div class="col-sm-12 col-sm-offset-12">
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
 						</div>
 					</div>
+				</div>
+				<!-- insert contact form here -->
+				<form id="contact-form">
+					<div class="form-group">
 						<div class="container">
 							<div class="row">
 								<div class="col-sm-12">
+
+									<label for="email">Email</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input class="form-control" type="text" name="email" value size="40" id="email"
+												 placeholder="Your Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password">Password</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-envelope"></i>
+										</div>
+										<input class="form-control" type="text" name="password" value size="20" id="password"
+												 placeholder="Password">
+									</div>
 								</div>
 							</div>
 						</div>
-						<!-- insert contact form here -->
-						<form id="contact-form">
-							<div class="form-group">
-								<label for="email">Email</label>
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-user"></i>
-									</div>
-									<input class="form-control" type="text" name="email" value size="40" id="email" placeholder="Your Email">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="password">Password</label>
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-envelope"></i>
-									</div>
-									<input class="form-control" type="text" name="password" value size="20" id="password" placeholder="Password">
-								</div>
-							</div>
 					</div>
-					</main>
+		</div>
+		</main>
 	</body>
 </html>
