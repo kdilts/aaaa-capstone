@@ -29,9 +29,9 @@ CREATE TABLE application(
 );
 
 CREATE TABLE bridge(
-	bridgeStaffId CHAR(9),
-	bridgeName VARCHAR(64),
-	bridgeUserName VARCHAR(20),
+	bridgeStaffId CHAR(9) UNIQUE,
+	bridgeName VARCHAR(64) UNIQUE,
+	bridgeUserName VARCHAR(20) UNIQUE,
 	INDEX (bridgeStaffId),
 	PRIMARY KEY(bridgeStaffId)
 );
