@@ -9,7 +9,7 @@ require_once ("autoload.php");
  * @version 1.0.0
  **/
 
-class Application {
+class Application implements \JsonSerializable {
 	use ValidateDate;
 	/**
 	 * @var int $applicationId

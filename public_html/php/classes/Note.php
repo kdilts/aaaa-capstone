@@ -1,7 +1,7 @@
 <?php
 namespace Edu\Cnm\DdcAaaa;
 
-class Note {
+class Note  implements \JsonSerializable {
 	use ValidateDate;
 	/**
 	 * Id of the note

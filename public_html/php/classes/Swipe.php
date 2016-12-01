@@ -2,7 +2,7 @@
 
 namespace Edu\Cnm\DdcAaaa;
 
-class Swipe {
+class Swipe  implements \JsonSerializable {
 
 	/**
 	 * id for this swipe is the primary key
