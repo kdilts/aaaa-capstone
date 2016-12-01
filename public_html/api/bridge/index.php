@@ -89,6 +89,8 @@ try {
 			$reply->message = "Bridge created OK";
 		}
 
+	} else {
+		throw (new Exception("Invalid HTTP request!", 405));
 	}
 	// update reply with exception information
 } catch(Exception $exception) { // TODO shouldn't exceptions be ordered from most specific to least?
