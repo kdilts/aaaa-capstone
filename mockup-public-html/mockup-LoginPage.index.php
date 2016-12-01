@@ -56,9 +56,9 @@
 									<label for="inputPassword" class="control-label">Password</label>
 									<div class="form-inline row">
 										<div class="form-group col-sm-6">
-											<input type="password" data-minlength="6" class="form-control" id="inputPassword"
+											<input type="password" data-minlength="12" class="form-control" id="inputPassword"
 													 placeholder="Password" required>
-											<div class="help-block">Minimum of 6 characters</div>
+											<div class="help-block">Minimum of 12 characters</div>
 										</div>
 										<div class="form-group col-sm-6">
 											<input type="password" class="form-control" id="inputPasswordConfirm"
