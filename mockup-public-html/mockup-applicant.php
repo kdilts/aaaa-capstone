@@ -31,8 +31,8 @@
 					<li role="presentation"><a href="#">Students</a></li>
 				</ul>
 				<div class="row">
-					<div class="col-sm-6">
-						<form class="navbar-form navbar-left">
+					<div class="col-sm-12">
+						<form class="navbar-form navbar-right">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Search">
 							</div>
