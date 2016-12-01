@@ -11,9 +11,6 @@ $decodeContent = json_decode($requestContent, true);
 
 $decodeContentString = var_export($decodeContent, true);
 
-$fd = fopen("/tmp/posttest.txt", "w");
-fwrite($fd, $requestContent);
-fclose($fd);
 $fd = fopen("/tmp/posttest2.txt", "w");
 fwrite($fd, $decodeContentString);
 fclose($fd);
@@ -21,6 +18,7 @@ $fd = fopen("/tmp/jsonerror.txt", "w");
 fwrite($fd, json_last_error_msg());
 fclose($fd);
 
+$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 
 $newApp = new Application(
 	null,
@@ -41,17 +39,15 @@ $newApp = new Application(
 	//$decodeContent["Campaign Source"]
 );
 
-	//grab the mySQL DataBase connection
-//$config = readConfig("/etc/apache2/capstone-mysql/ddcaaaa.ini");
-$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
-//$this->connection = $this->createDefaultDBConnection($pdo, $config["database"]);
-
 $newApp->insert($pdo);
 
 if($decodeContent["46813108"] !== null) {
 	if(is_array($decodeContent["46813108"])){
 		foreach($decodeContent["46813108"] as &$cohortId){
 			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
+			$fd = fopen("/tmp/posttest.txt", "w");
+			fwrite($fd, var_export($newAppCohort));
+			fclose($fd);
 			$newAppCohort->insert($pdo);
 		}
 	}else{
