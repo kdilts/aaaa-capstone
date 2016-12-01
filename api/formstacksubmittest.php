@@ -48,12 +48,29 @@ $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 
 $newApp->insert($pdo);
 
-if($decodeContent["46813108"] === null) {
-	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813109"]);
-}else{
-	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
+if($decodeContent["46813108"] !== null) {
+	if(is_array($decodeContent["46813108"])){
+		foreach($decodeContent["46813108"] as &$cohortId){
+			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
+			$newAppCohort->insert($pdo);
+		}
+	}else{
+		$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
+		$newAppCohort->insert($pdo);
+	}
 }
 
-$newAppCohort->insert($pdo);
+if($decodeContent["46813109"] !== null){
+	if(is_array($decodeContent["46813109"])){
+		foreach($decodeContent["46813109"] as &$cohortId){
+			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
+			$newAppCohort->insert($pdo);
+		}
+	}else{
+		$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813109"]);
+		$newAppCohort->insert($pdo);
+	}
+}
+
 
 
