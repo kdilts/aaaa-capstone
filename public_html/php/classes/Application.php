@@ -670,7 +670,7 @@ class Application {
 	 * @throws \TypeError if $applicationName is not a string
 	 */
 	public static function getApplicationsByApplicationName (\PDO $pdo, string $applicationName) {
-		// sanitize the prospectEmail before searching
+		// sanitize the applicationName before searching
 		$applicationName = trim($applicationName);
 		$applicationName = filter_var($applicationName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($applicationName) === true) {
