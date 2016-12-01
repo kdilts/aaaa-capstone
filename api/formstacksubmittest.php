@@ -39,12 +39,9 @@ if($decodeContent["46813108"] === null) {
 }else{
 	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
 }
+
 $newAppCohort->insert($pdo);
 $decodeContentString = var_export($decodeContent, true);
-//
-//$fd = fopen("/tmp/apptest.txt", "w");
-//fwrite($fd, $requestContent);
-//fclose($fd);
 
 $fd = fopen("/tmp/posttest.txt", "w");
 fwrite($fd, $requestContent);
