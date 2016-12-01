@@ -1,7 +1,7 @@
 <?php
 
-require_once "autoloader.php";
-require_once "/lib/xsrf.php";
+require_once(dirname(__DIR__,2) . "/public_html/php/classes/autoload.php");
+require_once (dirname(__DIR__,2) . "/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Edu\Cnm\DdcAaaa\Bridge;
@@ -74,7 +74,7 @@ try {
 		}
 
 		//  make sure bridge user name is available (required field)
-		if(empty($requestObject->profileId) === true) {
+		if(empty($requestObject->bridgeUserName) === true) {
 			throw(new \InvalidArgumentException ("Bridge User Name is missing.", 405));
 		}
 
