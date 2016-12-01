@@ -25,41 +25,41 @@ $reply->data = null;
 
 try {
 	//grab the mySQL connection
-	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql//ddcaaaa.ini");
+	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 
 	//determine which HTTP method was used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-	$profileId = filter_input(INPUT_GET, "profileId", FILTER_VALIDATE_INT);
-	$content = filter_input(INPUT_GET, "content", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_GET, "bridgeStaffId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$bridgeName = filter_input(INPUT_GET, "bridgeName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$bridgeUserName = filter_input(INPUT_GET, "bridgeUserName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
-	// handle GET request - if id is present, that tweet is returned, otherwise all tweets are returned
+	// handle GET request
 	if($method === "GET") {
 		//set XSRF cookie
 		setXsrfCookie();
 
-		//get a specific tweet or all tweets and update reply
+		//get a specific bridge or all bridges and update reply
 		if(empty($id) === false) {
-			$tweet = Tweet::getTweetByTweetId($pdo, $id);
-			if($tweet !== null) {
-				$reply->data = $tweet;
+			$bridge = Bridge::getBridgeByBridgeStaffId($pdo, $id);
+			if($bridge !== null) {
+				$reply->data = $bridge;
 			}
-		} else if(empty($profileId) === false) {
-			$tweets = Tweet::getTweetByTweetProfileId($pdo, $profileId);
-			if($tweets !== null) {
-				$reply->data = $tweets;
+		} else if(empty($bridgeName) === false) {
+			$bridges = Bridge::getBridgeByBridgeName($pdo, $bridgeName);
+			if($bridges !== null) {
+				$reply->data = $bridges;
 			}
-		} else if(empty($content) === false) {
-			$tweets = Tweet::getTweetByTweetContent($pdo, $content);
-			if($tweets !== null) {
-				$reply->data = $tweets;
+		} else if(empty($bridgeUserName) === false) {
+			$bridges = Bridge::getBridgeByBridgeUserName($pdo, $bridgeUserName);
+			if($bridges !== null) {
+				$reply->data = $bridges;
 			}
 		} else {
-			$tweets = Tweet::getAllTweets($pdo);
-			if($tweets !== null) {
-				$reply->data = $tweets;
+			$bridges = Bridge::getAllBridges($pdo);
+			if($bridges !== null) {
+				$reply->data = $bridges;
 			}
 		}
 	} else if($method === "POST") {
