@@ -8,6 +8,20 @@ require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 $requestContent = file_get_contents("php://input");
 $decodeContent = json_decode($requestContent, true);
 
+
+$decodeContentString = var_export($decodeContent, true);
+
+$fd = fopen("/tmp/posttest.txt", "w");
+fwrite($fd, $requestContent);
+fclose($fd);
+$fd = fopen("/tmp/posttest2.txt", "w");
+fwrite($fd, $decodeContentString);
+fclose($fd);
+$fd = fopen("/tmp/jsonerror.txt", "w");
+fwrite($fd, json_last_error_msg());
+fclose($fd);
+
+
 $newApp = new Application(
 	null,
 	$decodeContent["46813104"]["first"], //first name
@@ -41,14 +55,5 @@ if($decodeContent["46813108"] === null) {
 }
 
 $newAppCohort->insert($pdo);
-$decodeContentString = var_export($decodeContent, true);
 
-$fd = fopen("/tmp/posttest.txt", "w");
-fwrite($fd, $requestContent);
-fclose($fd);
-$fd = fopen("/tmp/posttest2.txt", "w");
-fwrite($fd, $decodeContentString);
-fclose($fd);
-$fd = fopen("/tmp/jsonerror.txt", "w");
-fwrite($fd, json_last_error_msg());
-fclose($fd);
+
