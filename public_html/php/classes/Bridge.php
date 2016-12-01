@@ -199,7 +199,7 @@ namespace Edu\Cnm\DdcAaaa;
 		 * searches bridge by bridgeName
 		 * @param \PDO $pdo PDO connection object
 		 * @param string $bridgeName search for bridge by bridge name
-		 * @return \SplFixedArray if found or null if not found
+		 * @return  bridge|null if found or null if not found
 		 * @throws \PDOException when mySQL related errors occur
 		 * @throws \TypeError when variables are not the correct data type
 		 */
@@ -219,26 +219,25 @@ namespace Edu\Cnm\DdcAaaa;
 			$parameters = ["bridgeName" => $bridgeName];
 			$statement->execute($parameters);
 
-			// build an array of bridges
-			$bridges = new \SplFixedArray($statement->rowCount());
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			while(($row = $statement->fetch()) !== false) {
-				try {
+			// grab bridge from SQL
+			try {
+				$bridge = null;
+				$statement->setFetchMode(\PDO::FETCH_ASSOC);
+				$row = $statement->fetch();
+				if($row !== false) {
 					$bridge = new Bridge($row["bridgeStaffId"], $row["bridgeName"], $row["bridgeUserName"]);
-					$bridges[$bridges->key()] = $bridge;
-					$bridges->next();
-				} catch(\Exception $exception) {
-					// if the row couldn't be converted, rethrow it
-					throw(new \PDOException($exception->getMessage(), 0, $exception));
 				}
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-			return $bridges;
+			return ($bridge);
 		}
 		/**
 		 * searches bridge by userName
 		 * @param \PDO $pdo connection object
 		 * @param \string $bridgeUserName searches bridge by UserName
-		 * @return \SplFixedArray SplArray of all the names of bridge found
+		 * @return bridge|null if the name of bridge found
 		 * @throws \PDOException when mySQL related errors occur
 		 * @throws \TypeError when variables are not the correct data type
 
@@ -259,20 +258,19 @@ namespace Edu\Cnm\DdcAaaa;
 			$parameters = ["bridgeUserName" => $bridgeUserName];
 			$statement->execute($parameters);
 
-			// build an array of bridges
-			$bridges = new \SplFixedArray($statement->rowCount());
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			while(($row = $statement->fetch()) !== false) {
-				try {
+			// grab bridge from SQL
+			try {
+				$bridge = null;
+				$statement->setFetchMode(\PDO::FETCH_ASSOC);
+				$row = $statement->fetch();
+				if($row !== false) {
 					$bridge = new Bridge($row["bridgeStaffId"], $row["bridgeName"], $row["bridgeUserName"]);
-					$bridges[$bridges->key()] = $bridge;
-					$bridges->next();
-				} catch(\Exception $exception) {
-					// if the row couldn't be converted, rethrow it
-					throw(new \PDOException($exception->getMessage(), 0, $exception));
 				}
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-			return $bridges;
+			return ($bridge);
 		}
 
 		/**
