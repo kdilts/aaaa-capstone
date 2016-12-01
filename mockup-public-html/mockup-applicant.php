@@ -2,10 +2,13 @@
 <html>
 
 	<head lang="en">
-		<script data-require="jquery@2.2.0" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-		<script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="style.css" />
+		<script data-require="jquery@2.2.0" data-semver="2.2.0"
+				  src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet"
+				href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+		<script data-require="bootstrap@3.3.6" data-semver="3.3.6"
+				  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
 
 	</head>
@@ -27,6 +30,16 @@
 					<li role="presentation"><a href="#">Permits</a></li>
 					<li role="presentation"><a href="#">Students</a></li>
 				</ul>
+				<div class="row">
+					<div class="col-sm-6">
+						<form class="navbar-form navbar-left">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search">
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+					</div>
+				</div>
 			</div>
 		</section>
 
@@ -58,7 +71,8 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+								aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title" id="myModalLabel">Add Student</h4>
 					</div>
 					<div class="modal-body">
