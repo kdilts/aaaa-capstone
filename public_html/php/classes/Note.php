@@ -4,6 +4,11 @@ namespace Edu\Cnm\DdcAaaa;
 class Note {
 	use ValidateDate;
 	/**
+	 * Id of the note
+	 * @var int $noteId
+	 */
+	private $noteId;
+	/**
 	 * actual content of the note
 	 * @var string $noteContent
 	 */
@@ -24,11 +29,6 @@ class Note {
 	 * @var int $noteProspectId
 	 */
 	private $noteProspectId;
-	/**
-	 * Id of the note
-	 * @var int $noteId
-	 */
-	private $noteId;
 	/**
 	 * @var \DateTime $noteDateTime
 	 */
@@ -262,13 +262,12 @@ class Note {
 			throw(new \PDOException("not a new noteId"));
 		}
 		// create query template
-		$query = "INSERT INTO note(noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId) VALUES(:noteId, :noteContent, :noteNoteTypeId, :noteApplicationId, :noteProspectId, :noteDateTime, :noteBridgeStaffId)";
+		$query = "INSERT INTO note(noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId) VALUES(:noteContent, :noteNoteTypeId, :noteApplicationId, :noteProspectId, :noteDateTime, :noteBridgeStaffId)";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
 		$this->noteDateTime = $this->noteDateTime->format("Y-m-d H:i:s");
 		$parameters = [
-			"noteId" => $this->noteId,
 			"noteApplicationId" => $this->noteApplicationId,
 			"noteProspectId" => $this->noteProspectId,
 			"noteNoteTypeId" => $this->noteNoteTypeId,
@@ -365,6 +364,7 @@ class Note {
 	 * @throws \TypeError when variables are not the correct data
 	 */
 	public static function getNoteByNoteProspectId(\PDO $pdo, int $noteProspectId) {
+		var_dump($noteProspectId);
 		// sanitize the noteProspectId before searching
 		if($noteProspectId <= 0) {
 			throw(new \PDOException("noteProspectId not positive"));
@@ -381,7 +381,9 @@ class Note {
 		// build an array of notes
 		$notes = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		echo PHP_EOL . "!!!!!!!" . PHP_EOL;
 		while(($row = $statement->fetch()) !== false) {
+			echo PHP_EOL . "----------" . PHP_EOL;
 			try {
 				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteBridgeStaffId"]);
 				$notes[$notes->key()] = $note;
