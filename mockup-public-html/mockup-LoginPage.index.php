@@ -52,7 +52,7 @@
 											<i class="fa fa-user"></i>
 										</div>
 										<input class="form-control" type="text" name="email" value size="40" id="email"
-												 placeholder="Your Email">
+												 placeholder="Your Email" required>
 									</div>
 								</div>
 								<div class="form-group">
@@ -62,7 +62,7 @@
 											<i class="fa fa-envelope"></i>
 										</div>
 										<input class="form-control" type="text" name="password" value size="20" id="password"
-												 placeholder="Password">
+												 placeholder="Password" required>
 									</div>
 								</div>
 							</div>
