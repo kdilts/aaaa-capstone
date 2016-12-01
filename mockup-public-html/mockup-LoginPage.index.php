@@ -44,7 +44,7 @@
 					<div class="form-group">
 						<div class="container">
 							<div class="row">
-								<div class="col-sm-12">
+								<div class="col-sm-6">
 
 									<label for="email">Email</label>
 									<div class="input-group">
@@ -63,8 +63,19 @@
 										</div>
 										<input class="form-control" type="text" name="password" value size="20" id="password"
 												 placeholder="Password" required>
+										<div
+										<div class="form-group col-sm-6">
+											<input type="password" class="form-control" id="inputPasswordConfirm"
+													 data-match="#inputPassword" data-match-error="Whoops, these don't match"
+													 placeholder="Confirm" required>
+											<div class="help-block with-errors"></div>
+										</div>
 									</div>
 								</div>
+							</div>
+							<div class="footer">
+								<button type="button" class="btn btn-default" data-dismiss="footer">Enter</button>
+
 							</div>
 						</div>
 					</div>
