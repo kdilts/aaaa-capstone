@@ -60,6 +60,8 @@ if($decodeContent["46813109"] !== null){
 	}
 }
 
+// TODO throw exception if no cohorts are selected
+
 //$decodeContentString = var_export($decodeContent, true);
 //$fd = fopen("/tmp/posttest.txt", "w");
 //fwrite($fd, $requestContent);
