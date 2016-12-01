@@ -68,30 +68,25 @@ try {
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
 
-		//make sure tweet content is available (required field)
-		if(empty($requestObject->tweetContent) === true) {
-			throw(new \InvalidArgumentException ("No content for Tweet.", 405));
+		//make sure bridge name is available (required field)
+		if(empty($requestObject->bridgeName) === true) {
+			throw(new \InvalidArgumentException ("Bridge Name is missing.", 405));
 		}
 
-		// make sure tweet date is accurate (optional field)
-		if(empty($requestObject->tweetDate) === true) {
-			$requestObject->tweetDate = new \DateTime();
-		}
-
-		//  make sure profileId is available
+		//  make sure bridge user name is available (required field)
 		if(empty($requestObject->profileId) === true) {
-			throw(new \InvalidArgumentException ("No Profile ID.", 405));
+			throw(new \InvalidArgumentException ("Bridge User Name is missing.", 405));
 		}
 
 		//perform the actual post
 		if($method === "POST") {
 
 			// create new tweet and insert into the database
-			$tweet = new Tweet(null, $requestObject->profileId, $requestObject->tweetContent, null);
-			$tweet->insert($pdo);
+			$bridge = new Bridge(null, $requestObject->bridgeName, $requestObject->bridgeUserName);
+			$bridge->insert($pdo);
 
 			// update reply
-			$reply->message = "Tweet created OK";
+			$reply->message = "Bridge created OK";
 		}
 
 	}
