@@ -20,7 +20,8 @@
 					<div class="container">
 						<ul class="nav navbar-nav navbar-right">
 						</ul>
-					</div><!-- container -->
+					</div>
+					<!-- container -->
 				</nav>
 			</header>
 

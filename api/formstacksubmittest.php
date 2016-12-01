@@ -1,13 +1,18 @@
 <?php
 
-
 namespace Edu\Cnm\DdcAaaa;
 use Edu\Cnm\DdcAaaa\{ Application };
 require_once(dirname(__DIR__) . "/public_html/php/classes/autoload.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
+
+// get json string from post request and decode it
 $requestContent = file_get_contents("php://input");
 $decodeContent = json_decode($requestContent, true);
 
+// get pdo object so that things can be inserted into the database
+$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
+
+// create application object from data decoded from post request and insert it into databse
 $newApp = new Application(
 	null,
 	$decodeContent["46813104"]["first"], //first name
@@ -26,32 +31,44 @@ $newApp = new Application(
 	//$decodeContent["Campaign Medium"],
 	//$decodeContent["Campaign Source"]
 );
-
-	//grab the mySQL DataBase connection
-//$config = readConfig("/etc/apache2/capstone-mysql/ddcaaaa.ini");
-$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
-//$this->connection = $this->createDefaultDBConnection($pdo, $config["database"]);
-
 $newApp->insert($pdo);
 
-if($decodeContent["46813108"] === null) {
-	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813109"]);
-}else{
-	$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
+// create applicationCohort object(s) to associate this application with the cohort(s) the user selected and insert them into the database
+
+		// full stack
+if($decodeContent["46813108"] !== null) {
+	if(is_array($decodeContent["46813108"])){
+		foreach($decodeContent["46813108"] as &$cohortId){
+			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
+			$newAppCohort->insert($pdo);
+		}
+	}else{
+		$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813108"]);
+		$newAppCohort->insert($pdo);
+	}
 }
-$newAppCohort->insert($pdo);
-$decodeContentString = var_export($decodeContent, true);
-//
-//$fd = fopen("/tmp/apptest.txt", "w");
+		// .net
+if($decodeContent["46813109"] !== null){
+	if(is_array($decodeContent["46813109"])){
+		foreach($decodeContent["46813109"] as &$cohortId){
+			$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $cohortId);
+			$newAppCohort->insert($pdo);
+		}
+	}else{
+		$newAppCohort = new ApplicationCohort(null, $newApp->getApplicationId(), $decodeContent["46813109"]);
+		$newAppCohort->insert($pdo);
+	}
+}
+
+// TODO throw exception if no cohorts are selected
+
+//$decodeContentString = var_export($decodeContent, true);
+//$fd = fopen("/tmp/posttest.txt", "w");
 //fwrite($fd, $requestContent);
 //fclose($fd);
-
-$fd = fopen("/tmp/posttest.txt", "w");
-fwrite($fd, $requestContent);
-fclose($fd);
-$fd = fopen("/tmp/posttest2.txt", "w");
-fwrite($fd, $decodeContentString);
-fclose($fd);
-$fd = fopen("/tmp/jsonerror.txt", "w");
-fwrite($fd, json_last_error_msg());
-fclose($fd);
+//$fd = fopen("/tmp/posttest2.txt", "w");
+//fwrite($fd, $decodeContentString);
+//fclose($fd);
+//$fd = fopen("/tmp/jsonerror.txt", "w");
+//fwrite($fd, json_last_error_msg());
+//fclose($fd);
