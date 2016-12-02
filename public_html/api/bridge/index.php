@@ -47,14 +47,14 @@ try {
 				$reply->data = $bridge;
 			}
 		} else if(empty($bridgeName) === false) {
-			$bridges = Bridge::getBridgeByBridgeName($pdo, $bridgeName);
-			if($bridges !== null) {
-				$reply->data = $bridges;
+			$bridge = Bridge::getBridgeByBridgeName($pdo, $bridgeName);
+			if($bridge !== null) {
+				$reply->data = $bridge;
 			}
 		} else if(empty($bridgeUserName) === false) {
-			$bridges = Bridge::getBridgeByBridgeUserName($pdo, $bridgeUserName);
-			if($bridges !== null) {
-				$reply->data = $bridges;
+			$bridge = Bridge::getBridgeByBridgeUserName($pdo, $bridgeUserName);
+			if($bridge !== null) {
+				$reply->data = $bridge;
 			}
 		} else {
 			$bridges = Bridge::getAllBridges($pdo);

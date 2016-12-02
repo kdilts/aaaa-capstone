@@ -8,7 +8,7 @@ use Edu\Cnm\DdcAaaa\Prospect;
 
 
 /**
- * api for the Bridge class
+ * api for the prospect class
  *
  * @author Kevin Dilts <kevin@kevindilts.net>
  **/
@@ -31,62 +31,67 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$id = filter_input(INPUT_GET, "bridgeStaffId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$bridgeName = filter_input(INPUT_GET, "bridgeName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$bridgeUserName = filter_input(INPUT_GET, "bridgeUserName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-
+	$id = filter_input(INPUT_GET, "prospectId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$prospectFirstName = filter_input(INPUT_GET, "prospectFirstName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$prospectLastName = filter_input(INPUT_GET, "prospectLastName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$prospectEmail = filter_input(INPUT_GET, "prospectEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	// handle GET request
 	if($method === "GET") {
 		//set XSRF cookie
 		setXsrfCookie();
 
-		//get a specific bridge or all bridges and update reply
+		//get a specific prospect or all prospects and update reply
 		if(empty($id) === false) {
-			$bridge = Bridge::getBridgeByBridgeStaffId($pdo, $id);
-			if($bridge !== null) {
-				$reply->data = $bridge;
+			$prospect = Prospect::getProspectByProspectId($pdo, $id);
+			if($prospect !== null) {
+				$reply->data = $prospect;
 			}
-		} else if(empty($bridgeName) === false) {
-			$bridges = Bridge::getBridgeByBridgeName($pdo, $bridgeName);
-			if($bridges !== null) {
-				$reply->data = $bridges;
+		} else if(empty($prospectFirstName) === false) {
+			$prospects = Prospect::getProspectsByProspectName($pdo, $prospectFirstName);
+			if($prospects !== null) {
+				$reply->data = $prospects;
 			}
-		} else if(empty($bridgeUserName) === false) {
-			$bridges = Bridge::getBridgeByBridgeUserName($pdo, $bridgeUserName);
-			if($bridges !== null) {
-				$reply->data = $bridges;
+		} else if(empty($prospectLastName) === false) {
+			$prospects = Prospect::getProspectsByProspectName($pdo, $prospectLastName);
+			if($prospects !== null) {
+				$reply->data = $prospects;
 			}
-		} else {
-			$bridges = Bridge::getAllBridges($pdo);
-			if($bridges !== null) {
-				$reply->data = $bridges;
+		} else if(empty($prospectEmail) === false) {
+			$prospects = Prospect::getProspectByProspectEmail($pdo, $prospectEmail);
+			if($prospects !== null) {
+				$reply->data = $prospects;
+			} else {
+				$prospects = Prospect::getAllProspects($pdo);
+				if($prospects !== null) {
+					$reply->data = $prospects;
+				}
 			}
 		}
-	} else if($method === "POST") {
+	}else if($method === "POST") {
 
 		verifyXsrf();
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
 
-		//make sure bridge name is available (required field)
-		if(empty($requestObject->bridgeName) === true) {
-			throw(new \InvalidArgumentException ("Bridge Name is missing.", 405));
+		//make sure prospect name is available (required field)
+		if(empty($requestObject->prospectFirstName) === true) {
+			throw(new \InvalidArgumentException ("Prospect First Name is missing.", 405));
 		}
 
-		//  make sure bridge user name is available (required field)
-		if(empty($requestObject->bridgeUserName) === true) {
-			throw(new \InvalidArgumentException ("Bridge User Name is missing.", 405));
+		//  make sure prospect user name is available (required field)
+		if(empty($requestObject->prospectLastName) === true) {
+			throw(new \InvalidArgumentException ("Prospect Last Name is missing.", 405));
 		}
-
+//TODO: do we need email and prospect id versions of the above functions? ^^^^
 		//perform the actual post
 		if($method === "POST") {
 
 			// create new tweet and insert into the database
-			$bridge = new Bridge(null, $requestObject->bridgeName, $requestObject->bridgeUserName);
-			$bridge->insert($pdo);
+			$prospect = new Prospect(null, $requestObject->prospectPhoneNumber, $requestObject->prospectEmail, $requestObject->prospectFirstName, $requestObject->prospectLastName);
+			$prospect->insert($pdo);
 
 			// update reply
-			$reply->message = "Bridge created OK";
+			$reply->message = "prospect created OK";
 		}
 
 	} else {
