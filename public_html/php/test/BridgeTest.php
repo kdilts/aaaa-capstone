@@ -82,13 +82,12 @@ class BridgeTest extends AaaaTest {
 		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Bridge::getBridgeByBridgeName($this->getPDO(), $bridge->getBridgeName());
+		$pdoBridge = Bridge::getBridgeByBridgeName($this->getPDO(), $bridge->getBridgeName());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
-		$this->assertNotNull($results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Bridge", $results);
+		$this->assertNotNull($pdoBridge);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Bridge", $pdoBridge);
 
 		// grab the result from the array and validate it
-		$pdoBridge = $results[0];
 		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
 		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
 		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
@@ -115,13 +114,12 @@ class BridgeTest extends AaaaTest {
 		$bridge->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Bridge::getBridgeByBridgeUserName($this->getPDO(), $bridge->getBridgeUserName());
+		$pdoBridge = Bridge::getBridgeByBridgeUserName($this->getPDO(), $bridge->getBridgeUserName());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("bridge"));
-		$this->assertNotNull($results);
-		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\Bridge", $results);
+		$this->assertNotNull($pdoBridge);
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Bridge", $pdoBridge);
 
 		// grab the result from the array and validate it
-		$pdoBridge = $results[0];
 		$this->assertEquals($pdoBridge->getBridgeStaffId(), $this->VALID_BRIDGESTAFFID);
 		$this->assertEquals($pdoBridge->getBridgeName(), $this->VALID_BRIDGENAME);
 		$this->assertEquals($pdoBridge->getBridgeUserName(), $this->VALID_BRIDGEUSERNAME);
