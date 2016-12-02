@@ -25,7 +25,7 @@ try {
 	$password = $requestObject->password;
 
 	// read the active directory configuration
-	$config = readConfig("/etc/apache2/capstone-mysql/aes49.ini");
+	$config = readConfig("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 	$adconfig = json_decode($config["adconfig"], true);
 
 	// setup active directory connection
