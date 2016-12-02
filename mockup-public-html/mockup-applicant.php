@@ -10,7 +10,7 @@
 				  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
-<title> Stream Line CNM Application</title>
+		<title> Stream Line CNM Application</title>
 	</head>
 
 	<body>
@@ -67,12 +67,12 @@
 											<ul>
 												<li><strong>Name:</strong> John Dice.</li>
 												<li><strong>DOB:</strong> 28th July 1995.</li>
-												<li><strong>BirthPlace:</strong> Chicago.</li>
+												<li><strong>From where?:</strong> Chicago.</li>
 												<li><strong>Occupation:</strong> Student.</li>
 												<li><strong>About:</strong> Information.</li>
 												<li><strong>Contact:</strong> Contact stuff.</li>
 											</ul>
-											<button class="md-close">Close </button>
+											<button class="md-close">Close</button>
 										</div>
 									</div>
 								</div>
@@ -125,16 +125,17 @@
 							<div class="input-group-addon">
 								<i class="fa fa-comment" aria-hidden="true"></i>
 							</div>
-							<textarea class="form-control" rows="5" id="message" name="message" placeholder="Message (2000 characters max)"></textarea>
+							<textarea class="form-control" rows="5" id="message" name="message"
+										 placeholder="Message (2000 characters max)"></textarea>
 						</div>
 					</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
+		</div>
 		</div>
 
 	</body>
