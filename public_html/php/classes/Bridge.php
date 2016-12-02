@@ -207,7 +207,7 @@ namespace Edu\Cnm\DdcAaaa;
 			// sanitize the bridgeName before searching
 			$bridgeName = trim($bridgeName);
 			$bridgeName = filter_var($bridgeName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			if(empty($bridgeName) === null) {
+			if(empty($bridgeName)) {
 				throw(new \PDOException("bridgeName is empty or insecure")); //is this right?
 			}
 
@@ -246,7 +246,7 @@ namespace Edu\Cnm\DdcAaaa;
 			// sanitize the bridgeUserName before searching
 			$bridgeUserName = trim($bridgeUserName);
 			$bridgeUserName = filter_var($bridgeUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			if(empty($bridgeUserName) === null) {
+			if(empty($bridgeUserName)) {
 				throw(new \PDOException("bridgeUserName can't be empty"));
 			}
 
