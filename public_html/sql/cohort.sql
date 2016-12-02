@@ -1,3 +1,3 @@
-INSERT INTO cohort (cohortId, cohortApplicationId) VALUES (NULL, 1);
-INSERT INTO cohort (cohortId, cohortApplicationId) VALUES (NULL, 2);
-INSERT INTO cohort (cohortId, cohortApplicationId) VALUES (NULL, 3);
+INSERT INTO cohort (cohortId, cohortName) VALUES (NULL, "Fullstack January 2017");
+INSERT INTO cohort (cohortId, cohortName) VALUES (NULL, "Fullstack April 2017");
+INSERT INTO cohort (cohortId, cohortName) VALUES (NULL, ".Net February 2017");
