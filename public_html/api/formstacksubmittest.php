@@ -60,7 +60,9 @@ if($decodeContent["46813109"] !== null){
 	}
 }
 
-// TODO throw exception if no cohorts are selected
+if($decodeContent["46813108"] === null && $decodeContent["46813109"] === null){
+	throw(new \Exception("Must apply to at least one cohort.", 0));
+}
 
 //$decodeContentString = var_export($decodeContent, true);
 //$fd = fopen("/tmp/posttest.txt", "w");
