@@ -1,0 +1,6 @@
+{
+  "require": {
+    "swiftmailer/swiftmailer":"@stable",
+    "adldap2/adldap2":"@stable"
+  }
+}
