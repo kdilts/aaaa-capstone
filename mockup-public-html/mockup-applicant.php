@@ -59,7 +59,24 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="well">
-							<p>This is some student data...</p>
+							<ul>
+								<div class="md-modal md-effect-1" id="modal-3">
+									<div class="md-content">
+										<h3>Person Information</h3>
+										<div>
+											<ul>
+												<li><strong>Name:</strong> John Dice.</li>
+												<li><strong>DOB:</strong> 28th July 1995.</li>
+												<li><strong>BirthPlace:</strong> Chicago.</li>
+												<li><strong>Occupation:</strong> Student.</li>
+												<li><strong>About:</strong> Information.</li>
+												<li><strong>Contact:</strong> Contact stuff.</li>
+											</ul>
+											<button class="md-close">Close </button>
+										</div>
+									</div>
+								</div>
+							</ul>
 						</div>
 					</div>
 				</div>
