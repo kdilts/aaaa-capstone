@@ -72,6 +72,7 @@ namespace Edu\Cnm\DdcAaaa;
 			if(empty($newBridgeStaffId) === true) {
 				throw (new \InvalidArgumentException("Bridge staff id is either empty or insecure."));
 			}
+			// TODO length validation?
 			$this ->bridgeStaffId = $newBridgeStaffId;
 		}
 		/**
@@ -94,6 +95,7 @@ namespace Edu\Cnm\DdcAaaa;
 			if(empty($newBridgeName) === true) {
 				throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
 			}
+			// TODO length validation?
 			$this ->bridgeName = $newBridgeName;
 		}
 		/**
@@ -118,6 +120,7 @@ namespace Edu\Cnm\DdcAaaa;
 			if(empty($newBridgeUserName) === true) {
 				throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
 			}
+			// TODO length validation?
 			$this ->bridgeUserName = $newBridgeUserName;
 		}
 		/**

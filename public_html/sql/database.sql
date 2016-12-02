@@ -38,7 +38,7 @@ CREATE TABLE bridge(
 
 CREATE TABLE cohort(
 	cohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	cohortApplicationId INT UNSIGNED NOT NULL,
+	cohortName VARCHAR(30) NOT NULL,
 	INDEX (cohortId),
 	PRIMARY KEY(cohortId)
 );

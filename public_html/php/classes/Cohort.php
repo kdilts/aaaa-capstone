@@ -18,26 +18,25 @@ class Cohort implements \JsonSerializable {
 	private $cohortId;
 
 	/**
-	 * @var int $cohortApplicationId
+	 * @var string $cohortName
 	 **/
-	private $cohortApplicationId;
+	private $cohortName;
 	/**
 	 * cohort constructor
 	 *
 	 * @param int|null $newCohortId
-	 * @param int $newCohortApplicationId
+	 * @param string $newCohortName
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data is not correct or is not positive
 	 * @throws \TypeError when variable are not the correct data type
 	 * @throws \Exception when any other exceptions occur
 	 **/
 
-	public function __construct(int $newCohortId = null, int $newCohortApplicationId) {
+	public function __construct(int $newCohortId = null, string $newCohortName) {
 		try {
 			$this->setCohortId($newCohortId);
-			$this->setCohortApplicationId($newCohortApplicationId);
-		} catch(\InvalidArgumentException $invalidArgument)
-		{
+			$this->setCohortName($newCohortName);
+		} catch(\InvalidArgumentException $invalidArgument){
 			// rethrow the exception to the caller
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0,$invalidArgument));
 		} catch(\RangeException $range) {
@@ -60,9 +59,7 @@ class Cohort implements \JsonSerializable {
 	public function getCohortId() {
 		return ($this->cohortId);
 	}
-
-
-
+	
 	/**
 	 * @param int|null $newCohortId
 	 * @throws \RangeException if data is not positive
@@ -83,26 +80,29 @@ class Cohort implements \JsonSerializable {
 
 	}
 	/**
-	 * accessor method for the cohort application id
+	 * accessor method for the cohort name
 	 *
-	 * @return int value of cohort application id
+	 * @return string value of cohort name
 	 */
-	public function getCohortApplicationId () {
-		return($this->cohortApplicationId);
+	public function getCohortName() {
+		return($this->cohortName);
 	}
 
 	/**
-	 * mutator method for cohort application id
-	 * @param int $newCohortApplicationId
-	 * @throws \RangeException if $newCohortApplicationId is not positive
-	 * @throws \TypeError if $newCohortApplicationId is not an integer
+	 * mutator method for cohort name
+	 * @param string $newCohortName
+	 * @throws \RangeException if $newCohortName is not positive
+	 * @throws \TypeError if $newCohortName is not an integer
 	 **/
-	public function setCohortApplicationId(int $newCohortApplicationId) {
-		if($newCohortApplicationId <= 0) {
-			throw(new \RangeException("cohort application id is not positive"));
+	public function setCohortName(string $newCohortName) {
+		$newCohortName = trim ($newCohortName);
+		$newCohortName = filter_var($newCohortName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newCohortName) === true) {
+			throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
 		}
-		// convert and store the cohort application id
-		$this->cohortApplicationId = $newCohortApplicationId;
+		// TODO length validation
+		// convert and store the cohort name
+		$this->cohortName = $newCohortName;
 	}
 
 	/**
@@ -118,10 +118,10 @@ class Cohort implements \JsonSerializable {
 			throw(new \PDOException("not a new cohort"));
 		}
 		// create query template
-		$query = "INSERT INTO cohort(cohortId, cohortApplicationId) VALUES(:cohortId, :cohortApplicationId)";
+		$query = "INSERT INTO cohort(cohortId, cohortName) VALUES(:cohortId, :cohortName)";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
-		$parameters = ["cohortId" => $this->cohortId, "cohortApplicationId" => $this->cohortApplicationId];
+		$parameters = ["cohortId" => $this->cohortId, "cohortName" => $this->cohortName];
 		$statement->execute($parameters);
 		// update the null cohortId with what mySQL just gave us
 		$this->cohortId = intval($pdo->lastInsertId());
@@ -142,7 +142,7 @@ class Cohort implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT cohortId, cohortApplicationId From cohort WHERE cohortId = :cohortId";
+		$query = "SELECT cohortId, cohortName From cohort WHERE cohortId = :cohortId";
 		$statement = $pdo->prepare($query);
 
 		// bind the cohort id to the place holder in template
@@ -155,7 +155,7 @@ class Cohort implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$cohort = new Cohort($row["cohortId"], $row["cohortApplicationId"]);
+				$cohort = new Cohort($row["cohortId"], $row["cohortName"]);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
@@ -165,26 +165,26 @@ class Cohort implements \JsonSerializable {
 	}
 
 	/**
-	 * searches cohorts by ApplicationId
+	 * searches cohorts by Name
 	 * @param \PDO $pdo connection object
-	 * @param int $cohortApplicationId searching cohort by ApplicationId
+	 * @param int $cohortName searching cohort by Name
 	 * @return Cohort|null id for the application to search for
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
 
-	public static function getCohortByCohortApplicationId(\PDO $pdo, int $cohortApplicationId){
+	public static function getCohortByCohortName(\PDO $pdo, string $cohortName){
 		// sanitize the cohortId before searching
-		if($cohortApplicationId <= 0){
-			throw(new \PDOException("cohortApplicationId not positive"));
+		if($cohortName <= 0){
+			throw(new \PDOException("cohortName not positive"));
 		}
 
 		// create query template
-		$query = "SELECT cohortId, cohortApplicationId From cohort WHERE cohortApplicationId = :cohortApplicationId";
+		$query = "SELECT cohortId, cohortName From cohort WHERE cohortName = :cohortName";
 		$statement = $pdo->prepare($query);
 
 		// bind the cohort id to the place holder in template
-		$parameters = ["cohortApplicationId" => $cohortApplicationId];
+		$parameters = ["cohortName" => $cohortName];
 		$statement->execute($parameters);
 
 		// grab cohort from SQL
@@ -193,7 +193,7 @@ class Cohort implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$cohort = new Cohort($row["cohortId"], $row["cohortApplicationId"]);
+				$cohort = new Cohort($row["cohortId"], $row["cohortName"]);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
@@ -210,7 +210,7 @@ class Cohort implements \JsonSerializable {
 	 */
 	public static function getAllCohorts(\PDO $pdo){
 		// create query template
-		$query = "SELECT cohortId, cohortApplicationId From cohort";
+		$query = "SELECT cohortId, cohortName From cohort";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -219,7 +219,7 @@ class Cohort implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false){
 			try {
-				$cohort = new Cohort($row["cohortId"], $row["cohortApplicationId"]);
+				$cohort = new Cohort($row["cohortId"], $row["cohortName"]);
 				$cohorts[$cohorts->key()] = $cohort;
 				$cohorts->next();
 			} catch(\Exception $exception){
