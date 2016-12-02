@@ -10,7 +10,7 @@
 				  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
-
+<title> Stream Line CNM Application</title>
 	</head>
 
 	<body>
