@@ -45,7 +45,7 @@ class CohortTest extends AaaaTest {
 		$pdoCohort = Cohort::getCohortByCohortId($this->getPDO(), $cohort->getCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
 		$this->assertEquals($pdoCohort->getCohortId(), $cohort->getCohortId());
-		$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
+		$this->assertEquals($pdoCohort->getCohortName(), $this->VALID_COHORTAPPLICATIONID);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class CohortTest extends AaaaTest {
 		$this->assertInstanceOF("Edu\\Cnm\\DdcAaaa\\Cohort", $result);
 
 		// grab the result from the array and validate it
-		$this->assertEquals($result->getCohortApplicationId(), $cohort->getCohortApplicationId());
+		$this->assertEquals($result->getCohortName(), $cohort->getCohortName());
 		$this->assertEquals($result->getCohortId(), $cohort->getCohortId());
 	}
 
@@ -94,7 +94,7 @@ class CohortTest extends AaaaTest {
 	/**
 	 * test grabbing valid Cohort by the valid Cohort Application Id
 	 */
-	public function testGetValidCohortByCohortApplicationId() {
+	public function testGetValidCohortByCohortName() {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("cohort");
 
@@ -103,21 +103,21 @@ class CohortTest extends AaaaTest {
 		$cohort->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$result = Cohort::getCohortByCohortApplicationId($this->getPDO(), $cohort->getCohortApplicationId());
+		$result = Cohort::getCohortByCohortName($this->getPDO(), $cohort->getCohortName());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("cohort"));
 		$this->assertNotNull($result);
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Cohort", $result);
 
 		//grab the result from the array and validate it
-		$this->assertEquals($result->getCohortApplicationId(), $cohort->getCohortApplicationId());
+		$this->assertEquals($result->getCohortName(), $cohort->getCohortName());
 		$this->assertEquals($result->getCohortId(), $cohort->getCohortId());
 	}
 	/**
 	 * test grabbing a Cohort by Application Id that does not exist
 	 */
-	public function testGetInvalidCohortByCohortApplicationId(){
+	public function testGetInvalidCohortByCohortName(){
 		//grab a cohort by searching for application id that does not exist
-		$cohort = Cohort::getCohortByCohortApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$cohort = Cohort::getCohortByCohortName($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertNull($cohort);
 	}
 	/**
@@ -139,7 +139,7 @@ class CohortTest extends AaaaTest {
 
 		// grab the result from the array and validate it
 		$pdoCohort = $results[0];
-		$this->assertEquals($pdoCohort->getCohortApplicationId(), $this->VALID_COHORTAPPLICATIONID);
+		$this->assertEquals($pdoCohort->getCohortName(), $this->VALID_COHORTAPPLICATIONID);
 		$this->assertEquals($pdoCohort->getCohortId(), $cohort->getCohortId());
 	}
 }
