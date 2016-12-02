@@ -93,7 +93,7 @@ try {
 		throw (new Exception("Invalid HTTP request!", 405));
 	}
 	// update reply with exception information
-} catch(Exception $exception) { // TODO shouldn't exceptions be ordered from most specific to least?
+} catch(Exception $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 } catch(TypeError $typeError) {
