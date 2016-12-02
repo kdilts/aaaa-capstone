@@ -10,17 +10,19 @@ class Swipe  implements \JsonSerializable {
 	 */
 	private $swipeId;
 
-	/**
-	 * number is always growing for the data
-	 * @var int $swipeNumber
-	 */
-	private $swipeNumber;
 
 	/**
 	 * the status show allows you to track each swipe card
 	 * @var int $swipeStatus current status of swipe card
 	 */
 	private $swipeStatusTypeId;
+
+	/**
+	 * number is always growing for the data
+	 * @var int $swipeNumber
+	 */
+	private $swipeNumber;
+
 
 	/**
 	 * the constructor for this swipe
