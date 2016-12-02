@@ -82,7 +82,7 @@ try {
 		if($method === "POST") {
 
 			// create new tweet and insert into the database
-			$bridge = new Bridge(null, $requestObject->bridgeName, $requestObject->bridgeUserName);
+			$bridge = new Bridge($requestObject->bridgeId, $requestObject->bridgeName, $requestObject->bridgeUserName);
 			$bridge->insert($pdo);
 
 			// update reply
