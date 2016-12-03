@@ -25,12 +25,11 @@
 		</section>
 		<div class="list-group">
 			<ul>
-			<button type="button" class="list-group-item">Prospect</button>
-			<button type="button" class="list-group-item">Proscpect Id</button>
-			<button type="button" class="list-group-item">First Name</button>
-			<button type="button" class="list-group-item">Last Name</button>
-			<button type="button" class="list-group-item">Email</button>
-			<button type="button" class="list-group-item">Phone</button>
+				<div class="list-group">
+					<a href="#" class="list-group-item">First item</a>
+					<a href="#" class="list-group-item">Second item</a>
+					<a href="#" class="list-group-item">Third item</a>
+				</div>
 			</ul>
 
 		</div>
