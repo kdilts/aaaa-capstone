@@ -82,7 +82,6 @@
 				</div>
 			</div>
 		</section>
-
 		<!-- add modal here -->
 		<div class="modal fade" id="add-student" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
