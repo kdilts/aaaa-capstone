@@ -177,8 +177,13 @@ class Cohort implements \JsonSerializable {
 
 	public static function getCohortByCohortName(\PDO $pdo, string $cohortName){
 		// sanitize the cohortId before searching
-		if($cohortName <= 0){
-			throw(new \PDOException("cohortName not positive"));
+		$cohortName = trim ($cohortName);
+		$cohortName = filter_var($cohortName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($cohortName) === true) {
+			throw (new \InvalidArgumentException("Cohort name is either empty or insecure."));
+		}
+		if(strlen($cohortName) > 30) {
+			throw(new \RangeException("Cohort Name too large"));
 		}
 
 		// create query template
