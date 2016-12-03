@@ -43,25 +43,21 @@ try {
 		//get a specific swipe or all swipes and update reply
 		if(empty($swipeId) === false) {
 			$swipe = Swipe::getSwipeBySwipeId($pdo, $swipeId);
-			echo "swipeId".PHP_EOL;
 			if($swipe !== null) {
 				$reply->data = $swipe;
 			}
 		} else if(empty($swipeStatusTypeId) === false) {
 			$swipe = Swipe::getSwipesBySwipeStatus($pdo, $swipeStatusTypeId);
-			echo "swipeStatus".PHP_EOL;
 			if($swipe !== null) {
 				$reply->data = $swipe;
 			}
 		} else if(empty($swipeNumber) === false) {
 			$swipe = Swipe::getSwipeBySwipeNumber($pdo, $swipeNumber);
-			echo "swipeNumber".PHP_EOL;
 			if($swipe !== null) {
 				$reply->data = $swipe;
 			}
 		} else {
 			$swipes = Swipe::getAllSwipes($pdo);
-			echo "getall".PHP_EOL;
 			if($swipes !== null) {
 				$reply->data = $swipes->toArray();
 			}
