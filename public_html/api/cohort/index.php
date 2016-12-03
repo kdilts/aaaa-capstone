@@ -71,8 +71,8 @@ try {
 		if($method === "POST") {
 
 			// create new tweet and insert into the database
-			$bridge = new Cohort($requestObject->cohortId, $requestObject->cohortName);
-			$bridge->insert($pdo);
+			$cohort = new Cohort($requestObject->cohortId, $requestObject->cohortName);
+			$cohort->insert($pdo);
 
 			// update reply
 			$reply->message = "Cohort created OK";
