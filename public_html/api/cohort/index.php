@@ -8,7 +8,7 @@ use Edu\Cnm\DdcAaaa\Cohort;
 
 
 /**
- * api for the Bridge class
+ * api for the Cohort class
  *
  * @author Kevin Dilts <kevin@kevindilts.net>
  **/
