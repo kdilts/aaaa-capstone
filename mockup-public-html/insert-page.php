@@ -17,6 +17,8 @@
 				</div>
 			</div>
 		</section>
+		<form>
+			<br />
 
 		<section>
 			<div class="container">
@@ -28,6 +30,7 @@
 				</ul>
 			</div>
 		</section>
+			</form>
 		<form>
 			<br />
 			<select class="form-control">
@@ -39,11 +42,13 @@
 			</select>
 		</form>
 		<section>
+			<br />
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="well">
 							<ul>
+								<br />
 								<li>Student Name</li>
 								<li>Student Name</li>
 								<li>Student Name</li>
