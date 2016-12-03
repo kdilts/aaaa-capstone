@@ -100,7 +100,9 @@ class Cohort implements \JsonSerializable {
 		if(empty($newCohortName) === true) {
 			throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
 		}
-		// TODO length validation
+		if(strlen($newCohortName) > 30) {
+			throw(new \RangeException("Cohort name too large"));
+		}
 		// convert and store the cohort name
 		$this->cohortName = $newCohortName;
 	}
@@ -167,7 +169,7 @@ class Cohort implements \JsonSerializable {
 	/**
 	 * searches cohorts by Name
 	 * @param \PDO $pdo connection object
-	 * @param int $cohortName searching cohort by Name
+	 * @param string $cohortName searching cohort by Name
 	 * @return Cohort|null id for the application to search for
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
