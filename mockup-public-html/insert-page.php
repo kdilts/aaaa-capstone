@@ -17,20 +17,6 @@
 				</div>
 			</div>
 		</section>
-		<form>
-			<div class="form-group">
-				<label for="inputName">Name</label>
-				<input class="form-control" type="text" id="inputName" placeholder="Full Name" />
-			</div>
-			<div class="form-group">
-				<label for="inputDOB">Date of Birth</label>
-				<input class="form-control" type="date" id="inputDOB" />
-			</div>
-			<div class="form-group">
-				<label for="inputName">Name</label>
-				<input class="form-control" type="text" id="inputName" placeholder="Full Name" />
-			</div>
-		</form>
 
 		<section>
 			<div class="container">
@@ -42,7 +28,16 @@
 				</ul>
 			</div>
 		</section>
-
+		<form>
+			<br />
+			<select class="form-control">
+				<option>Option 1</option>
+				<option>Option 2</option>
+				<option>Option 3</option>
+				<option>Option 4</option>
+				<option>Option 5</option>
+			</select>
+		</form>
 		<section>
 			<div class="container">
 				<div class="row">
