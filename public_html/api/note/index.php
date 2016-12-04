@@ -53,13 +53,13 @@ try {
 			}
 		} else if(empty($noteApplicationId) === false) {
 			echo "app" . PHP_EOL;
-			$notes = Note::getNoteByNoteApplicationId($pdo, $noteApplicationId);
+			$notes = Note::getNotesByNoteApplicationId($pdo, $noteApplicationId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
 		} else if(empty($noteProspectId) === false) {
 			echo "prospect" . PHP_EOL;
-			$notes = Note::getNoteByNoteProspectId($pdo, $noteProspectId);
+			$notes = Note::getNotesByNoteProspectId($pdo, $noteProspectId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
