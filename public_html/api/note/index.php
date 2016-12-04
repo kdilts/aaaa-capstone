@@ -118,10 +118,10 @@ try {
 			$note = new Note(
 				$requestObject->noteId,
 				$requestObject->noteContent,
-				$requestObject->noteNoteType,
+				$requestObject->noteNoteTypeId,
 				$requestObject->noteApplicationId,
 				$requestObject->noteProspectId,
-				$requestObject->noteDateTime,
+				\DateTime::createFromFormat("Y-m-d H:i:s", $requestObject->noteDateTime),
 				$requestObject->noteBridgeStaffId
 			);
 			$note->insert($pdo);
