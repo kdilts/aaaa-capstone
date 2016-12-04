@@ -91,7 +91,7 @@ try {
 				$reply->data = $studentPermits->toArray();
 			}
 		}
-	} else if($method === "POST") {
+	} else if($method === "POST" || "PUT") {
 
 		verifyXsrf();
 		$requestContent = file_get_contents("php://input");
@@ -138,6 +138,26 @@ try {
 
 			// update reply
 			$reply->message = "StudentPermit created OK";
+		}else if($method === "PUT"){
+
+			// retrieve the studentPermit to update
+			$studentPermit = StudentPermit::getStudentPermitByStudentPermitId($pdo, $studentPermitId);
+			if($studentPermit === null) {
+				throw(new RuntimeException("StudentPermit does not exist", 404));
+			}
+
+			// update all attributes
+			$studentPermit->setStudentPermitApplicationId($requestObject->studentPermitApplicationId);
+			$studentPermit->setStudentPermitPlacardId($requestObject->studentPermitPlacardId);
+			$studentPermit->setStudentPermitSwipeId($requestObject->studentPermitSwipeId);
+			$studentPermit->setStudentPermitCheckOutDate($requestObject->studentPermitCheckOutDate);
+			$studentPermit->setStudentPermitCheckInDate($requestObject->studentPermitCheckInDate);
+
+			$studentPermit->update($pdo);
+
+			// update reply
+			$reply->message = "StudentPermit updated OK";
+
 		}
 
 	} else {
