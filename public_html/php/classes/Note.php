@@ -342,7 +342,7 @@ class Note  implements \JsonSerializable {
 	 * @throws \PDOException when note application id is not positive
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getNoteByNoteApplicationId(\PDO $pdo, int $noteApplicationId) {
+	public static function getNotesByNoteApplicationId(\PDO $pdo, int $noteApplicationId) {
 		// sanitize the noteApplicationId before searching
 		if($noteApplicationId <= 0) {
 			throw(new \PDOException("noteApplicationId not positive"));
@@ -388,7 +388,7 @@ class Note  implements \JsonSerializable {
 	 * @throws \PDOException when data id is not positive
 	 * @throws \TypeError when variables are not the correct data
 	 */
-	public static function getNoteByNoteProspectId(\PDO $pdo, int $noteProspectId) {
+	public static function getNotesByNoteProspectId(\PDO $pdo, int $noteProspectId) {
 		// sanitize the noteApplicationId before searching
 		if($noteProspectId <= 0) {
 			throw(new \PDOException("noteProspectId not positive"));
@@ -434,7 +434,7 @@ class Note  implements \JsonSerializable {
 	 * @throws \PDOException if id is not positive
 	 * @throws \TypeError when variables are not the correct data
 	 */
-	public static function getNoteByNoteNoteTypeId(\PDO $pdo, int $noteNoteTypeId) {
+	public static function getNotesByNoteNoteTypeId(\PDO $pdo, int $noteNoteTypeId) {
 		// sanitize the noteNoteTypeId before searching
 		if($noteNoteTypeId <= 0) {
 			throw(new \PDOException("noteNoteTypeId not positive"));

@@ -153,7 +153,7 @@ class NoteTest extends AaaaTest {
 	/**
 	 * test inserting a valid Note and verify that the actual mySQL data matches
 	 */
-	public function testGetValidNoteByNoteApplicationId() {
+	public function testGetValidNotesByNoteApplicationId() {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("note");
 
@@ -162,7 +162,7 @@ class NoteTest extends AaaaTest {
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$results = Note::getNoteByNoteApplicationId($this->getPDO(), $note->getNoteApplicationId());
+		$results = Note::getNotesByNoteApplicationId($this->getPDO(), $note->getNoteApplicationId());
 		$pdoNote = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
@@ -179,16 +179,16 @@ class NoteTest extends AaaaTest {
 	/**
 	 * Test inserting a Note that already exists
 	 */
-	public function testInsertInvalidNoteByNoteApplicationId() {
+	public function testInsertInvalidNotesByNoteApplicationId() {
 		//create a note with a non null note id  and watch it fail
-		$note = Note::getNoteByNoteApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$note = Note::getNotesByNoteApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertEmpty($note);
 	}
 
 	/**
 	 * test inserting a valid Note and verify that the actual mySQL data matches
 	 */
-	public function testGetValidNoteByNoteProspectId() {
+	public function testGetValidNotesByNoteProspectId() {
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("note");
 
@@ -197,7 +197,7 @@ class NoteTest extends AaaaTest {
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$results = Note::getNoteByNoteProspectId($this->getPDO(), $note->getNoteProspectId());
+		$results = Note::getNotesByNoteProspectId($this->getPDO(), $note->getNoteProspectId());
 		$pdoNote = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("note"));
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
@@ -214,15 +214,15 @@ class NoteTest extends AaaaTest {
 	/**
 	 * test inserting a note that already exists
 	 */
-	public function testInsertInvalidNoteByNoteProspectId(){
+	public function testInsertInvalidNotesByNoteProspectId(){
 		//create a note with a none null note id and watch it fail
-		$note = Note::getNoteByNoteProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$note = Note::getNotesByNoteProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertEmpty($note);
 	}
 	/**
 	 * test inserting a valid Note and verify that the actual mySQL data matches
 	 */
-	public function testGetValidNoteByNoteNoteTypeId(){
+	public function testGetValidNotesByNoteNoteTypeId(){
 		//count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("note");
 		//create a new Note and insert it to mySQL
@@ -230,7 +230,7 @@ class NoteTest extends AaaaTest {
 		$note->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
-		$results = Note::getNoteByNoteNoteTypeId($this->getPDO(), $note->getNoteNoteTypeId());
+		$results = Note::getNotesByNoteNoteTypeId($this->getPDO(), $note->getNoteNoteTypeId());
 		$pdoNote = $results[0];
 		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
 		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
@@ -247,9 +247,9 @@ class NoteTest extends AaaaTest {
 	/**
 	 * test inserting a note that already exists
 	 */
-	public function testInsertInvalidNoteByNoteNoteTypeId(){
+	public function testInsertInvalidNotesByNoteNoteTypeId(){
 		//create a note with a none null note id and watch it fail
-		$note = Note::getNoteByNoteNoteTypeId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$note = Note::getNotesByNoteNoteTypeId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertEmpty($note);
 	}
 	/**
