@@ -61,7 +61,7 @@ try {
 					$reply->data = $prospectCohorts;
 				}
 			}
-		}
+
 	}else if($method === "POST") {
 
 		verifyXsrf();
