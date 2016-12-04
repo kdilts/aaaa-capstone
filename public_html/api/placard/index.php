@@ -62,7 +62,7 @@ try {
 				$reply->data = $placards->toArray();
 			}
 		}
-	} else if($method === "POST") {
+	} else if($method === "POST" || $method === "PUT") {
 
 		verifyXsrf();
 		$requestContent = file_get_contents("php://input");
@@ -86,8 +86,22 @@ try {
 
 			// update reply
 			$reply->message = "Placard created OK";
-		}
+		}else if($method === "PUT"){
+			// retrieve the placard to update
+			$placard = Placard::getPlacardByPlacardId($pdo, $placardId);
+			if($placard === null) {
+				throw(new RuntimeException("Placard does not exist", 404));
+			}
 
+			// update all attributes
+			$placard->setPlacardStatusTypeId($requestObject->placardStatusTypeId);
+			$placard->setPlacardNumber($requestObject->placardNumber);
+
+			$placard->update($pdo);
+
+			// update reply
+			$reply->message = "Placard updated OK";
+		}
 	} else {
 		throw (new Exception("Invalid HTTP request!", 405));
 	}
