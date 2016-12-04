@@ -45,27 +45,32 @@ try {
 		setXsrfCookie();
 
 		//get a specific note or all notes and update reply
-		if(empty($id) === false) {
+		if(empty($noteId) === false) {
+			echo "id" . PHP_EOL;
 			$note = Note::getNoteByNoteId($pdo, $noteId);
 			if($note !== null) {
 				$reply->data = $note;
 			}
 		} else if(empty($noteApplicationId) === false) {
+			echo "app" . PHP_EOL;
 			$notes = Note::getNoteByNoteApplicationId($pdo, $noteApplicationId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
 		} else if(empty($noteProspectId) === false) {
+			echo "prospect" . PHP_EOL;
 			$notes = Note::getNoteByNoteProspectId($pdo, $noteProspectId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
 		} else if(empty($noteNoteTypeId) === false) {
-			$notes = Note::getNoteByNoteProspectId($pdo, $noteNoteTypeId);
+			echo "note type" . PHP_EOL;
+			$notes = Note::getNotesByNoteNoteTypeId($pdo, $noteNoteTypeId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
 		} else {
+			echo "all" . PHP_EOL;
 			$notes = Note::getAllNotes($pdo);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
