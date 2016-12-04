@@ -42,8 +42,8 @@ class Note  implements \JsonSerializable {
 	 * @param int|null $newNoteId id for this Note or null if a new Note
 	 * @param string $newNoteContent string containing actual note data
 	 * @param int $newNoteNoteTypeId id of the Type of this Note
-	 * @param int $newNoteApplicationId Id of the Application associated with this Note
-	 * @param int $newNoteProspectId id of the Prospect associated with this Note
+	 * @param int|null $newNoteApplicationId Id of the Application associated with this Note
+	 * @param int|null $newNoteProspectId id of the Prospect associated with this Note
 	 * @param \DateTime $newNoteDateTime date and time this Note was created or null if set to current date and time
 	 * @param string $newNoteBridgeStaffId id for the Bridge Staff commenting on this note
 	 * @throws \InvalidArgumentException if data types are not valid
@@ -51,7 +51,7 @@ class Note  implements \JsonSerializable {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exceptions occur
 	 */
-	public function __construct(int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId, int $newNoteProspectId, \DateTime $newNoteDateTime, string $newNoteBridgeStaffId) {
+	public function __construct(int $newNoteId = null, string $newNoteContent, int $newNoteNoteTypeId, int $newNoteApplicationId = null, int $newNoteProspectId = null, \DateTime $newNoteDateTime, string $newNoteBridgeStaffId) {
 		try {
 			$this->setNoteId($newNoteId);
 			$this->setNoteContent($newNoteContent);
@@ -197,11 +197,16 @@ class Note  implements \JsonSerializable {
 	/**
 	 * mutator method for application of the note
 	 *
-	 * @param int $newNoteApplicationId new value of note application id
+	 * @param int|null $newNoteApplicationId new value of note application id
 	 * @throws \RangeException if $newNoteApplicationId is not positive
 	 * @throws \TypeError if $newNoteApplicationId is not an integer
 	 */
-	public function setNoteApplicationId(int $newNoteApplicationId) {
+	public function setNoteApplicationId(int $newNoteApplicationId = null) {
+		if($newNoteApplicationId === null){
+			$this->noteApplicationId = null;
+			return;
+		}
+
 		if($newNoteApplicationId < 0) {
 			throw(new \RangeException("Note Application Id can't be negative."));
 //set application Id
@@ -212,11 +217,16 @@ class Note  implements \JsonSerializable {
 	/**
 	 * mutator method for note of the prospect Id
 	 *
-	 * @param int $newNoteProspectId new value of note prospect id
+	 * @param int|null $newNoteProspectId new value of note prospect id
 	 * @throws \RangeException if $newNoteProspectId is not positive
 	 * @throws \TypeError if $newNoteProspectId is not an integer
 	 */
-	public function setNoteProspectId(int $newNoteProspectId) {
+	public function setNoteProspectId(int $newNoteProspectId = null) {
+		if($newNoteProspectId === null){
+			$this->noteProspectId = null;
+			return;
+		}
+
 		if($newNoteProspectId < 0) {
 			throw(new \RangeException("Note Prospect Id can't be negative."));
 //store prospect Id
