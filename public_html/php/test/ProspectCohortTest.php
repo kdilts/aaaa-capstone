@@ -108,7 +108,7 @@ class ProspectCohortTest extends AaaaTest {
 		$prospectCohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = ProspectCohort::getAllProspectCohorts($this->getPDO());
+		$results = ProspectCohort::getProspectCohortsByCohortId($this->getPDO(), $prospectCohort->getProspectCohortCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\ProspectCohort", $results);
@@ -126,7 +126,7 @@ class ProspectCohortTest extends AaaaTest {
 	 */
 	public function testGetInvalidProspectCohortByCohortId(){
 		// grab a prospectCohort by searching for id that does not exist
-		$prospectCohort = ProspectCohort::getProspectCohortByCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$prospectCohort = ProspectCohort::getProspectCohortsByCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertCount(0, $prospectCohort);
 	}
 
@@ -142,7 +142,7 @@ class ProspectCohortTest extends AaaaTest {
 		$prospectCohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = ProspectCohort::getAllProspectCohorts($this->getPDO());
+		$results = ProspectCohort::getProspectCohortsByProspectId($this->getPDO(), $prospectCohort->getProspectCohortProspectId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\ProspectCohort", $results);
@@ -160,8 +160,8 @@ class ProspectCohortTest extends AaaaTest {
 	 */
 	public function testGetInvalidProspectCohortByProspectId(){
 		// grab a prospectCohort by searching for id that does not exist
-		$prospectCohort = ProspectCohort::getProspectCohortByProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($prospectCohort);
+		$prospectCohort = ProspectCohort::getProspectCohortsByProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertEmpty($prospectCohort);
 	}
 
 	/**
