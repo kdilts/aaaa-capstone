@@ -31,9 +31,9 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$prospectCohortId = filter_input(INPUT_GET, "prospectCohortId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$prospectCohortProspectId = filter_input(INPUT_GET, "prospectCohortProspectId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$prospectCohortCohortId = filter_input(INPUT_GET, "prospectCohortCohortId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$prospectCohortId = filter_input(INPUT_GET, "prospectCohortId", FILTER_VALIDATE_INT);
+	$prospectCohortProspectId = filter_input(INPUT_GET, "prospectCohortProspectId", FILTER_VALIDATE_INT);
+	$prospectCohortCohortId = filter_input(INPUT_GET, "prospectCohortCohortId", FILTER_VALIDATE_INT);
 	// handle GET request
 	if($method === "GET") {
 		//set XSRF cookie
@@ -82,7 +82,11 @@ try {
 		if($method === "POST") {
 
 			// create new tweet and insert into the database
-			$prospectCohort = new ProspectCohort(null, $requestObject->prospectCohortProspectId, $requestObject->prospectCohortCohortId);
+			$prospectCohort = new ProspectCohort(
+				$requestObject->prospectCohortId,
+				$requestObject->prospectCohortProspectId,
+				$requestObject->prospectCohortCohortId
+			);
 			$prospectCohort->insert($pdo);
 
 			// update reply
@@ -93,7 +97,7 @@ try {
 		throw (new Exception("Invalid HTTP request!", 405));
 	}
 	// update reply with exception information
-} catch(Exception $exception) { // TODO shouldn't exceptions be ordered from most specific to least?
+} catch(Exception $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 } catch(TypeError $typeError) {
