@@ -10,11 +10,12 @@
 				href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
 		<script data-require="bootstrap@3.3.6" data-semver="3.3.6"
 				  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="CustomStyles.css" rel="stylesheet"/>
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
 		<title>Stream Line CNM Log in Page</title>
 	</head>
-
+	<!-- form -->
 	<body class="sfooter">
 		<div class="sfooter-content">
 			<div class="row"></div>
@@ -27,8 +28,21 @@
 				<div class="container">
 					<div class="jumbotron text-center">
 						<h1 class="text-center">Stream Line CNM</h1>
+						<label for="Email">Email</label>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"></span>
+							<div><input type="text" class="form-control" placeholder="Your Email"></div>
+						</div>
+						<label for="Password">Password</label>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"></span>
+							<input type="text" class="form-control" placeholder="Password">
+						</div>
+						<button type="button" class="btn btn-default navbar-btn">Sign n</button>
+
 						<div class="form-wrap row">
 							<div class="col-sm-12 col-sm-offset-12">
+								</form>
 							</div>
 						</div>
 					</div>
@@ -40,40 +54,6 @@
 					</div>
 				</div>
 				<!-- insert contact form here -->
-				<form id="contact-form">
-					<div class="form-group">
-						<div class="container">
-							<div class="row">
-								<div class="col-sm-6">
-								</div>
-								<div class="form-group">
-									<label for="inputEmail" class="control-label">Email</label>
-									<input type="email" class="form-control" id="inputEmail" placeholder="Email"
-											 data-error="Bruh, that email address is invalid" required>
-									<div class="help-block with-errors"></div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword" class="control-label">Password</label>
-									<div class="form-inline row">
-										<div class="form-group col-sm-6">
-											<input type="password" data-minlength="12" class="form-control" id="inputPassword"
-													 placeholder="Password" required>
-											<div class="help-block">Minimum of 12 characters</div>
-										</div>
-										<div class="form-group col-sm-6">
-											<input type="password" class="form-control" id="inputPasswordConfirm"
-													 data-match="#inputPassword" data-match-error="Whoops, these don't match"
-													 placeholder="Confirm" required>
-											<div class="help-block with-errors">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="footer">
-						<button type="button" class="btn btn-default" data-dismiss="footer">Enter</button>
 
 					</div>
 			</main>
