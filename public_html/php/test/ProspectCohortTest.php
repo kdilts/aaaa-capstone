@@ -108,7 +108,7 @@ class ProspectCohortTest extends AaaaTest {
 		$prospectCohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = ProspectCohort::getProspectCohortByCohortId($this->getPDO(), $prospectCohort->getProspectCohortCohortId());
+		$results = ProspectCohort::getAllProspectCohorts($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\ProspectCohort", $results);
@@ -142,7 +142,13 @@ class ProspectCohortTest extends AaaaTest {
 		$prospectCohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoProspectCohort = ProspectCohort::getProspectCohortByProspectId($this->getPDO(), $prospectCohort->getProspectCohortProspectId());
+		$results = ProspectCohort::getAllProspectCohorts($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\ProspectCohort", $results);
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoProspectCohort = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("prospectCohort"));
 		$this->assertEquals($pdoProspectCohort->getProspectCohortId(), $prospectCohort->getProspectCohortId());
 		$this->assertEquals($pdoProspectCohort->getProspectCohortProspectId(), $this->prospect->getProspectId());

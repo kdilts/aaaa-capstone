@@ -46,21 +46,21 @@ try {
 				$reply->data = $prospectCohort;
 			}
 		} else if(empty($prospectCohortProspectId) === false) {
-			$prospectCohort = ProspectCohort::getProspectCohortByProspectId($pdo, $prospectCohortProspectId);
+			$prospectCohort = ProspectCohort::getProspectCohortsByProspectId($pdo, $prospectCohortProspectId);
 			if($prospectCohort !== null) {
-				$reply->data = $prospectCohort;
+				$reply->data = $prospectCohort->toArray();
 			}
 		} else if(empty($prospectCohortCohortId) === false) {
-			$prospectCohorts = ProspectCohort::getProspectCohortByCohortId($pdo, $prospectCohortCohortId);
+			$prospectCohorts = ProspectCohort::getProspectCohortsByCohortId($pdo, $prospectCohortCohortId);
 			if($prospectCohorts !== null) {
-				$reply->data = $prospectCohorts;
+				$reply->data = $prospectCohorts->toArray();
 			}
 		} else {
-				$prospectCohorts = ProspectCohort::getAllProspectCohorts($pdo);
-				if($prospectCohorts !== null) {
-					$reply->data = $prospectCohorts;
-				}
+			$prospectCohorts = ProspectCohort::getAllProspectCohorts($pdo);
+			if($prospectCohorts !== null) {
+				$reply->data = $prospectCohorts->toArray();
 			}
+		}
 
 	}else if($method === "POST") {
 

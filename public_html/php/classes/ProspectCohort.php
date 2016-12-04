@@ -205,11 +205,11 @@ class ProspectCohort implements \JsonSerializable {
 	 * gets the Prospect Cohort by prospect id
 	 * @param \PDO $pdo connection object
 	 * @param int $prospectCohortProspectId prospectCohort prospect id to search for
-	 * @return ProspectCohort|null prospectCohort if found or null if not found
+	 * @return \SplFixedArray prospectCohort if found or null if not found
 	 * @throws \PDOException if prospect cohort prospect id is not positive
 	 */
 
-	public static function getProspectCohortByProspectId (\PDO $pdo, int $prospectCohortProspectId){
+	public static function getProspectCohortsByProspectId (\PDO $pdo, int $prospectCohortProspectId){
 		//sanitize the prospectCohortId before searching
 		if ($prospectCohortProspectId <=0) {
 			throw(new \PDOException("prospectCohortProspectId not positive"));
@@ -223,19 +223,20 @@ class ProspectCohort implements \JsonSerializable {
 		$parameters = ["prospectCohortProspectId" => $prospectCohortProspectId];
 		$statement->execute($parameters);
 
-		//grab placard from SQL
-		try {
-			$prospectCohort = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false){
-				$prospectCohort = new prospectCohort ($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
+		// build an array of prospectCohorts
+		$prospectCohorts = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$prospectCohort = new ProspectCohort($row["prospectCohortId"], $row["prospectCohortProspectId"], $row["prospectCohortCohortId"]);
+				$prospectCohorts[$prospectCohorts->key()] = $prospectCohort;
+				$prospectCohorts->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception){
-			//if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($prospectCohort);
+		return $prospectCohorts;
 	}
 
 	/**
@@ -245,7 +246,7 @@ class ProspectCohort implements \JsonSerializable {
 	 * @return \SplFixedArray array of prospectCohorts found
 	 * @throws \PDOException if prospect cohort cohort id is not positive
 	 */
-	public static function getProspectCohortByCohortId (\PDO $pdo, int $prospectCohortCohortId){
+	public static function getProspectCohortsByCohortId (\PDO $pdo, int $prospectCohortCohortId){
 		//sanitize the prospectCohortId before searching
 		if ($prospectCohortCohortId <=0){
 			throw(new \PDOException("prospectCohortCohortId not positive"));
@@ -258,7 +259,7 @@ class ProspectCohort implements \JsonSerializable {
 		$parameters = ["prospectCohortCohortId" => $prospectCohortCohortId];
 		$statement->execute($parameters);
 
-		// build an array of prospectCohort
+		// build an array of prospectCohorts
 		$prospectCohorts = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
