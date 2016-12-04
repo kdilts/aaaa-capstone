@@ -526,7 +526,7 @@ class Note  implements \JsonSerializable {
 	 * @throws \PDOException if id is not positive
 	 * @throws \TypeError when variables are not the correct data
 	 */
-	public static function getNotesByDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate) {
+	public static function getNotesByNoteDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate) {
 		// sanitize the dates before searching
 		try {
 			$startDate = self::validateDateTime($startDate);

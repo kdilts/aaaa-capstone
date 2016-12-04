@@ -69,7 +69,7 @@ class NoteTest extends AaaaTest {
 		$this->noteType = new NoteType(null,"string");
 		$this->noteType->insert($this->getPDO());
 
-		$this->VALID_DATE = \DateTime::createFromFormat("Y-m-d","2016-1-1");
+		$this->VALID_DATE = \DateTime::createFromFormat("Y-m-d H:i:s","2016-1-10 12:00:00");
 
 		$this->application = new Application(null, "john", "doe", "em@ail.com", "555-555-5555", "source", "about you", "hope", "exp", $this->VALID_DATE, "utmC","utmM", "utmS");
 		$this->application->insert($this->getPDO());
@@ -284,6 +284,40 @@ class NoteTest extends AaaaTest {
 	public function testGetInvalidNotesByBridgeStaffId(){
 		//create a note with a none null note id and watch it fail
 		$note = Note::getNotesByNoteBridgeStaffId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertEmpty($note);
+	}
+
+	/**
+	 * test grabbing notes by a date range
+	 */
+	public function testGetValidNotesByNoteDateRange(){
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("note");
+		//create a new Note and insert it to mySQL
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
+		$note->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$results = Note::getNotesByNoteDateRange($this->getPDO(), \DateTime::createFromFormat("Y-m-d H:i:s","2016-1-1 12:00:00"), \DateTime::createFromFormat("Y-m-d H:i:s","2016-2-1 12:00:00"));
+		$pdoNote = $results[0];
+		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+
+		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
+		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
+		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteDateTime(), $this->VALID_DATE);
+		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
+	}
+
+	/**
+	 * test inserting a note that already exists
+	 */
+	public function testGetInvalidNotesByNoteDateRange(){
+		//create a note with a none null note id and watch it fail
+		$note = Note::getNotesByNoteDateRange($this->getPDO(),  \DateTime::createFromFormat("Y-m-d H:i:s","2016-1-1 12:00:00"), \DateTime::createFromFormat("Y-m-d H:i:s","2016-2-1 12:00:00"));
 		$this->assertEmpty($note);
 	}
 
