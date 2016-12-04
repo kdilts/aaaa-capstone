@@ -36,8 +36,12 @@ try {
 	$noteNoteTypeId = filter_input(INPUT_GET, "noteNoteTypeId", FILTER_VALIDATE_INT);
 	$noteApplicationId = filter_input(INPUT_GET, "noteApplicationId", FILTER_VALIDATE_INT);
 	$noteProspectId = filter_input(INPUT_GET, "noteProspectId", FILTER_VALIDATE_INT);
-	$noteDateTime = filter_input(INPUT_GET, "noteDateTime"); // TODO figure out how to sanitize
+	$noteDateTime = filter_input(INPUT_GET, "noteDateTime", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$noteBridgeStaffId = filter_input(INPUT_GET, "noteBridgeStaffId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+	$startDate = filter_input(INPUT_GET, "startDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$endDate = filter_input(INPUT_GET, "endDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
 
 	// handle GET request
 	if($method === "GET") {
@@ -76,9 +80,15 @@ try {
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
-		}
-		// TODO handle get by date range
-		else {
+		} else if(empty($startDate) === false && empty($endDate) === false) {
+			echo "dates" . PHP_EOL;
+			$startDate = \DateTime::createFromFormat("Y-m-d H:i:s", $startDate);
+			$endDate = \DateTime::createFromFormat("Y-m-d H:i:s", $endDate);
+			$notes = Note::getNotesByNoteDateRange($pdo, $startDate, $endDate);
+			if($notes !== null) {
+				$reply->data = $notes->toArray();
+			}
+		} else {
 			echo "all" . PHP_EOL;
 			$notes = Note::getAllNotes($pdo);
 			if($notes !== null) {
