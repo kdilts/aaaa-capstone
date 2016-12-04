@@ -24,14 +24,19 @@
 			</div>
 		</section>
 		<div class="list-group">
+				<div class="row">
+					<div class="col-sm-6">
+					</div>
 			<ul>
 				<div class="list-group">
-					<a href="#" class="list-group-item">First item</a>
-					<a href="#" class="list-group-item">Second item</a>
-					<a href="#" class="list-group-item">Third item</a>
+					<a href="#" class="list-group-item">Prospect ID</a>
+					<a href="#" class="list-group-item">Name</a>
+					<a href="#" class="list-group-item">Email</a>
+					<a href="#" class="list-group-item">Phone</a>
+				</div>
+				<button class="btn btn-success" type="submit"><i class="fa fa-paper-plane"></i> Submit</button>
 				</div>
 			</ul>
-
 		</div>
 	</body>
 </html>
