@@ -150,8 +150,8 @@ try {
 			$studentPermit->setStudentPermitApplicationId($requestObject->studentPermitApplicationId);
 			$studentPermit->setStudentPermitPlacardId($requestObject->studentPermitPlacardId);
 			$studentPermit->setStudentPermitSwipeId($requestObject->studentPermitSwipeId);
-			$studentPermit->setStudentPermitCheckOutDate($requestObject->studentPermitCheckOutDate);
-			$studentPermit->setStudentPermitCheckInDate($requestObject->studentPermitCheckInDate);
+			$studentPermit->setStudentPermitCheckOutDate(\DateTime::createFromFormat("Y-m-d",$requestObject->studentPermitCheckOutDate));
+			$studentPermit->setStudentPermitCheckInDate(\DateTime::createFromFormat("Y-m-d",$requestObject->studentPermitCheckInDate));
 
 			$studentPermit->update($pdo);
 
