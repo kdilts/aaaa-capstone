@@ -63,13 +63,22 @@ try {
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
-		} else if(empty($noteNoteTypeId) === false) {
+		}
+		else if(empty($noteNoteTypeId) === false) {
 			echo "note type" . PHP_EOL;
 			$notes = Note::getNotesByNoteNoteTypeId($pdo, $noteNoteTypeId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
-		} else {
+		} else if(empty($noteBridgeStaffId) === false) {
+			echo "bridge" . PHP_EOL;
+			$notes = Note::getNotesByNoteBridgeStaffId($pdo, $noteBridgeStaffId);
+			if($notes !== null) {
+				$reply->data = $notes->toArray();
+			}
+		}
+		// TODO handle get by date range
+		else {
 			echo "all" . PHP_EOL;
 			$notes = Note::getAllNotes($pdo);
 			if($notes !== null) {
