@@ -62,7 +62,7 @@ try {
 				$reply->data = $swipes->toArray();
 			}
 		}
-	} else if($method === "POST") {
+	} else if($method === "POST" || $method === "PUT") {
 
 		verifyXsrf();
 		$requestContent = file_get_contents("php://input");
@@ -87,6 +87,21 @@ try {
 
 			// update reply
 			$reply->message = "swipe created OK";
+		} else if($method === "PUT"){
+			// retrieve the swipe to update
+			$swipe = Swipe::getSwipeBySwipeId($pdo, $swipeId);
+			if($swipe === null) {
+				throw(new RuntimeException("Swipe does not exist", 404));
+			}
+
+			// update all attributes
+			$swipe->setSwipeStatus($requestObject->swipeStatusTypeId);
+			$swipe->setSwipeNumber($requestObject->swipeNumber);
+
+			$swipe->update($pdo);
+
+			// update reply
+			$reply->message = "Swipe updated OK";
 		}
 
 	} else {
