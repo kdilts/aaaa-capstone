@@ -427,7 +427,7 @@ class Note  implements \JsonSerializable {
 	}
 
 	/**
-	 * get note by note of the noteId
+	 * get notes by note type id
 	 * @param \PDO $pdo connection object
 	 * @param int $noteNoteTypeId id to search for
 	 * @return \SplFixedArray SplFixedArray of Notes found
@@ -472,6 +472,14 @@ class Note  implements \JsonSerializable {
 		return $notes;
 	}
 
+	/**
+	 * get notes by bridge staff id
+	 * @param \PDO $pdo connection object
+	 * @param int $noteBridgeStaffId bridge staff id to search for
+	 * @return \SplFixedArray SplFixedArray of Notes found
+	 * @throws \PDOException if id is not positive
+	 * @throws \TypeError when variables are not the correct data
+	 */
 	public static function getNotesByBridgeStaffId(\PDO $pdo, int $noteBridgeStaffId) {
 		// sanitize the noteNoteTypeId before searching
 		if($noteBridgeStaffId <= 0) {
