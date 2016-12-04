@@ -481,7 +481,7 @@ class Note  implements \JsonSerializable {
 	 * @throws \TypeError when variables are not the correct data
 	 */
 	public static function getNotesByBridgeStaffId(\PDO $pdo, int $noteBridgeStaffId) {
-		// sanitize the noteNoteTypeId before searching
+		// sanitize the bridge staff id before searching
 		if($noteBridgeStaffId <= 0) {
 			throw(new \PDOException("noteBridgeStaffId not positive"));
 		}
@@ -490,7 +490,7 @@ class Note  implements \JsonSerializable {
 		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId FROM note WHERE noteBridgeStaffId = :noteBridgeStaffId";
 		$statement = $pdo->prepare($query);
 
-		// bind the noteNoteType id to the place holder in template
+		// bind the bridge staff id to the place holder in template
 		$parameters = ["noteBridgeStaffId" => $noteBridgeStaffId];
 		$statement->execute($parameters);
 
@@ -518,7 +518,63 @@ class Note  implements \JsonSerializable {
 		return $notes;
 	}
 
+	/**
+	 * @param \PDO $pdo connection object
+	 * @param \DateTime $startDate beginning of date range
+	 * @param \DateTime $endDate end of date range
+	 * @return \SplFixedArray SplFixedArray of Notes found
+	 * @throws \PDOException if id is not positive
+	 * @throws \TypeError when variables are not the correct data
+	 */
+	public static function getNotesByDateRange(\PDO $pdo, \DateTime $startDate, \DateTime $endDate) {
+		// sanitize the dates before searching
+		try {
+			$startDate = self::validateDateTime($startDate);
+			$endDate = self::validateDateTime($endDate);
+		} catch(\InvalidArgumentException $invalidArgument) {
+			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		} catch(\RangeException $range) {
+			throw(new \RangeException($range->getMessage(), 0, $range));
+		}
 
+		// format dates
+		$startDate = $startDate->format("Y-m-d H:i:s");
+		$endDate = $endDate->format("Y-m-d H:i:s");
+
+		// create query template
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId FROM note WHERE noteDateTime >= :startDate AND noteDateTime <= :endDate";
+		$statement = $pdo->prepare($query);
+
+		// bind the dates to the place holder in template
+		$parameters = [
+			"startDate" => $startDate,
+			"endDate" => $endDate
+		];
+		$statement->execute($parameters);
+
+		// build an array of notes
+		$notes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$note = new Note(
+					$row["noteId"],
+					$row["noteContent"],
+					$row["noteNoteTypeId"],
+					$row["noteApplicationId"],
+					$row["noteProspectId"],
+					\DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]),
+					$row["noteBridgeStaffId"]
+				);
+				$notes[$notes->key()] = $note;
+				$notes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return $notes;
+	}
 
 	/**
 	 * gets all notes
