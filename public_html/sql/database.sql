@@ -38,7 +38,7 @@ CREATE TABLE bridge(
 
 CREATE TABLE cohort(
 	cohortId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	cohortName VARCHAR(30) NOT NULL,
+	cohortName VARCHAR(30) NOT NULL UNIQUE,
 	INDEX (cohortId),
 	PRIMARY KEY(cohortId)
 );
@@ -61,14 +61,14 @@ CREATE TABLE prospect(
 
 CREATE TABLE statusType(
 	statusTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	statusTypeName INT UNSIGNED NOT NULL,
+	statusTypeName INT UNSIGNED NOT NULL UNIQUE,
 	INDEX (statusTypeId),
 	PRIMARY KEY (statusTypeId)
 );
 
 CREATE TABLE placard(
 	placardId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	placardNumber INT UNSIGNED NOT NULL,
+	placardNumber INT UNSIGNED NOT NULL UNIQUE,
 	placardStatusTypeId INT UNSIGNED NOT NULL,
 	INDEX (placardId),
 	INDEX (placardStatusTypeId),
@@ -79,7 +79,7 @@ CREATE TABLE placard(
 
 CREATE TABLE swipe(
 	swipeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	swipeNumber INT UNSIGNED NOT NULL,
+	swipeNumber INT UNSIGNED NOT NULL UNIQUE,
 	swipeStatusTypeId INT UNSIGNED NOT NULL,
 	INDEX (swipeId),
 	INDEX (swipeStatusTypeId),

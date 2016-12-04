@@ -31,9 +31,9 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$placardId = filter_input(INPUT_GET, "placardId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$placardStatusTypeId = filter_input(INPUT_GET, "placardStatusTypeId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$placardNumber = filter_input(INPUT_GET, "placardNumber", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$placardId = filter_input(INPUT_GET, "placardId", FILTER_VALIDATE_INT);
+	$placardStatusTypeId = filter_input(INPUT_GET, "placardStatusTypeId", FILTER_VALIDATE_INT);
+	$placardNumber = filter_input(INPUT_GET, "placardNumber", FILTER_VALIDATE_INT);
 
 	// handle GET request
 	if($method === "GET") {
@@ -68,22 +68,21 @@ try {
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
 
-		//make sure bridge name is available (required field)
-		if(empty($requestObject->placardId) === true) {
-			throw(new \InvalidArgumentException ("Placard ID is missing.", 405));
-		}
-
-		//  make sure bridge user name is available (required field)
+		//  make sure placard status type id name is available (required field)
 		if(empty($requestObject->placardStatusTypeId) === true) {
-			throw(new \InvalidArgumentException ("Placard Status Type ID is missing.", 405));
+			throw(new \InvalidArgumentException ("Placard Status Type Id is missing.", 405));
 		}
 
+		//make sure placard number is available (required field)
+		if(empty($requestObject->placardNumber) === true) {
+			throw(new \InvalidArgumentException ("Placard Number is missing.", 405));
+		}
 		//perform the actual post
 		if($method === "POST") {
 
 			// create new tweet and insert into the database
-			$bridge = new Placard(null, $requestObject->placardStatusTypeId, $requestObject->placardNumber);
-			$bridge->insert($pdo);
+			$placard = new Placard($requestObject->placardId, $requestObject->placardStatusTypeId, $requestObject->placardNumber);
+			$placard->insert($pdo);
 
 			// update reply
 			$reply->message = "Placard created OK";
@@ -93,7 +92,7 @@ try {
 		throw (new Exception("Invalid HTTP request!", 405));
 	}
 	// update reply with exception information
-} catch(Exception $exception) { // TODO shouldn't exceptions be ordered from most specific to least?
+} catch(Exception $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 } catch(TypeError $typeError) {

@@ -72,7 +72,9 @@ namespace Edu\Cnm\DdcAaaa;
 			if(empty($newBridgeStaffId) === true) {
 				throw (new \InvalidArgumentException("Bridge staff id is either empty or insecure."));
 			}
-			// TODO length validation?
+			if(strlen($newBridgeStaffId) > 9) {
+				throw(new \RangeException("Bridge Staff Id too large"));
+			}
 			$this ->bridgeStaffId = $newBridgeStaffId;
 		}
 		/**
@@ -95,7 +97,9 @@ namespace Edu\Cnm\DdcAaaa;
 			if(empty($newBridgeName) === true) {
 				throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
 			}
-			// TODO length validation?
+			if(strlen($newBridgeName) > 64) {
+				throw(new \RangeException("Bridge Name too large"));
+			}
 			$this ->bridgeName = $newBridgeName;
 		}
 		/**
@@ -114,13 +118,13 @@ namespace Edu\Cnm\DdcAaaa;
 		 **/
 		public function setBridgeUserName(string $newBridgeUserName) {
 			$newBridgeUserName = trim ($newBridgeUserName);
-			//echo $newBridgeUserName;
 			$newBridgeUserName = filter_var($newBridgeUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-			//echo $newBridgeUserName;
 			if(empty($newBridgeUserName) === true) {
 				throw (new \InvalidArgumentException("Bridge name is either empty or insecure."));
 			}
-			// TODO length validation?
+			if(strlen($newBridgeUserName) > 20) {
+				throw(new \RangeException("Bridge Username too large"));
+			}
 			$this ->bridgeUserName = $newBridgeUserName;
 		}
 		/**

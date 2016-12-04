@@ -173,6 +173,9 @@ class Note  implements \JsonSerializable {
 			throw (new \InvalidArgumentException("Note content is either empty or insecure."));
 			//store content of the note
 		}
+		if(strlen($newNoteContent) > 2000) {
+			throw(new \RangeException("note content too large"));
+		}
 		$this->noteContent = $newNoteContent;
 	}
 
@@ -243,11 +246,17 @@ class Note  implements \JsonSerializable {
 	 * @throws \RangeException if not valid
 	 * @throws \InvalidArgumentException if $newNoteBridgeStaffId is not a valid object or string
 	 */
-	public function setNoteBridgeStaffId(int $newNoteBridgeStaffId) {
-		if($newNoteBridgeStaffId < 0) {
-			throw(new \RangeException("Note Bridge Staff Id can't be negative."));
-//store the note bridge staff Id
+	public function setNoteBridgeStaffId(string $newNoteBridgeStaffId) {
+		$newNoteBridgeStaffId = trim ($newNoteBridgeStaffId);
+		$newNoteBridgeStaffId = filter_var($newNoteBridgeStaffId, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newNoteBridgeStaffId) === true) {
+			throw (new \InvalidArgumentException("newNoteBridgeStaffId is either empty or insecure."));
 		}
+		if(strlen($newNoteBridgeStaffId) > 9) {
+			throw(new \RangeException("Bridge Staff Id too large"));
+		}
+
+		//store the note bridge staff Id
 		$this->noteBridgeStaffId = $newNoteBridgeStaffId;
 	}
 	/**
@@ -308,7 +317,15 @@ class Note  implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false){
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], \DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]), $row["noteBridgeStaffId"]);
+				$note = new Note(
+					$row["noteId"],
+					$row["noteContent"],
+					$row["noteNoteTypeId"],
+					$row["noteApplicationId"],
+					$row["noteProspectId"],
+					\DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]),
+					$row["noteBridgeStaffId"]
+				);
 			}
 		} catch(\Exception $exception){
 			// if the row couldn't be converted, rethrow it
@@ -332,7 +349,7 @@ class Note  implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId FROM note WHERE noteId = :noteApplicationId";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId FROM note WHERE noteApplicationId = :noteApplicationId";
 		$statement = $pdo->prepare($query);
 
 		// bind the noteApplication id to the place holder in template
@@ -344,7 +361,15 @@ class Note  implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"], $row["noteContent"], $row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], \DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]), $row["noteBridgeStaffId"]);
+				$note = new Note(
+					$row["noteId"],
+					$row["noteContent"],
+					$row["noteNoteTypeId"],
+					$row["noteApplicationId"],
+					$row["noteProspectId"],
+					\DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]),
+					$row["noteBridgeStaffId"]
+				);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
@@ -364,8 +389,7 @@ class Note  implements \JsonSerializable {
 	 * @throws \TypeError when variables are not the correct data
 	 */
 	public static function getNoteByNoteProspectId(\PDO $pdo, int $noteProspectId) {
-		var_dump($noteProspectId);
-		// sanitize the noteProspectId before searching
+		// sanitize the noteApplicationId before searching
 		if($noteProspectId <= 0) {
 			throw(new \PDOException("noteProspectId not positive"));
 		}
@@ -374,22 +398,28 @@ class Note  implements \JsonSerializable {
 		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId FROM note WHERE noteProspectId = :noteProspectId";
 		$statement = $pdo->prepare($query);
 
-		// bind the noteProspect id to the place holder in template
+		// bind the noteApplication id to the place holder in template
 		$parameters = ["noteProspectId" => $noteProspectId];
 		$statement->execute($parameters);
 
 		// build an array of notes
 		$notes = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		echo PHP_EOL . "!!!!!!!" . PHP_EOL;
 		while(($row = $statement->fetch()) !== false) {
-			echo PHP_EOL . "----------" . PHP_EOL;
 			try {
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteBridgeStaffId"]);
+				$note = new Note(
+					$row["noteId"],
+					$row["noteContent"],
+					$row["noteNoteTypeId"],
+					$row["noteApplicationId"],
+					$row["noteProspectId"],
+					\DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]),
+					$row["noteBridgeStaffId"]
+				);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
+				// if the row couldn't be converted, rethrow
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
@@ -411,7 +441,7 @@ class Note  implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId FROM note WHERE noteNoteTypeId = :noteNoteTypeId";
+		$query = "SELECT noteId, noteContent, noteNoteTypeId, noteApplicationId, noteProspectId, noteDateTime, noteBridgeStaffId FROM note WHERE noteNoteTypeId = :noteNoteTypeId";
 		$statement = $pdo->prepare($query);
 
 		// bind the noteNoteType id to the place holder in template
@@ -423,7 +453,15 @@ class Note  implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteDateTime"], $row["noteBridgeStaffId"]);
+				$note = new Note(
+					$row["noteId"],
+					$row["noteContent"],
+					$row["noteNoteTypeId"],
+					$row["noteApplicationId"],
+					$row["noteProspectId"],
+					\DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]),
+					$row["noteBridgeStaffId"]
+				);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch(\Exception $exception) {
@@ -451,7 +489,15 @@ class Note  implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false){
 			try{
-				$note = new Note($row["noteId"],$row["noteContent"],$row["noteNoteTypeId"], $row["noteApplicationId"], $row["noteProspectId"], $row["noteDateTime"], $row["noteBridgeStaffId"]);
+				$note = new Note(
+					$row["noteId"],
+					$row["noteContent"],
+					$row["noteNoteTypeId"],
+					$row["noteApplicationId"],
+					$row["noteProspectId"],
+					\DateTime::createFromFormat("Y-m-d H:i:s", $row["noteDateTime"]),
+					$row["noteBridgeStaffId"]
+				);
 				$notes[$notes->key()] = $note;
 				$notes->next();
 			} catch (\Exception $exception){

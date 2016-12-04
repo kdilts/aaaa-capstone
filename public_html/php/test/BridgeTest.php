@@ -64,8 +64,11 @@ class BridgeTest extends AaaaTest {
 	 * @expectedException \PDOException
 	 **/
 	public function testInsertInvalidBridge() {
-		// create a Bridge with a non null bridge id and watch it fail
-		$bridge = new Bridge(AaaaTest::INVALID_KEY, $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		// create a Bridge
+		$bridge = new Bridge("111222333", $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
+		$bridge->insert($this->getPDO());
+		// attempt to create the exact same bridge
+		$bridge = new Bridge("111222333", $this->VALID_BRIDGENAME, $this->VALID_BRIDGEUSERNAME);
 		$bridge->insert($this->getPDO());
 	}
 
