@@ -144,7 +144,7 @@ class NoteTest extends AaaaTest {
 	/**
 	 * Test inserting a Note that already exists
 	 */
-	public function testInsertInvalidNoteByNoteId() {
+	public function testGetInvalidNoteByNoteId() {
 		//create a Note with a non null note id and watch it fail
 		$note = Note::getNoteByNoteId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertNull($note);
@@ -179,7 +179,7 @@ class NoteTest extends AaaaTest {
 	/**
 	 * Test inserting a Note that already exists
 	 */
-	public function testInsertInvalidNotesByNoteApplicationId() {
+	public function testGetInvalidNotesByNoteApplicationId() {
 		//create a note with a non null note id  and watch it fail
 		$note = Note::getNotesByNoteApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertEmpty($note);
@@ -214,7 +214,7 @@ class NoteTest extends AaaaTest {
 	/**
 	 * test inserting a note that already exists
 	 */
-	public function testInsertInvalidNotesByNoteProspectId(){
+	public function testGetInvalidNotesByNoteProspectId(){
 		//create a note with a none null note id and watch it fail
 		$note = Note::getNotesByNoteProspectId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertEmpty($note);
@@ -247,11 +247,46 @@ class NoteTest extends AaaaTest {
 	/**
 	 * test inserting a note that already exists
 	 */
-	public function testInsertInvalidNotesByNoteNoteTypeId(){
+	public function testGetInvalidNotesByNoteNoteTypeId(){
 		//create a note with a none null note id and watch it fail
 		$note = Note::getNotesByNoteNoteTypeId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertEmpty($note);
 	}
+
+	/**
+	 *  test grabbing notes by bridge staff id
+	 */
+	public function testGetValidNotesByNoteBridgeStaffId(){
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("note");
+		//create a new Note and insert it to mySQL
+		$note = new Note(null, $this->VALID_NOTECONTENT, $this->noteType->getNoteTypeId(),$this->application->getApplicationId(),$this->prospect->getProspectId(), $this->VALID_DATE, $this->bridge->getBridgeStaffId());
+		$note->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$results = Note::getNotesByNoteBridgeStaffId($this->getPDO(), $note->getNoteBridgeStaffId());
+		$pdoNote = $results[0];
+		$this->assertEquals($numRows = 1, $this->getConnection()->getRowCount("note"));
+		$this->assertInstanceOf("Edu\\Cnm\\DdcAaaa\\Note",$pdoNote);
+
+		$this->assertEquals($pdoNote->getNoteId(), $note->getNoteId());
+		$this->assertEquals($pdoNote->getNoteContent(), $this->VALID_NOTECONTENT);
+		$this->assertEquals($pdoNote->getNoteNoteTypeId(), $this->noteType->getNoteTypeId());
+		$this->assertEquals($pdoNote->getNoteApplicationId(), $this->application->getApplicationId());
+		$this->assertEquals($pdoNote->getNoteProspectId(), $this->prospect->getProspectId());
+		$this->assertEquals($pdoNote->getNoteDateTime(), $this->VALID_DATE);
+		$this->assertEquals($pdoNote->getNoteBridgeStaffId(), $this->bridge->getBridgeStaffId());
+	}
+
+	/**
+	 * test inserting a note that already exists
+	 */
+	public function testGetInvalidNotesByBridgeStaffId(){
+		//create a note with a none null note id and watch it fail
+		$note = Note::getNotesByNoteBridgeStaffId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertEmpty($note);
+	}
+
 	/**
 	 * test grabbing all Notes
 	 **/

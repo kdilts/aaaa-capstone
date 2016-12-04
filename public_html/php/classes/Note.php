@@ -480,7 +480,7 @@ class Note  implements \JsonSerializable {
 	 * @throws \PDOException if id is not positive
 	 * @throws \TypeError when variables are not the correct data
 	 */
-	public static function getNotesByBridgeStaffId(\PDO $pdo, int $noteBridgeStaffId) {
+	public static function getNotesByNoteBridgeStaffId(\PDO $pdo, int $noteBridgeStaffId) {
 		// sanitize the bridge staff id before searching
 		if($noteBridgeStaffId <= 0) {
 			throw(new \PDOException("noteBridgeStaffId not positive"));
