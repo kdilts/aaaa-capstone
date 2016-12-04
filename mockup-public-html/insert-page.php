@@ -80,7 +80,7 @@
 		</form>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 
-			<script src="bootstrap/js/bootstrap.min.js"></script>
+			<script; src="bootstrap/js/bootstrap.min.js"></script>
 	</body>
 		<div class="modal fade" id="add-student" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
