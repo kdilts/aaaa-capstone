@@ -102,7 +102,7 @@ class ApplicationCohortTest extends AaaaTest {
 	/**
 	 *  test grabbing ApplicationCohorts by ApplicationCohortCohortId
 	 */
-	public function testGetValidApplicationCohortByCohortId(){
+	public function testGetValidApplicationCohortsByCohortId(){
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("applicationCohort");
 
@@ -111,7 +111,7 @@ class ApplicationCohortTest extends AaaaTest {
 		$applicationCohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = ApplicationCohort::getApplicationCohortByCohortId($this->getPDO(), $applicationCohort->getApplicationCohortCohortId());
+		$results = ApplicationCohort::getApplicationCohortsByCohortId($this->getPDO(), $applicationCohort->getApplicationCohortCohortId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\ApplicationCohort", $results);
@@ -127,16 +127,16 @@ class ApplicationCohortTest extends AaaaTest {
 	/**
 	 *  test grabbing ApplicationCohorts by ApplicationCohortCohortId that does not exit
 	 */
-	public function testGetInvalidApplicationCohortByCohortId(){
+	public function testGetInvalidApplicationCohortsByCohortId(){
 		// grab a applicationCohort by searching for id that does not exist
-		$applicationCohort = ApplicationCohort::getApplicationCohortByCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$applicationCohort = ApplicationCohort::getApplicationCohortsByCohortId($this->getPDO(), AaaaTest::INVALID_KEY);
 		$this->assertCount(0, $applicationCohort);
 	}
 
 	/**
 	 *  test grabbing an ApplicationCohort by ApplicationCohortApplicationId
 	 */
-	public function testGetValidApplicationCohortByApplicationId(){
+	public function testGetValidApplicationCohortsByApplicationId(){
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("applicationCohort");
 
@@ -145,7 +145,13 @@ class ApplicationCohortTest extends AaaaTest {
 		$applicationCohort->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoApplicationCohort = ApplicationCohort::getApplicationCohortByApplicationId($this->getPDO(), $applicationCohort->getApplicationCohortApplicationId());
+		$results = ApplicationCohort::getApplicationCohortsByApplicationId($this->getPDO(), $applicationCohort->getApplicationCohortApplicationId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("Edu\\Cnm\\DdcAaaa\\ApplicationCohort", $results);
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoApplicationCohort = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("applicationCohort"));
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortId(), $applicationCohort->getApplicationCohortId());
 		$this->assertEquals($pdoApplicationCohort->getApplicationCohortApplicationId(), $this->application->getApplicationId());
@@ -155,10 +161,10 @@ class ApplicationCohortTest extends AaaaTest {
 	/**
 	 *  test grabbing an ApplicationCohort by ApplicationCohortApplicationId
 	 */
-	public function testGetInvalidApplicationCohortByApplicationId(){
+	public function testGetInvalidApplicationCohortsByApplicationId(){
 		// grab a applicationCohort by searching for id that does not exist
-		$applicationCohort = ApplicationCohort::getApplicationCohortByApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
-		$this->assertNull($applicationCohort);
+		$applicationCohort = ApplicationCohort::getApplicationCohortsByApplicationId($this->getPDO(), AaaaTest::INVALID_KEY);
+		$this->assertEmpty($applicationCohort);
 	}
 
 	/**
