@@ -14,6 +14,10 @@
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
 		<title>Stream Line CNM Log in Page</title>
+		body{
+			background-image: url('sandias.png');
+		}
+
 	</head>
 	<!-- form -->
 	<body class="sfooter">
@@ -26,6 +30,11 @@
 			<!-- container -->
 			<main>
 				<div class="container">
+					<br>
+					<div class="row-fluid">
+						<div class="span10 offsetHalf"><i class="icon-ddcd-lg.png icon-5x" style="color:#d58512"</div>
+					</div>
+				</div>
 					<div class="jumbotron text-center">
 						<h1 class="text-center">Stream Line CNM</h1>
 						<label for="Email">Email</label>
@@ -38,7 +47,7 @@
 							<span class="input-group-addon" id="basic-addon1"></span>
 							<input type="text" class="form-control" placeholder="Password">
 						</div>
-						<button type="button" class="btn btn-default navbar-btn">Sign n</button>
+						<button type="button" class="btn btn-default navbar-btn">Sign</button>
 
 						<div class="form-wrap row">
 							<div class="col-sm-12 col-sm-offset-12">
