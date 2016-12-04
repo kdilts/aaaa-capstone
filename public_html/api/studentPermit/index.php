@@ -60,27 +60,27 @@ try {
 			if($studentPermit !== null) {
 				$reply->data = $studentPermit;
 			}
-		} else if(empty($studentPermitProspectId) === false) {
+		} else if(empty($studentPermitSwipeId) === false) {
 			$studentPermit = StudentPermit::getStudentPermitByStudentPermitSwipeId($pdo, $studentPermitSwipeId);
 			if($studentPermit !== null) {
 				$reply->data = $studentPermit;
 			}
 		}
-		else if(empty($studentPermitStudentPermitTypeId) === false) {
+		else if(empty($studentPermitPlacardId) === false) {
 			$studentPermit = StudentPermit::getStudentPermitByStudentPermitPlacardId($pdo, $studentPermitPlacardId);
 			if($studentPermit !== null) {
 				$reply->data = $studentPermit;
 			}
 		} else if(empty($checkOutStartDate) === false && empty($checkOutEndDate) === false) {
-			$startDate = \DateTime::createFromFormat("Y-m-d H:i:s", $checkOutStartDate);
-			$endDate = \DateTime::createFromFormat("Y-m-d H:i:s", $checkOutEndDate);
+			$checkOutStartDate = \DateTime::createFromFormat("Y-m-d", $checkOutStartDate);
+			$checkOutEndDate = \DateTime::createFromFormat("Y-m-d", $checkOutEndDate);
 			$studentPermits = StudentPermit::getStudentPermitsByStudentPermitCheckOutDateRange($pdo, $checkOutStartDate, $checkOutEndDate);
 			if($studentPermits !== null) {
 				$reply->data = $studentPermits->toArray();
 			}
 		} else if(empty($checkInStartDate) === false && empty($checkInEndDate) === false) {
-			$startDate = \DateTime::createFromFormat("Y-m-d H:i:s", $checkInStartDate);
-			$endDate = \DateTime::createFromFormat("Y-m-d H:i:s", $checkInEndDate);
+			$checkInStartDate = \DateTime::createFromFormat("Y-m-d", $checkInStartDate);
+			$checkInEndDate = \DateTime::createFromFormat("Y-m-d", $checkInEndDate);
 			$studentPermits = StudentPermit::getStudentPermitsByStudentPermitCheckInDateRange($pdo, $checkInStartDate, $checkInEndDate);
 			if($studentPermits !== null) {
 				$reply->data = $studentPermits->toArray();
