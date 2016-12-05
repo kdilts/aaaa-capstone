@@ -6,7 +6,7 @@ import {Swipe} from "../classes/swipe";
 import {Status} from "../classes/status";
 
 @Injectable()
-export class NoteTypeService extends BaseService {
+export class SwipeService extends BaseService {
 	constructor(protected http: Http) {
 		super(http);
 	}

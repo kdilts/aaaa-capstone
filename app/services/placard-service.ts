@@ -6,7 +6,7 @@ import {Placard} from "../classes/placard";
 import {Status} from "../classes/status";
 
 @Injectable()
-export class NoteTypeService extends BaseService {
+export class PlacardService extends BaseService {
 	constructor(protected http: Http) {
 		super(http);
 	}
