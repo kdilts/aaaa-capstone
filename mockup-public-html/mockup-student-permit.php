@@ -101,29 +101,6 @@
 				<button type="submit" class="btn btn-default">Submit</button>
 			</div>
 		</div>
-		<div>
-			<form class="form-horizontal">
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="studentpermitId">Student Permit Id:</label>
-					<div class="col-sm-5">
-						<input type="studentpermitId" class="form-control" id="studentpermitId" placeholder="Student Permit Id">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="pwd">Student Permit Application Id:</label>
-					<div class="col-sm-5">
-						<input type="studentpermitapplicationid" class="form-control" id="studentpermitId" placeholder="Student Permit Application Id">
-					</div>
-				</div>
 		</div>
-		</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Submit</button>
-			</div>
-		</div>
-		</div>
-		</form>
 	</body>
 </html>
