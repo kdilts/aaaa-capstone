@@ -61,7 +61,12 @@ try {
 			$applications = Application::getApplicationByApplicationEmail($pdo, $applicationEmail);
 			if($applications !== null) {
 				$reply->data = $applications;
-			} else {
+			}
+			else if(empty($applicationDateTime) === false) {
+				$applications = Application::getApplicationsByApplicationDateRange($pdo, $startDate, $endDate);
+				if($applications !== null) {
+					$reply->data = $applications;
+				} else {
 				$applications = Application::getAllApplications($pdo);
 				if($applications !== null) {
 					$reply->data = $applications;
