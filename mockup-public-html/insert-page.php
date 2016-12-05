@@ -87,21 +87,46 @@
 						<h4 class="modal-title" id="myModalLabel">Add Student</h4>
 					</div>
 					<div class="modal-body">
-						<form class="form-signin" method="POST" action="../public_html/api/application/index.php">
-							<h2 class="form-signin-heading">Please sign in</h2>
-							<input class="" type="text" required name="applicationFirstName" placeholder="First Name">
+						<form class="" method="POST" action="../public_html/api/application/index.php">
+							<h2 class="">Add Student</h2>
+							<div class="form-group">
+								<input class="" type="text" required name="applicationFirstName" placeholder="First Name">
+							</div>
+							<div class="form-group">
 							<input class="" type="text" required name="applicationLastName" placeholder="Last Name">
-							<input class="" type="text" required name="applicationEmail" placeholder="Email">
-							<input class="" type="text" required name="applicationPhoneNumber" placeholder="Phone Number">
-							<input class="" type="text" required name="applicationSource" placeholder="Source">
-							<input class="" type="text" required name="applicationAboutYou" placeholder="About you">
-							<input class="" type="text" required name="applicationHopeToAccomplish" placeholder="">
-							<input class="" type="text" required name="applicationExperience" placeholder="">
+							</div>
+							<br />
+							<div class="form-group">
+								<input class="" type="text" required name="applicationEmail" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<input class="" type="text" required name="applicationPhoneNumber" placeholder="Phone Number">
+							</div>
+							<br />
+							<div class="form-group">
+								<input class="" type="text" required name="applicationSource" placeholder="Source">
+							</div>
+							<div class="form-group">
+								<label for="aboutYouArea">About You</label>
+								<textarea class="form-control" id="aboutYouArea" rows="4" required name ="applicationAboutYou"></textarea>
+							</div>
+							<br />
+							<div class="form-group">
+<!--								<input class="" type="text" required name="applicationHopeToAccomplish" placeholder="Hope to Accomplish">-->
+								<label for="htaArea">Hope to Accomplish</label>
+								<textarea class="form-control" id="htaArea" rows="4" required name ="applicationHopeToAccomplish"></textarea>
+							</div>
+							<br />
+							<div class="form-group">
+								<label for="experienceArea">Experience</label>
+								<textarea class="form-control" id="experienceAreaArea" rows="4" required name ="applicationExperience"></textarea>
+<!--								<input class="" type="text" required name="applicationExperience" placeholder="Experience">-->
+							</div>
 <!--							<input class="" type="text" required name="" placeholder="">-->
 <!--							<input class="" type="text" required name="" placeholder="">-->
 <!--							<input class="" type="text" required name="" placeholder="">-->
 							<label class="checkbox"></label>
-							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+							<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 						</form>
 					</div>
 					<div class="modal-footer">
