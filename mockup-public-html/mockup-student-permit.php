@@ -29,39 +29,59 @@
 					<form class="form-horizontal">
 						<div class="form-group">
 							<div class="form-group">
-								<label for="studentpermitid3" class="col-sm-2 control-label">Student Permit Id</label>
-								<div class="col-sm-10">
-									<input type="studentpermitid" class="form-control" id="inputStudentPermitId3" placeholder="StudentPermitId">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputStudentpermitApplicationId3" class="col-sm-2 control-label">Name</label>
-								<div class="col-sm-10">
-									<input type="studentpermitapplicaitonid" class="form-control" id="inputstudentpermitapplicationid3" placeholder="Student Permit Application Id">
-								</div>
-							</div>
-							<label for="inputStudentPermitSwipeId3" class="col-sm-2 control-label">Student Permit Swipe Id</label>
-							<div class="col-sm-10">
-								<input type="studentpermitswipeid" class="form-control" id="inputstudentpermitswipeid3" placeholder="Student Permit Swipe Id">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputStudentPermitPlacardId3" class="col-sm-2 control-label">Student Permit Placard Id #</label>
-							<div class="col-sm-10">
-								<input type="StudentPermitPlacardId" class="form-control" id="inputStudentPermitPlacardId3" placeholder="Student Permit Placard Id">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-default">Submit</button>
 							</div>
 						</div>
 					</form>
 				</div>
+				<body>
+					<table class="table-responsive";
+							 <table class="table";
+					<table border="1" width="90%">
+						<thead>
+							<tr>
+								<td colspan="4">Student Permit Information</td>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<td colspan="4">This is the foot of the table</td>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
+								<td>Cell 1</td>
+								<td>Cell 2</td>
+								<td>Cell 3</td>
+								<td>Cell 4</td>
+							</tr>
+							<tr>
+								<td>Cell 1</td>
+								<td>Cell 2</td>
+								<td>Cell 3</td>
+								<td>Cell 4</td>
+							</tr>
+							<tr>
+								<td>Cell 1</td>
+								<td>Cell 2</td>
+								<td>Cell 3</td>
+								<td>Cell 4</td>
+							</tr><tr>
+								<td>Cell 1</td>
+								<td>Cell 2</td>
+								<td>Cell 3</td>
+								<td>Cell 4</td>
+							</tr><tr>
+								<td>Cell 1</td>
+								<td>Cell 2</td>
+								<td>Cell 3</td>
+								<td>Cell 4</td>
+							</tr>
+						</tbody>
+					</table>
+				</body>
+			</div>
+			<div class="col-sm-offset-10 col-sm-10">
+				<button type="submit" class="btn btn-default">Submit</button>
 			</div>
 		</div>
 	</body>
