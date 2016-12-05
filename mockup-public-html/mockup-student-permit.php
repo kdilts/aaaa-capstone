@@ -41,6 +41,12 @@
 							<tr>
 								<td colspan="6">Student Permit Information</td>
 							</tr>
+							<th>Student Permit ID</th>
+							<th>Student Permit Application Id</th>
+							<th>Student Permit Swipe Id</th>
+							<th>Student Permit Placard Id</th>
+							<th>Student Permit Check Out Date</th>
+							<th>Student Permit Check In Date</th>
 						</thead>
 						<tfoot>
 							<tr>
