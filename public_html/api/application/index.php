@@ -64,59 +64,60 @@ try {
 		} else if(empty($applicationFirstName) === false) {
 			$applications = Application::getApplicationsByApplicationName($pdo, $applicationFirstName);
 			if($applications !== null) {
-				$reply->data = $applications;
+				$reply->data = $applications->toArray();
 			}
 		} else if(empty($applicationLastName) === false) {
 			$applications = Application::getApplicationsByApplicationName($pdo, $applicationLastName);
 			if($applications !== null) {
-				$reply->data = $applications;
+				$reply->data = $applications->toArray();
 			}
 		} else if(empty($applicationEmail) === false) {
-			$applications = Application::getApplicationByApplicationEmail($pdo, $applicationEmail);
+			$application = Application::getApplicationByApplicationEmail($pdo, $applicationEmail);
+			if($application !== null) {
+				$reply->data = $application;
+			}
+		} else if(empty($applicationDateTime) === false) {
+			$applications = Application::getApplicationsByApplicationDateRange($pdo, $startDate, $endDate);
 			if($applications !== null) {
 				$reply->data = $applications;
-			} else if(empty($applicationDateTime) === false) {
-				$applications = Application::getApplicationsByApplicationDateRange($pdo, $startDate, $endDate);
-				if($applications !== null) {
-					$reply->data = $applications;
-				} else {
-					$applications = Application::getAllApplications($pdo);
-					if($applications !== null) {
-						$reply->data = $applications;
-					}
-				}
 			}
-		} else if($method === "POST") {
-
-			verifyXsrf();
-			$requestContent = file_get_contents("php://input");
-			$requestObject = json_decode($requestContent);
-
-			//make sure application name is available (required field)
-			if(empty($requestObject->applicationFirstName) === true) {
-				throw(new \InvalidArgumentException ("application First Name is missing.", 405));
-			}
-
-			//  make sure application user name is available (required field)
-			if(empty($requestObject->applicationLastName) === true) {
-				throw(new \InvalidArgumentException ("application Last Name is missing.", 405));
-			}
-
-			//perform the actual post
-			if($method === "POST") {
-
-				// create new application and insert into the database
-				$application = new Application(null, $requestObject->applicationFirstName, $requestObject->applicationLastName, $requestObject->applicationEmail, $requestObject->applicationPhoneNumber, $requestObject->applicationSource, $requestObject->applicationAboutYou, $requestObject->applicationHopeToAccomplish, $requestObject->applicationExperience, $requestObject->applicationDateTime, $requestObject->applicationUtmCampaign, $requestObject->applcationUtmMedium, $requestObject->applicationUtmSource);
-				$application->insert($pdo);
-
-				// update reply
-				$reply->message = "application created OK";
-			}
-
 		} else {
-			throw (new Exception("Invalid HTTP request!", 405));
+			$applications = Application::getAllApplications($pdo);
+			if($applications !== null) {
+				$reply->data = $applications;
+			}
 		}
+	} else if($method === "POST") {
+
+		verifyXsrf();
+		$requestContent = file_get_contents("php://input");
+		$requestObject = json_decode($requestContent);
+
+		//make sure application name is available (required field)
+		if(empty($requestObject->applicationFirstName) === true) {
+			throw(new \InvalidArgumentException ("application First Name is missing.", 405));
+		}
+
+		//  make sure application user name is available (required field)
+		if(empty($requestObject->applicationLastName) === true) {
+			throw(new \InvalidArgumentException ("application Last Name is missing.", 405));
+		}
+
+		//perform the actual post
+		if($method === "POST") {
+
+			// create new application and insert into the database
+			$application = new Application(null, $requestObject->applicationFirstName, $requestObject->applicationLastName, $requestObject->applicationEmail, $requestObject->applicationPhoneNumber, $requestObject->applicationSource, $requestObject->applicationAboutYou, $requestObject->applicationHopeToAccomplish, $requestObject->applicationExperience, $requestObject->applicationDateTime, $requestObject->applicationUtmCampaign, $requestObject->applcationUtmMedium, $requestObject->applicationUtmSource);
+			$application->insert($pdo);
+
+			// update reply
+			$reply->message = "application created OK";
+		}
+
+	} else {
+		throw (new Exception("Invalid HTTP request!", 405));
 	}
+
 	// update reply with exception information
 } catch(Exception $exception) {
 	$reply->status = $exception->getCode();
