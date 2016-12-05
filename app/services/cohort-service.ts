@@ -19,7 +19,7 @@ export class CohortService extends BaseService {
 			.catch(this.handleError));
 	}
 
-	getCohortByCohortId(cohort: number) : Observable<Cohort> {
+	getCohortByCohortId(cohortId: number) : Observable<Cohort> {
 		return(this.http.get(this.cohortUrl + cohortId)
 			.map(this.extractData)
 			.catch(this.handleError));
