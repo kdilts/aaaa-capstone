@@ -33,7 +33,7 @@
 			</form>
 		<form>
 			<br />
-			<select class="form-control">
+			<select class="form-control" placeholder="6 blocks wide">
 				<option>Application</option>
 				<option>Bridge</option>
 				<option>Cohort</option>
