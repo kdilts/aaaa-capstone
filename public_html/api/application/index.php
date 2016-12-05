@@ -93,21 +93,85 @@ try {
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
 
-		//make sure application name is available (required field)
+		// make sure application first name is available (required field)
 		if(empty($requestObject->applicationFirstName) === true) {
 			throw(new \InvalidArgumentException ("application First Name is missing.", 405));
 		}
 
-		//  make sure application user name is available (required field)
+		// make sure application last name is available (required field)
 		if(empty($requestObject->applicationLastName) === true) {
 			throw(new \InvalidArgumentException ("application Last Name is missing.", 405));
 		}
 
+		// make sure application Email is available (required field)
+		if(empty($requestObject->applicationEmail) === true) {
+			throw(new \InvalidArgumentException ("application Email is missing.", 405));
+		}
+
+		// make sure application PhoneNumber is available (required field)
+		if(empty($requestObject->applicationPhoneNumber) === true) {
+			throw(new \InvalidArgumentException ("application PhoneNumber is missing.", 405));
+		}
+
+		// make sure application Source is available (required field)
+		if(empty($requestObject->applicationSource) === true) {
+			throw(new \InvalidArgumentException ("application Source is missing.", 405));
+		}
+
+		// make sure application AboutYou is available (required field)
+		if(empty($requestObject->applicationAboutYou) === true) {
+			throw(new \InvalidArgumentException ("application AboutYou is missing.", 405));
+		}
+
+		// make sure application HopeToAccomplish is available (required field)
+		if(empty($requestObject->applicationHopeToAccomplish) === true) {
+			throw(new \InvalidArgumentException ("application HopeToAccomplish is missing.", 405));
+		}
+
+		// make sure application Experience is available (required field)
+		if(empty($requestObject->applicationExperience) === true) {
+			throw(new \InvalidArgumentException ("application Experience is missing.", 405));
+		}
+
+		// make sure application DateTime is available (required field)
+		if(empty($requestObject->applicationDateTime) === true) {
+			throw(new \InvalidArgumentException ("application DateTime is missing.", 405));
+		}
+
+		// make sure application UtmCampaign is available (required field)
+		if(empty($requestObject->applicationUtmCampaign) === true) {
+			throw(new \InvalidArgumentException ("application UtmCampaign is missing.", 405));
+		}
+
+		// make sure application UtmMedium is available (required field)
+		if(empty($requestObject->applicationUtmMedium) === true) {
+			throw(new \InvalidArgumentException ("application UtmMedium is missing.", 405));
+		}
+
+		// make sure application UtmSource is available (required field)
+		if(empty($requestObject->applicationUtmSource) === true) {
+			throw(new \InvalidArgumentException ("application UtmSource is missing.", 405));
+		}
+		
 		//perform the actual post
 		if($method === "POST") {
 
 			// create new application and insert into the database
-			$application = new Application(null, $requestObject->applicationFirstName, $requestObject->applicationLastName, $requestObject->applicationEmail, $requestObject->applicationPhoneNumber, $requestObject->applicationSource, $requestObject->applicationAboutYou, $requestObject->applicationHopeToAccomplish, $requestObject->applicationExperience, $requestObject->applicationDateTime, $requestObject->applicationUtmCampaign, $requestObject->applcationUtmMedium, $requestObject->applicationUtmSource);
+			$application = new Application(
+				$requestObject->applicationId,
+				$requestObject->applicationFirstName,
+				$requestObject->applicationLastName,
+				$requestObject->applicationEmail,
+				$requestObject->applicationPhoneNumber,
+				$requestObject->applicationSource,
+				$requestObject->applicationAboutYou,
+				$requestObject->applicationHopeToAccomplish,
+				$requestObject->applicationExperience,
+				$requestObject->applicationDateTime,
+				$requestObject->applicationUtmCampaign,
+				$requestObject->applcationUtmMedium,
+				$requestObject->applicationUtmSource
+			);
 			$application->insert($pdo);
 
 			// update reply
