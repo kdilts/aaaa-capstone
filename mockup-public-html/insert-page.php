@@ -34,11 +34,18 @@
 		<form>
 			<br />
 			<select class="form-control">
-				<option>Option 1</option>
-				<option>Option 2</option>
-				<option>Option 3</option>
-				<option>Option 4</option>
-				<option>Option 5</option>
+				<option>Application</option>
+				<option>Bridge</option>
+				<option>Cohort</option>
+				<option>Note Type</option>
+				<option>Prospect</option>
+				<option>Status Type</option>
+				<option>Placard<</option>
+				<option>Swipe</option>
+				<option>Aplication Cohort</option>
+				<option>Student Permit</option>
+				<option>Prospect Cohort</option>
+				<option>Note</option>
 			</select>
 		</form>
 		<section>
@@ -67,16 +74,6 @@
 		</section>
 
 		<!-- add modal here -->
-
-		<form>
-			<br />
-			<select class="form-control">
-				<option>Option 1</option>
-				<option>Option 2</option>
-				<option>Option 3</option>
-				<option>Option 4</option>
-				<option>Option 5</option>
-			</select>
 		</form>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 
