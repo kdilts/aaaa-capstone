@@ -6,7 +6,6 @@ require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Edu\Cnm\DdcAaaa\Application;
 
-
 /**
  * api for the application class
  *
@@ -76,15 +75,17 @@ try {
 			if($application !== null) {
 				$reply->data = $application;
 			}
-		} else if(empty($applicationDateTime) === false) {
+		} else if(empty($startDate) === false && empty($endDate) === false) {
+			$startDate = \DateTime::createFromFormat("Y-m-d H:i:s", $startDate);
+			$endDate = \DateTime::createFromFormat("Y-m-d H:i:s", $endDate);
 			$applications = Application::getApplicationsByApplicationDateRange($pdo, $startDate, $endDate);
 			if($applications !== null) {
-				$reply->data = $applications;
+				$reply->data = $applications->toArray();
 			}
 		} else {
 			$applications = Application::getAllApplications($pdo);
 			if($applications !== null) {
-				$reply->data = $applications;
+				$reply->data = $applications->toArray();
 			}
 		}
 	} else if($method === "POST") {
@@ -167,7 +168,7 @@ try {
 				$requestObject->applicationAboutYou,
 				$requestObject->applicationHopeToAccomplish,
 				$requestObject->applicationExperience,
-				$requestObject->applicationDateTime,
+				\DateTime::createFromFormat("Y-m-d",$requestObject->applicationDateTime),
 				$requestObject->applicationUtmCampaign,
 				$requestObject->applcationUtmMedium,
 				$requestObject->applicationUtmSource

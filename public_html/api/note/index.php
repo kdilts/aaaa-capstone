@@ -50,38 +50,32 @@ try {
 
 		//get a specific note or all notes and update reply
 		if(empty($noteId) === false) {
-			echo "id" . PHP_EOL;
 			$note = Note::getNoteByNoteId($pdo, $noteId);
 			if($note !== null) {
 				$reply->data = $note;
 			}
 		} else if(empty($noteApplicationId) === false) {
-			echo "app" . PHP_EOL;
 			$notes = Note::getNotesByNoteApplicationId($pdo, $noteApplicationId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
 		} else if(empty($noteProspectId) === false) {
-			echo "prospect" . PHP_EOL;
 			$notes = Note::getNotesByNoteProspectId($pdo, $noteProspectId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
 		}
 		else if(empty($noteNoteTypeId) === false) {
-			echo "note type" . PHP_EOL;
 			$notes = Note::getNotesByNoteNoteTypeId($pdo, $noteNoteTypeId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
 		} else if(empty($noteBridgeStaffId) === false) {
-			echo "bridge" . PHP_EOL;
 			$notes = Note::getNotesByNoteBridgeStaffId($pdo, $noteBridgeStaffId);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
 			}
 		} else if(empty($startDate) === false && empty($endDate) === false) {
-			echo "dates" . PHP_EOL;
 			$startDate = \DateTime::createFromFormat("Y-m-d H:i:s", $startDate);
 			$endDate = \DateTime::createFromFormat("Y-m-d H:i:s", $endDate);
 			$notes = Note::getNotesByNoteDateRange($pdo, $startDate, $endDate);
@@ -89,7 +83,6 @@ try {
 				$reply->data = $notes->toArray();
 			}
 		} else {
-			echo "all" . PHP_EOL;
 			$notes = Note::getAllNotes($pdo);
 			if($notes !== null) {
 				$reply->data = $notes->toArray();
