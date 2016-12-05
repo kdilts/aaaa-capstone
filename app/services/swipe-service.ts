@@ -37,7 +37,7 @@ export class SwipeService extends BaseService {
 			.catch(this.handleError));
 	}
 
-	createSwipe(Swipe: Swipe) : Observable<Status> {
+	createSwipe(swipe: Swipe) : Observable<Status> {
 		return(this.http.post(this.swipeUrl, swipe)
 			.map(this.extractMessage)
 			.catch(this.handleError));
