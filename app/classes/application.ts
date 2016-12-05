@@ -1,0 +1,3 @@
+export class Application {
+	constructor(public applicationId: number, public applicationFirstName: string, public applicationLastName: string, public applicationEmail: string, public applicationPhoneNumber: string, public applicationSource: string, public applicationAboutYou: string, public applicationHopeToAccomplish: string, public applicationExperience: string, public applicationDateTime: string, public applicationUtmCampaign: string, public applicationUtmMedium: string, public applicationUtmSource: string) {}
+}
