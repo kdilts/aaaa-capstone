@@ -6,39 +6,27 @@ import {Application} from "../classes/application";
 import {Status} from "../classes/status";
 
 @Injectable()
-export class SwipeService extends BaseService {
+export class ApplicationService extends BaseService {
 	constructor(protected http: Http) {
 		super(http);
 	}
 
-	private swipeUrl = "api/swipe/";
+	private applicationUrl = "api/application/";
 
-	getAllSwipes() : Observable<Swipe[]> {
-		return(this.http.get(this.swipeUrl)
+	getAllApplications() : Observable<Application[]> {
+		return(this.http.get(this.applicationUrl)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
 
-	getSwipeBySwipeId(swipeId: number) : Observable<Swipe> {
-		return(this.http.get(this.swipeUrl + swipeId)
+	getApplicationsByApplicationDateRange(startDate: string, endDate: string) : Observable<Application[]> {
+		return(this.http.get(this.applicationUrl + startDate + endDate)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
 
-	getSwipesBySwipeStatusTypeId(swipeStatusTypeId: number) : Observable<Swipe[]> {
-		return(this.http.get(this.swipeUrl + swipeStatusTypeId)
-			.map(this.extractData)
-			.catch(this.handleError));
-	}
-
-	getSwipeBySwipeNumber(swipeNumber: number) : Observable<Swipe> {
-		return(this.http.get(this.swipeUrl + swipeNumber)
-			.map(this.extractData)
-			.catch(this.handleError));
-	}
-
-	createSwipe(swipe: Swipe) : Observable<Status> {
-		return(this.http.post(this.swipeUrl, swipe)
+	createApplication(application: Application) : Observable<Status> {
+		return(this.http.post(this.applicationUrl, application)
 			.map(this.extractMessage)
 			.catch(this.handleError));
 	}
