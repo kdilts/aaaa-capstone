@@ -34,7 +34,7 @@ try {
 	$prospectFirstName = filter_input(INPUT_GET, "prospectFirstName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$prospectLastName = filter_input(INPUT_GET, "prospectLastName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$prospectEmail = filter_input(INPUT_GET, "prospectEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$prospectEmail = filter_input(INPUT_GET, "prospectPhoneNumber", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$prospectPhoneNumber = filter_input(INPUT_GET, "prospectPhoneNumber", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	// handle GET request
 	if($method === "GET") {
