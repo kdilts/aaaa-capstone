@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "./base-service";
-import {NoteType} from "../classes/noteType";
+import {Swipe} from "../classes/swipe";
 import {Status} from "../classes/status";
 
 @Injectable()
@@ -11,28 +11,34 @@ export class NoteTypeService extends BaseService {
 		super(http);
 	}
 
-	private noteTypeUrl = "api/noteType/";
+	private swipeUrl = "api/swipe/";
 
-	getAllNoteType() : Observable<NoteType[]> {
-		return(this.http.get(this.noteTypeUrl)
+	getAllSwipes() : Observable<Swipe[]> {
+		return(this.http.get(this.swipeUrl)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
 
-	getNoteTypesByNoteTypeName(noteTypeName: string) : Observable<NoteType[]> {
-		return(this.http.get(this.noteTypeUrl + noteTypeName)
+	getSwipeBySwipeId(swipeId: number) : Observable<Swipe> {
+		return(this.http.get(this.swipeUrl + swipeId)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
 
-	getNoteType(noteTypeId: number) : Observable<NoteType> {
-		return(this.http.get(this.noteTypeUrl + noteTypeId)
+	getSwipesBySwipeStatusTypeId(swipeStatusTypeId: number) : Observable<Swipe[]> {
+		return(this.http.get(this.swipeUrl + swipeStatusTypeId)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
 
-	createNoteType(noteType: NoteType) : Observable<Status> {
-		return(this.http.post(this.noteTypeUrl, noteType)
+	getSwipeBySwipeNumber(swipeNumber: number) : Observable<Swipe> {
+		return(this.http.get(this.swipeUrl + swipeNumber)
+			.map(this.extractData)
+			.catch(this.handleError));
+	}
+
+	createSwipe(Swipe: Swipe) : Observable<Status> {
+		return(this.http.post(this.swipeUrl, swipe)
 			.map(this.extractMessage)
 			.catch(this.handleError));
 	}
