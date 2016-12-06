@@ -40,6 +40,10 @@
 				<option>Deep Dive Coding Summer Session</option>
 				<option>Deep Dive Coding Fall Session</option>
 				<option>.NET</option>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
 			</select>
 		</form>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
