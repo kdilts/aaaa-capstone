@@ -1,5 +1,8 @@
 <!DOCTYP html>
 <head lang="en">
+			<meta charset="utf-8"
+			<meta http-equiv="X-UA-Compatible" content="IE-edge">
+			<meta name="viewport" content="width=device-width", initial-scale="1">
 	<script data-require="jquery@2.2.0" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -104,8 +107,8 @@
 	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
 	<!-- Font Awesome (added because you use icons in your prepend/append)-->
-	<link rel="stylesheet" href="https://formden.com/static/cdn-awesome/4.4.0/css/font-awesome.min.css"
-/>
+	<link rel="stylesheet" href="https://formden.com/static/cdn-awesome/4.4.0/css/font-awesome.min.css"/>
+
 
 </body>
 </html>

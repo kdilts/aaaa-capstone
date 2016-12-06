@@ -23,8 +23,7 @@
 					</div>
 				</div>
 			</section>
-			<div class="list-group">
-				<div>
+			<div class="list-group"></div>
 					<div class="col-sm-6">
 						<form class="form-horizontal">
 							<div class="form-group">

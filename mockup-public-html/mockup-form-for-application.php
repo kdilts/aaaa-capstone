@@ -13,7 +13,8 @@
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Welcome to AAAA!</h1>
+					<h1>Streamline</h1>
+					<h1>Application Form</h1>
 				</div>
 			</div>
 		</section>
@@ -33,12 +34,12 @@
 		</form>
 		<form>
 			<br />
-			<select class="form-control">
-				<option>Option 1</option>
-				<option>Option 2</option>
-				<option>Option 3</option>
-				<option>Option 4</option>
-				<option>Option 5</option>
+			<select class="form-control" label="Select Cohort">
+				<option>Deep Dive Coding Winter Session</option>
+				<option>Deep Dive Coding Spring Session</option>
+				<option>Deep Dive Coding Summer Session</option>
+				<option>Deep Dive Coding Fall Session</option>
+				<option>.NET</option>
 			</select>
 		</form>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">

@@ -14,9 +14,6 @@
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
 		<title>Stream Line CNM Log in Page</title>
-		body{
-			background-image: url('sandias.png');
-		}
 
 	</head>
 	<!-- form -->

@@ -8,12 +8,12 @@
 		<link rel="stylesheet" href="style.css" />
 		<script src="script.js"></script>
 	</head>
-
+<!---- INSERT PAGE ---->
 	<body>
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Welcome to AAAA!</h1>
+					<h1>Insert Page To Streamline</h1>
 				</div>
 			</div>
 		</section>
@@ -33,8 +33,9 @@
 			</form>
 		<form>
 			<br />
-			<label for="foo" class="col-sm-6 control-label">foo</label>
-			<select class="form-control" placeholder="2 blocks wide" class="col-xs-6 control-label">Select</label>
+			<label>Select</label>
+			<select class="form-control" placeholder="4 blocks wide text-center" class="col-xs-6 control-label">Select</label>
+				<option>SELECT</option>
 				<option>Application</option>
 				<option>Bridge</option>
 				<option>Cohort</option>
