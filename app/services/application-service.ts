@@ -24,6 +24,7 @@ export class ApplicationService extends BaseService {
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
+
 	getApplicationByApplicationEmail(applicationEmail: string) : Observable<Application> {
 		return(this.http.get(this.applicationUrl + applicationEmail)
 			.map(this.extractData)
