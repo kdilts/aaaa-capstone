@@ -65,11 +65,17 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-primary">Save changes</button>
 			</div>
-
 		</div>
 	</div>
 	</form>
 	</div>
+	<!--- Date Picker  Special Version of Bootstrap that only a---------->
+	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+	<!-- Font Awesome (added because you use icons in your prepend/append)-->
+	link rel=
+
+
 </body>
 </html>
 
