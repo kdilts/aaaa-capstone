@@ -51,20 +51,20 @@
 								<input type="bridgeUserName" class="form-control" id="bridgeUserName" placeholder="BridgeUserName">
 							</div>
 						</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
 			</div>
+			</form>
 		</div>
-	</div>
-	</form>
-	</div>
-	<!--- Date Picker  Special Version of Bootstrap that only a---------->
-	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+		<!--- Date Picker  Special Version of Bootstrap that only a---------->
+		<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
-	<!-- Font Awesome (added because you use icons in your prepend/append)-->
-	<link rel="stylesheet" href="https://formden.com/static/cdn-awesome/4.4.0/css/font-awesome.min.css"
-	/>
+		<!-- Font Awesome (added because you use icons in your prepend/append)-->
+		<link rel="stylesheet" href="https://formden.com/static/cdn-awesome/4.4.0/css/font-awesome.min.css"
+		/>
 
 </body>
 </html>
