@@ -37,7 +37,7 @@
 						<label for="Email">Email</label>
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1"></span>
-							<div><input type="text" class="form-control" placeholder="Your Email"></div>
+							<div><input type="text" class="form-control" placeholder="Your Email/Username"></div>
 						</div>
 						<label for="Password">Password</label>
 						<div class="input-group">

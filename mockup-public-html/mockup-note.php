@@ -86,7 +86,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-						<label for class="textarea" class="col-lg-10 control-label">Note</label>
+						<label for class="textarea" class="col-lg-10 control-label">   Note</label>
 						<div class="col-lg-10">
 							<textarea rows="5" cols="100">Note Content</textarea>
 						</div>
