@@ -1,9 +1,11 @@
 export class Note {
-	constructor(public noteId: number,
-					public noteContent: string,
-					public noteNoteTypeId: number,
-					public noteApplicationId: number,
-					public noteProspectId: number,
-					public noteDateTime: string,
-					public noteBridgeStaffId: string) {}
+	constructor(
+		public noteId: number,
+		public noteApplicationId: number,
+		public noteProspectId: number,
+		public noteNoteTypeId: number,
+		public noteContent: string,
+		public noteDateTime: string,
+		public noteBridgeStaffId : string
+	) {}
 }
