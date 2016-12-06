@@ -19,7 +19,7 @@
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Swipe Insert Page Stream Line CNM</h1>
+					<h1>Note Insert Page Stream Line CNM</h1>
 				</div>
 			</div>
 		</section>
@@ -29,20 +29,20 @@
 					<form class="form-horizontal">
 						<div class="form-group">
 							<div class="form-group">
-								<label for="swipeId3" class="col-sm-2 control-label">Swipe Id</label>
+								<label for="noteId" class="col-sm-6 control-label">Note Id</label>
 								<div class="col-sm-10">
-									<input type="swipeid" class="form-control" id="inputSwipeId3" placeholder="SwipeId">
+									<input type="noteid" class="form-control" id="inputNoteId3" placeholder="NoteId">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputSwipeNumber3" class="col-sm-2 control-label">Swipe Number</label>
+								<label for="inputNoteNumber3" class="col-sm-6 control-label">Note Number</label>
 								<div class="col-sm-10">
-									<input type="swipenumber" class="form-control" id="inputSwipeNumber3" placeholder="Swipe Number">
+									<input type="notenumber" class="form-control" id="inputNoteNumber3" placeholder="Note Number">
 								</div>
 							</div>
-							<label for="inputSwipeStatusTypeId3" class="col-sm-2 control-label">Swipe Status Type Id</label>
+							<label for="inputNoteStatusTypeId3" class="col-sm-6 control-label">Note Status Type Id</label>
 							<div class="col-sm-10">
-								<input type="swipestatustypeId" class="form-control" id="inputswipestatustypeid3" placeholder="Swipe Status Type Id">
+								<input type="notestatustypeId" class="form-control" id="inputnotestatustypeid3" placeholder="Note Status Type Id">
 							</div>
 						</div>
 						<div class="form-group">

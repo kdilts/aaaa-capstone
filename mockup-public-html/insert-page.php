@@ -109,7 +109,7 @@
 							</div>
 							<div class="form-group">
 								<label for="aboutYouArea">About You</label>
-								<textarea class="form-control" id="aboutYouArea" rows="4" required name ="applicationAboutYou"></textarea>
+								<textarea class="form-control-1" id="aboutYouArea" rows="4" required name ="applicationAboutYou"></textarea>
 							</div>
 							<br />
 							<div class="form-group">
