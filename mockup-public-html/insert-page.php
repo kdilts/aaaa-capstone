@@ -34,7 +34,7 @@
 		<form>
 			<br />
 			<label for="foo" class="col-sm-6 control-label">foo</label>
-			<select class="form-control" placeholder="6 blocks wide" class="col-xs-6 control-label">Select</label>
+			<select class="form-control" placeholder="2 blocks wide" class="col-xs-6 control-label">Select</label>
 				<option>Application</option>
 				<option>Bridge</option>
 				<option>Cohort</option>
