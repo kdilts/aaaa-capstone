@@ -24,6 +24,22 @@ export class ApplicationService extends BaseService {
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
+	getApplicationByApplicationEmail(applicationEmail: string) : Observable<Application> {
+		return(this.http.get(this.applicationUrl + applicationEmail)
+			.map(this.extractData)
+			.catch(this.handleError));
+	}
+
+	getApplicationByApplicationId(applicationId: number) : Observable<Application> {
+		return(this.http.get(this.applicationUrl + applicationId)
+			.map(this.extractData)
+			.catch(this.handleError));
+	}
+	getApplicationsByApplicationName(applicationName: string) : Observable<Application[]> {
+		return(this.http.get(this.applicationUrl + applicationName)
+			.map(this.extractData)
+			.catch(this.handleError));
+	}
 
 	createApplication(application: Application) : Observable<Status> {
 		return(this.http.post(this.applicationUrl, application)
