@@ -54,19 +54,23 @@
 				<label for="experienceArea">Experience</label>
 				<textarea class="form-control" id="experienceAreaArea" rows="4" required name ="applicationExperience"></textarea>
 
+				<br />
+				<script type="text/javascript">
+					$(function () {
+						$('#datetimepicker1').datetimepicker();
+					});
+				</script>
 				<!--								<input class="" type="text" required name="applicationExperience" placeholder="Experience">-->
-			</div>
-			<div class="form-group">
-				<label for="inputDOB">Date of Birth</label>
-				<input class="form-control" type="date" id="inputDOB" />
 			</div>
 			<div class="form-group">
 				<input class="" type="text" required name="applicationUtmCampaign" placeholder="Application Utm Campaign">
 			</div>
-			<br /><div class="form-group">
+			<br />
+			<div class="form-group">
 				<input class="" type="text" required name="applicationUtmMedium" placeholder="Application Utm Medium">
 			</div>
-			<br /><div class="form-group">
+			<br />
+			<div class="form-group">
 				<input class="" type="text" required name="applicationUtmSource" placeholder="Application Utm Source">
 			</div>
 			<br />
@@ -76,15 +80,10 @@
 			<label class="checkbox"></label>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 		</form>
-		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
 		</div>
 
-		</div>
-		</div>
-		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 			<script; src="bootstrap/js/bootstrap.min.js"></script>
 	</body>
