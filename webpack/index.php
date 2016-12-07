@@ -11,7 +11,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<base href="<?php echo dirname($_SERVER["PHP_SELF"]) . "/"; ?>" />
 
-		<title>AAAAA Capstone</title>
+		<title>AAAA Capstone</title>
 	</head>
 	<body>
 		<!-- This custom tag much match your Angular @Component selector name in app/app.component.ts -->
