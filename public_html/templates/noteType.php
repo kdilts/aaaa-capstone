@@ -2,7 +2,7 @@
 
 <ul>
 	<li *ngFor="let noteType of noteTypes">
-		{{ noteType.noteTypeName }}
+		{{ noteType.noteTypeId }} : {{ noteType.noteTypeName }}
 	</li>
 </ul>
 
@@ -15,11 +15,11 @@
 			<div class="input-group-addon">
 				<i class="fa fa-comment" aria-hidden="true"></i>
 			</div>
-			<input type="text" name="noteTypeName" id="noteTypeName" class="form-control" maxlength="255" required [(ngModel)]="noteType.noteTypeName" #noteTypeName="ngModel" />
+			<input type="text" name="noteTypeName" id="noteTypeName" class="form-control" maxlength="30" required [(ngModel)]="noteType.noteTypeName" #noteTypeName="ngModel" />
 		</div>
 		<div [hidden]="noteTypeName.valid || noteTypeName.pristine" class="alert alert-danger" role="alert">
 			<p *ngIf="noteTypeName.errors?.required">NoteType is required.</p>
-			<p *ngIf="noteTypeName.errors?.maxlength">NoteType is too long. You typed</p>
+			<p *ngIf="noteTypeName.errors?.maxlength">NoteType is too long.</p>
 		</div>
 	</div>
 	<button type="submit" class="btn btn-info btn-lg" [disabled]="noteTypeForm.invalid"><i class="fa fa-share"></i> NoteType</button>

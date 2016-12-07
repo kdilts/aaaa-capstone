@@ -1,3 +1,3 @@
 export class Status {
-	constructor(public status: number, public message: string, public type: string) {}
+	constructor(public apiStatus: number, public message: string, public type: string) {}
 }

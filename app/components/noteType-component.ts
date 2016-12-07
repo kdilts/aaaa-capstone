@@ -25,16 +25,11 @@ export class NoteTypeComponent implements OnInit {
 			.subscribe(noteTypes => this.noteTypes = noteTypes);
 	}
 
-	getAllNoteTypes() : void {
-		this.noteTypeService.getAllNoteType()
-			.subscribe(noteTypes => this.noteTypes = noteTypes);
-	}
-
 	createNoteType() : void {
 		this.noteTypeService.createNoteType(this.noteType)
 			.subscribe(status => {
 				this.status = status;
-				if(status.status === 200) {
+				if(status.apiStatus === 200) {
 					this.reloadNoteTypes();
 					this.noteTypeForm.reset();
 				}
