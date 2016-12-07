@@ -29,31 +29,26 @@
 					<form class="form-horizontal">
 						<div class="form-group">
 							<div class="form-group">
-								<label for="noteId" class="col-sm-6 control-label">Note Id</label>
+								<label for="noteTypeId" class="col-sm-6 control-label">Note Type Id</label>
 								<div class="col-sm-10">
-									<input type="noteid" class="form-control" id="inputNoteId3" placeholder="NoteId">
+									<input type="noteTypeId" class="form-control" id="inputNoteTypeId" placeholder="NoteTypeId">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputNoteNumber3" class="col-sm-6 control-label">Note Number</label>
+								<label for="inputNoteTypeName" class="col-sm-6 control-label">Note Type Name</label>
 								<div class="col-sm-10">
-									<input type="notenumber" class="form-control" id="inputNoteNumber3" placeholder="Note Number">
+									<input type="noteTypeName" class="form-control" id="inputNoteTypeName" placeholder="Note Type Name">
 								</div>
 							</div>
-							<label for="inputNoteStatusTypeId3" class="col-sm-6 control-label">Note Status Type Id</label>
-							<div class="col-sm-10">
-								<input type="notestatustypeId" class="form-control" id="inputnotestatustypeid3" placeholder="Note Status Type Id">
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-default">Submit</button>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-default">Submit</button>
-							</div>
-						</div>
 					</form>
 				</div>
 			</div>
