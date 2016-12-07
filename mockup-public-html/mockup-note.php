@@ -109,7 +109,6 @@
 	<!-- Font Awesome (added because you use icons in your prepend/append)-->
 	<link rel="stylesheet" href="https://formden.com/static/cdn-awesome/4.4.0/css/font-awesome.min.css"/>
 
-
 </body>
 </html>
 

@@ -53,7 +53,6 @@
 			<div class="form-group">
 				<label for="experienceArea">Experience</label>
 				<textarea class="form-control" id="experienceAreaArea" rows="4" required name ="applicationExperience"></textarea>
-
 				<br />
 				<script type="text/javascript">
 					$(function () {
@@ -83,6 +82,11 @@
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
+		<!--- Date Picker  Special Version of Bootstrap that only a---------->
+		<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+		<!-- Font Awesome (added because you use icons in your prepend/append)-->
+		<link rel="stylesheet" href="https://formden.com/static/cdn-awesome/4.4.0/css/font-awesome.min.css"/>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 			<script; src="bootstrap/js/bootstrap.min.js"></script>
