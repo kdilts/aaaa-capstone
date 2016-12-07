@@ -20,35 +20,72 @@
 		</section>
 		<form>
 			<div class="form-group">
-				<label for="inputName">Name</label>
-				<input class="form-control" type="text" id="inputName" placeholder="Full Name" />
+				<input class="" type="text" required name="applicationId" placeholder="Application Id">
+			</div>
+			<div class="form-group">
+				<input class="" type="text" required name="applicationFirstName" placeholder="First Name">
+			</div>
+			<div class="form-group">
+				<input class="" type="text" required name="applicationLastName" placeholder="Last Name">
+			</div>
+			<br />
+			<div class="form-group">
+				<input class="" type="text" required name="applicationEmail" placeholder="Email">
+			</div>
+			<div class="form-group">
+				<input class="" type="text" required name="applicationPhoneNumber" placeholder="Phone Number">
+			</div>
+			<br />
+			<div class="form-group">
+				<input class="" type="text" required name="applicationSource" placeholder="Source">
+			</div>
+			<div class="form-group">
+				<label for="aboutYouArea">About You</label>
+				<textarea class="form-control-1" id="aboutYouArea" rows="4" required name ="applicationAboutYou"></textarea>
+			</div>
+			<br />
+			<div class="form-group">
+				<!--								<input class="" type="text" required name="applicationHopeToAccomplish" placeholder="Hope to Accomplish">-->
+				<label for="htaArea">Hope to Accomplish</label>
+				<textarea class="form-control" id="htaArea" rows="4" required name ="applicationHopeToAccomplish"></textarea>
+			</div>
+			<br />
+			<div class="form-group">
+				<label for="experienceArea">Experience</label>
+				<textarea class="form-control" id="experienceAreaArea" rows="4" required name ="applicationExperience"></textarea>
+
+				<!--								<input class="" type="text" required name="applicationExperience" placeholder="Experience">-->
 			</div>
 			<div class="form-group">
 				<label for="inputDOB">Date of Birth</label>
 				<input class="form-control" type="date" id="inputDOB" />
 			</div>
 			<div class="form-group">
-				<label for="inputName">Name</label>
-				<input class="form-control" type="text" id="inputName" placeholder="Full Name" />
+				<input class="" type="text" required name="applicationUtmCampaign" placeholder="Application Utm Campaign">
 			</div>
-		</form>
-		<form>
+			<br /><div class="form-group">
+				<input class="" type="text" required name="applicationUtmMedium" placeholder="Application Utm Medium">
+			</div>
+			<br /><div class="form-group">
+				<input class="" type="text" required name="applicationUtmSource" placeholder="Application Utm Source">
+			</div>
 			<br />
-			<select class="form-control" label="Select Cohort">
-				<option>Deep Dive Coding Winter Session</option>
-				<option>Deep Dive Coding Spring Session</option>
-				<option>Deep Dive Coding Summer Session</option>
-				<option>Deep Dive Coding Fall Session</option>
-				<option>.NET</option>
-			</select>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
+			<!--							<input class="" type="text" required name="" placeholder="">-->
+			<!--							<input class="" type="text" required name="" placeholder="">-->
+			<!--							<input class="" type="text" required name="" placeholder="">-->
+			<label class="checkbox"></label>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 		</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
+		</div>
+
+		</div>
+		</div>
+		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-
 			<script; src="bootstrap/js/bootstrap.min.js"></script>
 	</body>
 
