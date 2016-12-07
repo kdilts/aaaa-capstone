@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 
 @Component({
-	templateUrl: "./templates/home.php"
+	templateUrl: "./templates/noteType.php"
 })
 
-export class HomeComponent { }
+export class NoteTypeComponent { }
