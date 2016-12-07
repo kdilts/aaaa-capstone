@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
-import {NoteType} from "../classes/noteType";
 import {NoteTypeService} from "../services/noteType-service";
+import {NoteType} from "../classes/noteType";
 import {Status} from "../classes/status";
 
 @Component({
@@ -9,20 +9,15 @@ import {Status} from "../classes/status";
 })
 
 export class NoteTypeComponent implements OnInit {
-	@ViewChild("noteTypeForm") noteTypeForm;
+	@ViewChild("noteTypeForm") noteTypeForm : any;
 	noteTypes : NoteType[] = [];
-	NoteType : NoteType = new NoteType(null, "");
+	noteType : NoteType = new NoteType(null, "");
 	status: Status = null;
 
 	constructor(private noteTypeService: NoteTypeService, private router: Router) {}
 
 	ngOnInit() : void {
-		this.getAllNoteTypes();
-	}
-
-	getAllNoteTypes() : void {
-		this.noteTypeService.getAllNoteType()
-			.subscribe(noteTypes => this.noteTypes = noteTypes);
+		this.reloadNoteTypes();
 	}
 
 	reloadNoteTypes() : void {
@@ -30,8 +25,13 @@ export class NoteTypeComponent implements OnInit {
 			.subscribe(noteTypes => this.noteTypes = noteTypes);
 	}
 
+	getAllNoteTypes() : void {
+		this.noteTypeService.getAllNoteType()
+			.subscribe(noteTypes => this.noteTypes = noteTypes);
+	}
+
 	createNoteType() : void {
-		this.noteTypeService.createNoteType(this.NoteType)
+		this.noteTypeService.createNoteType(this.noteType)
 			.subscribe(status => {
 				this.status = status;
 				if(status.status === 200) {
