@@ -25,7 +25,7 @@
 			</div>
 			<div class="form-group">
 				<label for="inputApplicationCohortApplicationId">Application Cohort Application Id</label>
-				<input class="form-control" type="text" id="inputApplicationCohortApplicationid" />
+				<input class="form-control" type="text" id="inputApplicationCohortApplicationid" placeholder="Application Cohort Application Id" />
 			</div>
 			<div class="form-group">
 				<label for="inputApplicationCohortCohortId">Application Cohort Cohort Id</label>
