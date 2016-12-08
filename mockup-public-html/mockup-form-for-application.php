@@ -20,8 +20,7 @@
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Streamline</h1>
-					<h1>Application Form</h1>
+					<h1>Streamline CNM Application</h1>
 				</div>
 			</div>
 		</section>

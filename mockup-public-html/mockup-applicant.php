@@ -10,14 +10,14 @@
 				  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
-		<title> Stream Line CNM Applicant</title>
+		<title> Streamline CNM Applicant</title>
 	</head>
 
 	<body>
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Stream Line CNM!</h1>
+					<h1>Stream Line CNM Applicant</h1>
 				</div>
 			</div>
 		</section>

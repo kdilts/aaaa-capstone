@@ -19,50 +19,38 @@
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Insert Page Prospect Cohort Stream Line CNM</h1>
+					<h1>Streamline CNM Insert Page
+						<h1>Prospect Cohort</h1>
 				</div>
 			</div>
 		</section>
 		<div class="list-group">
 			<div>
-				<div class="col-sm-6">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<div class="form-group">
-								<label for="inputprospectid3" class="col-sm-2 control-label">Prospect Cohort Id</label>
-								<div class="col-sm-10">
-									<input type="prospect" class="form-control" id="inputProspectId33" placeholder="Prospect Id">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputName3" class="col-sm-2 control-label">Name</label>
-								<div class="col-sm-10">
-									<input type="name" class="form-control" id="inputName3" placeholder="Name">
-								</div>
-							</div>
-							<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-							<div class="col-sm-10">
-								<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputPhone3" class="col-sm-2 control-label">Phone #</label>
-							<div class="col-sm-10">
-								<input type="phone" class="form-control" id="inputPhone33" placeholder="Phone Number">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-default">Sign in</button>
-							</div>
-						</div>
-					</form>
+				<label for="prospectCohortId">Prospect Cohort Id</label>
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1"></span>
+					<input class="col-sm-4" type="text"  class="form-control-center" placeholder="Prospect Cohort Id">
 				</div>
-
+			<div>
+				<br />
+				<label for="prospectCohortProspectId">Prospect Cohort Prospect Id</label>
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1"></span>
+					<input class="col-sm-4" type="text"  class="form-control-center" placeholder="Prospect Cohort Prospect Id">
+				</div>
+				<br />
+				<div>
+					<label for="prospectCohortCohortId">Prospect Cohort Cohort Id</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"></span>
+						<input class="col-sm-4" type="text"  class="form-control-center" placeholder="Prospect Cohort Cohort Id">
+					</div>
+					<br />
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+							</div>
+						</div>
+					<br />
 				<button class="btn btn-success" type="submit"><i class="fa fa-paper-plane"></i> Submit</button>
 			</div>
 		</div>

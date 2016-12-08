@@ -12,7 +12,7 @@
 
 		<div class="container">
 
-			<h2>Parking</h2>
+			<h2>Streamline CNM Parking</h2>
 			<p>Parking Permit Tags and Swipecard Assignment</p>
 			<table class="table">
 				<thead>
@@ -41,7 +41,7 @@
 						<td>Jeremiah Hollywood</td>
 						<td>DPP Id# 171</td>
 						<td>Swipe Card Id# 123</td>
-						<td>Lost (wt...!)</td>
+						<td>Lost</td>
 					</tr>
 					<tr class="warning"</tr>
 					<td>Maria Tacos</td>

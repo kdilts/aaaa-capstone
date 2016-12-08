@@ -13,13 +13,14 @@
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
 
-		<title>Insert Page CNM</title>
+		<title>Status Type Page CNM</title>
 	</head>
 	<body>
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Insert Page Stream Line CNM</h1>
+					<h1>Stream Line CNM</h1>
+					<h1>Status Type</h1>
 				</div>
 			</div>
 		</section>
@@ -29,15 +30,15 @@
 					<form class="form-horizontal">
 						<div class="form-group">
 							<div class="form-group">
-								<label for="inputstatustype3" class="col-sm-2 control-label">Status Type Id</label>
+								<label for="inputStatusType3" class="col-sm-2 control-label">Status Type Id</label>
 								<div class="col-sm-10">
-									<input type="statusttype" class="form-control" id="inputstatustype3" placeholder="Status Type Id">
+									<input type="statusType" class="form-control" id="inputStatusType3" placeholder="Status Type Id">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputstatustypeName3" class="col-sm-2 control-label">Status Type Name</label>
+								<label for="inputStatusTypeName3" class="col-sm-2 control-label">Status Type Name</label>
 								<div class="col-sm-10">
-									<input type="statustypename" class="form-control" id="inputstatustypename3" placeholder="StatusTyoeName">
+									<input type="statusTypeName" class="form-control" id="inputStatusTypeName3" placeholder="StatusTypeName">
 								</div>
 							</div>
 						</div>

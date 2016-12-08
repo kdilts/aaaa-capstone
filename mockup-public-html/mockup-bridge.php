@@ -23,7 +23,7 @@
 	<section>
 		<div class="container">
 			<div class="jumbotron text-center">
-				<h1>Stream Line</h1>
+				<h1>Streamline CNM</h1>
 				<h1>Bridge</h1>
 			</div>
 		</div>

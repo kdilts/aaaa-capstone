@@ -13,13 +13,14 @@
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
 
-		<title>Insert Page CNM</title>
+		<title>Streamline CNM Swipe</title>
 	</head>
 	<body>
 			<section>
 				<div class="container">
 					<div class="jumbotron text-center">
-						<h1>Swipe Insert Page Stream Line CNM</h1>
+						<h1>Stream Line CNM</h1>
+						<h1>Swipe Insert Page</h1>
 					</div>
 				</div>
 			</section>
@@ -30,18 +31,18 @@
 								<div class="form-group">
 									<label for="swipeId3" class="col-sm-2 control-label">Swipe Id</label>
 									<div class="col-sm-10">
-										<input type="swipeid" class="form-control" id="inputSwipeId3" placeholder="SwipeId">
+										<input type="swipeId" class="form-control" id="inputSwipeId3" placeholder="SwipeId">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputSwipeNumber3" class="col-sm-2 control-label">Swipe Number</label>
 									<div class="col-sm-10">
-										<input type="swipenumber" class="form-control" id="inputSwipeNumber3" placeholder="Swipe Number">
+										<input type="swipeNumber" class="form-control" id="inputSwipeNumber3" placeholder="Swipe Number">
 									</div>
 								</div>
 								<label for="inputSwipeStatusTypeId3" class="col-sm-2 control-label">Swipe Status Type Id</label>
 								<div class="col-sm-10">
-									<input type="swipestatustypeId" class="form-control" id="inputswipestatustypeid3" placeholder="Swipe Status Type Id">
+									<input type="swipeStatusTypeId" class="form-control" id="inputSwipeStatusTypeid3" placeholder="Swipe Status Type Id">
 								</div>
 							</div>
 							<div class="form-group">

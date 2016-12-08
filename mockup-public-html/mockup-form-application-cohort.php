@@ -13,8 +13,8 @@
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Streamline</h1>
-					<h1>Application Cohort Form</h1>
+					<h1>Streamline CNM</h1>
+					<h1>Application Cohort</h1>
 				</div>
 			</div>
 		</section>

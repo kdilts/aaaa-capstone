@@ -13,7 +13,7 @@
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Insert Page To Streamline</h1>
+					<h1>Streamline CNM Insert Page</h1>
 				</div>
 			</div>
 		</section>

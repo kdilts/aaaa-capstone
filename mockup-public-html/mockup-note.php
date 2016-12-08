@@ -26,8 +26,7 @@
 	<section>
 		<div class="container">
 			<div class="jumbotron text-center">
-				<h1>Stream Line</h1>
-				<h1>Notes</h1>
+				<h1>Streamline CNM Note</h1>
 			</div>
 		</div>
 	</section>
@@ -56,31 +55,31 @@
 				<form class="form-horizontal">
 					<div class="form-group">
 						<div class="form-group">
-							<label for="noteId" class="col-sm-2 control-label">Note Id</label>
+							<label for="noteId" class="col-sm-4 control-label">Note Id</label>
 							<div class="col-sm-10">
 								<input type="noteid" class="form-control" id="inputNoteId" placeholder="NoteId">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="NoteAppllicationId" class="col-sm-2 control-label">Note Application Id</label>
+							<label for="NoteAppllicationId" class="col-sm-4 control-label">Note Application Id</label>
 							<div class="col-sm-10">
 								<input type="noteApplicationId" class="form-control" id="inputNoteApplicationId" placeholder="NoteApplicationId">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="NoteProspectId" class="col-sm-2 control-label">Note Prospect Id</label>
+							<label for="NoteProspectId" class="col-sm-4 control-label">Note Prospect Id</label>
 							<div class="col-sm-10">
 								<input type="noteProspectId" class="form-control" id="inputProspectId" placeholder="NoteProspectId">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="NoteType" class="col-sm-2 control-label">Note Type</label>
+							<label for="NoteType" class="col-sm-4 control-label">Note Type</label>
 							<div class="col-sm-10">
 								<input type="noteType" class="form-control" id="inputType" placeholder="NoteType">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="NoteBridgeId" class="col-sm-2 control-label">NoteBridgeId</label>
+							<label for="NoteBridgeId" class="col-sm-4 control-label">NoteBridgeId</label>
 							<div class="col-sm-10">
 								<input type="noteBridgeId" class="form-control" id="inputBridgeId" placeholder="NoteBridgeId">
 							</div>
@@ -92,7 +91,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-4 col-sm-10">
 				</form>
 			</div>
 			<div class="modal-footer">

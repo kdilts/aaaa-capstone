@@ -44,7 +44,7 @@
 							<span class="input-group-addon" id="basic-addon1"></span>
 							<input type="text" class="form-control" placeholder="Password">
 						</div>
-						<button type="button" class="btn btn-default navbar-btn">Sign</button>
+						<button type="button" class="btn btn-default navbar-btn">Sign In</button>
 
 						<div class="form-wrap row">
 							<div class="col-sm-12 col-sm-offset-12">

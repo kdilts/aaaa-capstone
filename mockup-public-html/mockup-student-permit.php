@@ -13,13 +13,14 @@
 		<link rel="stylesheet" href="style.css"/>
 		<script src="script.js"></script>
 
-		<title>Insert Page CNM</title>
+		<title>Student Permit Page CNM</title>
 	</head>
 	<body>
 		<section>
 			<div class="container">
 				<div class="jumbotron text-center">
-					<h1>Student Permit Insert Page Stream Line CNM</h1>
+					<h1>Stream Line CNM</h1>
+					<h1>Student Permit</h1>
 				</div>
 			</div>
 		</section>
