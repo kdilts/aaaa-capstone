@@ -83,17 +83,24 @@ try {
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
 			}
-		}else if($getAllCohortsToo){
+		}else{
 			$applications = Application::getAllApplicationsAndCohorts($pdo);
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
 			}
-		} else {
-			$applications = Application::getAllApplications($pdo);
-			if($applications !== null) {
-				$reply->data = $applications->toArray();
-			}
 		}
+//		else if($getAllCohortsToo){
+//			$applications = Application::getAllApplicationsAndCohorts($pdo);
+//			if($applications !== null) {
+//				$reply->data = $applications->toArray();
+//			}
+//		}
+//		else {
+//			$applications = Application::getAllApplications($pdo);
+//			if($applications !== null) {
+//				$reply->data = $applications->toArray();
+//			}
+//		}
 	} else if($method === "POST") {
 
 		verifyXsrf();

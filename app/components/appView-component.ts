@@ -17,6 +17,7 @@ import {Status} from "../classes/status";
 export class AppViewComponent implements OnInit{
 	@ViewChild("appView") appView : any;
 	applications : Application[] = [];
+	objects : any[] = [];
 	prospects : Prospect[] = [];
 	applicationCohorts : ApplicationCohort[] = [];
 	cohorts : Cohort[] = [];
@@ -38,8 +39,8 @@ export class AppViewComponent implements OnInit{
 	}
 
 	reloadApplications()	 : void {
-		this.applicationService.getAllApplicationsAndCohorts(true)
-			.subscribe(applications => this.applications = applications);
+		this.applicationService.getAllApplications()
+			.subscribe(objects => this.objects = objects);
 	}
 
 	reloadProspects() : void {

@@ -13,17 +13,17 @@ export class ApplicationService extends BaseService {
 
 	private applicationUrl = "api/application/";
 
-	getAllApplications() : Observable<Application[]> {
+	getAllApplications() : Observable<any[]> {
 		return(this.http.get(this.applicationUrl)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
 
-	getAllApplicationsAndCohorts(getAllCohortsToo: boolean) : Observable<any[]> {
-		return(this.http.get(this.applicationUrl + getAllCohortsToo)
-			.map(this.extractData)
-			.catch(this.handleError));
-	}
+	// getAllApplicationsAndCohorts(getAllCohortsToo: boolean) : Observable<any[]> {
+	// 	return(this.http.get(this.applicationUrl + getAllCohortsToo)
+	// 		.map(this.extractData)
+	// 		.catch(this.handleError));
+	// }
 
 	getApplicationsByApplicationDateRange(startDate: string, endDate: string) : Observable<Application[]> {
 		return(this.http.get(this.applicationUrl + startDate + endDate)
