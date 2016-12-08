@@ -8,6 +8,8 @@ import {NoteTypeService} from "./services/noteType-service";
 import {ApplicationService} from "./services/application-service";
 import {ProspectService} from "./services/prospect-service";
 import {StudentPermitService} from "./services/studentPermit-service";
+import {CohortService} from "./services/cohort-service";
+import {ApplicationCohortService} from "./services/applicationCohort-service";
 
 const moduleDeclarations = [AppComponent];
 
