@@ -11,6 +11,11 @@
 		<script src="script.js"></script>
 	</head>
 
+
+	<!----------------- Java Script for date stamp ------------------>
+	<!---------- var isoDate = new Date(new Date().getTime()).toISOString();
+	$('#utc').html(isoDate); ------------->
+
 	<body>
 		<section>
 			<div class="container">
