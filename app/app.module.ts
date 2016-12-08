@@ -15,6 +15,16 @@ const moduleDeclarations = [AppComponent];
 	imports:      [BrowserModule, FormsModule, HttpModule, routing],
 	declarations: [...moduleDeclarations, ...allAppComponents],
 	bootstrap:    [AppComponent],
-	providers:    [appRoutingProviders, NoteTypeService, ApplicationService, ProspectService, NoteTypeService, StudentPermitService]
+	providers:    [
+		appRoutingProviders,
+		NoteTypeService,
+		ApplicationService,
+		ProspectService,
+		NoteTypeService,
+		StudentPermitService,
+		ApplicationCohortService,
+		CohortService
+	]
 })
+
 export class AppModule {}
