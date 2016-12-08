@@ -70,7 +70,7 @@ try {
 		//perform the actual post
 		if($method === "POST") {
 
-			// create new tweet and insert into the database
+			// create new noteType and insert into the database
 			$noteType = new NoteType($requestObject->noteTypeId, $requestObject->noteTypeName);
 			$noteType->insert($pdo);
 

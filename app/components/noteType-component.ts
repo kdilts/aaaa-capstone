@@ -14,7 +14,10 @@ export class NoteTypeComponent implements OnInit {
 	noteType : NoteType = new NoteType(null, "");
 	status: Status = null;
 
-	constructor(private noteTypeService: NoteTypeService, private router: Router) {}
+	constructor(
+		private noteTypeService: NoteTypeService,
+		private router: Router
+	) {}
 
 	ngOnInit() : void {
 		this.reloadNoteTypes();
