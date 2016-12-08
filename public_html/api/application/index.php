@@ -83,7 +83,7 @@ try {
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
 			}
-		}else if(!$getAllCohortsToo){
+		}else if($getAllCohortsToo){
 			$applications = Application::getAllApplicationsAndCohorts($pdo);
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
