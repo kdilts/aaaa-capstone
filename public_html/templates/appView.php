@@ -38,12 +38,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let application of applications">
-									<td>{{ application.applicationLastName }}</td>
-									<td>{{ application.applicationFirstName }}</td>
-									<td>{{ application.applicationEmail }}</td>
-									<td>{{ application.applicationCohortId }}</td>
-									<td>{{ application.applicationDateTime }}</td>
+								<tr *ngFor="let applicationCohort of applicationCohorts">
+									<td>{{ (application.getApplicationByApplicationId(applicationCohort.applicationCohortApplicationId)).applicationFirstName }}</td>
+<!--									<td>{{ application.applicationFirstName }}</td>-->
+<!--									<td>{{ application.applicationEmail }}</td>-->
+<!--									<td>{{ application.applicationCohortId }}</td>-->
+<!--									<td>{{ application.applicationDateTime }}</td>-->
 								</tr>
 							</tbody>
 						</table>
