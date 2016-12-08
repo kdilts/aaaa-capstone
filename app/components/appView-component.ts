@@ -38,7 +38,7 @@ export class AppViewComponent implements OnInit{
 	}
 
 	reloadApplications()	 : void {
-		this.applicationService.getAllApplications()
+		this.applicationService.getAllApplicationsAndCohorts(true)
 			.subscribe(applications => this.applications = applications);
 	}
 
