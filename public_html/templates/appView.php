@@ -39,10 +39,11 @@
 							</thead>
 							<tbody>
 								<tr *ngFor="let applicationCohort of applicationCohorts">
-									<td>{{ (application.getApplicationByApplicationId(applicationCohort.applicationCohortApplicationId)).applicationFirstName }}</td>
-<!--									<td>{{ application.applicationFirstName }}</td>-->
+									<td>{{ applicationCohort.applicationCohortId }}</td>
+									<td>{{ applicationCohort.applicationCohortApplicationId }}</td>
+									<td>{{ applicationCohort.applicationCohortCohortId }}</td>
 <!--									<td>{{ application.applicationEmail }}</td>-->
-<!--									<td>{{ application.applicationCohortId }}</td>-->
+<!--									<td>{{ cohort.cohortName }}</td>-->
 <!--									<td>{{ application.applicationDateTime }}</td>-->
 								</tr>
 							</tbody>
