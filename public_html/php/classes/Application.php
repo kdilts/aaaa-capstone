@@ -757,6 +757,7 @@ class Application implements \JsonSerializable {
 	 */
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
+		$fields["applicationDateTime"] = $this->applicationDateTime->getTimestamp() * 1000;
 		return($fields);
 	}
 }
