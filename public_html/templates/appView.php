@@ -45,5 +45,6 @@
 					</div><!--end of .table-responsive-->
 				</div>
 			</section>
+		</div>
 	</body>
 </html>
