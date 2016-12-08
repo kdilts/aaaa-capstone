@@ -5,6 +5,9 @@ import {HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {allAppComponents, appRoutingProviders, routing} from "./app.routes";
 import {NoteTypeService} from "./services/noteType-service";
+import {ApplicationService} from "./services/application-service";
+import {ProspectService} from "./services/prospect-service";
+import {StudentPermitService} from "./services/studentPermit-service";
 
 const moduleDeclarations = [AppComponent];
 
@@ -12,6 +15,6 @@ const moduleDeclarations = [AppComponent];
 	imports:      [BrowserModule, FormsModule, HttpModule, routing],
 	declarations: [...moduleDeclarations, ...allAppComponents],
 	bootstrap:    [AppComponent],
-	providers:    [appRoutingProviders, NoteTypeService]
+	providers:    [appRoutingProviders, NoteTypeService, ApplicationService, ProspectService, NoteTypeService, StudentPermitService]
 })
 export class AppModule {}
