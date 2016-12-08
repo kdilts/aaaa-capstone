@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
-import {StudentPermitService} from "../services/studentpermit-service";
+import {StudentPermitService} from "../services/studentPermit-service";
 import {StudentPermit} from "../classes/studentPermit";
 import {Status} from "../classes/status";
 
