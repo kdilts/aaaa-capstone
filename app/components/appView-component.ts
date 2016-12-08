@@ -40,7 +40,7 @@ export class AppViewComponent implements OnInit{
 
 	reloadApplications()	 : void {
 		this.applicationService.getAllApplications()
-			.subscribe(objects => this.objects = objects);
+			.subscribe(applications => this.applications = applications);
 	}
 
 	reloadProspects() : void {
