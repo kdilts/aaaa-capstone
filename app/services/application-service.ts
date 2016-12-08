@@ -19,7 +19,7 @@ export class ApplicationService extends BaseService {
 			.catch(this.handleError));
 	}
 
-	getAllApplicationsAndCohorts(getAllCohortsToo: boolean) : Observable<Application[]> { // TODO fix observable type
+	getAllApplicationsAndCohorts(getAllCohortsToo: boolean) : Observable<any[]> {
 		return(this.http.get(this.applicationUrl + getAllCohortsToo)
 			.map(this.extractData)
 			.catch(this.handleError));
