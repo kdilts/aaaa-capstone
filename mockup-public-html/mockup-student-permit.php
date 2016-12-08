@@ -34,74 +34,70 @@
 						</div>
 					</form>
 				</div>
-				<body>
-					<table class="table-responsive" ;
-					<table class="table" ;
-					<table border="1" width="90%">
-						<thead>
-							<tr>
-								<td colspan="6">Student Permit Information</td>
-							</tr>
-							<th>Student Permit ID</th>
-							<th>Student Permit Application Id</th>
-							<th>Student Permit Swipe Id</th>
-							<th>Student Permit Placard Id</th>
-							<th>Student Permit Check Out Date</th>
-							<th>Student Permit Check In Date</th>
-						</thead>
-						<tfoot>
-							<tr>
-								<td colspan="6">This is the foot of the table</td>
-							</tr>
-						</tfoot>
-						<tbody>
-							<tr>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-							</tr>
-							<tr>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-							<tr>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-							</tr>
-							<tr>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-							</tr>
-							<tr>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-								<td><input> </input></td>
-							</tr>
-						</tbody>
-					</table>
-				</body>
+					<table class="table-responsive">
+						<table class="table">
+							<table border="1" width="90%">
+								<thead>
+									<tr>
+										<td colspan="6">Student Permit Information</td>
+									</tr>
+									<th>Student Permit ID</th>
+									<th>Student Permit Application Id</th>
+									<th>Student Permit Swipe Id</th>
+									<th>Student Permit Placard Id</th>
+									<th>Student Permit Check Out Date</th>
+									<th>Student Permit Check In Date</th>
+								</thead>
+								<tfoot>
+									<tr>
+										<td colspan="6">This is the foot of the table</td>
+									</tr>
+								</tfoot>
+								<tr>
+									<td><input type="text" name="permit"> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+								</tr>
+								<tr>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+								<tr>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+								</tr>
+								<tr>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+								</tr>
+								<tr>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+									<td><input> </input></td>
+								</tr>
+								</table>
+							</table>
 			</div>
 			<div class="col-sm-offset-10 col-sm-10">
 				<button type="submit" class="btn btn-default">Submit</button>
 			</div>
-		</div>
 		</div>
 	</body>
 </html>
