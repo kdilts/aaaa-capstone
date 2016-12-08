@@ -43,7 +43,7 @@
 									<td>{{ application.applicationLastName }}</td>
 									<td>{{ application.applicationEmail }}</td>
 									<td>{{ application.applicationCohortId }}</td>
-									<td>{{ application.applicationDateTime }}</td>
+									<td>{{ application.applicationDateTime | date: 'medium' }}</td>
 								</tr>
 							</tbody>
 						</table>
