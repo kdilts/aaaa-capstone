@@ -3,9 +3,8 @@ import {Router} from "@angular/router";
 import {ApplicationService} from "../services/application-service";
 import {ProspectService} from "../services/prospect-service";
 import {Application} from "../classes/application";
-import {Status} from "../classes/status";
 import {Prospect} from "../classes/prospect";
-
+import {Status} from "../classes/status";
 
 @Component({
 	templateUrl: "./templates/appView.php"

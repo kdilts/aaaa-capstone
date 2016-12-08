@@ -13,7 +13,7 @@ export class StudentPermitService extends BaseService {
 
 	private studentPermitUrl = "api/studentPermit/";
 
-	getAllStudentPermit() : Observable<StudentPermit[]> {
+	getAllStudentPermits() : Observable<StudentPermit[]> {
 		return(this.http.get(this.studentPermitUrl)
 			.map(this.extractData)
 			.catch(this.handleError));
