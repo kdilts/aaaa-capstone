@@ -5,7 +5,9 @@ require_once (dirname(__DIR__,2) . "/php/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Edu\Cnm\DdcAaaa\ProspectCohort;
-
+use Edu\Cnm\DdcAaaa\JsonObjectStorage;
+use Edu\Cnm\DdcAaaa\Cohort;
+use Edu\Cnm\DdcAaaa\Prospect;
 
 /**
  * api for the prospect class
@@ -58,7 +60,19 @@ try {
 		} else {
 			$prospectCohorts = ProspectCohort::getAllProspectCohorts($pdo);
 			if($prospectCohorts !== null) {
-				$reply->data = $prospectCohorts->toArray();
+				$storage = new JsonObjectStorage();
+
+				for($i = 0; $i < count($prospectCohorts); $i++){
+					$storage->attach(
+						$prospectCohorts[$i],
+						[
+							Prospect::getProspectByProspectId($pdo, $prospectCohorts[$i]->getProspectCohortProspectId()),
+							Cohort::getCohortByCohortId($pdo, $prospectCohorts[$i]->getProspectCohortCohortId())
+						]
+					);
+				}
+
+				$reply->data = $storage;
 			}
 		}
 
