@@ -9,6 +9,8 @@
 		<div class="container">
 			<?php require_once("../php/partials/navbar.php"); ?>
 
-
 			<h1>Detail View</h1>
-<h3>First Name: {{application.applicationFirstName}}</h3>
+			<h3>First Name: {{application.applicationFirstName}}</h3>
+		</div>
+	</body>
+</html>
