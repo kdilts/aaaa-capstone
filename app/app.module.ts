@@ -11,6 +11,7 @@ import {StudentPermitService} from "./services/studentPermit-service";
 import {CohortService} from "./services/cohort-service";
 import {ApplicationCohortService} from "./services/applicationCohort-service";
 import {NoteService} from "./services/note-service";
+import {ProspectCohortService} from "./services/prospectCohort-service";
 
 const moduleDeclarations = [AppComponent];
 
