@@ -60,12 +60,13 @@
 		<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Position</th>
-					<th>Office</th>
-					<th>Age</th>
-					<th>Start date</th>
-					<th>Salary</th>
+					<th>Last Name</th>
+					<th>First Name</th>
+					<th>Cohort</th>
+					<th>Date</th>
+					<th>Email</th>
+
+					<th>Email</th>
 				</tr>
 			</thead>
 			<tfoot>
@@ -74,8 +75,8 @@
 					<th>Position</th>
 					<th>Office</th>
 					<th>Age</th>
-					<th>Start date</th>
-					<th>Salary</th>
+					<th>Star</th>
+					<th></th>
 				</tr>
 			</tfoot>
 			<tbody>
