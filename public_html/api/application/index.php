@@ -88,7 +88,7 @@ try {
 		} else {
 			$applications = Application::getAllApplications($pdo);
 			if($applications !== null) {
-				$reply->data = $applications;
+				$reply->data = $applications->toArray();
 			}
 		}
 
