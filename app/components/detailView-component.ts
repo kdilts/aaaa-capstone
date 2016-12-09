@@ -6,7 +6,7 @@ import {NoteService} from "../services/note-service";
 import {Application} from "../classes/application";
 import {Prospect} from "../classes/prospect";
 import {Status} from "../classes/status";
-import {Note} from "../classes/note"
+import {Note} from "../classes/note";
 
 @Component({
 	templateUrl: "./templates/detailView.php"
@@ -23,7 +23,8 @@ export class DetailViewComponent implements OnInit{
 		private applicationService: ApplicationService,
 		private prospectService: ProspectService,
 		private noteService: NoteService,
-		private router: Router
+		private router: Router,
+		private application: Application
 	) {}
 
 	ngOnInit() : void {
@@ -33,8 +34,8 @@ export class DetailViewComponent implements OnInit{
 	}
 
 	reloadApplications()	 : void {
-		this.applicationService.getAllApplications()
-			.subscribe(applications => this.applications = applications);
+		this.applicationService.getApplicationByApplicationId()
+			.subscribe(application => this.application = application);
 	}
 
 	reloadProspects() : void {
@@ -43,7 +44,7 @@ export class DetailViewComponent implements OnInit{
 	}
 
 	reloadNotes() : void {
-		this.noteService.getAllNotes()
+		this.noteService.getNotesByNoteApplicationId()
 			.subscribe(notes => this.notes = notes);
 	}
 }

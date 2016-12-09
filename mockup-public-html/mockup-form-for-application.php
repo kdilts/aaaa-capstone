@@ -59,13 +59,6 @@
 				</div>
 
 				<! ----------------------- date picker ------------------->
-				<script type="text/javascript">
-					$(function () {
-						$('#datetimepicker1').datetimepicker();
-					});
-				</script>
-			</div>
-		</div>
 <!--------------------- date stamp --------------------->
 		<div class="container">
 			<h2 id="utc"></h2>
