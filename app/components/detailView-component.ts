@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {ApplicationService} from "../services/application-service";
 import {ProspectService} from "../services/prospect-service";
-import {Application} from "../classes/application";
 import {NoteService} from "../services/note-service";
+import {Application} from "../classes/application";
 import {Prospect} from "../classes/prospect";
 import {Status} from "../classes/status";
 import {Note} from "../classes/note"
