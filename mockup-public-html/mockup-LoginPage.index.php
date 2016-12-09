@@ -32,36 +32,36 @@
 						<div class="span10 offsetHalf"><i class="icon-ddcd-lg.png icon-5x" style="color:#d58512"</div>
 					</div>
 				</div>
-					<div class="jumbotron text-center">
-						<h1 class="text-center">Stream Line CNM</h1>
-						<label for="Email">Email</label>
-						<div class="input-group">
-							<span class="input-group-addon" id="basic-addon1"></span>
-							<div><input type="text" class="form-control" placeholder="Your Email/Username"></div>
-						</div>
-						<label for="Password">Password</label>
-						<div class="input-group">
-							<span class="input-group-addon" id="basic-addon1"></span>
-							<input type="text" class="form-control" placeholder="Password">
-						</div>
-						<button type="button" class="btn btn-default navbar-btn">Sign In</button>
+				<div class="jumbotron text-center">
+					<h1 class="text-center">Stream Line CNM</h1>
+					<label for="Email">Email</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"></span>
+						<div><input type="text" class="form-control" placeholder="Your Email/Username"></div>
+					</div>
+					<label for="Password">Password</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"></span>
+						<input type="text" class="form-control" placeholder="Password">
+					</div>
+					<button type="button" class="btn btn-default navbar-btn">Sign In</button>
 
-						<div class="form-wrap row">
-							<div class="col-sm-12 col-sm-offset-12">
-								</form>
-							</div>
+					<div class="form-wrap row">
+						<div class="col-sm-12 col-sm-offset-12">
+							</form>
 						</div>
 					</div>
 				</div>
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-12">
-						</div>
-					</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
 				</div>
-				<!-- insert contact form here -->
+			</div>
+		</div>
+		<!-- insert contact form here -->
 
-					</div>
-			</main>
+		</div>
+		</main>
 	</body>
 </html>

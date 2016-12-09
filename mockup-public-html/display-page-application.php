@@ -60,10 +60,6 @@
 										<td><input> </input></td>
 										<td><input> </input></td>
 									</tr>
-									<tr>
-										<td><input> </input></td>
-										<td><input> </input></td>
-										<td><input> </input></td></tr>
 									<td colspan="3">This is the foot of the table</td>
 							</div>
 							</tbody>
@@ -72,49 +68,22 @@
 	</section>
 
 	<!-- add modal here -->
-	<div class="modal fade" id="add-student" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 							aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Add Student</h4>
-				</div>
-				<div class="modal-body">
-					<label for="name">Name <span class="text-danger">*</span></label>
-					<div class="input-group">
-						<div class="input-group-addon">
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</div>
-						<input type="text" class="form-control" id="name" name="name" placeholder="Name">
-					</div>
+					<h4> class="modal-title" </h4>
 				</div>
 				<div class="form-group">
-					<label for="email">Email <span class="text-danger">*</span></label>
-					<div class="input-group">
-						<div class="input-group-addon">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</div>
-						<input type="email" class="form-control" id="email" name="email" placeholder="Email">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="subject">Subject</label>
-					<div class="input-group">
-						<div class="input-group-addon">
-							<i class="fa fa-pencil" aria-hidden="true"></i>
-						</div>
-						<input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="message">Message <span class="text-danger">*</span></label>
+					<label for="note">Note<span class="text-danger">*</span></label>
 					<div class="input-group">
 						<div class="input-group-addon">
 							<i class="fa fa-comment" aria-hidden="true"></i>
 						</div>
-						<textarea class="form-control" rows="5" id="message" name="message"
-									 placeholder="Message (2000 characters max)"></textarea>
+						<textarea class="form-control" rows="5" id="note" name="note"
+									 placeholder="Note(2000 characters max)"></textarea>
 					</div>
 				</div>
 			</div>

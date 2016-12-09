@@ -1,2 +1,14 @@
-<pre>Month: {{ date.month }}.{{ date.year }}</pre>
-															 <pre>Model: {{ model | json }}</pre>
+/*this is how to inject pictures into those funny jumbotrons*/
+/*HOME PAGE*/
+#home-jumbo {
+	background: url("../images/deep-dive-sandias5.png") no-repeat;
+	min-height: 100vh;
+	margin: 0;
+	padding: 200px 0 100px;
+	color: black;
+	background-size: 150%;
+}
+
+.background-img {
+	background: url(../images/sandias.png) no-repeat center fixed;
+}
