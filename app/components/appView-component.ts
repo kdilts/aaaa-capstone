@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import {Application} from "../classes/application";
 import {ApplicationService} from "../services/application-service";
 import {Prospect} from "../classes/prospect";
@@ -27,7 +27,8 @@ export class AppViewComponent implements OnInit{
 		private prospectService: ProspectService,
 		private applicationCohortService: ApplicationCohortService,
 		private cohortService: CohortService,
-		private router: Router
+		private router: Router,
+		private route: ActivatedRoute
 	) {}
 
 	ngOnInit() : void {

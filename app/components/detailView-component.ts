@@ -47,7 +47,4 @@ export class DetailViewComponent implements OnInit{
 		this.noteService.getNotesByNoteApplicationId()
 			.subscribe(notes => this.notes = notes);
 	}
-	switchApplication(application: Application) : void {
-		this.router.navigate(["/detailView/", application.applicationId]);
-	}
 }
