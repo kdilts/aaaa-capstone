@@ -39,11 +39,11 @@
 							</thead>
 							<tbody>
 								<tr *ngFor="let application of applications">
-									<td>{{ application[0] }}</td>
-<!--									<td>{{ application.applicationLastName }}</td>-->
-<!--									<td>{{ application.applicationEmail }}</td>-->
-<!--									<td> test </td>-->
-<!--									<td>{{ application.applicationDateTime | date: 'medium' }}</td>-->
+									<td>{{ application.applicationFirstName }}</td>
+									<td>{{ application.applicationLastName }}</td>
+									<td>{{ application.applicationEmail }}</td>
+									<td>{{ application.info }}</td>
+									<td>{{ application.applicationDateTime | date: 'medium' }}</td>
 								</tr>
 							</tbody>
 						</table>
