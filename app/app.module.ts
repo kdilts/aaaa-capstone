@@ -26,6 +26,7 @@ const moduleDeclarations = [AppComponent];
 		NoteService,
 		StudentPermitService,
 		ApplicationCohortService,
+		ProspectCohortService,
 		CohortService
 	]
 })
