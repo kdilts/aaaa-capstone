@@ -24,7 +24,7 @@
 			<div class="container">
 				<ul class="nav nav-pills">
 					<li role="presentation"><a href="#">Home</a></li>
-					<li role="presentation"><a href="#">Applicant</a></li>
+					<li role="presentation"><a href="#">Applica</a></li>
 					<li role="presentation"><a href="#">Permits</a></li>
 					<li role="presentation"><a href="#">Students</a></li>
 				</ul>
