@@ -103,6 +103,8 @@ try {
 				}
 
 				$reply->data = $storage;
+
+				var_dump($storage);
 			}
 		}
 

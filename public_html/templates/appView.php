@@ -39,7 +39,7 @@
 							</thead>
 							<tbody>
 								<tr *ngFor="let application of applications">
-									<td>{{ application[0].applicationFirstName }}</td>
+									<td>{{ application[0] }}</td>
 <!--									<td>{{ application.applicationLastName }}</td>-->
 <!--									<td>{{ application.applicationEmail }}</td>-->
 <!--									<td> test </td>-->
