@@ -5,7 +5,7 @@ require_once(dirname(__DIR__, 2) . "/php/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Edu\Cnm\DdcAaaa\Application;
-
+use Edu\Cnm\DdcAaaa\ApplicationCohort;
 /**
  * api for the application class
  *
@@ -83,24 +83,13 @@ try {
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
 			}
-		}else{
-			$applications = Application::getAllApplicationsAndCohorts($pdo);
+		} else {
+			$applications = Application::getAllApplications($pdo);
 			if($applications !== null) {
 				$reply->data = $applications->toArray();
 			}
 		}
-//		else if($getAllCohortsToo){
-//			$applications = Application::getAllApplicationsAndCohorts($pdo);
-//			if($applications !== null) {
-//				$reply->data = $applications->toArray();
-//			}
-//		}
-//		else {
-//			$applications = Application::getAllApplications($pdo);
-//			if($applications !== null) {
-//				$reply->data = $applications->toArray();
-//			}
-//		}
+
 	} else if($method === "POST") {
 
 		verifyXsrf();
