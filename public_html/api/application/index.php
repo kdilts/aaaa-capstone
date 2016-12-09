@@ -92,11 +92,11 @@ try {
 
 				$applicationCohorts = [];
 				for($i = 0; $i < count($applications); $i++){
-					$applicationCohorts[$i] = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $applications[$i]->applicationId);
+					$applicationCohorts[$i] = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $applications[$i]->getApplicationId());
 
 					$cohorts = [];
 					for($j = 0; $j < count($applicationCohorts[$i]); $j++){
-						$cohorts[$j] = (Cohort::getCohortByCohortId($pdo, $applicationCohorts[$i][$j]->applicationCohortCohortId)->getCohortName());
+						$cohorts[$j] = (Cohort::getCohortByCohortId($pdo, $applicationCohorts[$i][$j]->getApplicationCohortCohortId())->getCohortName());
 					}
 
 					$storage->attach($applications[$i], $cohorts);
@@ -104,7 +104,6 @@ try {
 
 				$reply->data = $storage;
 
-				var_dump($storage);
 			}
 		}
 
