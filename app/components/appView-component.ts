@@ -2,8 +2,6 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Application} from "../classes/application";
 import {ApplicationService} from "../services/application-service";
-import {Prospect} from "../classes/prospect";
-import {ProspectService} from "../services/prospect-service";
 import {Cohort} from "../classes/cohort";
 import {CohortService} from "../services/cohort-service";
 import {ApplicationCohort} from "../classes/applicationCohort";
@@ -17,14 +15,12 @@ import {Status} from "../classes/status";
 export class AppViewComponent implements OnInit{
 	@ViewChild("appView") appView : any;
 	applications : Application[] = [];
-	prospects : Prospect[] = [];
 	applicationCohorts : ApplicationCohort[] = [];
 	cohorts : Cohort[] = [];
 	status: Status = null;
 
 	constructor(
 		private applicationService: ApplicationService,
-		private prospectService: ProspectService,
 		private applicationCohortService: ApplicationCohortService,
 		private cohortService: CohortService,
 		private router: Router,
@@ -33,7 +29,6 @@ export class AppViewComponent implements OnInit{
 
 	ngOnInit() : void {
 		this.reloadApplications();
-		this.reloadProspects();
 		this.reloadApplicationCohorts();
 		this.reloadCohorts();
 	}
@@ -41,11 +36,6 @@ export class AppViewComponent implements OnInit{
 	reloadApplications()	 : void {
 		this.applicationService.getAllApplications()
 			.subscribe(applications => this.applications = applications);
-	}
-
-	reloadProspects() : void {
-		this.prospectService.getAllProspects()
-			.subscribe(prospects => this.prospects = prospects);
 	}
 
 	reloadApplicationCohorts()	 : void {

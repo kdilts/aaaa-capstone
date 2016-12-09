@@ -19,7 +19,7 @@ export const routes: Routes = [
 	{path: "", component: HomeComponent},
 	{path: "noteType", component: NoteTypeComponent },
 	{path: "appView", component: AppViewComponent },
-	{path: "prsView", component: AppViewComponent },
+	{path: "prsView", component: PrsViewComponent },
 	{path: "pkgView", component: PkgViewComponent },
 	{path: "detailView/:applicationId", component: DetailViewComponent }
 ];

@@ -30,7 +30,6 @@
 									<th>First</th>
 									<th>Email</th>
 									<th>Cohort</th>
-									<th>Date</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -39,7 +38,6 @@
 									<td>{{ prospectCohort.info[0].prospectLastName }}</td>
 									<td>{{ prospectCohort.info[0].prospectEmail }}</td>
 									<td>{{ prospectCohort.info[1].cohortName }}</td>
-									<td>{{ prospectCohort.info[0].prospectDateTime | date: 'medium' }}</td>
 								</tr>
 							</tbody>
 						</table>

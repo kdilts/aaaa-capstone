@@ -1,13 +1,11 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {Application} from "../classes/application";
-import {ApplicationService} from "../services/application-service";
 import {Prospect} from "../classes/prospect";
 import {ProspectService} from "../services/prospect-service";
 import {Cohort} from "../classes/cohort";
 import {CohortService} from "../services/cohort-service";
-import {ApplicationCohort} from "../classes/applicationCohort";
-import {ApplicationCohortService} from "../services/applicationCohort-service";
+import {ProspectCohort} from "../classes/prospectCohort";
+import {ProspectCohortService} from "../services/prospectCohort-service";
 import {Status} from "../classes/status";
 
 @Component({
@@ -16,31 +14,23 @@ import {Status} from "../classes/status";
 
 export class PrsViewComponent implements OnInit{
 	@ViewChild("prsView") prsView : any;
-	applications : Application[] = [];
 	prospects : Prospect[] = [];
-	applicationCohorts : ApplicationCohort[] = [];
+	prospectCohorts : ProspectCohort[] = [];
 	cohorts : Cohort[] = [];
 	status: Status = null;
 
 	constructor(
-		private applicationService: ApplicationService,
 		private prospectService: ProspectService,
-		private applicationCohortService: ApplicationCohortService,
+		private prospectCohortService: ProspectCohortService,
 		private cohortService: CohortService,
 		private router: Router,
 		private route: ActivatedRoute
 	) {}
 
 	ngOnInit() : void {
-		this.reloadApplications();
 		this.reloadProspects();
-		this.reloadApplicationCohorts();
+		this.reloadProspectCohorts();
 		this.reloadCohorts();
-	}
-
-	reloadApplications()	 : void {
-		this.applicationService.getAllApplications()
-			.subscribe(applications => this.applications = applications);
 	}
 
 	reloadProspects() : void {
@@ -48,16 +38,14 @@ export class PrsViewComponent implements OnInit{
 			.subscribe(prospects => this.prospects = prospects);
 	}
 
-	reloadApplicationCohorts()	 : void {
-		this.applicationCohortService.getAllApplicationCohorts()
-			.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
+	reloadProspectCohorts()	 : void {
+		this.prospectCohortService.getAllProspectCohorts()
+			.subscribe(prospectCohorts => this.prospectCohorts = prospectCohorts);
 	}
 
 	reloadCohorts() : void {
 		this.cohortService.getAllCohorts()
 			.subscribe(cohorts => this.cohorts = cohorts);
 	}
-	switchApplication(application: Application) : void {
-		this.router.navigate(["/detailView/", application.applicationId]);
-	}
+	
 }
