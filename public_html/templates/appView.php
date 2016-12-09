@@ -34,7 +34,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let applicationCohort of applicationCohorts">
+								<tr *ngFor="let applicationCohort of applicationCohorts" (click)="switchApplication(applicationCohort.info[0]);">
 									<td>{{ applicationCohort.info[0].applicationFirstName }}</td>
 									<td>{{ applicationCohort.info[0].applicationLastName }}</td>
 									<td>{{ applicationCohort.info[0].applicationEmail }}</td>

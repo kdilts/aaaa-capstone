@@ -56,5 +56,7 @@ export class AppViewComponent implements OnInit{
 		this.cohortService.getAllCohorts()
 			.subscribe(cohorts => this.cohorts = cohorts);
 	}
-
+	switchApplication(application: Application) : void {
+		this.router.navigate(["/detailView/", application.applicationId]);
+	}
 }
