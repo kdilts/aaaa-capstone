@@ -36,13 +36,10 @@
 						<button type="submit" class="btn btn-default">Search</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Sign Out</a></li>
-						<li><a href="#">Parking</a></li>
 						<li><a href="#">Student</a></li>
-
+						<li><a href="#">Parking</a></li>
+						<li><a href="#">Sign Out</a></li>
 						<li role="separator" class="divider"></li>
-					</ul>
-					</li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
@@ -215,9 +212,7 @@
 				</li>
 				<li class="paginate_button next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0">Next</a>
 				</li>
-
 			</ul>
-
 		</div>
 
 
@@ -258,14 +253,10 @@
 										 placeholder="Message (2000 characters max)"></textarea>
 						</div>
 					</div>
-				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
-			</div>
-		</div>
-		</div>
 
 	</body>
 
