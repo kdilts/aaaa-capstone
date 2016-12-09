@@ -5,9 +5,6 @@ require_once(dirname(__DIR__, 2) . "/php/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Edu\Cnm\DdcAaaa\Application;
-use Edu\Cnm\DdcAaaa\ApplicationCohort;
-use Edu\Cnm\DdcAaaa\Cohort;
-use Edu\Cnm\DdcAaaa\JsonObjectStorage;
 
 /**
  * api for the application class

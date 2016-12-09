@@ -4,8 +4,10 @@ require_once(dirname(__DIR__,2) . "/php/classes/autoload.php");
 require_once (dirname(__DIR__,2) . "/php/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
+use Edu\Cnm\DdcAaaa\Application;
 use Edu\Cnm\DdcAaaa\ApplicationCohort;
-
+use Edu\Cnm\DdcAaaa\Cohort;
+use Edu\Cnm\DdcAaaa\JsonObjectStorage;
 
 /**
  * api for the application class
@@ -58,7 +60,19 @@ try {
 		} else {
 			$applicationCohorts = ApplicationCohort::getAllApplicationCohorts($pdo);
 			if($applicationCohorts !== null) {
-				$reply->data = $applicationCohorts->toArray();
+				$storage = new JsonObjectStorage();
+
+				for($i = 0; $i < count($applicationCohorts); $i++){
+					$storage->attach(
+						$applicationCohorts[$i],
+						[
+							Application::getApplicationByApplicationId($pdo, $applicationCohorts[$i]->getApplicationCohortApplicationId()),
+							Cohort::getCohortByCohortId($pdo, $applicationCohorts[$i]->getApplicationCohortCohortId())
+						]
+					);
+				}
+
+				$reply->data = $storage;
 			}
 		}
 
