@@ -6,3 +6,6 @@
 		</div>
 	</div>
 </section>
+<section>
+	<input type="date">
+</section>

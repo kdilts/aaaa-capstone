@@ -2,11 +2,32 @@
 <html>
 
 	<head lang="en">
+		<link rel="stylesheet" href="_css/datepicker.css">
+		<link rel="stylesheet" href="_css/bootstrap.css">
+		<link rel="stylesheet" href="_css/bootstrap-responsive.css">
+		<script type="text/javascript" src="datepicker/bootstrap-datepicker.js"></script>
+	</head>
+	<head runat="server">
+		<title>Test Zone</title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="Css/datepicker.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="../Js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('#pickyDate').datepicker({
+					format: "dd/mm/yyyy"
+				});
+			});
+		</script>
 		<script data-require="jquery@2.2.0" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		<script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<link data-require=bootstrap-datepicker.css
+		bootstrap-datepicker.standalone.css
 		<link rel="stylesheet" href="style.css" />
 		<script src="script.js"></script>
 	</head>
