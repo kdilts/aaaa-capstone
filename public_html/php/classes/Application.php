@@ -716,27 +716,27 @@ class Application implements \JsonSerializable {
 		return ($applications);
 	}
 
-	public static function getAllApplicationsAndCohorts(\PDO $pdo){
-		$query = "SELECT * FROM application, applicationCohort, cohort WHERE application.applicationId = applicationCohort.applicationCohortApplicationId AND cohort.cohortId = applicationCohort.applicationCohortCohortId";
-
-		$statement = $pdo->prepare($query);
-		$statement->execute();
-
-		// build array of objects
-		$objects = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
-				$object = (object) $row;
-				$objects[$objects->key()] = $object;
-				$objects->next();
-			} catch(\Exception $exception){
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-		return $objects;
-	}
+//	public static function getAllApplicationsAndCohorts(\PDO $pdo){
+//		$query = "SELECT * FROM application, applicationCohort, cohort WHERE application.applicationId = applicationCohort.applicationCohortApplicationId AND cohort.cohortId = applicationCohort.applicationCohortCohortId";
+//
+//		$statement = $pdo->prepare($query);
+//		$statement->execute();
+//
+//		// build array of objects
+//		$objects = new \SplFixedArray($statement->rowCount());
+//		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+//		while(($row = $statement->fetch()) !== false) {
+//			try {
+//				$object = (object) $row;
+//				$objects[$objects->key()] = $object;
+//				$objects->next();
+//			} catch(\Exception $exception){
+//				// if the row couldn't be converted, rethrow it
+//				throw(new \PDOException($exception->getMessage(), 0, $exception));
+//			}
+//		}
+//		return $objects;
+//	}
 
 	public static function getAllApplications(\PDO $pdo){
 		// create query template

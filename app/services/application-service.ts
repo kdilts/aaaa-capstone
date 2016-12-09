@@ -3,8 +3,6 @@ import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "./base-service";
 import {Application} from "../classes/application";
-import {ApplicationCohort} from "../classes/applicationCohort";
-import {Cohort} from "../classes/cohort";
 import {Status} from "../classes/status";
 
 @Injectable()
@@ -15,17 +13,11 @@ export class ApplicationService extends BaseService {
 
 	private applicationUrl = "api/application/";
 
-	getAllApplications() : Observable<any[]> {
+	getAllApplications() : Observable<Application[]> {
 		return(this.http.get(this.applicationUrl)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
-
-	// getAllApplicationsAndCohorts(getAllCohortsToo: boolean) : Observable<any[]> {
-	// 	return(this.http.get(this.applicationUrl + getAllCohortsToo)
-	// 		.map(this.extractData)
-	// 		.catch(this.handleError));
-	// }
 
 	getApplicationsByApplicationDateRange(startDate: string, endDate: string) : Observable<Application[]> {
 		return(this.http.get(this.applicationUrl + startDate + endDate)

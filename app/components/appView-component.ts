@@ -17,7 +17,6 @@ import {Status} from "../classes/status";
 export class AppViewComponent implements OnInit{
 	@ViewChild("appView") appView : any;
 	applications : Application[] = [];
-	objects : any[] = [];
 	prospects : Prospect[] = [];
 	applicationCohorts : ApplicationCohort[] = [];
 	cohorts : Cohort[] = [];
