@@ -33,11 +33,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let prospectCohort of prospectCohorts">
-									<td>{{ prospectCohort.info[0].prospectFirstName }}</td>
-									<td>{{ prospectCohort.info[0].prospectLastName }}</td>
-									<td>{{ prospectCohort.info[0].prospectEmail }}</td>
-									<td>{{ prospectCohort.info[1].cohortName }}</td>
+								<tr *ngFor="let prospect of prospects">
+									<td>{{ prospect.prospectFirstName }}</td>
+<!--									<td>{{ prospectCohort.info[0].prospectLastName }}</td>-->
+<!--									<td>{{ prospectCohort.info[0].prospectEmail }}</td>-->
+<!--									<td>{{ prospectCohort.info[1].cohortName }}</td>-->
 								</tr>
 							</tbody>
 						</table>
