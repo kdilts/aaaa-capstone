@@ -33,7 +33,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let prospect of prospects">
+								<tr *ngFor="let prospectCohort of prospectCohorts">
 									<td>{{ prospectCohort.info[0].prospectFirstName }}</td>
 									<td>{{ prospectCohort.info[0].prospectLastName }}</td>
 									<td>{{ prospectCohort.info[0].prospectEmail }}</td>
