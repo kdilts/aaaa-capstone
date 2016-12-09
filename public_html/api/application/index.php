@@ -6,6 +6,9 @@ require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Edu\Cnm\DdcAaaa\Application;
 use Edu\Cnm\DdcAaaa\ApplicationCohort;
+use Edu\Cnm\DdcAaaa\Cohort;
+use Edu\Cnm\DdcAaaa\JsonObjectStorage;
+
 /**
  * api for the application class
  *
@@ -85,7 +88,21 @@ try {
 		} else {
 			$applications = Application::getAllApplications($pdo);
 			if($applications !== null) {
-				$reply->data = $applications->toArray();
+				$storage = new JsonObjectStorage();
+
+				$applicationCohorts = [];
+				for($i = 0; $i < count($applications); $i++){
+					$applicationCohorts[$i] = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $applications[$i]->applicationId);
+
+					$cohorts = [];
+					for($j = 0; $j < count($applicationCohorts[$i]); $j++){
+						$cohorts[$j] = (Cohort::getCohortByCohortId($pdo, $applicationCohorts[$i][$j]->applicationCohortCohortId)->getCohortName());
+					}
+
+					$storage->attach($applications[$i], $cohorts);
+				}
+
+				$reply->data = $storage;
 			}
 		}
 
