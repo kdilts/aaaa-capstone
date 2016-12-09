@@ -12,7 +12,7 @@ export const routes: Routes = [
 	{path: "noteType", component: NoteTypeComponent },
 	{path: "appView", component: AppViewComponent },
 	{path: "pkgView", component: PkgViewComponent },
-	{path: "detailView", component: DetailViewComponent }
+	{path: "detailView/:applicationId", component: DetailViewComponent }
 ];
 
 export const appRoutingProviders: any[] = [];
