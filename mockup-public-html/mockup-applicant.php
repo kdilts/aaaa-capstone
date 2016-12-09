@@ -13,6 +13,40 @@
 		<title> Streamline CNM Applicant</title>
 	</head>
 	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+							  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">CNM</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<form class="navbar-form navbar-right">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default">Search</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Sign Out</a></li>
+						<li><a href="#">Parking</a></li>
+						<li><a href="#">Student</a></li>
+
+						<li role="separator" class="divider"></li>
+					</ul>
+					</li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
 		<section>
 			<div class="container">
 				<ul class="nav nav-tabs nav-justified">
@@ -26,111 +60,167 @@
 			</div>
 		</section>
 
-		<section>=
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="well">
-							<h2>Responsive Table with Bootstrap</h2>
+		<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Position</th>
+					<th>Office</th>
+					<th>Age</th>
+					<th>Start date</th>
+					<th>Salary</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th>Name</th>
+					<th>Position</th>
+					<th>Office</th>
+					<th>Age</th>
+					<th>Start date</th>
+					<th>Salary</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr>
+					<td>Tiger Nixon</td>
+					<td>System Architect</td>
+					<td>Edinburgh</td>
+					<td>61</td>
+					<td>2011/04/25</td>
+					<td>$320,800</td>
+				</tr>
+				<tr>
+					<td>Garrett Winters</td>
+					<td>Accountant</td>
+					<td>Tokyo</td>
+					<td>63</td>
+					<td>2011/07/25</td>
+					<td>$170,750</td>
+				</tr>
+				<tr>
+					<td>Ashton Cox</td>
+					<td>Junior Technical Author</td>
+					<td>San Francisco</td>
+					<td>66</td>
+					<td>2009/01/12</td>
+					<td>$86,000</td>
+				</tr>
+				<tr>
+					<td>Cedric Kelly</td>
+					<td>Senior Javascript Developer</td>
+					<td>Edinburgh</td>
+					<td>22</td>
+					<td>2012/03/29</td>
+					<td>$433,060</td>
+				</tr>
+				<tr>
+					<td>Airi Satou</td>
+					<td>Accountant</td>
+					<td>Tokyo</td>
+					<td>33</td>
+					<td>2008/11/28</td>
+					<td>$162,700</td>
+				</tr>
+				<tr>
+					<td>Brielle Williamson</td>
+					<td>Integration Specialist</td>
+					<td>New York</td>
+					<td>61</td>
+					<td>2012/12/02</td>
+					<td>$372,000</td>
+				</tr>
+				<tr>
+					<td>Herrod Chandler</td>
+					<td>Sales Assistant</td>
+					<td>San Francisco</td>
+					<td>59</td>
+					<td>2012/08/06</td>
+					<td>$137,500</td>
+				</tr>
+				<tr>
+					<td>Rhona Davidson</td>
+					<td>Integration Specialist</td>
+					<td>Tokyo</td>
+					<td>55</td>
+					<td>2010/10/14</td>
+					<td>$327,900</td>
+				</tr>
+				<tr>
+					<td>Colleen Hurst</td>
+					<td>Javascript Developer</td>
+					<td>San Francisco</td>
+					<td>39</td>
+					<td>2009/09/15</td>
+					<td>$205,500</td>
+				</tr>
+				<tr>
+					<td>Sonya Frost</td>
+					<td>Software Engineer</td>
+					<td>Edinburgh</td>
+					<td>23</td>
+					<td>2008/12/13</td>
+					<td>$103,600</td>
+				</tr>
+				<tr>
+					<td>Jena Gaines</td>
+					<td>Office Manager</td>
+					<td>London</td>
+					<td>30</td>
+					<td>2008/12/19</td>
+					<td>$90,560</td>
+				</tr>
+				<tr>
+					<td>Quinn Flynn</td>
+					<td>Support Lead</td>
+					<td>Edinburgh</td>
+					<td>22</td>
+					<td>2013/03/03</td>
+					<td>$342,000</td>
+				</tr>
+				<tr>
+					<td>Michael Bruce</td>
+					<td>Javascript Developer</td>
+					<td>Singapore</td>
+					<td>29</td>
+					<td>2011/06/27</td>
+					<td>$183,000</td>
+				</tr>
+				<tr>
+					<td>Donna Snider</td>
+					<td>Customer Support</td>
+					<td>New York</td>
+					<td>27</td>
+					<td>2011/01/25</td>
+					<td>$112,000</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+			<ul class="pagination">
+				<li class="pagination_button previous disabled" id="example_previous">
+					<a href="#" arial-controls="example" data-dt-idx="0" tabindex="0">Previous</a>
+				</li>
+				<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
+				</li>
+				<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">2</a>
+				</li>
+				<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">3</a>
+				</li>
+				<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">4</a>
+				</li>
+				<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">5</a>
+				</li>
+				<li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">6</a>
+				</li>
+				<li class="paginate_button next" id="example_next"><a href="#" aria-controls="example" data-dt-idx="7" tabindex="0">Next</a>
+				</li>
 
-							<div class="container">
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="table-responsive">
-											<table
-												summary="This table shows how to create responsive tables using Bootstrap's default functionality"
-												class="table table-bordered table-hover">
-												<caption class="text-center">An example of a responsive table based on <a
-														href="http://getbootstrap.com/css/#tables-responsive" target="_blank">Bootstrap</a>:
-												</caption>
-												<thead>
-													<tr>
-														<th>Country</th>
-														<th>Languages</th>
-														<th>Population</th>
-														<th>Median Age</th>
-														<th>Area (Km²)</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Argentina</td>
-														<td>Spanish (official), English, Italian, German, French</td>
-														<td>41,803,125</td>
-														<td>31.3</td>
-														<td>2,780,387</td>
-													</tr>
-													<tr>
-														<td>Australia</td>
-														<td>English 79%, native and other languages</td>
-														<td>23,630,169</td>
-														<td>37.3</td>
-														<td>7,739,983</td>
-													</tr>
-													<tr>
-														<td>Greece</td>
-														<td>Greek 99% (official), English, French</td>
-														<td>11,128,404</td>
-														<td>43.2</td>
-														<td>131,956</td>
-													</tr>
-													<tr>
-														<td>Luxembourg</td>
-														<td>Luxermbourgish (national) French, German (both administrative)</td>
-														<td>536,761</td>
-														<td>39.1</td>
-														<td>2,586</td>
-													</tr>
-													<tr>
-														<td>Russia</td>
-														<td>Russian, others</td>
-														<td>142,467,651</td>
-														<td>38.4</td>
-														<td>17,076,310</td>
-													</tr>
-													<tr>
-														<td>Sweden</td>
-														<td>Swedish, small Sami- and Finnish-speaking minorities</td>
-														<td>9,631,261</td>
-														<td>41.1</td>
-														<td>449,954</td>
-													</tr>
-												</tbody>
-												<tfoot>
-													<tr>
-														<td colspan="5" class="text-center">Data retrieved from <a
-																href="http://www.infoplease.com/ipa/A0855611.html" target="_blank">infoplease</a>
-															and <a
-																href="http://www.worldometers.info/world-population/population-by-country/"
-																target="_blank">worldometers</a>.
-														</td>
-													</tr>
-												</tfoot>
-											</table>
-										</div><!--end of .table-responsive-->
-									</div>
-								</div>
-							</div>
+			</ul>
 
-							<p class="p">Demo by George Martsoukos. <a
-									href="http://www.sitepoint.com/responsive-data-tables-comprehensive-list-solutions"
-									target="_blank">See article</a>.</p>
+		</div>
 
-							<button class="btn btn-info" data-target="#add-student" data-toggle="modal">Add Student</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- add modal here -->
-		<div class="modal fade" id="add-student" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-								aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Add Student</h4>
-					</div>
+
 					<div class="modal-body">
 						<label for="name">Name <span class="text-danger">*</span></label>
 						<div class="input-group">
