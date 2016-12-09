@@ -42,9 +42,9 @@
 				</div>
 			</div>
 			<script type="text/javascript">
-				$(function () {
-					$('#datetimepicker1').datetimepicker();
-				});
+				<section>
+				<input type="date">
+					</sect
 			</script>
 		</div>
 	</div>
