@@ -30,7 +30,7 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$applicationId = filter_input(INPUT_GET, "applicationId", FILTER_VALIDATE_INT);
+	$applicationId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 	$applicationFirstName = filter_input(INPUT_GET, "applicationFirstName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationLastName = filter_input(INPUT_GET, "applicationLastName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$applicationEmail = filter_input(INPUT_GET, "applicationEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
