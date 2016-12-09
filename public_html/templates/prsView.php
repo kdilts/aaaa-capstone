@@ -13,8 +13,8 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<ul class="nav nav-tabs nav-justified">
-							<li role="presentation"><a href="#">Applicants</a></li>
-							<li role="presentation"><a href="#">Prospects</a></li>
+							<li role="presentation"><a href="appView.php">Applicants</a></li>
+							<li role="presentation"><a href="prsView.php">Prospect</a></li>
 						</ul>
 					</div>
 				</div>
