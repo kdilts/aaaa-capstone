@@ -48,7 +48,6 @@ try {
 
 	$startDate = filter_input(INPUT_GET, "startDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$endDate = filter_input(INPUT_GET, "endDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$getAllCohortsToo = filter_input(INPUT_GET, "getAllCohortsToo", FILTER_VALIDATE_BOOLEAN); // TODO double check validation - something about null
 
 	// handle GET request
 	if($method === "GET") {

@@ -42,7 +42,7 @@
 									<td>{{ application.applicationFirstName }}</td>
 									<td>{{ application.applicationLastName }}</td>
 									<td>{{ application.applicationEmail }}</td>
-									<td>{{ application.cohortName }}</td>
+									<td> test </td>
 									<td>{{ application.applicationDateTime | date: 'medium' }}</td>
 								</tr>
 							</tbody>
