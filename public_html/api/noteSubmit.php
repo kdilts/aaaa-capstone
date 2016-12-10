@@ -22,3 +22,6 @@ $newNote = new Note(
 	);
 $newNote->insert($pdo);
 
+$fd = fopen("/tmp/posttest.txt", "w");
+fwrite($fd, var_export($_POST));
+fclose($fd);
