@@ -59,7 +59,7 @@
 				</tr>
 			</thead>
 			<tr *ngFor="let note of notes">
-				<td>{{ note.noteDateTime | date }}</td>
+				<td>{{ note.noteDateTime | date : 'medium' }}</td>
 				<td>{{ note.noteContent | slice:0:5 }}</td>
 			</tr>
 		</table>
