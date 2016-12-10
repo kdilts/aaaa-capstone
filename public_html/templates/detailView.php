@@ -63,14 +63,18 @@
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 										<h4 class="modal-title">Confirmation</h4>
 									</div>
+									<form id="note-form" action="../api/noteSubmit.php" method="post">
 									<div class="modal-body">
-										<p>Do you want to save changes you made to document before closing?</p>
-										<p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
+
+										<textarea class="form-control" rows="5" id="noteContent" name="noteContent"
+													 placeholder="Message (2000 characters max)"></textarea>
+
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save changes</button>
+										<input type="submit" class="btn btn-primary" value="Submit">
 									</div>
+									</form>
 								</div>
 							</div>
 						</div>
