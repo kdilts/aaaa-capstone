@@ -1,6 +1,12 @@
 <div class="row">
-	<div class="col-xs-8">
+	<div class="col-xs-7">
 		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<td>Applicant Details:</td>
+					<td></td>
+				</tr>
+			</thead>
 			<tr>
 				<td>First Name:</td>
 				<td>{{application.applicationFirstName}}</td>
@@ -35,12 +41,27 @@
 			</tr>
 			<tr>
 				<td>Date Submitted:</td>
-				<td>{{application.applicationDateTime}}</td>
+				<td>{{ application.applicationDateTime }}</td>
 			</tr>
 		</table>
 	</div>
 
-	<div class="col-xs-4">
-
+	<div class="col-xs-5">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<td>Notes:</td>
+					<td><button>+</button></td>
+				</tr>
+				<tr>
+					<td>Date</td>
+					<td>Preview</td>
+				</tr>
+			</thead>
+			<tr>
+				<td>{{ application.applicationDateTime }}</td>
+				<td>preivew content</td>
+			</tr>
+		</table>
 	</div>
 </div>
