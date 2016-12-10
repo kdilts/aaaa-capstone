@@ -1,13 +1,46 @@
-<h1>Detail View</h1>
-<ul>
-	<li><em>First Name: </em>{{application.applicationFirstName}}</li>
-	<li><em>Last Name: </em>{{application.applicationLastName}} </li>
-	<li><em>Email: </em>{{application.applicationEmail}}</li>
-	<li><em>Phone Number: </em>{{application.applicationPhoneNumber}}</li>
-	<li><em>Where did you hear about DDC from? </em>{{application.applicationSource}}</li>
-	<li><em>About You: </em>{{application.applicationAboutYou}}</li>
-	<li><em>Hope To Accomplish: </em>{{application.applicationHopeToAccomplish}}</li>
-	<li><em>Previous Experience: </em>{{application.applicationExperience}}</li>
-	<li><em>Date Submitted: </em>{{application.applicationDateTime  | date: 'medium' }}</li>
-</ul>
+<div class="row">
+	<div class="col-xs-8">
+		<table class="table table-bordered table-hover">
+			<tr>
+				<td>First Name:</td>
+				<td>{{application.applicationFirstName}}</td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td>{{application.applicationLastName}}</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td>{{application.applicationEmail}}</td>
+			</tr>
+			<tr>
+				<td>Phone Number:</td>
+				<td>{{application.applicationPhoneNumber}}</td>
+			</tr>
+			<tr>
+				<td>Where did you hear about DDC from?</td>
+				<td>{{application.applicationSource}}</td>
+			</tr>
+			<tr>
+				<td>About You:</td>
+				<td>{{application.applicationAboutYou}}</td>
+			</tr>
+			<tr>
+				<td>Hope To Accomplish:</td>
+				<td>{{application.applicationHopeToAccomplish}}</td>
+			</tr>
+			<tr>
+				<td>Previous Experience:</td>
+				<td>{{application.applicationExperience}}</td>
+			</tr>
+			<tr>
+				<td>Date Submitted:</td>
+				<td>{{application.applicationDateTime}}</td>
+			</tr>
+		</table>
+	</div>
 
+	<div class="col-xs-4">
+
+	</div>
+</div>
