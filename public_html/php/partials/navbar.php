@@ -8,7 +8,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="#">CNM</a>
+		<a class="navbar-brand">CNM</a>
 	</div>
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,9 +20,10 @@
 			<button type="submit" class="btn btn-default">Search</button>
 		</form>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#">Sign Out</a></li>
-			<li><a href="#">Parking</a></li>
-			<li><a href="#">Student</a></li>
+			<li><a routerLink="/">Sign Out</a></li>
+			<li><a routerLink="/pkgView/">Parking</a></li>
+			<li><a routerLink="/appView/">Applications</a></li>
+			<li><a routerLink="/prsView/">Prospects</a></li>
 
 			<li role="separator" class="divider"></li>
 		</ul>

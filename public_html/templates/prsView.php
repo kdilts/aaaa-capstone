@@ -1,19 +1,11 @@
 <section>
 	<div class="row">
-		<div class="col-sm-12">
-			<ul class="nav nav-tabs nav-justified">
-				<li role="presentation"><a routerLink="/appView/">Applicants</a></li>
-				<li role="presentation"><a routerLink="/prsView/">Prospect</a></li>
-			</ul>
-		</div>
-	</div>
-</section>
-
-<section>
-	<div class="row">
 		<div class="col-xs-12">
 			<table class="table table-bordered table-hover">
 				<thead>
+					<tr>
+						<th>Prospects:</th>
+					</tr>
 					<tr>
 						<th>Last</th>
 						<th>First</th>
