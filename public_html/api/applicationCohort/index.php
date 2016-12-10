@@ -33,7 +33,7 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize input
-	$applicationCohortId = filter_input(INPUT_GET, "applicationCohortId", FILTER_VALIDATE_INT);
+	$applicationCohortId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 	$applicationCohortApplicationId = filter_input(INPUT_GET, "applicationCohortApplicationId", FILTER_VALIDATE_INT);
 	$applicationCohortCohortId = filter_input(INPUT_GET, "applicationCohortCohortId", FILTER_VALIDATE_INT);
 	// handle GET request
@@ -48,9 +48,21 @@ try {
 				$reply->data = $applicationCohort;
 			}
 		} else if(empty($applicationCohortApplicationId) === false) {
-			$applicationCohort = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $applicationCohortApplicationId);
-			if($applicationCohort !== null) {
-				$reply->data = $applicationCohort->toArray();
+			$applicationCohorts = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $applicationCohortApplicationId);
+			if($applicationCohorts !== null) {
+				$storage = new JsonObjectStorage();
+
+				for($i = 0; $i < count($applicationCohorts); $i++){
+					$storage->attach(
+						$applicationCohorts[$i],
+						[
+							Application::getApplicationByApplicationId($pdo, $applicationCohorts[$i]->getApplicationCohortApplicationId()),
+							Cohort::getCohortByCohortId($pdo, $applicationCohorts[$i]->getApplicationCohortCohortId())
+						]
+					);
+				}
+
+				$reply->data = $storage;
 			}
 		} else if(empty($applicationCohortCohortId) === false) {
 			$applicationCohorts = ApplicationCohort::getApplicationCohortsByCohortId($pdo, $applicationCohortCohortId);

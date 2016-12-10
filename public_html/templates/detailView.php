@@ -16,6 +16,10 @@
 				<td>{{application.applicationLastName}}</td>
 			</tr>
 			<tr>
+				<td>Cohorts:</td>
+				<td>TODO</td>
+			</tr>
+			<tr>
 				<td>Email:</td>
 				<td>{{application.applicationEmail}}</td>
 			</tr>
