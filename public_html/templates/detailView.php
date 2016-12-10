@@ -58,9 +58,9 @@
 					<td>Preview</td>
 				</tr>
 			</thead>
-			<tr>
-				<td>{{ application.applicationDateTime }}</td>
-				<td>preivew content</td>
+			<tr *ngFor="let note of notes">
+				<td>{{ note.noteDateTime }}</td>
+				<td>{{ note.noteContent }}</td>
 			</tr>
 		</table>
 	</div>
