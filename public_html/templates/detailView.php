@@ -60,7 +60,7 @@
 			</thead>
 			<tr *ngFor="let note of notes">
 				<td>{{ note.noteDateTime }}</td>
-				<td>{{ note.noteContent }}</td>
+				<td>{{ note.noteContent | slice:0:5 }}</td>
 			</tr>
 		</table>
 	</div>
