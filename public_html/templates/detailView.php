@@ -8,6 +8,6 @@
 	<li><em>About You: </em>{{application.applicationAboutYou}}</li>
 	<li><em>Hope To Accomplish: </em>{{application.applicationHopeToAccomplish}}</li>
 	<li><em>Previous Experience: </em>{{application.applicationExperience}}</li>
-	<li><em>Date Submitted: </em>{{application.applicationDateTime}}</li>
+	<li><em>Date Submitted: </em>{{application.applicationDateTime  | date: 'medium' }}</li>
 </ul>
 
