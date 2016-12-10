@@ -85,9 +85,12 @@
 					<td>Preview</td>
 				</tr>
 			</thead>
-			<tr *ngFor="let note of notes">
-				<td>{{ note.noteDateTime | date : 'medium' }}</td>
-				<td>{{ note.noteContent | slice:0:5 }}</td>
+<!--			<tr *ngFor="let note of notes">-->
+<!--				<td>{{ note.noteDateTime | date : 'medium' }}</td>-->
+<!--				<td>{{ note.noteContent | slice:0:5 }}</td>-->
+<!--			</tr>-->
+			<tr *ngFor="let applicationCohort of applicationCohorts">
+				<td>asdf</td>
 			</tr>
 		</table>
 	</div>
