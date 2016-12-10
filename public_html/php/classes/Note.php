@@ -630,6 +630,7 @@ class Note  implements \JsonSerializable {
 	 */
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
+		$fields["noteDateTime"] = $this->noteDateTime->getTimestamp() * 1000;
 		return($fields);
 	}
 }
