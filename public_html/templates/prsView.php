@@ -2,8 +2,8 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<ul class="nav nav-tabs nav-justified">
-				<li role="presentation"><a routerLink="appView">Applicants</a></li>
-				<li role="presentation"><a routerLink="prsView">Prospect</a></li>
+				<li role="presentation"><a routerLink="/appView/">Applicants</a></li>
+				<li role="presentation"><a routerLink="/prsView/">Prospect</a></li>
 			</ul>
 		</div>
 	</div>
