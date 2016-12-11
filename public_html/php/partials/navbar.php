@@ -23,6 +23,7 @@
 			<li><a routerLink="/">Sign Out</a></li>
 			<li><a routerLink="/pkgView/">Parking</a></li>
 			<li><a routerLink="/appView/">Applications</a></li>
+			<li><a routerlink="/mobView/">Mobile</a></li>
 			<li><a routerLink="/prsView/">Prospects</a></li>
 
 			<li role="separator" class="divider"></li>
