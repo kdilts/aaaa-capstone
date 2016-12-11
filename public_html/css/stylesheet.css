@@ -10,8 +10,32 @@
 }
 
 .background-img {
-	background: url(../images/sandias.png) no-repeat center fixed;
+	background: url("../images/deep-dive-sandias5.png") no-repeat center fixed;
 }
 .bs-example{
 	margin: 20px
+}
+/*SIGN UP PAGE*/
+div.signup-content {
+	background-image: url("../images/deep-dive-sandias5.png");
+	background-size: 100%;
+	min-height: 100vh;
+
+}
+
+/*SIGN IN PAGE*/
+div.signin-content{
+	background-image: url("../images/deep-dive-sandias5.png");
+	background-size: cover;
+	min-height: 100vh;
+	border-radius: 0;
+	padding-top: 15%; /*might need to be taken out or adjusted depending on the view of demo day screen*/
+}
+.index-div {
+	padding-right:0;
+	padding-left: 0;
+}
+/*to cancel out the margin of sign in*/
+.jumbotron {
+	margin-bottom: 0px;
 }
