@@ -622,6 +622,8 @@ class StudentPermit implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
+		$fields["studentPermitCheckInDate"] = $this->studentPermitCheckInDate->getTimestamp() * 1000;
+		$fields["studentPermitCheckOutDate"] = $this->studentPermitCheckOutDate->getTimestamp() * 1000;
 		return($fields);
 	}
 }

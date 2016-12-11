@@ -22,8 +22,8 @@
 				<td>Not like this.</td>
 				<td>{{studentPermit.info[1].swipeNumber}}</td>
 				<td>{{studentPermit.info[0].placardNumber}}</td>
-				<td>{{studentPermit.studentPermitCheckOutDate}}</td>
-				<td>{{studentPermit.studentPermitCheckInDate}}</td>
+				<td>{{studentPermit.studentPermitCheckOutDate | date: 'medium'}}</td>
+				<td>{{studentPermit.studentPermitCheckInDate | date: 'medium'}}</td>
 				<td>{{studentPermit.info[2].statusTypeName}}</td>
 			</tr>
 		</table>
