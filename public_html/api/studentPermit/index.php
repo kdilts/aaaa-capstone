@@ -9,6 +9,7 @@ use Edu\Cnm\DdcAaaa\Swipe;
 use Edu\Cnm\DdcAaaa\Placard;
 use Edu\Cnm\DdcAaaa\StatusType;
 use Edu\Cnm\DdcAaaa\JsonObjectStorage;
+use Edu\Cnm\DdcAaaa\Application;
 /**
  * api for the StudentPermit class
  *
@@ -98,7 +99,8 @@ try {
 						[
 							$placard,
 							Swipe::getSwipeBySwipeId($pdo, $studentPermits[$i]->getStudentPermitSwipeId()),
-							StatusType::getStatusTypeByStatusTypeId($pdo, $placard->getPlacardStatusTypeId())
+							StatusType::getStatusTypeByStatusTypeId($pdo, $placard->getPlacardStatusTypeId()),
+							Application::getApplicationByApplicationId($pdo, $studentPermits[$i]->getStudentPermitApplicationId())
 						]
 					);
 				}
