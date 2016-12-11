@@ -17,7 +17,7 @@ export class LoginViewComponent {
 	login() : void {
 		this.activeDirectoryService.login(this.loginData)
 			.subscribe(status => {
-				this.apiStatus = status;
+				this.status = status;
 				if(status.apiStatus === 200) {
 					this.loginForm.reset();
 				}
