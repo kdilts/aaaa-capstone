@@ -1,21 +1,26 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
 import {Status} from "../classes/status";
+import {ActiveDirectoryService} from "../services/activeDirectory-service"
+import {ActiveDirectory} from "../classes/activeDirectory";
 
 @Component({
 	templateUrl: "./templates/loginView.php"
 })
 
-export class LoginViewComponent implements OnInit{
-	@ViewChild("loginView") loginView : any;
+export class LoginViewComponent {
+	@ViewChild("loginForm") loginForm;
+	loginData : ActiveDirectory = new ActiveDirectory("", "");
 	status: Status = null;
 
-	constructor(
-		private router: Router,
-		private route: ActivatedRoute
-	) {}
+	constructor(private activeDirectoryService: ActiveDirectoryService) {}
 
-	ngOnInit() : void {
+	login() : void {
+		this.activeDirectoryService.login(this.loginData)
+			.subscribe(status => {
+				this.apiStatus = status;
+				if(status.apiStatus === 200) {
+					this.loginForm.reset();
+				}
+			});
 	}
-
 }
