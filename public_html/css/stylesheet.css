@@ -1,7 +1,7 @@
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
 #home-jumbo {
-	background: url("../images/deep-dive-sandias5.png") no-repeat;
+	background: url("../images/login-page.png") no-repeat;
 	min-height: 100vh;
 	margin: 0;
 	padding: 200px 0 100px;
@@ -10,14 +10,14 @@
 }
 
 .background-img {
-	background: url("../images/deep-dive-sandias5.png") no-repeat center fixed;
+	background: url("../images/stemulus-login-page.png") no-repeat center fixed;
 }
 .bs-example{
 	margin: 20px
 }
 /*SIGN UP PAGE*/
 div.signup-content {
-	background-image: url("../images/deep-dive-sandias5.png");
+	background-image: url("../images/stemulus-login-page.png");
 	background-size: 100%;
 	min-height: 100vh;
 
@@ -25,11 +25,11 @@ div.signup-content {
 
 /*SIGN IN PAGE*/
 div.signin-content{
-	background-image: url("../images/deep-dive-sandias5.png");
+	background-image: url("../images/stemulus-login-page.png");
 	background-size: cover;
 	min-height: 100vh;
 	border-radius: 0;
-	padding-top: 15%; /*might need to be taken out or adjusted depending on the view of demo day screen*/
+	padding-top: 15%;
 }
 .index-div {
 	padding-right:0;
