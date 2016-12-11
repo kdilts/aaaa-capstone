@@ -16,15 +16,15 @@
 					<td>Status</td>
 				</tr>
 			</thead>
-			<tr>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
-				<td>a</td>
+			<tr *ngFor = "let studentPermit of studentPermits">
+				<td>{{studentPermit.info[3].applicationLastName}}</td>
+				<td>{{studentPermit.info[3].applicationFirstName}}</td>
+				<td>Not like this.</td>
+				<td>{{studentPermit.info[1].swipeNumber}}</td>
+				<td>{{studentPermit.info[0].placardNumber}}</td>
+				<td>{{studentPermit.studentPermitCheckOutDate}}</td>
+				<td>{{studentPermit.studentPermitCheckInDate}}</td>
+				<td>{{studentPermit.info[2].statusTypeName}}</td>
 			</tr>
 		</table>
 	</div>
