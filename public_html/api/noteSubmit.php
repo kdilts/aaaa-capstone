@@ -5,6 +5,7 @@ use Edu\Cnm\DdcAaaa\{ Note };
 require_once(dirname(__DIR__) . "/public_html/php/classes/autoload.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
+$requestContent = file_get_contents("php://input");
 $noteContent = $_POST['noteContent'];
 $noteTypeId = 2; //htmlspecialchars($_POST['noteTypeId']);
 $noteBridgeStaffId = 111222333; //htmlspecialchars($_POST['noteBridgeStaffId']);
@@ -23,5 +24,5 @@ $newNote = new Note(
 $newNote->insert($pdo);
 
 $fd = fopen("/tmp/posttest.txt", "w");
-fwrite($fd, var_export($_POST));
+fwrite($fd, $requestContent);
 fclose($fd);

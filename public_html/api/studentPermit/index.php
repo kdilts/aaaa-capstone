@@ -5,8 +5,10 @@ require_once (dirname(__DIR__,2) . "/php/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Edu\Cnm\DdcAaaa\StudentPermit;
-
-
+use Edu\Cnm\DdcAaaa\Swipe;
+use Edu\Cnm\DdcAaaa\Placard;
+use Edu\Cnm\DdcAaaa\StatusType;
+use Edu\Cnm\DdcAaaa\JsonObjectStorage;
 /**
  * api for the StudentPermit class
  *
@@ -88,7 +90,20 @@ try {
 		} else {
 			$studentPermits = StudentPermit::getAllStudentPermits($pdo);
 			if($studentPermits !== null) {
-				$reply->data = $studentPermits->toArray();
+				$storage = new JsonObjectStorage();
+				for ($i=0; $i<count($studentPermits); $i++){
+					$placard = Placard::getPlacardByPlacardId($pdo, $studentPermits[$i]->getStudentPermitPlacardId());
+					$storage->attach(
+						$studentPermits[$i],
+						[
+							$placard,
+							Swipe::getSwipeBySwipeId($pdo, $studentPermits[$i]->getStudentPermitSwipeId()),
+							StatusType::getStatusTypeByStatusTypeId($pdo, $placard->getPlacardStatusTypeId())
+						]
+					);
+				}
+
+				$reply->data = $storage;
 			}
 		}
 	} else if($method === "POST" || "PUT") {
