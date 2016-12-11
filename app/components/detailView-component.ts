@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Params} from "@angular/router";
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 
 import {ApplicationService} from "../services/application-service";
 import {ApplicationCohortService} from "../services/applicationCohort-service";
@@ -18,6 +18,7 @@ import 'rxjs/add/operator/switchMap';
 })
 
 export class DetailViewComponent implements OnInit{
+	@ViewChild("detailView") detailView : any;
 	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
 	applicationCohorts : ApplicationCohort[] = [];
 	notes : Note[] = [];
@@ -27,6 +28,7 @@ export class DetailViewComponent implements OnInit{
 		private applicationService: ApplicationService,
 		private applicationCohortService: ApplicationCohortService,
 		private noteService: NoteService,
+		private router: Router,
 		private activatedRoute: ActivatedRoute
 	) {}
 
