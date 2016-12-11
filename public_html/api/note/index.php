@@ -36,7 +36,7 @@ try {
 	$noteNoteTypeId = filter_input(INPUT_GET, "noteNoteTypeId", FILTER_VALIDATE_INT);
 	$noteApplicationId = filter_input(INPUT_GET, "noteApplicationId", FILTER_VALIDATE_INT);
 	$noteProspectId = filter_input(INPUT_GET, "noteProspectId", FILTER_VALIDATE_INT);
-	$noteDateTime = filter_input(INPUT_GET, "noteDateTime", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$noteDateTime = filter_input(INPUT_GET, "noteDateTime", FILTER_VALIDATE_INT);
 	$noteBridgeStaffId = filter_input(INPUT_GET, "noteBridgeStaffId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	$startDate = filter_input(INPUT_GET, "startDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);

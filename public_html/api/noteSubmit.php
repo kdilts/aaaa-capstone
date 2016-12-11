@@ -6,11 +6,15 @@ require_once(dirname(__DIR__) . "/public_html/php/classes/autoload.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 $requestContent = file_get_contents("php://input");
-$noteContent = $_POST['noteContent'];
+$noteContent = $requestContent['noteContent'];
 $noteTypeId = 2; //htmlspecialchars($_POST['noteTypeId']);
 $noteBridgeStaffId = 111222333; //htmlspecialchars($_POST['noteBridgeStaffId']);
 $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 
+
+$fd = fopen("/tmp/posttest.txt", "w");
+fwrite($fd, $requestContent);
+fclose($fd);
 // create Note object from data decoded from post request and insert it into databse
 $newNote = new Note(
 	null,
@@ -22,7 +26,3 @@ $newNote = new Note(
 	$noteBridgeStaffId
 	);
 $newNote->insert($pdo);
-
-$fd = fopen("/tmp/posttest.txt", "w");
-fwrite($fd, $requestContent);
-fclose($fd);
