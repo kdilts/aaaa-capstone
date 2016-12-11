@@ -5,6 +5,7 @@ import {DetailViewComponent} from "./components/detailView-component";
 import {PkgViewComponent} from "./components/pkgView-component";
 import {AppViewComponent} from "./components/appView-component";
 import {PrsViewComponent} from "./components/prsView-component";
+import {LoginViewComponent} from "./components/loginView-component";
 
 export const allAppComponents = [
 	HomeComponent,
@@ -12,7 +13,8 @@ export const allAppComponents = [
 	AppViewComponent,
 	PkgViewComponent,
 	PrsViewComponent,
-	DetailViewComponent
+	DetailViewComponent,
+	LoginViewComponent
 ];
 
 export const routes: Routes = [
@@ -21,7 +23,8 @@ export const routes: Routes = [
 	{path: "appView", component: AppViewComponent },
 	{path: "prsView", component: PrsViewComponent },
 	{path: "pkgView", component: PkgViewComponent },
-	{path: "detailView/:applicationId", component: DetailViewComponent }
+	{path: "detailView/:applicationId", component: DetailViewComponent },
+	{path: "loginView", component: LoginViewComponent}
 ];
 
 export const appRoutingProviders: any[] = [];

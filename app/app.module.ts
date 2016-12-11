@@ -12,6 +12,7 @@ import {CohortService} from "./services/cohort-service";
 import {ApplicationCohortService} from "./services/applicationCohort-service";
 import {NoteService} from "./services/note-service";
 import {ProspectCohortService} from "./services/prospectCohort-service";
+import {ActiveDirectoryService} from "./services/activeDirectory-service";
 
 const moduleDeclarations = [AppComponent];
 
@@ -28,7 +29,8 @@ const moduleDeclarations = [AppComponent];
 		StudentPermitService,
 		ApplicationCohortService,
 		ProspectCohortService,
-		CohortService
+		CohortService,
+		ActiveDirectoryService
 	]
 })
 
