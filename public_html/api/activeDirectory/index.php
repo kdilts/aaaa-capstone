@@ -2,8 +2,8 @@
 // author: Dylan Mcdonald
 // shamelessly copied at Dylan's behest
 
-require_once("encrypted-config.php");
-require_once("xsrf.php");
+require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
+require_once(dirname(__DIR__, 2) . "/php/lib/xsrf.php");
 require_once(dirname(__DIR__, 3) . "/vendor/autoload.php");
 
 // prepare an empty reply
@@ -27,6 +27,12 @@ try {
 	// read the active directory configuration
 	$config = readConfig("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 	$adconfig = json_decode($config["adconfig"], true);
+	$admusers = json_decode($config["admusers"], true);
+
+	// don't waste time if it's not even an admin user
+	if(in_array($username, $admusers) === false) {
+		throw(new RuntimeException("invalid username/password", 401));
+	}
 
 	// setup active directory connection
 	$provider = new \Adldap\Connections\Provider($adconfig);
