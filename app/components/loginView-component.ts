@@ -8,7 +8,7 @@ import {ActiveDirectory} from "../classes/activeDirectory";
 })
 
 export class LoginViewComponent {
-	@ViewChild("loginForm") loginForm;
+	@ViewChild("loginForm") loginForm : any;
 	loginData : ActiveDirectory = new ActiveDirectory("", "");
 	status: Status = null;
 
