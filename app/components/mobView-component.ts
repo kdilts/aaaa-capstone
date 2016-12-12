@@ -12,7 +12,7 @@ import {CohortService} from "../services/cohort-service";
 })
 
 export class MobViewComponent implements OnInit{
-	@ViewChild("mobView") mobView : any;
+	@ViewChild("quickProspectForm") quickProspectForm : any;
 	prospect : Prospect = new Prospect(0, "", "", "", "");
 	status: Status = null;
 	cohorts: Cohort[] = [];
@@ -31,5 +31,15 @@ export class MobViewComponent implements OnInit{
 		this.cohortService.getAllCohorts()
 			.subscribe(cohorts => this.cohorts = cohorts);
 	}
+
+	// createProspect() : void {
+	// 	this.prospectService.createProspect(this.prospect)
+	// 		.subscribe(status => {
+	// 			this.status = status;
+	// 			if(status.status === 200) {
+	// 				this.quickProspectForm.reset();
+	// 			}
+	// 		});
+	// }
 
 }
