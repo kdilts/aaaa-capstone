@@ -15,14 +15,14 @@
 
 
 .login {
-	background: url("images/computer-image.png");
+	background: url("images/login-page.png");
 	background-size: 100%;
 	min-height: 100vh;
 }
 
 /*LOGIN PAGE*/
 div.signup-content {
-	background-image: url("images/computer-image.png");
+	background-image: url("images/login-page.png");
 	background-size: 100%;
 	min-height: 100vh;
 
@@ -30,7 +30,7 @@ div.signup-content {
 
 /*SIGN IN PAGE*/
 div.signin-content{
-	background-image: url("images/computer-image.png");
+	background-image: url("images/login-page.png");
 	background-size: cover;
 	min-height: 100vh;
 	border-radius: 0;
