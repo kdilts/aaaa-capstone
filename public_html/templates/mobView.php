@@ -5,11 +5,18 @@
 <form #quickProspectForm="ngForm" name="quickProspectForm" id="quickProspectForm" class="form-horizontal well"  (ngSubmit)="createProspect();" novalidate>
 
  <div class="form-group">
-  <label for="inputName" class="col-sm-2 control-label">Name</label>
+  <label for="inputName" class="col-sm-2 control-label">Last Name</label>
   <div class="col-sm-10">
-   <input type="text" class="form-control" id="inputName" name="inputName"  placeholder="Enter Name" [(ngModel)]="prospect.name" #prospectName="ngModel" >
+   <input type="text" class="form-control" id="inputName" name="inputName"  placeholder="Enter Name" [(ngModel)]="prospect.LastName" #prospectName="ngModel" >
   </div>
  </div>
+
+	<div class="form-group">
+		<label for="inputName" class="col-sm-2 control-label">First Name</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="inputName" name="inputName"  placeholder="Enter First Name" [(ngModel)]="prospect.FirstName" #prospectName="ngModel" >
+		</div>
+	</div>
 
  <div class="form-group">
   <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
@@ -24,6 +31,13 @@
    <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email" [(ngModel)]="prospect.email" #prospectEmail="ngModel">
   </div>
  </div>
+
+	<div class="form-group">
+		<label for="inputCohort" class="col-sm-2 control-label">Cohort</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="inputCohort" name="inputCohort"  placeholder="Cohort" [(ngModel)]="prospect.cohort" #prospectName="ngModel" >
+		</div>
+	</div>
 
 
  <div class="form-group">
