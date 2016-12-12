@@ -4,9 +4,7 @@
 .form-control-1 {
 	 width: 75%;
  }
-body {
-	background-image: url()
-}
+
 
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
@@ -32,7 +30,7 @@ div.signup-content {
 
 /*SIGN IN PAGE*/
 div.signin-content{
-	background-image: url("images/stemulus-login-page.png");
+	background-image: url("images/computer-image.png");
 	background-size: cover;
 	min-height: 100vh;
 	border-radius: 0;
