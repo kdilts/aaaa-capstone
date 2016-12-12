@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div class="jumbotron text-center">
-					<h1 class="text-center">Stream Line CNM</h1>
+					<h1 class="text-center">Streamline CNM</h1>
 					<label for="Email">Email</label>
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1"></span>
