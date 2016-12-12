@@ -22,6 +22,7 @@ export class DetailViewComponent implements OnInit{
 	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
 	applicationCohorts : ApplicationCohort[] = [];
 	notes : Note[] = [];
+	note : Note = new Note(null, 0, 0, 0, "", "", "");
 	status: Status = null;
 
 	constructor(
@@ -49,4 +50,16 @@ export class DetailViewComponent implements OnInit{
 					.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
 			});
 	}
+
+	createNote() : void {
+		this.noteService.createNote(this.note)
+			.subscribe(status => {
+				this.status = status;
+				if(status.status === 200) {
+					this.reloadApplication();
+					this.detailView.reset();
+				}
+			});
+	}
+
 }

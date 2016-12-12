@@ -72,11 +72,24 @@
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 										<h4 class="modal-title">Confirmation</h4>
 									</div>
-									<form id="note-form" action="../api/noteSubmit.php" method="post">
+
+									<!-- FORM -->
+									<form #noteForm="ngForm" name="detailView" id="detailView" class="form-horizontal well" (ngSubmit)="createNote();" novalidate>
 									<div class="modal-body">
 
-										<textarea class="form-control" rows="5" id="noteContent" name="noteContent"
-													 placeholder="Message (2000 characters max)"></textarea>
+										<div class="form-group" [ngClass]="{ 'has-error': noteContent.touched && noteContent.invalid }">
+											<label for="noteContent">Content:</label>
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-comment" aria-hidden="true"></i>
+												</div>
+												<input type="text" name="noteContent" id="noteContent" class="form-control" maxlength="255" required [(ngModel)]="detailView.noteContent" #noteContentText="ngModel" />
+											</div>
+											<div [hidden]="noteContentText.valid || noteContentText.pristine" class="alert alert-danger" role="alert">
+												<p *ngIf="noteContentText.errors?.required">Misquote is required.</p>
+												<p *ngIf="noteContentText.errors?.maxlength">Misquote is too long.</p>
+											</div>
+										</div>
 
 									</div>
 									<div class="modal-footer">
@@ -84,6 +97,8 @@
 										<input type="submit" class="btn btn-primary" value="Submit">
 									</div>
 									</form>
+									<!-- FORM -->
+
 								</div>
 							</div>
 						</div>
