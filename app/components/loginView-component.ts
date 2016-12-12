@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, ViewChild} from "@angular/core";
 import {Status} from "../classes/status";
 import {ActiveDirectoryService} from "../services/activeDirectory-service"
 import {ActiveDirectory} from "../classes/activeDirectory";
