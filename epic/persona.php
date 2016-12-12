@@ -20,14 +20,14 @@
 			</li>
 
 			<li>
-				Attitudes and Behaviors: Andrea makes sure all the concerns of the applicants are addressed in a profesional and friendly fashion.
+				Attitudes and Behaviors: Andrea makes sure all the concerns of the applicants are addressed in a professional and friendly fashion.
 				She is very overloaded in administrative tasks. She is the primary contact for all the inquiries for the cohorts
 				and in charge of registration and payments for applicants. She does not want to enter each interaction into the database by hand.
 			</li>
 
 			<li>
 				Frustrations and Needs: She is very frustrated about the complete manual process across the board on the record keeping for applications, payments and personal records.
-				She needs a system where she may keep notes on each individual interactions with the inquirers and applicants as they happen.
+				She needs a system where she may keep notes on each individual interaction with the inquirers and applicants as they happen.
 			</li>
 			<li>
 				Goals: Consistent and easy access of records, reduction of manual process and a process to upgrade from inquiries to applications!
@@ -36,21 +36,21 @@
 
 		<ul>
 			<li>
-				Name: Captain Dylan McDonald of the USS Fuzzy
+				Name: Captain Dylan McDonald of the USS Fuzzy.
 			</li>
 			<li>
 				Profession: Professional admirer of all things Windows and Comcast. He spends most of his time embellishing the many features and advantages that Windows offers over the lesser, more primitive operating systems. A staunch believe that Windows Vista is the best piece of software ever written, he teaches his poor, naive students the "truth" of Windows superiority.
 			</li>
 			<li>
-				Technology: Sadly the Surface doesn't support Windows Vista, so he is forced to use the slightly worse Windows 8. However, he has it and his hard drive fully encrypted using ROT13, an algorithm he posits is the most secure ever created.
+				Technology: Sadly, the Surface doesn't support Windows Vista, so he is forced to use the slightly worse Windows 8. However, he has it and his hard drive fully encrypted using ROT13, an algorithm he posits is the most secure ever created.
 			</li>
 
 			<li>
-				Attitudes and Behaviors: Most well known for his attitude towards Mac peasants, whom he considers lesser mortals, he is generally respectful to everyone else except those who disagree that Star Wars is better than Star Trek.
+				Attitudes and Behaviors: Most well-known for his attitude towards Mac peasants, whom he considers lesser mortals, he is generally respectful to everyone else except those who disagree that Star Wars is better than Star Trek.
 			</li>
 
 			<li>
-				Frustrations and Needs: Frustrated that his peers continue to use OSX or worse, Linux; he none the less recognizes that this project needs to be accessable accross all platforms. He needs a system compatible with is superior operating system that will allow him to access, organize, modify, and make notes on students from various cohorts. Occasionally frustrated when he finds his students haven't updated to the latest Windows 10 update.
+				Frustrations and Needs: Frustrated that his peers continue to use OSX or worse, Linux; he none the less recognizes that this project needs to be accessible across all platforms. He needs a system compatible with is superior operating system that will allow him to access, organize, modify, and make notes on students from various cohorts. Occasionally frustrated when he finds his students haven't updated to the latest Windows 10 update.
 			</li>
 			<li>
 				Goals: Dylan, when caught in a particularly good mood, is willing to admit that teaching students full-stack web development is a close second in priority to converting everyone into Windows and Comcast users.
