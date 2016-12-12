@@ -32,7 +32,7 @@
 					</div>
 				</div>
 <!--				Phone Number                     -->
-				<div class="form-group"  [ngClass]="{ 'has-error': prospectPhoneNumber.touched && prospectPhoneNumbere.invalid }">
+				<div class="form-group"  [ngClass]="{ 'has-error': prospectPhoneNumber.touched && prospectPhoneNumber.invalid }">
 					<label for="prospectPhoneNumber" class="col-sm-2 control-label">Phone: </label>
 					<div class="input-group">
 						<div class="input-group-addon">
