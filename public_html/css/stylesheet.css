@@ -1,6 +1,6 @@
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
-#login-jumbo {
+#login {
 	background: url("../images/login-page.png") no-repeat;
 	min-height: 100vh;
 	margin: 0;
@@ -9,34 +9,4 @@
 	background-size: 150%;
 }
 
-.background-img {
-	background: url("../images/stemulus-login-page.png") no-repeat center fixed;
-
-}
-.bs-example{
-	margin: 20px
-}
-/*SIGN UP PAGE*/
-div.signup-content {
-	background-image: url("../images/stemulus-login-page.png");
-	background-size: 100%;
-	min-height: 100vh;
-
-}
-
-/*SIGN IN PAGE*/
-div.signin-content{
-	background-image: url("../images/stemulus-login-page.png");
-	background-size: cover;
-	min-height: 100vh;
-	border-radius: 0;
-	padding-top: 15%;
-}
-.index-div {
-	padding-right:0;
-	padding-left: 0;
-}
-/*to cancel out the margin of sign in*/
-.jumbotron {
-	margin-bottom: 0px;
-}
+.
