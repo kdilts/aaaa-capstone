@@ -13,6 +13,9 @@
 
 }
 
+textarea {
+	resize: none;
+}
 
 .login {
 	background: url("images/login-page.png");

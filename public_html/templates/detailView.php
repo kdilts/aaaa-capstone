@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
 	<div class="col-xs-7">
 		<table class="table table-bordered table-hover">
 			<thead>
@@ -83,7 +83,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-comment" aria-hidden="true"></i>
 													</div>
-													<input type="text" name="noteContent" id="noteContent" class="form-control" maxlength="255" required [(ngModel)]="note.noteContent" #noteContent="ngModel" />
+													<textarea name="noteContent" id="noteContent" class="form-control" maxlength="255" required [(ngModel)]="note.noteContent" #noteContent="ngModel" rows="5"></textarea>
 												</div>
 												<div [hidden]="noteContent.valid || noteContent.pristine" class="alert alert-danger" role="alert">
 													<p *ngIf="noteContent.errors?.required">Note content is required.</p>
