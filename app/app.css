@@ -8,7 +8,7 @@
 
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
-#home-jumbo {
+.home-jumbo {
 	background: url("images/login-page.png") no-repeat;
 	min-height: 100vh;
 	margin: 0;
@@ -44,3 +44,6 @@ div.signin-content{
 .jumbotron {
 	margin-bottom: 0px;
 }
+
+/*application page-table*/
+

@@ -1,7 +1,7 @@
 <section>
 	<div class="row">
 		<div class="col-xs-12">
-			<table class="table table-bordered table-hover">
+			<table class="table-table-bordered-table-hover">
 				<thead>
 					<tr>
 						<th>Applications:</th>
