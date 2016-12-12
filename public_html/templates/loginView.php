@@ -8,7 +8,7 @@
 					<div class="input-group-addon">
 						<i class="fa fa-comment" aria-hidden="true"></i>
 					</div>
-					<input type="text" name="userName" id="userName" class="form-control" maxlength="255" required [(ngModel)]="userName.userName" #userNameText="ngModel" />
+					<input type="text" name="userName" id="userName" class="form-control" maxlength="255" required [(ngModel)]="loginForm.userName" #userNameText="ngModel" />
 				</div>
 				<div [hidden]="userName.valid || userName.pristine" class="alert alert-danger" role="alert">
 					<p *ngIf="userName.errors?.required">User Name is required.</p>
@@ -22,7 +22,7 @@
 					<div class="input-group-addon">
 						<i class="fa fa-comment" aria-hidden="true"></i>
 					</div>
-					<input type="text" name="password" id="password" class="form-control" maxlength="255" required [(ngModel)]="password.password" #passwordText="ngModel" />
+					<input type="text" name="password" id="password" class="form-control" maxlength="255" required [(ngModel)]="loginForm.password" #passwordText="ngModel" />
 				</div>
 				<div [hidden]="passwordText.valid || passwordText.pristine" class="alert alert-danger" role="alert">
 					<p *ngIf="passwordText.errors?.required">Password is required.</p>
