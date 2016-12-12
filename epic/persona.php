@@ -13,10 +13,10 @@
 				Name: Andrea
 			</li>
 			<li>
-				Profession: Logistic ninja at STEMUlus Academy> Full time Inquiries, Registration and Payments Administrator
+				Profession: Logistic ninja at STEMulus Academy> Full time Inquiries, Registration and Payments Administrator
 			</li>
 			<li>
-				Technology: Surface Pro, Windows 10 with MS Windows Specifically MS Access as well as CNM Webmail/Outlook. Android Phone.
+				Technology: Surface Pro, Windows 10 with MS Windows Specifically MS Access as well as CNM Web-mail/Outlook. Android Phone.
 			</li>
 
 			<li>
