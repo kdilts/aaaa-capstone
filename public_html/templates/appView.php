@@ -14,7 +14,7 @@
 						<th>Date</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="application-tabel">
 					<tr *ngFor="let applicationCohort of applicationCohorts" (click)="switchApplication(applicationCohort.info[0]);">
 						<td>{{ applicationCohort.info[0].applicationFirstName }}</td>
 						<td>{{ applicationCohort.info[0].applicationLastName }}</td>

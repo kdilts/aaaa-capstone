@@ -44,3 +44,10 @@ div.signin-content{
 .jumbotron {
 	margin-bottom: 0px;
 }
+
+/*application page*/
+
+.table-table-bordered-table-hover{
+	background-color: #f7e1b5;
+
+}
