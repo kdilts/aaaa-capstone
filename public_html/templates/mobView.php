@@ -3,37 +3,41 @@
 		<div class="col-md-12">
 
 			<form #quickProspectForm="ngForm" name="quickProspectForm" id="quickProspectForm" class="form-horizontal well"  (ngSubmit)="createProspect();" novalidate>
-			<label for="prospectLastName" class="col-sm-2 control-label">Last Name</label>
-				<div class="input-group">
-					<div class="input-group-addon">
-						<i class="fa fa-comment" aria-hidden="true"></i>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="prospectLastName" name="prospectLastName"  placeholder="Enter Last Name" [(ngModel)]="prospect.prospectLastName" #prospectLastName="ngModel" maxlength="30" required />
-					</div>
-				</div>
-				<div [hidden]="prospectLastName.valid || prospectLastName.pristine" class="alert alert-danger" role="alert">
-					<p *ngIf="prospectLastName.errors?.required">Last Name is required.</p>
-					<p *ngIf="prospectLastName.errors?.maxlength">Last Name is too long.</p>
-				</div>
-				<label for="prospectFirstName" class="col-sm-2 control-label">First Name</label>
-				<div class="input-group">
-					<div class="input-group-addon">
-						<i class="fa fa-comment" aria-hidden="true"></i>
-					</div>
-					<div class="col-sm-10">
+<!--				First Name-->
+				<div class="form-group" [ngClass]="{ 'has-error': prospectFirstName.touched && prospectFirstName.invalid }">
+					<label for="prospectFirstName" class="col-sm-2 control-label">First Name: </label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-comment" aria-hidden="true"></i>
+						</div>
 						<input type="text" class="form-control" id="prospectFirstName" name="prospectFirstName"  placeholder="Enter First Name" [(ngModel)]="prospect.prospectFirstName" #prospectFirstName="ngModel" maxlength="30" required />
 					</div>
+					<div [hidden]="prospectFirstName.valid || prospectFirstName.pristine" class="alert alert-danger" role="alert">
+						<p *ngIf="prospectFirstName.errors?.required">First Name is required.</p>
+						<p *ngIf="prospectFirstName.errors?.maxlength">First Name is too long.</p>
+					</div>
 				</div>
-				<div [hidden]="prospectFirstName.valid || prospectFirstName.pristine" class="alert alert-danger" role="alert">
-					<p *ngIf="prospectFirstName.errors?.required">First Name is required.</p>
-					<p *ngIf="prospectFirstName.errors?.maxlength">First Name is too long.</p>
+<!--				Last Name-->
+				<div class="form-group" [ngClass]="{ 'has-error': prospectLastName.touched && prospectLastName.invalid }">
+					<label for="prospectLastName" class="col-sm-2 control-label">Last Name: </label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-comment" aria-hidden="true"></i>
+						</div>
+						<input type="text" class="form-control" id="prospectLastName" name="prospectLastName"  placeholder="Enter Last Name" [(ngModel)]="prospect.prospectLastName" #prospectLastName="ngModel" maxlength="30" required />
+					</div>
+					<div [hidden]="prospectLastName.valid || prospectLastName.pristine" class="alert alert-danger" role="alert">
+						<p *ngIf="prospectLastName.errors?.required">Last Name is required.</p>
+						<p *ngIf="prospectLastName.errors?.maxlength">Last Name is too long.</p>
+					</div>
 				</div>
-
-
-				<div class="form-group">
-					<label for="prospectPhoneNumber" class="col-sm-2 control-label">Phone</label>
-					<div class="col-sm-10">
+<!--				Phone Number                     -->
+				<div class="form-group"  [ngClass]="{ 'has-error': prospectPhoneNumber.touched && prospectPhoneNumbere.invalid }">
+					<label for="prospectPhoneNumber" class="col-sm-2 control-label">Phone: </label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-comment" aria-hidden="true"></i>
+						</div>
 						<input type="tel" class="form-control" id="prospectPhoneNumber" name="prospectPhoneNumber" placeholder="Phone Number" [(ngModel)]="prospect.prospectPhoneNumber" #prospectPhoneNumber="ngModel" maxlength="30" required />
 					</div>
 				</div>
@@ -41,11 +45,13 @@
 					<p *ngIf="prospectPhoneNumber.errors?.required">Phone Number is required.</p>
 					<p *ngIf="prospectPhoneNumber.errors?.maxlength">Phone Number is too long.</p>
 				</div>
-
-
-				<div class="form-group">
-					<label for="prospectEmail" class="col-sm-2 control-label">Email</label>
-					<div class="col-sm-10">
+<!--				Email Address-->
+				<div class="form-group"  [ngClass]="{ 'has-error': prospectEmail.touched && prospectEmail.invalid }">
+					<label for="prospectEmail" class="col-sm-2 control-label">Email: </label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-comment" aria-hidden="true"></i>
+						</div>
 						<input type="email" class="form-control" id="prospectEmail" name="prospectEmail" placeholder="Email" [(ngModel)]="prospect.prospectEmail" #prospectEmail="ngModel" maxlength="30" required />
 					</div>
 				</div>
@@ -54,10 +60,13 @@
 					<p *ngIf="prospectEmail.errors?.maxlength">Email is too long.</p>
 				</div>
 
-
+<!--				Cohort-->
 				<div class="form-group">
-					<label for="cohorts" class="col-sm-2 control-label">Cohort</label>
-					<div class="col-sm-10">
+					<label for="cohorts" class="col-sm-2 control-label">Cohort: </label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-comment" aria-hidden="true"></i>
+						</div>
 						<select class="form-control" id="cohorts" required>
 							<option *ngFor="let cohort of cohorts" value="cohortName">{{cohort.cohortName}}</option>
 						</select>
