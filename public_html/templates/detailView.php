@@ -83,7 +83,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-comment" aria-hidden="true"></i>
 													</div>
-													<input type="text" name="noteContent" id="noteContent" class="form-control" maxlength="255" required [(ngModel)]="detailView.noteContent" #noteContent="ngModel" />
+													<input type="text" name="noteContent" id="noteContent" class="form-control" maxlength="255" required [(ngModel)]="note.noteContent" #noteContent="ngModel" />
 												</div>
 												<div [hidden]="noteContent.valid || noteContent.pristine" class="alert alert-danger" role="alert">
 													<p *ngIf="noteContent.errors?.required">Note content is required.</p>
