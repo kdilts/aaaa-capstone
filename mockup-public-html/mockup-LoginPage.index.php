@@ -29,7 +29,7 @@
 				<div class="container">
 					<br>
 					<div class="row-fluid">
-						<div class="span10 offsetHalf"><i class="icon-ddcd-lg.png icon-5x" style="color:#d54a10"</div>
+						<div class="span10 offsetHalf"><i class="icon-ddcd-lg.png icon-5x" style="color:#d52a25"</div>
 					</div>
 				</div>
 				<div class="jumbotron text-center">
