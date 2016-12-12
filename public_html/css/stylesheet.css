@@ -13,3 +13,14 @@
 	color: black;
 	background-size: 150%;
 }
+
+.table-application{
+	background-color:whitesmoke;
+	box-shadow: rgba(0, 58, 112, 1.0);
+
+}
+
+.navbar-default{
+	background-color: rgba(65, 182, 230, 1.0);
+	border-color: rgba(246, 190, 0, 1.0);
+}
