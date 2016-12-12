@@ -7,7 +7,7 @@
 				<div class="form-group">
 					<label for="inputName" class="col-sm-2 control-label">Last Name</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="prospectLastName" name="prospectLastName"  placeholder="Enter Name" [(ngModel)]="prospect.prospectLastName" #prospectLastName="ngModel" >
+						<input type="text" class="form-control" id="prospectLastName" name="prospectLastName"  placeholder="Enter Last Name" [(ngModel)]="prospect.prospectLastName" #prospectLastName="ngModel" >
 					</div>
 				</div>
 
