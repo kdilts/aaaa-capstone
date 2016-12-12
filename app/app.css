@@ -36,10 +36,12 @@ div.signin-content{
 	border-radius: 0;
 	padding-top: 15%;
 }
+
 .index-div {
 	padding-right:0;
 	padding-left: 0;
 }
+
 /*to cancel out the margin of sign in*/
 .jumbotron {
 	margin-bottom: 0px;
@@ -53,4 +55,8 @@ div.signin-content{
 }
 div.input-group-addon{
 	color: #1016ff;
+}
+
+div.input-group{
+	background-color: transparent;
 }
