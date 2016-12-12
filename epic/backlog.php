@@ -9,25 +9,27 @@
 		<h1>Backlog</h1>
 		<ul>
 			<li>
-				create mySQL tables / database structure
-				entities / PHP classes
+				Create mySQL tables / database structure
+				Entities / PHP classes
 			</li>
 			<li>
-				front end design / wireframe
+
+
+				Front end design / wireframe
 				<ul>
 					<li>
-						view for applicants
+						View for applicants
 					</li>
 					<li>
-						view for andrea / administrators
+						View for andrea / administrators
 					</li>
 				</ul>
 			</li>
 			<li>
-				make ERD diagram
+				Make ERD diagram
 			</li>
 			<li>
-				finish epic
+				Finish epic
 			</li>
 		</ul>
 	</body>
