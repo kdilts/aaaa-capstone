@@ -35,7 +35,12 @@
 	<div class="form-group">
 		<label for="inputCohort" class="col-sm-2 control-label">Cohort</label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" id="inputCohort" name="inputCohort"  placeholder="Cohort" [(ngModel)]="prospect.cohort" #prospectName="ngModel" >
+       <select>
+        <option value="1">Cohort 1</option>
+        <option value="2">Cohort 2</option>
+        <option value="3">Cohort 3</option>
+       </select>
+<!--			<input type="text" class="form-control" id="inputCohort" name="inputCohort"  placeholder="Cohort" [(ngModel)]="prospect.cohort" #prospectName="ngModel" >-->
 		</div>
 	</div>
 

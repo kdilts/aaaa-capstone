@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router, ActivatedRoute, Params} from "@angular/router";
-
+import {NgForm} from "@angular/forms";
 import {ApplicationService} from "../services/application-service";
 import {ApplicationCohortService} from "../services/applicationCohort-service";
 import {NoteService} from "../services/note-service";
@@ -62,4 +62,10 @@ export class DetailViewComponent implements OnInit{
 	// 		});
 	// }
 
+}
+export class SimpleFormComp {
+	onSubmit(f: NgForm) {
+		console.log(f.value);  // { first: '', last: '' }
+		console.log(f.valid);  // false
+	}
 }
