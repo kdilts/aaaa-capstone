@@ -63,9 +63,9 @@ export class DetailViewComponent implements OnInit{
 	}
 
 }
-export class SimpleFormComp {
-	onSubmit(f: NgForm) {
-		console.log(f.value);  // { first: '', last: '' }
-		console.log(f.valid);  // false
-	}
-}
+// export class SimpleFormComp {
+// 	onSubmit(f: NgForm) {
+// 		console.log(f.value);  // { first: '', last: '' }
+// 		console.log(f.valid);  // false
+// 	}
+// }
