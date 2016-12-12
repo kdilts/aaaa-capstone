@@ -3,9 +3,11 @@
 		<div class="col-md-12">
 
 			<form #quickProspectForm="ngForm" name="quickProspectForm" id="quickProspectForm" class="form-horizontal well"  (ngSubmit)="createProspect();" novalidate>
-
-				<div class="form-group">
-					<label for="prospectLastName" class="col-sm-2 control-label">Last Name</label>
+			<label for="prospectLastName" class="col-sm-2 control-label">Last Name</label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<i class="fa fa-comment" aria-hidden="true"></i>
+					</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="prospectLastName" name="prospectLastName"  placeholder="Enter Last Name" [(ngModel)]="prospect.prospectLastName" #prospectLastName="ngModel" maxlength="30" required />
 					</div>
@@ -14,9 +16,11 @@
 					<p *ngIf="prospectLastName.errors?.required">Last Name is required.</p>
 					<p *ngIf="prospectLastName.errors?.maxlength">Last Name is too long.</p>
 				</div>
-
-				<div class="form-group">
-					<label for="prospectFirstName" class="col-sm-2 control-label">First Name</label>
+				<label for="prospectFirstName" class="col-sm-2 control-label">First Name</label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<i class="fa fa-comment" aria-hidden="true"></i>
+					</div>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="prospectFirstName" name="prospectFirstName"  placeholder="Enter First Name" [(ngModel)]="prospect.prospectFirstName" #prospectFirstName="ngModel" maxlength="30" required />
 					</div>
