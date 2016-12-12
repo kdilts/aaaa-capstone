@@ -32,14 +32,14 @@ export class MobViewComponent implements OnInit{
 			.subscribe(cohorts => this.cohorts = cohorts);
 	}
 
-	// createProspect() : void {
-	// 	this.prospectService.createProspect(this.prospect)
-	// 		.subscribe(status => {
-	// 			this.status = status;
-	// 			if(status.status === 200) {
-	// 				this.quickProspectForm.reset();
-	// 			}
-	// 		});
-	// }
+	createProspect() : void {
+		this.prospectService.createProspect(this.prospect)
+			.subscribe(status => {
+				this.status = status;
+				if(status.apiStatus === 200) {
+					this.quickProspectForm.reset();
+				}
+			});
+	}
 
 }
