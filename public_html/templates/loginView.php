@@ -18,7 +18,7 @@
 				</div>
 
 				<div class="form-group" [ngClass]="{ 'has-error': password.touched && password.invalid }">
-					<label for="password">Password</label>
+					<label for="password">Password:</label>
 					<div class="input-group">
 						<div class="input-group-addon">
 							<i class="fa fa-comment" aria-hidden="true"></i>
