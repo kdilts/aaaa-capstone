@@ -1,6 +1,6 @@
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
-#home-jumbo {
+#login-jumbo {
 	background: url("../images/login-page.png") no-repeat;
 	min-height: 100vh;
 	margin: 0;

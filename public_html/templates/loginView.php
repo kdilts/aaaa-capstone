@@ -1,3 +1,4 @@
+<div> class="login"</div>
 <div class="row">
 	<div class="col-xs-12">
 		<form #loginForm="ngForm" name="loginForm" id="loginForm" class="form-horizontal well" (ngSubmit)="login();" novalidate>
