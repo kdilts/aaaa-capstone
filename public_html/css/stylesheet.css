@@ -1,5 +1,10 @@
 /*this is how to inject pictures into those funny jumbotrons*/
-/*HOME PAGE*/
+/*LOGIN PAGE*/
+.jumbotron {
+	align-self: flex-end;
+	background: transparent;
+	color: #fff;
+}
 .login {
 	background: url("../images/login-page.png") no-repeat;
 	min-height: 100vh;
