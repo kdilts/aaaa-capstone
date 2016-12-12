@@ -51,16 +51,16 @@ export class DetailViewComponent implements OnInit{
 			});
 	}
 
-	// createNote() : void {
-	// 	this.noteService.createNote(this.note)
-	// 		.subscribe(status => {
-	// 			this.status = status;
-	// 			if(status.status === 200) {
-	// 				this.reloadApplication();
-	// 				this.detailView.reset();
-	// 			}
-	// 		});
-	// }
+	createNote() : void {
+		this.noteService.createNote(this.note)
+			.subscribe(status => {
+				this.status = status;
+				if(status.apiStatus === 200) {
+					this.reloadApplication();
+					this.detailView.reset();
+				}
+			});
+	}
 
 }
 export class SimpleFormComp {
