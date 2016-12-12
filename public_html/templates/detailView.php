@@ -94,7 +94,7 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-											<input type="submit" class="btn btn-primary" value="Submit">
+											<input type="submit" class="btn btn-info" value="Submit">
 										</div>
 									</form>
 									<!-- FORM -->
