@@ -3,7 +3,7 @@
 		<div class="col-xs-12">
 			<form #loginForm="ngForm" name="loginForm" id="loginForm" class="form-horizontal well" (ngSubmit)="login();" novalidate>
 
-				<div class="form-group" [ngClass]="{ 'has-error': userName.unTouched && userName.invalid }">
+				<div class="form-group" [ngClass]="{ 'has-error': userName.touched && userName.invalid }">
 					<label for="userName">User Name: </label>
 					<div class="input-group">
 						<div class="input-group-addon">
