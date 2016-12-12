@@ -5,21 +5,21 @@
 	 width: 75%;
  }
 
-
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
-.home-jumbo {
-	background: url("images/login-page.png") no-repeat;
-	min-height: 100vh;
-	margin: 0;
-	padding: 200px 0 100px;
-	color: black;
-	background-size: 150%;
+.jumbotron {
+	align-self: flex-end;
+	backgound: transparent;
+	color: #ffffff
+}
 
+
+.login {
+	background: url("images/computer-image.png");
+	background-size: 100%;
+	min-height: 100vh;
 }
-.bs-example{
-	margin: 20px;
-}
+
 /*LOGIN PAGE*/
 div.signup-content {
 	background-image: url("images/computer-image.png");
@@ -44,6 +44,3 @@ div.signin-content{
 .jumbotron {
 	margin-bottom: 0px;
 }
-
-/*application page-table*/
-
