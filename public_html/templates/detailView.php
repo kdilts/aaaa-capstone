@@ -89,7 +89,7 @@
 											</div>
 
 											<label for="noteNoteTypeId">Note Type:</label>
-											<select class="form-control" id="noteNoteTypeId" name="noteNoteTypeId" required>
+											<select class="form-control" id="noteNoteTypeId" name="noteNoteTypeId" [(ngModel)]="note.noteNoteTypeId" required>
 												<option *ngFor="let noteType of noteTypes" value="{{noteType.noteTypeId}}">{{noteType.noteTypeName}}</option>
 											</select>
 
