@@ -26,6 +26,11 @@ $reply->status = 200;
 $reply->data = null;
 
 try {
+
+	// ensure there's a user logged in
+	if(empty($_SESSION["adUser"]) === true) {
+		throw(new RuntimeException("user not logged in", 401));
+	}
 	//grab the mySQL connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 
