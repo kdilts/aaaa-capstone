@@ -24,7 +24,6 @@ $reply->status = 200;
 $reply->data = null;
 
 try {
-
 // ensure there's a user logged in
 	if(empty($_SESSION["adUser"]) === true) {
 		throw(new RuntimeException("user not logged in", 401));
