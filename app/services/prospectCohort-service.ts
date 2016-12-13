@@ -37,7 +37,7 @@ export class ProspectCohortService extends BaseService {
 			.catch(this.handleError));
 	}
 
-	createNoteType(prospectCohort: ProspectCohort) : Observable<Status> {
+	createProspectCohort(prospectCohort: ProspectCohort) : Observable<Status> {
 		return(this.http.post(this.prospectCohortUrl, prospectCohort)
 			.map(this.extractMessage)
 			.catch(this.handleError));

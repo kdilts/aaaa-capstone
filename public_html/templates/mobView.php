@@ -62,13 +62,13 @@
 
 <!--				Cohort-->
 				<div class="form-group">
-					<label for="cohorts" class="col-sm-2 control-label">Cohort: </label>
+					<label for="prospectCohortId" class="col-sm-2 control-label">Cohort: </label>
 					<div class="input-group">
 						<div class="input-group-addon">
 							<i class="fa fa-comment" aria-hidden="true"></i>
 						</div>
-						<select class="form-control" id="cohorts" required>
-							<option *ngFor="let cohort of cohorts" value="cohortName">{{cohort.cohortName}}</option>
+						<select class="form-control" id="prospectCohortId" name="prospectCohortId" required>
+							<option *ngFor="let cohort of cohorts" value="prospectCohortId">{{cohort.cohortName}}</option>
 						</select>
 					</div>
 				</div>

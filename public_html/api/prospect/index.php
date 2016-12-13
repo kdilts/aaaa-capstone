@@ -5,6 +5,7 @@ require_once (dirname(__DIR__,2) . "/php/lib/xsrf.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use Edu\Cnm\DdcAaaa\Prospect;
+use Edu\Cnm\DdcAaaa\ProspectCohort;
 
 /**
  * api for the prospect class
@@ -35,6 +36,8 @@ try {
 	$prospectLastName = filter_input(INPUT_GET, "prospectLastName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$prospectEmail = filter_input(INPUT_GET, "prospectEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$prospectPhoneNumber = filter_input(INPUT_GET, "prospectPhoneNumber", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+	$prospectCohortId = filter_input(INPUT_GET, "prospectCohortId", FILTER_VALIDATE_INT);
 
 	// handle GET request
 	if($method === "GET") {
@@ -106,6 +109,9 @@ try {
 				$requestObject->prospectLastName
 			);
 			$prospect->insert($pdo);
+
+			$prospectCohort = new ProspectCohort(null, $prospect->getProspectId(), $requestObject->prospectCohortId);
+			$prospectCohort->insert($pdo);
 
 			// update reply
 			$reply->message = "prospect created OK";

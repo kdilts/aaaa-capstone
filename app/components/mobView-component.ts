@@ -6,7 +6,6 @@ import {Prospect} from "../classes/prospect";
 import {Cohort} from "../classes/cohort";
 import {CohortService} from "../services/cohort-service";
 
-
 @Component({
 	templateUrl: "./templates/mobView.php"
 })
@@ -40,6 +39,7 @@ export class MobViewComponent implements OnInit{
 					this.quickProspectForm.reset();
 				}
 			});
+
 	}
 
 }
