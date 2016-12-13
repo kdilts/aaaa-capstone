@@ -1,3 +1,8 @@
+<?php
+if(session_status() !== PHP_SESSION_ACTIVE) {
+	session_start();
+}
+if(empty($_SESSION["adUser"]) === false) { ?>
 <div class="row">
 	<div class="col-xs-12">
 		<table class="table table-bordered table-hover">
@@ -29,3 +34,6 @@
 		</table>
 	</div>
 </div>
+<?php } else {
+	require(dirname(__DIR__) . "/php/lib/not-logged-in.php");
+}

@@ -23,7 +23,7 @@
 						<div class="input-group-addon">
 							<i class="fa fa-comment" aria-hidden="true"></i>
 						</div>
-						<input type="password" name="password" id="password" class="form-control" maxlength="255" required [(ngModel)]="loginForm.password" #password="ngModel" />
+						<input type="password" name="password" id="password" class="form-control" maxlength="255" required [(ngModel)]="loginData.password" #password="ngModel" />
 					</div>
 					<div [hidden]="password.valid || password.pristine" class="alert alert-danger" role="alert">
 						<p *ngIf="password.errors?.required">Password is required.</p>
