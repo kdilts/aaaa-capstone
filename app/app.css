@@ -111,5 +111,6 @@ tbody.application-tabel {
 
 /*Note Type*/
 tbody.noteType{
-	background-color: #f0ad4e
+	background-color: #b4f0ea
+	background-image: url("images/login-page.png");
 }
