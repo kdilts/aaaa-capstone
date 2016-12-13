@@ -24,7 +24,7 @@ export class NoteTypeComponent implements OnInit {
 	}
 
 	reloadNoteTypes() : void {
-		this.noteTypeService.getAllNoteType()
+		this.noteTypeService.getAllNoteTypes()
 			.subscribe(noteTypes => this.noteTypes = noteTypes);
 	}
 

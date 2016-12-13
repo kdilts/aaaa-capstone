@@ -72,7 +72,7 @@ try {
 
 		verifyXsrf();
 		$requestContent = file_get_contents("php://input");
-		$requestObject = json_decode($requestContent);
+		$requestObject = json_decode($requestContent, false);
 
 		//make sure prospect first name is available (required field)
 		if(empty($requestObject->prospectFirstName) === true) {
@@ -99,7 +99,7 @@ try {
 
 			// create new prospect and insert into the database
 			$prospect = new Prospect(
-				$requestObject->prospectId,
+				null,
 				$requestObject->prospectPhoneNumber,
 				$requestObject->prospectEmail,
 				$requestObject->prospectFirstName,

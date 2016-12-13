@@ -92,7 +92,7 @@ try {
 
 		verifyXsrf();
 		$requestContent = file_get_contents("php://input");
-		$requestObject = json_decode($requestContent);
+		$requestObject = json_decode($requestContent, false);
 
 		//make sure note content is available (required field)
 		if(empty($requestObject->noteContent) === true) {
@@ -119,7 +119,7 @@ try {
 
 			// create new tweet and insert into the database
 			$note = new Note(
-				$requestObject->noteId,
+				null,
 				$requestObject->noteContent,
 				$requestObject->noteNoteTypeId,
 				$requestObject->noteApplicationId,

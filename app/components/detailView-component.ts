@@ -3,12 +3,12 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {ApplicationService} from "../services/application-service";
 import {ApplicationCohortService} from "../services/applicationCohort-service";
+import {Note} from "../classes/note";
 import {NoteService} from "../services/note-service";
-
 import {Application} from "../classes/application";
 import {ApplicationCohort} from "../classes/applicationCohort";
-import {Note} from "../classes/note";
-
+import {NoteType} from "../classes/noteType";
+import {NoteTypeService} from "../services/noteType-service";
 import {Status} from "../classes/status";
 
 import 'rxjs/add/operator/switchMap';
@@ -24,17 +24,20 @@ export class DetailViewComponent implements OnInit{
 	notes : Note[] = [];
 	note : Note = new Note(null, 0, 0, 0, "", "", "");
 	status: Status = null;
+	noteTypes: NoteType[] = [];
 
 	constructor(
 		private applicationService: ApplicationService,
 		private applicationCohortService: ApplicationCohortService,
 		private noteService: NoteService,
+		private noteTypeService: NoteTypeService,
 		private router: Router,
 		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit() : void {
 		this.reloadApplication();
+		this.reloadNoteTypes();
 	}
 
 	reloadApplication()	 : void {
@@ -53,7 +56,10 @@ export class DetailViewComponent implements OnInit{
 				alert(this.applicationCohortService.getAllApplicationCohorts());
 			});
 	}
-
+	reloadNoteTypes() : void {
+		this.noteTypeService.getAllNoteTypes()
+			.subscribe(noteTypes => this.noteTypes = noteTypes);
+	}
 	createNote() : void {
 		this.noteService.createNote(this.note)
 			.subscribe(status => {

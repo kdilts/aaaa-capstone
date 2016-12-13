@@ -90,7 +90,9 @@
 													<p *ngIf="noteContent.errors?.maxlength">Note content is too long.</p>
 												</div>
 											</div>
-
+											<select class="form-control" id="noteTypes" required>
+												<option *ngFor="let noteType of noteTypes" value="noteTypeName">{{noteType.noteTypeName}}</option>
+											</select>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

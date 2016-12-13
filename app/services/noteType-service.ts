@@ -13,7 +13,7 @@ export class NoteTypeService extends BaseService {
 
 	private noteTypeUrl = "api/noteType/";
 
-	getAllNoteType() : Observable<NoteType[]> {
+	getAllNoteTypes() : Observable<NoteType[]> {
 		return(this.http.get(this.noteTypeUrl)
 			.map(this.extractData)
 			.catch(this.handleError));
