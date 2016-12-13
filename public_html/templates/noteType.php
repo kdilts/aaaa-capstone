@@ -1,11 +1,16 @@
-
+<div class="text-center">
 <h1>Note Type</h1>
+</div>
+<div class="note-type container-fluid">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
 
 <ul>
-	<li *ngFor="let noteType of noteTypes">
+	<li  *ngFor="let noteType of noteTypes">
 		{{ noteType.noteTypeId }} : {{ noteType.noteTypeName }}
 	</li>
 </ul>
+
 
 <form #noteTypeForm="ngForm" name="noteTypeForm" id="noteTypeForm" class="form-horizontal well" (ngSubmit)="createNoteType();" novalidate>
 	<h2>Create NoteType</h2>
