@@ -1,7 +1,7 @@
 <section>
-	<div class="row">
+	<div class="row parking-page input-group input-group-sm">
 		<div class="col-xs-12">
-			<table class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover parking-table">
 				<thead>
 					<tr>
 						<th>Prospects:</th>

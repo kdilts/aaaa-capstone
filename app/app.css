@@ -93,14 +93,21 @@ nav.navbar.navbar-default{
 	text-color:navyblue;
 }
 
+
+
 /*parking page*/
 
 
-.application-page{
+.parking-page{
 	background-color:ivory;
+
+}
+.table-bordered{
+	border: 5px solid #4c3cce;
+	background-color: rgba(246, 190, 0, 1.0);
 }
 
-.table-application {
+.parking-table {
 	background-color: rgba(65, 182, 230, 1.0);
 	box-shadow: royalblue;
 }
