@@ -25,6 +25,7 @@ export class DetailViewComponent implements OnInit{
 	note : Note = new Note(null, null, null, null, "", "");
 	status: Status = null;
 	noteTypes: NoteType[] = [];
+	testDate: string = null;
 
 	constructor(
 		private applicationService: ApplicationService,
@@ -45,6 +46,7 @@ export class DetailViewComponent implements OnInit{
 			.switchMap((params : Params) => this.applicationService.getApplicationByApplicationId(+params["applicationId"]))
 			.subscribe(application => {
 				this.application = application;
+				this.testDate = application.applicationDateTime;
 				this.note.noteApplicationId = this.application.applicationId;
 
 				this.noteService.getNotesByNoteApplicationId(this.application.applicationId)

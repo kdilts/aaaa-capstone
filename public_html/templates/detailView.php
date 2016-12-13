@@ -51,7 +51,8 @@
 			</tr>
 			<tr>
 				<td>Date Submitted:</td>
-				<td>{{ application.applicationDateTime }}</td>
+<!--				<td>{{ application.applicationDateTime }}</td>-->
+				<td>{{ testDate | date : 'medium' }}</td>
 			</tr>
 		</table>
 	</div>
