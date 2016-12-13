@@ -33,7 +33,6 @@ if(empty($_SESSION["adUser"]) === false) { ?>
 			</tr>
 		</table>
 	</div>
-</div>
 <?php } else {
 	require(dirname(__DIR__) . "/php/lib/not-logged-in.php");
 }
