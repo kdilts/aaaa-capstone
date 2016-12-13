@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 
 			<form #quickProspectForm="ngForm" name="quickProspectForm" id="quickProspectForm" class="form-horizontal well"  (ngSubmit)="createProspect();" novalidate>
-<!--				First Name-->
+				<!--				First Name-->
 				<div class="form-group" [ngClass]="{ 'has-error': prospectFirstName.touched && prospectFirstName.invalid }">
 					<label for="prospectFirstName" class="col-sm-2 control-label">First Name: </label>
 					<div class="input-group">
@@ -17,7 +17,7 @@
 						<p *ngIf="prospectFirstName.errors?.maxlength">First Name is too long.</p>
 					</div>
 				</div>
-<!--				Last Name-->
+				<!--				Last Name-->
 				<div class="form-group" [ngClass]="{ 'has-error': prospectLastName.touched && prospectLastName.invalid }">
 					<label for="prospectLastName" class="col-sm-2 control-label">Last Name: </label>
 					<div class="input-group">
@@ -31,7 +31,7 @@
 						<p *ngIf="prospectLastName.errors?.maxlength">Last Name is too long.</p>
 					</div>
 				</div>
-<!--				Phone Number                     -->
+				<!--				Phone Number                     -->
 				<div class="form-group"  [ngClass]="{ 'has-error': prospectPhoneNumber.touched && prospectPhoneNumber.invalid }">
 					<label for="prospectPhoneNumber" class="col-sm-2 control-label">Phone: </label>
 					<div class="input-group">
@@ -45,7 +45,7 @@
 					<p *ngIf="prospectPhoneNumber.errors?.required">Phone Number is required.</p>
 					<p *ngIf="prospectPhoneNumber.errors?.maxlength">Phone Number is too long.</p>
 				</div>
-<!--				Email Address-->
+				<!--				Email Address-->
 				<div class="form-group"  [ngClass]="{ 'has-error': prospectEmail.touched && prospectEmail.invalid }">
 					<label for="prospectEmail" class="col-sm-2 control-label">Email: </label>
 					<div class="input-group">
@@ -60,7 +60,7 @@
 					<p *ngIf="prospectEmail.errors?.maxlength">Email is too long.</p>
 				</div>
 
-<!--				Cohort-->
+				<!--				Cohort-->
 				<div class="form-group">
 					<label for="prospectCohortId" class="col-sm-2 control-label">Cohort: </label>
 					<div class="input-group">
@@ -75,7 +75,8 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">Enter</button>
+						<button type="submit" class="btn btn-info btn-lg"><i class="fa fa-share"></i> Submit</button>
+						<button type="reset" class="btn btn-warning btn-lg"><i class="fa fa-ban"></i> Reset</button>
 					</div>
 				</div>
 
