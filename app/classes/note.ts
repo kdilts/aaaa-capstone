@@ -5,7 +5,6 @@ export class Note {
 		public noteProspectId: number,
 		public noteNoteTypeId: number,
 		public noteContent: string,
-		public noteDateTime: string,
-		public noteBridgeStaffId : string
+		public noteDateTime: string
 	) {}
 }

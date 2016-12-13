@@ -24,6 +24,11 @@ $reply->status = 200;
 $reply->data = null;
 
 try {
+	// ensure there's a user logged in
+	if(empty($_SESSION["adUser"]) === true) {
+		throw(new RuntimeException("user not logged in", 401));
+	}
+
 	//grab the mySQL connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 
@@ -37,7 +42,6 @@ try {
 	$noteApplicationId = filter_input(INPUT_GET, "noteApplicationId", FILTER_VALIDATE_INT);
 	$noteProspectId = filter_input(INPUT_GET, "noteProspectId", FILTER_VALIDATE_INT);
 	$noteDateTime = filter_input(INPUT_GET, "noteDateTime", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$noteBridgeStaffId = filter_input(INPUT_GET, "noteBridgeStaffId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	$startDate = filter_input(INPUT_GET, "startDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$endDate = filter_input(INPUT_GET, "endDate", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -104,16 +108,6 @@ try {
 			throw(new \InvalidArgumentException ("note note type id is missing.", 405));
 		}
 
-		//make sure note datetime is available (required field)
-		if(empty($requestObject->noteDateTime) === true) {
-			throw(new \InvalidArgumentException ("note datetime is missing.", 405));
-		}
-
-		//  make sure note bridgestaffid is available (required field)
-		if(empty($requestObject->noteBridgeStaffId) === true) {
-			throw(new \InvalidArgumentException ("note bridge staff id is missing.", 405));
-		}
-
 		//perform the actual post
 		if($method === "POST") {
 
@@ -124,8 +118,8 @@ try {
 				$requestObject->noteNoteTypeId,
 				$requestObject->noteApplicationId,
 				$requestObject->noteProspectId,
-				\DateTime::createFromFormat("Y-m-d H:i:s", $requestObject->noteDateTime),
-				$requestObject->noteBridgeStaffId
+				new \DateTime(),
+				$_SESSION["adUser"]["studentId"]
 			);
 			$note->insert($pdo);
 
@@ -140,6 +134,7 @@ try {
 } catch(Exception $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
+	$reply->request = $requestObject;
 } catch(TypeError $typeError) {
 	$reply->status = $typeError->getCode();
 	$reply->message = $typeError->getMessage();

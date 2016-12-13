@@ -22,7 +22,7 @@ export class DetailViewComponent implements OnInit{
 	application : Application = new Application(null, "", "", "", "", "", "", "", "", "", "", "", "");
 	applicationCohorts : ApplicationCohort[] = [];
 	notes : Note[] = [];
-	note : Note = new Note(null, 0, 0, 0, "", "", "");
+	note : Note = new Note(null, null, null, null, "", "");
 	status: Status = null;
 	noteTypes: NoteType[] = [];
 
@@ -45,6 +45,7 @@ export class DetailViewComponent implements OnInit{
 			.switchMap((params : Params) => this.applicationService.getApplicationByApplicationId(+params["applicationId"]))
 			.subscribe(application => {
 				this.application = application;
+				this.note.noteApplicationId = this.application.applicationId;
 
 				this.noteService.getNotesByNoteApplicationId(this.application.applicationId)
 					.subscribe(notes => this.notes = notes);
