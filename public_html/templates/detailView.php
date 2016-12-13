@@ -54,7 +54,7 @@
 			</tr>
 			<tr>
 				<td>Date Submitted:</td>
-				<td>{{ application.applicationDateTime }}</td>
+				<td>{{ application.applicationDateTime}}</td>
 			</tr>
 		</table>
 	</div>

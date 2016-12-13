@@ -26,7 +26,7 @@ export class NoteService extends BaseService {
 	}
 
 	getNotesByNoteApplicationId(noteApplicationId: number) : Observable<Note[]> {
-		return(this.http.get(this.noteUrl + noteApplicationId)
+		return(this.http.get(this.noteUrl + "?noteApplicationId=" + noteApplicationId)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
