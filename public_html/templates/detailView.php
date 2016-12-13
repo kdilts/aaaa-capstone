@@ -18,10 +18,10 @@
 			<tr>
 				<td>Cohorts:</td>
 				<td>
-					<ul>
+					<ul class="list-unstyled">
 						<li *ngFor="let applicationCohort of applicationCohorts">
-<!--							{{ applicationCohort.applicationCohortId }}-->
-								test
+							{{ applicationCohort.applicationCohortId }}
+<!--								test-->
 						</li>
 						<!--						<li>cohort 1</li>-->
 						<!--						<li>cohort 2</li>-->

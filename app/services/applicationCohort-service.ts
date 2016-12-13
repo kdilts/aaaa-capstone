@@ -20,7 +20,7 @@ export class ApplicationCohortService extends BaseService {
 	}
 
 	getApplicationCohortsByApplicationId(applicationCohortApplicationId: number) : Observable<ApplicationCohort[]> {
-		return(this.http.get(this.applicationCohortUrl + applicationCohortApplicationId)
+		return(this.http.get(this.applicationCohortUrl + "?applicationCohortApplicationId=" + applicationCohortApplicationId)
 			.map(this.extractData)
 			.catch(this.handleError));
 	}
