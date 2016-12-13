@@ -5,6 +5,11 @@
 	 width: 75%;
  }
 
+.form-group {
+
+}
+
+
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
 .jumbotron {
@@ -29,6 +34,7 @@ div.signup-content {
 	background-image: url("images/login-page.png");
 	background-size: 100%;
 	min-height: 100vh;
+	padding-left: 15px;
 
 }
 

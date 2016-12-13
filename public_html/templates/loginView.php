@@ -1,6 +1,6 @@
-<div class="signin-content">
+<div class="signin-content container-fluid">
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-md-4 col-md-offset-4">
 			<form #loginForm="ngForm" name="loginForm" id="loginForm" class="form-horizontal well" (ngSubmit)="login();" novalidate>
 
 				<div class="form-group" [ngClass]="{ 'has-error': username.touched && username.invalid }">
@@ -31,14 +31,15 @@
 					</div>
 				</div>
 
+
 				<button type="submit" class="btn btn-info btn-lg" [disabled]="loginForm.invalid"><i class="fa fa-share"></i> Login</button>
 				<button type="reset" class="btn btn-warning btn-lg"><i class="fa fa-ban"></i> Reset</button>
 
 			</form>
-		</div>
-		<div *ngIf="status !== null" class="alert alert-dismissible" [ngClass]="status.type" role="alert">
-			<button type="button" class="close" aria-label="Close" (click)="status = null;"><span aria-hidden="true">&times;</span></button>
-			{{ status.message }}
+			<div *ngIf="status !== null" class="alert alert-dismissible" [ngClass]="status.type" role="alert">
+				<button type="button" class="close" aria-label="Close" (click)="status = null;"><span aria-hidden="true">&times;</span></button>
+				{{ status.message }}
+			</div>
 		</div>
 	</div>
 </div>
