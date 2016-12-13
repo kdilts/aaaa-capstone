@@ -1,3 +1,8 @@
+<?php
+if(session_status() !== PHP_SESSION_ACTIVE) {
+	session_start();
+}
+if(empty($_SESSION["adUser"]) === false) { ?>
 <div class="text-center">
 <h1>Note Type</h1>
 </div>
@@ -36,3 +41,6 @@
 	<button type="button" class="close" aria-label="Close" (click)="status = null;"><span aria-hidden="true">&times;</span></button>
 	{{ status.message }}
 </div>
+<?php } else {
+	require(dirname(__DIR__) . "/templates/loginView.php");
+}

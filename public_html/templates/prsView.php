@@ -1,9 +1,16 @@
-<section class="container-fluid">
-	<div class="row parking-page">
+<?php
+if(session_status() !== PHP_SESSION_ACTIVE) {
+	session_start();
+}
+if(empty($_SESSION["adUser"]) === false) { ?>
+<section>
+	<div class="row parking-page input-group input-group-sm">
 		<div class="col-xs-12">
-			<h2>Prospects</h2>
-			<table class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover parking-table">
 				<thead>
+					<tr>
+						<th>Prospects:</th>
+					</tr>
 					<tr>
 						<th>Last</th>
 						<th>First</th>
@@ -23,3 +30,6 @@
 		</div><!--end of .table-responsive-->
 	</div>
 </section>
+<?php } else {
+	require(dirname(__DIR__) . "/templates/loginView.php");
+}
