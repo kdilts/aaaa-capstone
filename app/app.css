@@ -8,6 +8,7 @@
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
 .jumbotron {
+	background: url("images/login-page.png");
 	align-self: flex-end;
 	background: transparent;
 
@@ -110,6 +111,6 @@ tbody.application-tabel {
 }
 
 /*Note Type*/
-tbody.noteType{
+tbody.noteType {
 	background-image: url("images/login-icarus.png");
 }
