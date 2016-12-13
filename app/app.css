@@ -1,14 +1,9 @@
 /**
-*this is css for select nav on noteType form
-  **/
+* this is css for select nav on noteType form
+**/
 .form-control-1 {
 	 width: 75%;
  }
-
-.form-group {
-
-}
-
 
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
@@ -16,7 +11,6 @@
 	background: url("images/login-page.png");
 	align-self: flex-end;
 	background: transparent;
-
 }
 
 textarea {
@@ -35,7 +29,6 @@ div.signup-content {
 	background-size: 100%;
 	min-height: 100vh;
 	padding-left: 15px;
-
 }
 
 /*SIGN IN PAGE*/
@@ -54,40 +47,13 @@ div.signin-content{
 
 /*to cancel out the margin of sign in*/
 .jumbotron {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 /*application page*/
-
-.table-table-bordered-table-hover{
-	background-color: #cccd6f;
-
-}
-div.input-group-addon{
-	color: #1016ff;
-}
-
-div.form-group{
-	background-color: transparent;
-}
-
-
-/*application page*/
-
-.application-page{
-	background-color:ivory;
-}
-
-.table-application {
-	background-color: rgba(65, 182, 230, 1.0);
-	box-shadow: royalblue;
-}
-
-	tbody.application-tabel {
+tbody.application-tabel {
 	background-color: whitesmoke;
-
 }
-
 
 /* Begin Nav bar css*/
 nav.navbar.navbar-default{
@@ -99,18 +65,9 @@ nav.navbar.navbar-default{
 	text-color:navyblue;
 }
 
-
-
 /*parking page*/
-
-
 .parking-page{
 	background-color:ivory;
-
-}
-.table-bordered{
-	border: 5px solid #4c3cce;
-	background-color: rgba(246, 190, 0, 1.0);
 }
 
 .parking-table {
@@ -118,16 +75,7 @@ nav.navbar.navbar-default{
 	box-shadow: royalblue;
 }
 
-tbody.application-tabel {
-	background-color: whitesmoke;
-
-}
-
 /*Note Type*/
 tbody.noteType {
 	background-color: #b3deb4;
-}
-
-#noteTypeForm.noteTypeName {
-
 }
