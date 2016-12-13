@@ -1,3 +1,4 @@
+
 <h1>Note Type</h1>
 
 <ul>
@@ -8,7 +9,7 @@
 
 <form #noteTypeForm="ngForm" name="noteTypeForm" id="noteTypeForm" class="form-horizontal well" (ngSubmit)="createNoteType();" novalidate>
 	<h2>Create NoteType</h2>
-	<hr />
+	<hr/>
 	<div class="form-group" [ngClass]="{ 'has-error': noteTypeName.touched && noteTypeName.invalid }">
 		<label for="noteType">NoteType</label>
 		<div class="input-group">

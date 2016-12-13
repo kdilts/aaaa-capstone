@@ -12,6 +12,13 @@
 	background: transparent;
 
 }
+#noteTypeForm{
+	background-color: #2e6da4;
+}
+
+table.table.table-bordered.table-hover{
+	background-color: transparent;
+}
 
 textarea {
 	resize: none;
@@ -108,3 +115,5 @@ tbody.application-tabel {
 	background-color: whitesmoke;
 
 }
+
+/*Note Type*/
