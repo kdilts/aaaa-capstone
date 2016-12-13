@@ -67,8 +67,8 @@
 						<div class="input-group-addon">
 							<i class="fa fa-comment" aria-hidden="true"></i>
 						</div>
-						<select class="form-control" id="prospectCohortId" name="prospectCohortId" required>
-							<option *ngFor="let cohort of cohorts" value="prospectCohortId">{{cohort.cohortName}}</option>
+						<select class="form-control" id="prospectCohortId" name="prospectCohortId" [(ngModel)]="prospect.prospectCohortId" required>
+							<option *ngFor="let cohort of cohorts" value="{{cohort.cohortId}}">{{cohort.cohortName}}</option>
 						</select>
 					</div>
 				</div>
