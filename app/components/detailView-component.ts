@@ -48,6 +48,9 @@ export class DetailViewComponent implements OnInit{
 
 				this.applicationCohortService.getApplicationCohortsByApplicationId(this.application.applicationId)
 					.subscribe(applicationCohorts => this.applicationCohorts = applicationCohorts);
+
+				alert(this.application.applicationId);
+				alert(this.applicationCohortService.getAllApplicationCohorts());
 			});
 	}
 
