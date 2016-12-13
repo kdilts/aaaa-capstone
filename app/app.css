@@ -58,6 +58,20 @@ nav.navbar.navbar-default{
 	padding-bottom: 5rem;
 	header-wraper:rgba(246, 190, 0, 1.0);
 	text-color:navyblue;
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover {
+	color: #000;
+}
+
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-brand {
+	color: #333;
+}
 }
 
 /*Note Type*/
