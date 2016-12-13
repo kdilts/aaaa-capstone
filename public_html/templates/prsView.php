@@ -1,11 +1,9 @@
-<section>
-	<div class="row parking-page input-group input-group-sm">
+<section class="container-fluid">
+	<div class="row parking-page">
 		<div class="col-xs-12">
-			<table class="table table-bordered table-hover parking-table">
+			<h2>Prospects</h2>
+			<table class="table table-bordered table-hover">
 				<thead>
-					<tr>
-						<th>Prospects:</th>
-					</tr>
 					<tr>
 						<th>Last</th>
 						<th>First</th>

@@ -50,11 +50,6 @@ div.signin-content{
 	margin-bottom: 0;
 }
 
-/*application page*/
-tbody.application-tabel {
-	background-color: whitesmoke;
-}
-
 /* Begin Nav bar css*/
 nav.navbar.navbar-default{
 	background-color: rgba(65, 182, 230, 1.0);
@@ -63,16 +58,6 @@ nav.navbar.navbar-default{
 	padding-bottom: 5rem;
 	header-wraper:rgba(246, 190, 0, 1.0);
 	text-color:navyblue;
-}
-
-/*parking page*/
-.parking-page{
-	background-color:ivory;
-}
-
-.parking-table {
-	background-color: rgba(65, 182, 230, 1.0);
-	box-shadow: royalblue;
 }
 
 /*Note Type*/
