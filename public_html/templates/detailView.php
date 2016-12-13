@@ -19,12 +19,13 @@
 				<td>Cohorts:</td>
 				<td>
 					<ul>
-						<!--						<li *ngFor="let applicationCohort of applicationCohorts">-->
-						<!--							test-->
-						<!--						</li>-->
-						<li>cohort 1</li>
-						<li>cohort 2</li>
-						<li>cohort 3</li>
+						<li *ngFor="let applicationCohort of applicationCohorts">
+<!--							{{ applicationCohort.applicationCohortId }}-->
+								test
+						</li>
+						<!--						<li>cohort 1</li>-->
+						<!--						<li>cohort 2</li>-->
+						<!--						<li>cohort 3</li>-->
 					</ul>
 				</td>
 			</tr>
