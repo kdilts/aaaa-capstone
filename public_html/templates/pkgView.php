@@ -5,7 +5,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 if(empty($_SESSION["adUser"]) === false) { ?>
 <div class="row">
 	<div class="col-xs-12">
-		<table class="table table-bordered table-hover">
+		<table class="table table-bordered table-hover table-parking">
 			<thead>
 				<tr>
 					<td>Parking:</td>

@@ -1,5 +1,5 @@
 <section>
-	<div class="row">
+	<div class="row application-page">
 		<div class="col-xs-12">
 			<table class="table table-bordered table-hover table-application">
 				<thead>

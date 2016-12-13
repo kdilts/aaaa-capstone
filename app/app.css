@@ -63,3 +63,48 @@ div.input-group-addon{
 div.form-group{
 	background-color: transparent;
 }
+
+
+/*application page*/
+
+.application-page{
+	background-color:ivory;
+}
+
+.table-application {
+	background-color: rgba(65, 182, 230, 1.0);
+	box-shadow: royalblue;
+}
+
+	tbody.application-tabel {
+	background-color: whitesmoke;
+
+}
+
+
+/* Begin Nav bar css*/
+nav.navbar.navbar-default{
+	background-color: rgba(65, 182, 230, 1.0);
+	border: 5px solid rgba(246, 190, 0, 1.0);
+	border-color: rgba(246, 190, 0, 1.0);
+	padding-bottom: 5rem;
+	header-wraper:rgba(246, 190, 0, 1.0);
+	text-color:navyblue;
+}
+
+/*parking page*/
+
+
+.application-page{
+	background-color:ivory;
+}
+
+.table-application {
+	background-color: rgba(65, 182, 230, 1.0);
+	box-shadow: royalblue;
+}
+
+tbody.application-tabel {
+	background-color: whitesmoke;
+
+}
