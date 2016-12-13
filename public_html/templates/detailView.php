@@ -51,7 +51,7 @@
 			</tr>
 			<tr>
 				<td>Date Submitted:</td>
-				<td>{{ application.applicationDateTime}}</td>
+				<td>{{ application.applicationDateTime }}</td>
 			</tr>
 		</table>
 	</div>
@@ -87,12 +87,9 @@
 													<p *ngIf="noteContent.errors?.maxlength">Note content is too long.</p>
 												</div>
 											</div>
-
-											<label for="noteNoteTypeId">Note Type:</label>
-											<select class="form-control" id="noteNoteTypeId" name="noteNoteTypeId" [(ngModel)]="note.noteNoteTypeId" required>
+											<select class="form-control" id="noteNoteTypeId" name="noteNoteTypeID" required>
 												<option *ngFor="let noteType of noteTypes" value="{{noteType.noteTypeId}}">{{noteType.noteTypeName}}</option>
 											</select>
-
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
