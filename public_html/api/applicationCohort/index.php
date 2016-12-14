@@ -16,9 +16,9 @@ use Edu\Cnm\DdcAaaa\JsonObjectStorage;
  **/
 
 //verify the session, start if not active
-if(session_status() !== PHP_SESSION_ACTIVE) {
-	session_start();
-}
+//if(session_status() !== PHP_SESSION_ACTIVE) {
+//	session_start();
+//}
 
 //prepare an empty reply
 $reply = new stdClass();
@@ -28,9 +28,10 @@ $reply->data = null;
 try {
 
 	// ensure there's a user logged in
-	if(empty($_SESSION["adUser"]) === true) {
-		throw(new RuntimeException("user not logged in", 401));
-	}
+//	if(empty($_SESSION["adUser"]) === true) {
+//		throw(new RuntimeException("user not logged in", 401));
+//	}
+
 	//grab the mySQL connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
 

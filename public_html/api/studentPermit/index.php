@@ -20,9 +20,9 @@ use Edu\Cnm\DdcAaaa\Cohort;
  **/
 
 //verify the session, start if not active
-if(session_status() !== PHP_SESSION_ACTIVE) {
-	session_start();
-}
+//if(session_status() !== PHP_SESSION_ACTIVE) {
+//	session_start();
+//}
 
 //prepare an empty reply
 $reply = new stdClass();
