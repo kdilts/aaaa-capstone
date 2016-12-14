@@ -1,4 +1,3 @@
-
 <section class="container-fluid">
 	<div class="row application-page">
 		<div class="col-xs-12">

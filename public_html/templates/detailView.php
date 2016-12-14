@@ -1,4 +1,3 @@
-
 <div class="row" xmlns="http://www.w3.org/1999/html">
 	<div class="col-xs-7">
 		<table class="table table-bordered table-hover">
