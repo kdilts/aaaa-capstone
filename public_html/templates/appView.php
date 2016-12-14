@@ -31,5 +31,5 @@ if(empty($_SESSION["adUser"]) === false) { ?>
 	</div>
 </section>
 <?php } else {
-	require(dirname(__DIR__) . "/templates/loginView.php");
-}
+
+} ?>
