@@ -9,7 +9,10 @@ use Edu\Cnm\DdcAaaa\Swipe;
 use Edu\Cnm\DdcAaaa\Placard;
 use Edu\Cnm\DdcAaaa\StatusType;
 use Edu\Cnm\DdcAaaa\JsonObjectStorage;
+use Edu\Cnm\DdcAaaa\ApplicationCohort;
 use Edu\Cnm\DdcAaaa\Application;
+use Edu\Cnm\DdcAaaa\Cohort;
+
 /**
  * api for the StudentPermit class
  *
@@ -28,9 +31,9 @@ $reply->data = null;
 
 try {
 	// ensure there's a user logged in
-	if(empty($_SESSION["adUser"]) === true) {
-		throw(new RuntimeException("user not logged in", 401));
-	}
+//	if(empty($_SESSION["adUser"]) === true) {
+//		throw(new RuntimeException("user not logged in", 401));
+//	}
 
 	//grab the mySQL connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcaaaa.ini");
@@ -99,13 +102,21 @@ try {
 				$storage = new JsonObjectStorage();
 				for ($i=0; $i<count($studentPermits); $i++){
 					$placard = Placard::getPlacardByPlacardId($pdo, $studentPermits[$i]->getStudentPermitPlacardId());
+					$applicationCohorts = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $studentPermits[$i]->getStudentPermitApplicationId());
+
+					$cohorts = [];
+					for($i = 0; $i < count($applicationCohorts); $i++){
+						$cohorts[$i] = Cohort::getCohortByCohortId($pdo, $applicationCohorts[$i]->getApplicationCohortCohortId());
+					}
+
 					$storage->attach(
 						$studentPermits[$i],
 						[
 							$placard,
 							Swipe::getSwipeBySwipeId($pdo, $studentPermits[$i]->getStudentPermitSwipeId()),
 							StatusType::getStatusTypeByStatusTypeId($pdo, $placard->getPlacardStatusTypeId()),
-							Application::getApplicationByApplicationId($pdo, $studentPermits[$i]->getStudentPermitApplicationId())
+							Application::getApplicationByApplicationId($pdo, $applicationCohorts[0]->getApplicationCohortApplicationId()),
+							$cohorts
 						]
 					);
 				}
