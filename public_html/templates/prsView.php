@@ -1,8 +1,8 @@
 <section class="container-fluid">
-	<div class="row parking-page input-group input-group-sm">
+	<div class="row">
 		<div class="col-xs-12">
 			<h2>Prospects</h2>
-			<table class="table table-bordered table-hover parking-table">
+			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
 						<th>Last</th>
