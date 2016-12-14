@@ -1,8 +1,4 @@
-<?php
-if(session_status() !== PHP_SESSION_ACTIVE) {
-	session_start();
-}
-if(empty($_SESSION["adUser"]) === false) { ?>
+
 <section class="container-fluid">
 	<div class="row application-page">
 		<div class="col-xs-12">
@@ -30,6 +26,3 @@ if(empty($_SESSION["adUser"]) === false) { ?>
 		</div><!--end of .table-responsive-->
 	</div>
 </section>
-<?php } else {
-
-} ?>

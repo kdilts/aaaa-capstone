@@ -1,8 +1,3 @@
-<?php
-if(session_status() !== PHP_SESSION_ACTIVE) {
-	session_start();
-}
-if(empty($_SESSION["adUser"]) === false) { ?>
 
 <div class="row">
 	<div class="col-xs-12">
@@ -34,6 +29,3 @@ if(empty($_SESSION["adUser"]) === false) { ?>
 			</tr>
 		</table>
 	</div>
-<?php } else {
-	require(dirname(__DIR__) . "/templates/loginView.php");
-}

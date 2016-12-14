@@ -1,8 +1,4 @@
-<?php
-if(session_status() !== PHP_SESSION_ACTIVE) {
-	session_start();
-}
-if(empty($_SESSION["adUser"]) === false) { ?>
+
 <div class="row" xmlns="http://www.w3.org/1999/html">
 	<div class="col-xs-7">
 		<table class="table table-bordered table-hover">
@@ -121,6 +117,3 @@ if(empty($_SESSION["adUser"]) === false) { ?>
 		</table>
 	</div>
 </div>
-<?php } else {
-	require(dirname(__DIR__) . "/templates/loginView.php");
-}
