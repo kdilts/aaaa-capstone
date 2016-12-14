@@ -1,4 +1,8 @@
-
+<?php
+if(session_status() !== PHP_SESSION_ACTIVE) {
+	session_start();
+}
+if(empty($_SESSION["adUser"]) === false) { ?>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -86,3 +90,6 @@
 		</div>
 	</div>
 </div>
+<?php } else {
+	require(dirname(__DIR__) . "/php/lib/not-logged-in.php");
+}

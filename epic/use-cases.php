@@ -58,7 +58,7 @@
 				pre-work.  He sees that I have made my payment and started to:
 				<ol>
 					<li>Create my CNM and Deep Dive student accounts.</li>
-					<li>set up the tool set and need to get my book so I can self-study.</li>
+					<li>set up the toolset and need to get my book so I can self-study.</li>
 				</ol>
 			</li>
 			<li> Since the installment of the new program, Dylan now has spare time to dress Senator Arlo up as a Klingon and reenact  scenes from the bridge of Star Trek V since there can be only one Captain on the bridge.</li>

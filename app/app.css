@@ -2,8 +2,8 @@
 * this is css for select nav on noteType form
 **/
 .form-control-1 {
-	width: 75%;
-}
+	 width: 75%;
+ }
 
 /*this is how to inject pictures into those funny jumbotrons*/
 /*HOME PAGE*/
@@ -51,20 +51,20 @@ div.signin-content{
 }
 
 /* Begin Nav bar css*/
-nav.navbar.navbar-default {
+nav.navbar.navbar-default{
 	background-color: rgba(65, 182, 230, 1.0);
 	border: 5px solid rgba(246, 190, 0, 1.0);
 	border-color: rgba(246, 190, 0, 1.0);
 	padding-bottom: 5rem;
-	header-wraper: rgba(246, 190, 0, 1.0);
-	text-color: navyblue;
-}
+	header-wraper:rgba(246, 190, 0, 1.0);
+	text-color:navyblue;
+
 .navbar-default .navbar-nav>li>a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus,
-.navbar-default .navbar-brand:hover{
+.navbar-default .navbar-brand:hover {
 	color: #000;
 }
 
@@ -72,7 +72,7 @@ nav.navbar.navbar-default {
 .navbar-default .navbar-brand {
 	color: #333;
 }
-
+}
 
 /*Note Type*/
 tbody.noteType {
