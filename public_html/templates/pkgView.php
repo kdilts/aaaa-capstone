@@ -1,8 +1,8 @@
 <?php
-if(session_status() !== PHP_SESSION_ACTIVE) {
-	session_start();
-}
-if(empty($_SESSION["adUser"]) === false) { ?>
+//if(session_status() !== PHP_SESSION_ACTIVE) {
+//	session_start();
+//}
+//if(empty($_SESSION["adUser"]) === false) { ?>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
@@ -45,6 +45,6 @@ if(empty($_SESSION["adUser"]) === false) { ?>
 			</div>
 		</div>
 	</div>
-<?php } else {
-
-}
+<?php //} else {
+//
+//}
