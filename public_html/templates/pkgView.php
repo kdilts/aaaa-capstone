@@ -1,6 +1,12 @@
-
+<?php
+if(session_status() !== PHP_SESSION_ACTIVE) {
+	session_start();
+}
+if(empty($_SESSION["adUser"]) === false) { ?>
+<section class="container-fluid";
 <div class="row">
 	<div class="col-xs-12">
+		<h2>Parking</h2>
 		<table class="table table-bordered table-hover table-parking">
 			<thead>
 				<tr>
@@ -37,3 +43,6 @@
 			</tr>
 		</table>
 	</div>
+<?php } else {
+	require(dirname(__DIR__) . "/templates/loginView.php");
+}
