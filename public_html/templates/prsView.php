@@ -3,14 +3,12 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 	session_start();
 }
 if(empty($_SESSION["adUser"]) === false) { ?>
-<section>
+<section class="container-fluid">
 	<div class="row parking-page input-group input-group-sm">
 		<div class="col-xs-12">
+			<h2>Prospects</h2>
 			<table class="table table-bordered table-hover parking-table">
 				<thead>
-					<tr>
-						<th>Prospects:</th>
-					</tr>
 					<tr>
 						<th>Last</th>
 						<th>First</th>
