@@ -5,9 +5,6 @@
 			<table class="table table-bordered table-hover table-parking">
 				<thead>
 					<tr>
-						<td>Parking:</td>
-					</tr>
-					<tr>
 						<td>Last</td>
 						<td>First</td>
 						<td>Cohort</td>
