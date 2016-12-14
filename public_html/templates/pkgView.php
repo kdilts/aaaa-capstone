@@ -20,7 +20,15 @@
 			<tr *ngFor = "let studentPermit of studentPermits">
 				<td>{{studentPermit.info[3].applicationLastName}}</td>
 				<td>{{studentPermit.info[3].applicationFirstName}}</td>
-				<td>Fullstack January 2017</td>
+
+				<td>
+					<ul class="list-unstyled">
+						<li>
+							{{studentPermit.info[4][0].cohortName}}
+						</li>
+					</ul>
+				</td>
+
 				<td>{{studentPermit.info[1].swipeNumber}}</td>
 				<td>{{studentPermit.info[0].placardNumber}}</td>
 				<td>{{studentPermit.studentPermitCheckOutDate | date: 'medium'}}</td>
