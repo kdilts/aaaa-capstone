@@ -27,13 +27,13 @@
 						<td>{{studentPermit.info[3].applicationLastName}}</td>
 						<td>{{studentPermit.info[3].applicationFirstName}}</td>
 
-						<td>
-							<ul class="list-unstyled">
-								<li *ngFor="let cohort of studentPermit.info[4]">
-									{{cohort.cohortName}}
-								</li>
-							</ul>
-						</td>
+					<td>
+						<ul class="list-unstyled">
+							<li *ngFor="let cohort of studentPermit.info[4]">
+								{{cohort.cohortName}}
+							</li>
+						</ul>
+					</td>
 
 						<td>{{studentPermit.info[1].swipeNumber}}</td>
 						<td>{{studentPermit.info[0].placardNumber}}</td>
