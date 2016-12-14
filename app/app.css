@@ -65,7 +65,7 @@ nav.navbar.navbar-default {
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus,
-.navbar-default .navbar-brand:hover
+.navbar-default .navbar-brand:hover{
 	color: #000;
 }
 
