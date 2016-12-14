@@ -105,8 +105,8 @@ try {
 					$applicationCohorts = ApplicationCohort::getApplicationCohortsByApplicationId($pdo, $studentPermits[$i]->getStudentPermitApplicationId());
 
 					$cohorts = [];
-					for($i = 0; $i < count($applicationCohorts); $i++){
-						$cohorts[$i] = Cohort::getCohortByCohortId($pdo, $applicationCohorts[$i]->getApplicationCohortCohortId());
+					for($j = 0; $j < count($applicationCohorts); $j++){
+						$cohorts[$j] = Cohort::getCohortByCohortId($pdo, $applicationCohorts[$j]->getApplicationCohortCohortId());
 					}
 
 					$storage->attach(

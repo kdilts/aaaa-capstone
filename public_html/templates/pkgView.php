@@ -23,8 +23,8 @@
 
 				<td>
 					<ul class="list-unstyled">
-						<li>
-							{{studentPermit.info[4][0].cohortName}}
+						<li *ngFor="let cohort of studentPermit.info[4]">
+							{{cohort.cohortName}}
 						</li>
 					</ul>
 				</td>
