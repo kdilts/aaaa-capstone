@@ -119,8 +119,9 @@ try {
 				$requestObject->noteApplicationId,
 				$requestObject->noteProspectId,
 				new \DateTime(),
-				$_SESSION["adUser"]["studentId"]
-			);
+				//$_SESSION["adUser"]["studentId"
+					'111222333'
+		);
 			$note->insert($pdo);
 
 			// update reply
