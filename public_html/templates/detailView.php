@@ -88,8 +88,8 @@
 													<p *ngIf="noteContent.errors?.maxlength">Note content is too long.</p>
 												</div>
 											</div>
-											<label>:</label>
-											<select class="form-control" id="noteNoteTypeId" name="noteNoteTypeID" [(ngModel)]="noteNoteTypeId" required>
+											<label>Note Type:</label>
+											<select class="form-control" id="noteNoteTypeId" name="noteNoteTypeID" [(ngModel)]="note.noteNoteTypeId" required>
 												<option *ngFor="let noteType of noteTypes" value="{{noteType.noteTypeId}}">{{noteType.noteTypeName}}</option>
 											</select>
 										</div>
