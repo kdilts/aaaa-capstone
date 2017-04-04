@@ -114,6 +114,21 @@ public function insert(\PDO $pdo){
 		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeContacted " ) ($query)";
 		$statment = $pdo->prepare($query);
 
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeTentative " ) ($query)";
+		$statment = $pdo->prepare($query);
+
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeSeriouslyInterested " ) ($query)";
+		$statment = $pdo->prepare($query);
+
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeLostInterested " ) ($query)";
+		$statment = $pdo->prepare($query);
+
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeSentRegistrationForm " ) ($query)";
+		$statment = $pdo->prepare($query);
+
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypePaidDepositPreWork " ) ($query)";
+		$statment = $pdo->prepare($query);
+
 }
 
 
