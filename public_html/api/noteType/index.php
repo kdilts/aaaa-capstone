@@ -95,6 +95,28 @@ try {
 	$reply->status = $typeError->getCode();
 	$reply->message = $typeError->getMessage();
 }
+/**
+ * inserts this noteTypeNames into mySQL
+ *
+ * @param \PDO $pdo PDO connection object
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError if $pdo is not a PDO connection object
+ **/
+public function insert(\PDO $pdo){
+// enforce the noteTypeName is null.
+	if($this->noteTypeName !== null) {
+		throw(new \PDOException("not a new note type name"));
+
+		// create query template
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeNewApplicant " ) ($query)";
+		$statment = $pdo->prepare($query);
+
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeContacted " ) ($query)";
+		$statment = $pdo->prepare($query);
+
+}
+
+
 
 header("Content-type: application/json");
 if($reply->data === null) {
