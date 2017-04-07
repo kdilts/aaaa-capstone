@@ -107,26 +107,26 @@ public function insert(\PDO $pdo){
 	if($this->noteTypeName !== null) {
 		throw(new \PDOException("not a new note type name"));
 
-		// create query template
-		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeNewApplicant " ) ($query)";
+		// create insert query template
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (NULL ,  'newNoteTypeNewApplicant'  ) ($query)";
 		$statment = $pdo->prepare($query);
 
-		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeContacted " ) ($query)";
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, 'newNoteTypeContacted ' ) ($query)";
 		$statment = $pdo->prepare($query);
 
-		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeTentative " ) ($query)";
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, 'newNoteTypeTentative ' ) ($query)";
 		$statment = $pdo->prepare($query);
 
-		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeSeriouslyInterested " ) ($query)";
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, ' newNoteTypeSeriouslyInterested ' ) ($query)";
 		$statment = $pdo->prepare($query);
 
-		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeLostInterested " ) ($query)";
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, 'newNoteTypeLostInterested ' ) ($query)";
 		$statment = $pdo->prepare($query);
 
-		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypeSentRegistrationForm " ) ($query)";
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null,  'newNoteTypeSentRegistrationForm' ) ($query)";
 		$statment = $pdo->prepare($query);
 
-		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, " newNoteTypePaidDepositPreWork " ) ($query)";
+		$query = "INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, 'newNoteTypePaidDepositPreWork ') ($query)";
 		$statment = $pdo->prepare($query);
 
 }
