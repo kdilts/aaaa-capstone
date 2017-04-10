@@ -7,7 +7,7 @@
 }
 .login {
 	background: url("../images/login-page.png") no-repeat;
-	min-height: 101vh;
+	min-height: 100vh;
 	margin: 0;
 	padding: 200px 0 100px;
 	color: black;
