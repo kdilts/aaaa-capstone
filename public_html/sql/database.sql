@@ -46,6 +46,16 @@ CREATE TABLE cohort(
 CREATE TABLE noteType(
 	noteTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	noteTypeName VARCHAR(40) NOT NULL,
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeNewApplicant)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeContacted)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeTentative)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeSeriouslyInterested)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeNoLongerInterested)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeSentRegistrationForm)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypePaidDepositStartPrework)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeCurrentStrudent)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeIncompleteStudent)
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeAlum)
 	INDEX (noteTypeName),
 	PRIMARY KEY(noteTypeId)
 );
