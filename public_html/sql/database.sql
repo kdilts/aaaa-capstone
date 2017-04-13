@@ -51,16 +51,7 @@ CREATE TABLE noteType (
 );
 
 
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeNewApplicant");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeContacted");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeTentative");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeSeriouslyInterested");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeLostInterest");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeSentRegistrationForm");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypePaidDepostitStartedPrework");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeCurrentStudent");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeIncompleteStudent");
-INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeAlumni");
+
 
 
 CREATE TABLE prospect(
@@ -161,3 +152,15 @@ CREATE TABLE note(
 	FOREIGN KEY(noteNoteTypeId) REFERENCES noteType(noteTypeId),
 	FOREIGN KEY(noteBridgeStaffId) REFERENCES bridge (bridgeStaffId)
 );
+
+
+INSERT INTO noteType (noteTypeName) VALUES ("New Applicant");
+INSERT INTO noteType (noteTypeName) VALUES ("Contacted");
+INSERT INTO noteType (noteTypeName) VALUES ("Tentative");
+INSERT INTO noteType (noteTypeName) VALUES ("Seriously Interested");
+INSERT INTO noteType (noteTypeName) VALUES ("Lost Interest");
+INSERT INTO noteType (noteTypeName) VALUES ("Sent Registration Form");
+INSERT INTO noteType (noteTypeName) VALUES ("Paid Deposit Started Prework");
+INSERT INTO noteType (noteTypeName) VALUES ("Current Student");
+INSERT INTO noteType (noteTypeName) VALUES ("Incomplete Student");
+INSERT INTO noteType (noteTypeName) VALUES ("Alumni");
