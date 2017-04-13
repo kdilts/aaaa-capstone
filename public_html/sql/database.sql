@@ -43,21 +43,25 @@ CREATE TABLE cohort(
 	PRIMARY KEY(cohortId)
 );
 
-CREATE TABLE noteType(
-	noteTypeId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	noteTypeName VARCHAR(40) NOT NULL,
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeNewApplicant)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeContacted)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeTentative)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeSeriouslyInterested)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeNoLongerInterested)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeSentRegistrationForm)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypePaidDepositStartPrework)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeCurrentStrudent)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeIncompleteStudent)
-	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, newNoteTypeAlum)
+CREATE TABLE noteType (
+	noteTypeId   INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	noteTypeName VARCHAR(40)                 NOT NULL,
 	INDEX (noteTypeName),
-	PRIMARY KEY(noteTypeId)
+	PRIMARY KEY (noteTypeId)
+);
+
+(
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeNewApplicant"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeContacted"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeTentative"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeSeriouslyInterested"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeLostInterest"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeSentRegistrationForm"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypePaidDepostitStartedPrework"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeCurrentStudent"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeIncompleteStudent"),
+	INSERT INTO noteType (noteTypeId, noteTypeName) VALUES (null, "newNoteTypeAlumni")
+
 );
 
 CREATE TABLE prospect(
