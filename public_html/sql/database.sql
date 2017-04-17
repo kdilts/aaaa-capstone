@@ -164,3 +164,5 @@ INSERT INTO noteType (noteTypeName) VALUES ("Paid Deposit Started Prework");
 INSERT INTO noteType (noteTypeName) VALUES ("Current Student");
 INSERT INTO noteType (noteTypeName) VALUES ("Incomplete Student");
 INSERT INTO noteType (noteTypeName) VALUES ("Alumni");
+
+
