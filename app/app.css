@@ -56,8 +56,16 @@ nav.navbar.navbar-default {
 	border: 5px solid #fcd02f;
 	border-color: #fcd02f;
 	padding-bottom: 5rem;
-	header-wraper: fcd02f;
-	text-color: navyblue;
+	//*header-wrapper: fcd02f;*//
+	color: #fff;
+}
+
+h1, h2, h3{
+	font-family: "Vitesse A", "sans-serif";
+}
+
+p{
+	font-family: "Roboto", "sans-serif";
 }
 
 .navbar-default .navbar-nav>li>a:focus,
