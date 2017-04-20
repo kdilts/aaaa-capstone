@@ -52,11 +52,11 @@ div.signin-content{
 
 /* Begin Nav bar css*/
 nav.navbar.navbar-default {
-	background-color: rgba(65, 182, 230, 1.0);
-	border: 5px solid rgba(246, 190, 0, 1.0);
-	border-color: rgba(246, 190, 0, 1.0);
+	background-color: #434244;
+	border: 5px solid #fcd02f;
+	border-color: #fcd02f;
 	padding-bottom: 5rem;
-	header-wraper: rgba(246, 190, 0, 1.0);
+	header-wraper: fcd02f;
 	text-color: navyblue;
 }
 
