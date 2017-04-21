@@ -20,7 +20,7 @@
 			<button type="submit" class="btn btn-default">Search</button>
 		</form>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a routerLink="/">Sign Out Test</a></li>
+			<li><a routerLink="/">Sign Out</a></li>
 			<li><a routerLink="/pkgView/">Parking</a></li>
 			<li><a routerLink="/appView/">Applications</a></li>
 			<li><a routerLink="/mobView/">Quick Prospect</a></li>
