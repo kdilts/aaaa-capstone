@@ -82,18 +82,18 @@ try {
 
 			// update reply
 			$reply->message = "NoteType created OK";
-		}
+}
 
-	} else {
-		throw (new Exception("Invalid HTTP request!", 405));
-	}
-	// update reply with exception information
+} else {
+throw (new Exception("Invalid HTTP request!", 405));
+}
+// update reply with exception information
 } catch(Exception $exception) {
-	$reply->status = $exception->getCode();
-	$reply->message = $exception->getMessage();
+$reply->status = $exception->getCode();
+$reply->message = $exception->getMessage();
 } catch(TypeError $typeError) {
-	$reply->status = $typeError->getCode();
-	$reply->message = $typeError->getMessage();
+$reply->status = $typeError->getCode();
+$reply->message = $typeError->getMessage();
 }
 /**
  * inserts this noteTypeNames into mySQL
