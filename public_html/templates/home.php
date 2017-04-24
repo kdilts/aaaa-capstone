@@ -1,2 +1,2 @@
 <navbar></navbar>
-home vieew
+home vieew foo
