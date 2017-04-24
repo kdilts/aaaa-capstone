@@ -76,7 +76,7 @@ try {
 		//perform the actual post
 		if($method === "POST") {
 
-			// create new tweet and insert into the database
+			// create new post and insert into the database
 			$cohort = new Cohort($requestObject->cohortId, $requestObject->cohortName);
 			$cohort->insert($pdo);
 

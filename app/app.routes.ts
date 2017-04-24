@@ -7,6 +7,7 @@ import {AppViewComponent} from "./components/appView-component";
 import {PrsViewComponent} from "./components/prsView-component";
 import {MobViewComponent} from "./components/mobView-component";
 import {LoginViewComponent} from "./components/loginView-component";
+import {NavBarComponent} from "./components/navBar-component";
 
 export const allAppComponents = [
 	HomeComponent,
@@ -16,7 +17,8 @@ export const allAppComponents = [
 	PrsViewComponent,
 	DetailViewComponent,
 	MobViewComponent,
-	LoginViewComponent
+	LoginViewComponent,
+	NavBarComponent
 ];
 
 export const routes: Routes = [
