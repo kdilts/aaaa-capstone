@@ -8,7 +8,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand">CNM Stream Line testing repo</a>
+		<a class="navbar-brand">CNM Stream Line testing</a>
 	</div>
 
 
